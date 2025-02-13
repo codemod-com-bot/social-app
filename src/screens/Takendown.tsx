@@ -8,6 +8,7 @@ import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useMutation} from '@tanstack/react-query'
 import Graphemer from 'graphemer'
+import { Trans,useTranslation } from "react-i18next";
 
 import {MAX_REPORT_REASON_GRAPHEME_LENGTH} from '#/lib/constants'
 import {useEnableKeyboardController} from '#/lib/hooks/useEnableKeyboardController'
@@ -26,6 +27,8 @@ import {P, Text} from '#/components/Typography'
 const COL_WIDTH = 400
 
 export function Takendown() {
+const { t } = useTranslation("screens");
+
   const {_} = useLingui()
   const t = useTheme()
   const insets = useSafeAreaInsets()
@@ -73,7 +76,7 @@ export function Takendown() {
           isPending || reasonGraphemeLength > MAX_REPORT_REASON_GRAPHEME_LENGTH
         }>
         <ButtonText>
-          <Trans>Submit Appeal</Trans>
+          <Trans>{t('submit-appeal')}</Trans>
         </ButtonText>
         {isPending && <ButtonIcon icon={Loader} />}
       </Button>
@@ -85,7 +88,7 @@ export function Takendown() {
         label={_(msg`Log out`)}
         onPress={() => logoutCurrentAccount('Takendown')}>
         <ButtonText>
-          <Trans>Log Out</Trans>
+          <Trans>{t('log-out')}</Trans>
         </ButtonText>
       </Button>
     )
@@ -99,7 +102,7 @@ export function Takendown() {
         label={_(msg`Cancel`)}
         onPress={() => setIsAppealling(false)}>
         <ButtonText>
-          <Trans>Cancel</Trans>
+          <Trans>{t('cancel')}</Trans>
         </ButtonText>
       </Button>
     )
@@ -111,7 +114,7 @@ export function Takendown() {
       label={_(msg`Appeal suspension`)}
       onPress={() => setIsAppealling(true)}>
       <ButtonText>
-        <Trans>Appeal Suspension</Trans>
+        <Trans>{t('appeal-suspension')}</Trans>
       </ButtonText>
     </Button>
   )
@@ -141,9 +144,9 @@ export function Takendown() {
 
             <Text style={[a.text_4xl, a.font_heavy, a.pb_md]}>
               {isAppealling ? (
-                <Trans>Appeal suspension</Trans>
+                <Trans>{t('appeal-suspension-alt')}</Trans>
               ) : (
-                <Trans>Your account has been suspended</Trans>
+                <Trans>{t('account-suspended-message')}</Trans>
               )}
             </Text>
 
@@ -151,15 +154,12 @@ export function Takendown() {
               <View style={[a.relative, a.w_full, a.mt_xl]}>
                 {isSuccess ? (
                   <P style={[t.atoms.text_contrast_medium, a.text_center]}>
-                    <Trans>
-                      Your appeal has been submitted. If your appeal succeeds,
-                      you will receive an email.
-                    </Trans>
+                    <Trans>{t('appeal-submitted-message')}</Trans>
                   </P>
                 ) : (
                   <>
                     <TextField.LabelText>
-                      <Trans>Reason for appeal</Trans>
+                      <Trans>{t('reason-for-appeal')}</Trans>
                     </TextField.LabelText>
                     <TextField.Root
                       isInvalid={
@@ -211,19 +211,15 @@ export function Takendown() {
               </View>
             ) : (
               <P style={[t.atoms.text_contrast_medium]}>
-                <Trans>
-                  Your account was found to be in violation of the{' '}
-                  <InlineLinkText
+                <Trans><Trans
+i18nKey="violation-notification"
+components={{"0": <InlineLinkText
                     label={_(msg`Bluesky Social Terms of Service`)}
                     to="https://bsky.social/about/support/tos"
                     style={[a.text_md, a.leading_normal]}
-                    overridePresentation>
-                    Bluesky Social Terms of Service
-                  </InlineLinkText>
-                  . You have been sent an email outlining the specific violation
-                  and suspension period, if applicable. You can appeal this
-                  decision if you believe it was made in error.
-                </Trans>
+                    overridePresentation />}}
+/>
+                  </Trans>
               </P>
             )}
 

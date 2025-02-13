@@ -1,6 +1,7 @@
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {AppIconImage} from '#/screens/Settings/AppIconSettings/AppIconImage'
 import {useCurrentAppIcon} from '#/screens/Settings/AppIconSettings/useCurrentAppIcon'
@@ -9,6 +10,8 @@ import {atoms as a} from '#/alf'
 import {Shapes_Stroke2_Corner0_Rounded as Shapes} from '#/components/icons/Shapes'
 
 export function SettingsListItem() {
+const { t } = useTranslation("screens/Settings/AppIconSettings");
+
   const {_} = useLingui()
   const icon = useCurrentAppIcon()
 
@@ -20,7 +23,7 @@ export function SettingsListItem() {
       <SettingsList.ItemIcon icon={Shapes} />
       <View style={[a.flex_1]}>
         <SettingsList.ItemText style={[a.pt_xs, a.pb_md]}>
-          <Trans>App Icon</Trans>
+          <Trans>{t('app-icon')}</Trans>
         </SettingsList.ItemText>
         <AppIconImage icon={icon} size={60} />
       </View>

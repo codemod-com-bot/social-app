@@ -2,6 +2,7 @@ import {useState} from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {cleanError} from '#/lib/strings/errors'
 import {isNative} from '#/platform/detection'
@@ -26,6 +27,8 @@ export function DisableEmail2FADialog({
 }: {
   control: Dialog.DialogOuterProps['control']
 }) {
+const { t } = useTranslation("screens/Settings/components");
+
   const {_} = useLingui()
   const t = useTheme()
   const {gtMobile} = useBreakpoints()
@@ -86,20 +89,14 @@ export function DisableEmail2FADialog({
           <Text
             nativeID="dialog-title"
             style={[a.text_2xl, a.font_bold, t.atoms.text]}>
-            <Trans>Disable Email 2FA</Trans>
+            <Trans>{t('disable-email-2fa')}</Trans>
           </Text>
           <P nativeID="dialog-description">
             {stage === Stages.ConfirmCode ? (
-              <Trans>
-                An email has been sent to{' '}
-                {currentAccount?.email || '(no email)'}. It includes a
-                confirmation code which you can enter below.
-              </Trans>
+              <Trans>{t('email-sent-notification')}
+                {currentAccount?.email || '(no email)'}{t('confirmation-code-instruction')}</Trans>
             ) : (
-              <Trans>
-                To disable the email 2FA method, please verify your access to
-                the email address.
-              </Trans>
+              <Trans>{t('verify-email-access')}</Trans>
             )}
           </P>
 
@@ -120,7 +117,7 @@ export function DisableEmail2FADialog({
                 label={_(msg`Send verification email`)}
                 disabled={isProcessing}>
                 <ButtonText>
-                  <Trans>Send verification email</Trans>
+                  <Trans>{t('send-verification-email')}</Trans>
                 </ButtonText>
                 {isProcessing && <ButtonIcon icon={Loader} />}
               </Button>
@@ -133,7 +130,7 @@ export function DisableEmail2FADialog({
                 label={_(msg`I have a code`)}
                 disabled={isProcessing}>
                 <ButtonText>
-                  <Trans>I have a code</Trans>
+                  <Trans>{t('have-code')}</Trans>
                 </ButtonText>
               </Button>
             </View>
@@ -141,7 +138,7 @@ export function DisableEmail2FADialog({
             <View>
               <View style={[a.mb_md]}>
                 <TextField.LabelText>
-                  <Trans>Confirmation code</Trans>
+                  <Trans>{t('confirmation-code')}</Trans>
                 </TextField.LabelText>
                 <TextField.Root>
                   <TextField.Icon icon={Lock} />
@@ -173,7 +170,7 @@ export function DisableEmail2FADialog({
                   label={_(msg`Resend email`)}
                   disabled={isProcessing}>
                   <ButtonText>
-                    <Trans>Resend email</Trans>
+                    <Trans>{t('resend-email')}</Trans>
                   </ButtonText>
                 </Button>
                 <Button
@@ -185,7 +182,7 @@ export function DisableEmail2FADialog({
                   label={_(msg`Confirm`)}
                   disabled={isProcessing}>
                   <ButtonText>
-                    <Trans>Confirm</Trans>
+                    <Trans>{t('confirm-action')}</Trans>
                   </ButtonText>
                   {isProcessing && <ButtonIcon icon={Loader} />}
                 </Button>

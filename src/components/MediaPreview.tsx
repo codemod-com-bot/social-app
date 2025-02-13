@@ -8,6 +8,7 @@ import {
   AppBskyEmbedVideo,
 } from '@atproto/api'
 import {Trans} from '@lingui/macro'
+import { useTranslation } from "react-i18next";
 
 import {parseTenorGif} from '#/lib/strings/embed-player'
 import {atoms as a, useTheme} from '#/alf'
@@ -112,6 +113,8 @@ export function ImageItem({
 }
 
 export function GifItem({thumbnail, alt}: {thumbnail: string; alt?: string}) {
+const { t } = useTranslation("components");
+
   return (
     <ImageItem thumbnail={thumbnail} alt={alt}>
       <View style={[a.absolute, a.inset_0, a.justify_center, a.align_center]}>
@@ -119,7 +122,7 @@ export function GifItem({thumbnail, alt}: {thumbnail: string; alt?: string}) {
       </View>
       <View style={styles.altContainer}>
         <Text style={styles.alt}>
-          <Trans>GIF</Trans>
+          <Trans>{t('gif')}</Trans>
         </Text>
       </View>
     </ImageItem>

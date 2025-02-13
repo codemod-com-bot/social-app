@@ -3,6 +3,7 @@ import {Pressable, View} from 'react-native'
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
 import {useKawaiiMode} from '#/state/preferences/kawaii'
@@ -29,6 +30,8 @@ export const SplashScreen = ({
   onPressSignin: () => void
   onPressCreateAccount: () => void
 }) => {
+const { t } = useTranslation("view/com/auth");
+
   const {_} = useLingui()
   const t = useTheme()
   const {isTabletOrMobile: isMobileWeb} = useWebMediaQueries()
@@ -96,7 +99,7 @@ export const SplashScreen = ({
 
               <Text
                 style={[a.text_md, a.font_bold, t.atoms.text_contrast_medium]}>
-                <Trans>What's up?</Trans>
+                <Trans>{t('whats-up')}</Trans>
               </Text>
             </View>
 
@@ -114,7 +117,7 @@ export const SplashScreen = ({
                 variant="solid"
                 color="primary">
                 <ButtonText>
-                  <Trans>Create account</Trans>
+                  <Trans>{t('create-account')}</Trans>
                 </ButtonText>
               </Button>
               <Button
@@ -128,7 +131,7 @@ export const SplashScreen = ({
                 variant="solid"
                 color="secondary">
                 <ButtonText>
-                  <Trans>Sign in</Trans>
+                  <Trans>{t('sign-in')}</Trans>
                 </ButtonText>
               </Button>
             </View>
@@ -145,6 +148,8 @@ export const SplashScreen = ({
 }
 
 function Footer() {
+const { t } = useTranslation("view/com/auth");
+
   const t = useTheme()
   const {_} = useLingui()
 
@@ -165,17 +170,17 @@ function Footer() {
       <InlineLinkText
         label={_(msg`Learn more about Bluesky`)}
         to="https://bsky.social">
-        <Trans>Business</Trans>
+        <Trans>{t('business')}</Trans>
       </InlineLinkText>
       <InlineLinkText
         label={_(msg`Read the Bluesky blog`)}
         to="https://bsky.social/about/blog">
-        <Trans>Blog</Trans>
+        <Trans>{t('blog')}</Trans>
       </InlineLinkText>
       <InlineLinkText
         label={_(msg`See jobs at Bluesky`)}
         to="https://bsky.social/about/join">
-        <Trans>Jobs</Trans>
+        <Trans>{t('jobs')}</Trans>
       </InlineLinkText>
 
       <View style={a.flex_1} />

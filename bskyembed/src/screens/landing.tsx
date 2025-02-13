@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import '../index.css'
 
 import {AppBskyFeedDefs, AppBskyFeedPost, AtUri, BskyAgent} from '@atproto/api'
@@ -31,6 +32,8 @@ const agent = new BskyAgent({
 render(<LandingPage />, root)
 
 function LandingPage() {
+const { t } = useTranslation("../bskyembed/src/screens");
+
   const [uri, setUri] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
@@ -118,7 +121,7 @@ function LandingPage() {
         <img src={logo} className="h-10" />
       </Link>
 
-      <h1 className="text-4xl font-bold text-center">Embed a Bluesky Post</h1>
+      <h1 className="text-4xl font-bold text-center">{t('embed-bluesky-post')}</h1>
 
       <input
         type="text"

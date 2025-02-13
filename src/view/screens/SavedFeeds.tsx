@@ -8,6 +8,7 @@ import {useLingui} from '@lingui/react'
 import {useFocusEffect} from '@react-navigation/native'
 import {useNavigation} from '@react-navigation/native'
 import {NativeStackScreenProps} from '@react-navigation/native-stack'
+import { useTranslation } from "react-i18next";
 
 import {useHaptics} from '#/lib/haptics'
 import {usePalette} from '#/lib/hooks/usePalette'
@@ -48,6 +49,8 @@ function SavedFeedsInner({
 }: {
   preferences: UsePreferencesQueryResponse
 }) {
+const { t } = useTranslation("view/screens");
+
   const pal = usePalette('default')
   const {_} = useLingui()
   const {isMobile, isDesktop} = useWebMediaQueries()
@@ -93,7 +96,7 @@ function SavedFeedsInner({
         <Layout.Header.BackButton />
         <Layout.Header.Content align="left">
           <Layout.Header.TitleText>
-            <Trans>Feeds</Trans>
+            <Trans>{t('feeds')}</Trans>
           </Layout.Header.TitleText>
         </Layout.Header.Content>
         <Button
@@ -106,7 +109,7 @@ function SavedFeedsInner({
           disabled={isOverwritePending || !hasUnsavedChanges}>
           <ButtonIcon icon={isOverwritePending ? Loader : SaveIcon} />
           <ButtonText>
-            {isDesktop ? <Trans>Save changes</Trans> : <Trans>Save</Trans>}
+            {isDesktop ? <Trans>{t('save-changes')}</Trans> : <Trans>{t('save')}</Trans>}
           </ButtonText>
         </Button>
       </Layout.Header.Outer>
@@ -120,7 +123,7 @@ function SavedFeedsInner({
 
         <View style={[pal.text, pal.border, styles.title]}>
           <Text type="title" style={pal.text}>
-            <Trans>Pinned Feeds</Trans>
+            <Trans>{t('pinned-feeds')}</Trans>
           </Text>
         </View>
 
@@ -134,7 +137,7 @@ function SavedFeedsInner({
                 styles.empty,
               ]}>
               <Text type="lg" style={[pal.text]}>
-                <Trans>You don't have any pinned feeds.</Trans>
+                <Trans>{t('no-pinned-feeds')}</Trans>
               </Text>
             </View>
           ) : (
@@ -161,7 +164,7 @@ function SavedFeedsInner({
 
         <View style={[pal.text, pal.border, styles.title]}>
           <Text type="title" style={pal.text}>
-            <Trans>Saved Feeds</Trans>
+            <Trans>{t('saved-feeds')}</Trans>
           </Text>
         </View>
         {preferences ? (
@@ -174,7 +177,7 @@ function SavedFeedsInner({
                 styles.empty,
               ]}>
               <Text type="lg" style={[pal.text]}>
-                <Trans>You don't have any saved feeds.</Trans>
+                <Trans>{t('no-saved-feeds')}</Trans>
               </Text>
             </View>
           ) : (
@@ -195,17 +198,13 @@ function SavedFeedsInner({
 
         <View style={styles.footerText}>
           <Text type="sm" style={pal.textLight}>
-            <Trans>
-              Feeds are custom algorithms that users build with a little coding
-              expertise.{' '}
+            <Trans>{t('feeds-description')}
               <TextLink
                 type="sm"
                 style={pal.link}
                 href="https://github.com/bluesky-social/feed-generator"
                 text={_(msg`See this guide`)}
-              />{' '}
-              for more information.
-            </Trans>
+              />{t('more-information')}</Trans>
           </Text>
         </View>
       </Layout.Content>
@@ -382,6 +381,8 @@ function ListItem({
 }
 
 function FollowingFeedCard() {
+const { t } = useTranslation("view/screens");
+
   const t = useTheme()
   return (
     <View
@@ -419,7 +420,7 @@ function FollowingFeedCard() {
       <View
         style={{flex: 1, flexDirection: 'row', gap: 8, alignItems: 'center'}}>
         <Text type="lg-medium" style={[t.atoms.text]} numberOfLines={1}>
-          <Trans>Following</Trans>
+          <Trans>{t('following')}</Trans>
         </Text>
       </View>
     </View>

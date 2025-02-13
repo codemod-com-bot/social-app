@@ -1,6 +1,7 @@
 import {View} from 'react-native'
 import {AppBskyUnspeccedDefs} from '@atproto/api'
 import {Trans} from '@lingui/macro'
+import { useTranslation } from "react-i18next";
 
 import {logEvent} from '#/lib/statsig/statsig'
 import {isWeb} from '#/platform/detection'
@@ -24,6 +25,8 @@ export function ExploreRecommendations() {
 }
 
 function Inner() {
+const { t } = useTranslation("screens/Search/components");
+
   const t = useTheme()
   const gutters = useGutters([0, 'compact'])
   const {data: trending, error, isLoading} = useTrendingTopics()
@@ -49,18 +52,16 @@ function Inner() {
               style={{marginLeft: -2}}
             />
             <Text style={[a.text_2xl, a.font_heavy, t.atoms.text]}>
-              <Trans>Recommended</Trans>
+              <Trans>{t('recommended')}</Trans>
             </Text>
           </View>
           {!allFeeds ? (
             <Text style={[t.atoms.text_contrast_high, a.leading_snug]}>
-              <Trans>
-                Content from across the network we think you might like.
-              </Trans>
+              <Trans>{t('content-suggestion-network')}</Trans>
             </Text>
           ) : (
             <Text style={[t.atoms.text_contrast_high, a.leading_snug]}>
-              <Trans>Feeds we think you might like.</Trans>
+              <Trans>{t('feeds-suggestion')}</Trans>
             </Text>
           )}
         </View>

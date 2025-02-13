@@ -1,6 +1,7 @@
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {useGoBack} from '#/lib/hooks/useGoBack'
 import {CenteredView} from '#/view/com/util/Views'
@@ -23,6 +24,8 @@ export function Error({
   hideBackButton?: boolean
   sideBorders?: boolean
 }) {
+const { t } = useTranslation("components");
+
   const {_} = useLingui()
   const t = useTheme()
   const {gtMobile} = useBreakpoints()
@@ -62,7 +65,7 @@ export function Error({
             size="large"
             style={[a.rounded_sm, a.overflow_hidden, {paddingVertical: 10}]}>
             <ButtonText>
-              <Trans>Retry</Trans>
+              <Trans>{t('retry-action')}</Trans>
             </ButtonText>
           </Button>
         )}
@@ -75,7 +78,7 @@ export function Error({
             size="large"
             style={[a.rounded_sm, a.overflow_hidden, {paddingVertical: 10}]}>
             <ButtonText>
-              <Trans>Go Back</Trans>
+              <Trans>{t('go-back-action')}</Trans>
             </ButtonText>
           </Button>
         )}

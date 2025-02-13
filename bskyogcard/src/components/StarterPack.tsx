@@ -1,6 +1,7 @@
 /* eslint-disable bsky-internal/avoid-unwrapped-text */
 import React from 'react'
 import {AppBskyGraphDefs, AppBskyGraphStarterpack} from '@atproto/api'
+import { useTranslation } from "react-i18next";
 
 import {Butterfly} from './Butterfly.js'
 import {Img} from './Img.js'
@@ -17,6 +18,8 @@ export function StarterPack(props: {
   starterPack: AppBskyGraphDefs.StarterPackView
   images: Map<string, Buffer>
 }) {
+const { t } = useTranslation("components");
+
   const {starterPack, images} = props
   const record = AppBskyGraphStarterpack.isRecord(starterPack.record)
     ? starterPack.record
@@ -106,9 +109,7 @@ export function StarterPack(props: {
             color: 'white',
             padding: 60,
             fontSize: 40,
-          }}>
-          JOIN THE CONVERSATION
-        </div>
+          }}>{t('join-the-conversation')}</div>
         <div style={{display: 'flex'}}>
           {imagesAcross.map((image, i) => {
             return (
@@ -143,9 +144,7 @@ export function StarterPack(props: {
             fontSize: 40,
             justifyContent: 'center',
             padding: '30px 30px 10px',
-          }}>
-          on <Butterfly width="65" style={{margin: '-7px 10px 0'}} /> Bluesky
-        </div>
+          }}>{t('on-bluesky')}<Butterfly width="65" style={{margin: '-7px 10px 0'}} />{t('platform-name-bluesky')}</div>
       </div>
     </div>
   )

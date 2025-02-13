@@ -8,6 +8,7 @@ import Animated, {
 import {AppBskyActorDefs, ModerationOpts} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {useNonReactiveCallback} from '#/lib/hooks/useNonReactiveCallback'
 import {logEvent} from '#/lib/statsig/statsig'
@@ -67,6 +68,8 @@ type Item =
     }
 
 export function FollowDialog({guide}: {guide: Follow10ProgressGuide}) {
+const { t } = useTranslation("components/ProgressGuide");
+
   const {_} = useLingui()
   const control = Dialog.useDialogControl()
   const {gtMobile} = useBreakpoints()
@@ -85,7 +88,7 @@ export function FollowDialog({guide}: {guide: Follow10ProgressGuide}) {
         variant="solid">
         <ButtonIcon icon={PersonGroupIcon} />
         <ButtonText>
-          <Trans>Find people to follow</Trans>
+          <Trans>{t('find-people-to-follow')}</Trans>
         </ButtonText>
       </Button>
       <Dialog.Outer control={control} nativeOptions={{minHeight}}>
@@ -394,6 +397,8 @@ let Header = ({
 Header = memo(Header)
 
 function HeaderTop({guide}: {guide: Follow10ProgressGuide}) {
+const { t } = useTranslation("components/ProgressGuide");
+
   const {_} = useLingui()
   const t = useTheme()
   const control = Dialog.useDialogContext()
@@ -414,7 +419,7 @@ function HeaderTop({guide}: {guide: Follow10ProgressGuide}) {
           a.leading_tight,
           t.atoms.text_contrast_high,
         ]}>
-        <Trans>Find people to follow</Trans>
+        <Trans>{t('find-people-to-follow-again')}</Trans>
       </Text>
       <View style={isWeb && {paddingRight: 36}}>
         <ProgressGuideTask

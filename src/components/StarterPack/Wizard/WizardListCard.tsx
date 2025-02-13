@@ -10,6 +10,7 @@ import {
 import {GeneratorView} from '@atproto/api/dist/client/types/app/bsky/feed/defs'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {DISCOVER_FEED_URI, STARTER_PACK_MAX_SIZE} from '#/lib/constants'
 import {sanitizeDisplayName} from '#/lib/strings/display-names'
@@ -46,6 +47,8 @@ function WizardListCard({
   disabled?: boolean
   moderationUi: ModerationUI
 }) {
+const { t } = useTranslation("components/StarterPack/Wizard");
+
   const t = useTheme()
   const {_} = useLingui()
 
@@ -105,7 +108,7 @@ function WizardListCard({
           style={[a.self_center, {marginLeft: 'auto'}]}
           onPress={onPress}>
           <ButtonText>
-            <Trans>Remove</Trans>
+            <Trans>{t('remove-button')}</Trans>
           </ButtonText>
         </Button>
       ) : null}

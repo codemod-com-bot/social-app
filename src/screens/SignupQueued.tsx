@@ -4,6 +4,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context'
 import {StatusBar} from 'expo-status-bar'
 import {msg, plural, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {logger} from '#/logger'
 import {isIOS, isWeb} from '#/platform/detection'
@@ -18,6 +19,8 @@ import {P, Text} from '#/components/Typography'
 const COL_WIDTH = 400
 
 export function SignupQueued() {
+const { t } = useTranslation("screens");
+
   const {_} = useLingui()
   const t = useTheme()
   const insets = useSafeAreaInsets()
@@ -79,7 +82,7 @@ export function SignupQueued() {
       onPress={checkStatus}
       disabled={isProcessing}>
       <ButtonText>
-        <Trans>Check my status</Trans>
+        <Trans>{t('check-my-status')}</Trans>
       </ButtonText>
       {isProcessing && <ButtonIcon icon={Loader} />}
     </Button>
@@ -93,7 +96,7 @@ export function SignupQueued() {
       label={_(msg`Log out`)}
       onPress={() => logoutCurrentAccount('SignupQueued')}>
       <ButtonText>
-        <Trans>Log out</Trans>
+        <Trans>{t('log-out')}</Trans>
       </ButtonText>
     </Button>
   )
@@ -124,13 +127,10 @@ export function SignupQueued() {
             </View>
 
             <Text style={[a.text_4xl, a.font_heavy, a.pb_sm]}>
-              <Trans>You're in line</Trans>
+              <Trans>{t('you-are-in-line')}</Trans>
             </Text>
             <P style={[t.atoms.text_contrast_medium]}>
-              <Trans>
-                There's been a rush of new users to Bluesky! We'll activate your
-                account as soon as we can.
-              </Trans>
+              <Trans>{t('account-activation-notice')}</Trans>
             </P>
 
             <View
@@ -152,18 +152,14 @@ export function SignupQueued() {
               )}
               <P style={[a.text_center]}>
                 {typeof placeInQueue === 'number' ? (
-                  <Trans>left to go.</Trans>
+                  <Trans>{t('time-left-to-go')}</Trans>
                 ) : (
-                  <Trans>You are in line.</Trans>
+                  <Trans>{t('you-are-in-line-confirmation')}</Trans>
                 )}{' '}
                 {estimatedTime ? (
-                  <Trans>
-                    We estimate {estimatedTime} until your account is ready.
-                  </Trans>
+                  <Trans>{t('estimated-time-until-ready', { estimatedTime })}</Trans>
                 ) : (
-                  <Trans>
-                    We will let you know when your account is ready.
-                  </Trans>
+                  <Trans>{t('notification-when-ready')}</Trans>
                 )}
               </P>
             </View>

@@ -4,6 +4,7 @@ import {AppBskyActorDefs, moderateProfile} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {differenceInSeconds} from 'date-fns'
+import { useTranslation } from "react-i18next";
 
 import {HITSLOP_10} from '#/lib/constants'
 import {useGetTimeAgo} from '#/lib/hooks/useTimeAgo'
@@ -26,6 +27,8 @@ export function NewskieDialog({
   profile: AppBskyActorDefs.ProfileViewDetailed
   disabled?: boolean
 }) {
+const { t } = useTranslation("components");
+
   const {_} = useLingui()
   const t = useTheme()
   const moderationOpts = useModerationOpts()
@@ -100,23 +103,21 @@ export function NewskieDialog({
               </View>
               <Text style={[a.font_bold, a.text_xl]}>
                 {isMe ? (
-                  <Trans>Welcome, friend!</Trans>
+                  <Trans>{t('welcome-friend')}</Trans>
                 ) : (
-                  <Trans>Say hello!</Trans>
+                  <Trans>{t('say-hello')}</Trans>
                 )}
               </Text>
             </View>
             <Text style={[a.text_md, a.text_center, a.leading_snug]}>
               {profile.joinedViaStarterPack ? (
                 <Trans>
-                  {profileName} joined Bluesky using a starter pack{' '}
-                  {timeAgo(createdAt, now, {format: 'long'})} ago
-                </Trans>
+                  {t('profile-joined-starter-pack', { profileName })}
+                  {timeAgo(createdAt, now, {format: 'long'})}{t('time-ago')}</Trans>
               ) : (
                 <Trans>
-                  {profileName} joined Bluesky{' '}
-                  {timeAgo(createdAt, now, {format: 'long'})} ago
-                </Trans>
+                  {t('profile-joined', { profileName })}
+                  {timeAgo(createdAt, now, {format: 'long'})}{t('time-ago')}</Trans>
               )}
             </Text>
             {profile.joinedViaStarterPack ? (
@@ -150,7 +151,7 @@ export function NewskieDialog({
                 style={[a.mt_sm]}
                 onPress={() => control.close()}>
                 <ButtonText>
-                  <Trans>Close</Trans>
+                  <Trans>{t('close')}</Trans>
                 </ButtonText>
               </Button>
             )}

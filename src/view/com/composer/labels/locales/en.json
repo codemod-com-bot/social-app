@@ -1,0 +1,17 @@
+{
+  "labels-added": "Labels added",
+  "labels": "Labels",
+  "add-content-warning": "Add a content warning",
+  "choose-self-labels-instructions": "Choose self-labels that are applicable for the media you are posting. If none are selected, this post is suitable for all audiences.",
+  "adult-content": "Adult Content",
+  "suggestive": "Suggestive",
+  "nudity": "Nudity",
+  "adult": "Adult",
+  "pictures-for-adults": "Pictures meant for adults.",
+  "artistic-nudity": "Artistic or non-erotic nudity.",
+  "sexual-activity-nudity": "Sexual activity or erotic nudity.",
+  "other": "Other",
+  "graphic-media": "Graphic Media",
+  "disturbing-media-instructions": "Media that may be disturbing or inappropriate for some audiences.",
+  "done": "Done"
+}

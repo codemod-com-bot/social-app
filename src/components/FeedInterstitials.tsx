@@ -4,6 +4,7 @@ import {AppBskyActorDefs, AppBskyFeedDefs, AtUri} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useNavigation} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {NavigationProp} from '#/lib/routes/types'
 import {logEvent} from '#/lib/statsig/statsig'
@@ -232,6 +233,8 @@ export function ProfileGrid({
   error: Error | null
   viewContext: 'profile' | 'feed'
 }) {
+const { t } = useTranslation("components");
+
   const t = useTheme()
   const {_} = useLingui()
   const moderationOpts = useModerationOpts()
@@ -332,9 +335,9 @@ export function ProfileGrid({
         ]}>
         <Text style={[a.text_sm, a.font_bold, t.atoms.text_contrast_medium]}>
           {viewContext === 'profile' ? (
-            <Trans>Similar accounts</Trans>
+            <Trans>{t('similar-accounts')}</Trans>
           ) : (
-            <Trans>Suggested for you</Trans>
+            <Trans>{t('suggested-for-you')}</Trans>
           )}
         </Text>
         <Person fill={t.atoms.text_contrast_low.color} size="sm" />
@@ -351,7 +354,7 @@ export function ProfileGrid({
               label={_(msg`Browse more suggestions`)}
               to="/search"
               style={[t.atoms.text_contrast_medium]}>
-              <Trans>Browse more suggestions</Trans>
+              <Trans>{t('browse-more-suggestions')}</Trans>
             </InlineLinkText>
             <Arrow size="sm" fill={t.atoms.text_contrast_medium.color} />
           </View>
@@ -375,9 +378,7 @@ export function ProfileGrid({
                   <View style={[a.flex_1, a.justify_center]}>
                     <View style={[a.flex_row, a.px_lg]}>
                       <Text style={[a.pr_xl, a.flex_1, a.leading_snug]}>
-                        <Trans>
-                          Browse more suggestions on the Explore page
-                        </Trans>
+                        <Trans>{t('explore-page-suggestions')}</Trans>
                       </Text>
 
                       <Arrow size="xl" />
@@ -394,6 +395,8 @@ export function ProfileGrid({
 }
 
 export function SuggestedFeeds() {
+const { t } = useTranslation("components");
+
   const numFeedsToDisplay = 3
   const t = useTheme()
   const {_} = useLingui()
@@ -467,7 +470,7 @@ export function SuggestedFeeds() {
             a.font_bold,
             t.atoms.text_contrast_medium,
           ]}>
-          <Trans>Some other feeds you might like</Trans>
+          <Trans>{t('other-feeds-you-might-like')}</Trans>
         </Text>
         <Hashtag fill={t.atoms.text_contrast_low.color} />
       </View>
@@ -488,7 +491,7 @@ export function SuggestedFeeds() {
               label={_(msg`Browse more suggestions`)}
               to="/search"
               style={[t.atoms.text_contrast_medium]}>
-              <Trans>Browse more suggestions</Trans>
+              <Trans>{t('duplicate-browse-more-suggestions')}</Trans>
             </InlineLinkText>
             <Arrow size="sm" fill={t.atoms.text_contrast_medium.color} />
           </View>
@@ -513,9 +516,7 @@ export function SuggestedFeeds() {
                   <View style={[a.flex_1, a.justify_center]}>
                     <View style={[a.flex_row, a.px_lg]}>
                       <Text style={[a.pr_xl, a.flex_1, a.leading_snug]}>
-                        <Trans>
-                          Browse more suggestions on the Explore page
-                        </Trans>
+                        <Trans>{t('duplicate-explore-page-suggestions')}</Trans>
                       </Text>
 
                       <Arrow size="xl" />

@@ -9,6 +9,7 @@ import {
 } from '@atproto/api'
 import {msg, Plural, plural, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import {MAX_LABELERS} from '#/lib/constants'
@@ -59,6 +60,8 @@ let ProfileHeaderLabeler = ({
   hideBackButton = false,
   isPlaceholderProfile,
 }: Props): React.ReactNode => {
+const { t } = useTranslation("screens/Profile/Header");
+
   const profile: Shadow<AppBskyActorDefs.ProfileViewDetailed> =
     useProfileShadow(profileUnshadowed)
   const t = useTheme()
@@ -186,7 +189,7 @@ let ProfileHeaderLabeler = ({
                 label={_(msg`Edit profile`)}
                 style={a.rounded_full}>
                 <ButtonText>
-                  <Trans>Edit Profile</Trans>
+                  <Trans>{t('edit-profile')}</Trans>
                 </ButtonText>
               </Button>
               <EditProfileDialog
@@ -204,7 +207,10 @@ let ProfileHeaderLabeler = ({
                     : _(msg`Subscribe to this labeler`)
                 }
                 onPress={onPressSubscribe}>
-                {state => (
+                {state =>  {
+const { t } = useTranslation("screens/Profile/Header");
+
+return (
                   <View
                     style={[
                       {
@@ -233,13 +239,14 @@ let ProfileHeaderLabeler = ({
                         a.leading_tight,
                       ]}>
                       {isSubscribed ? (
-                        <Trans>Unsubscribe</Trans>
+                        <Trans>{t('unsubscribe')}</Trans>
                       ) : (
-                        <Trans>Subscribe to Labeler</Trans>
+                        <Trans>{t('subscribe-to-labeler')}</Trans>
                       )}
                     </Text>
                   </View>
-                )}
+                )
+}}
               </Button>
             </>
           ) : null}
@@ -297,7 +304,10 @@ let ProfileHeaderLabeler = ({
                         other: '# users',
                       })}`,
                     )}>
-                    {({hovered, focused, pressed}) => (
+                    {({hovered, focused, pressed}) =>  {
+const { t } = useTranslation("screens/Profile/Header");
+
+return (
                       <Text
                         style={[
                           a.font_bold,
@@ -306,8 +316,7 @@ let ProfileHeaderLabeler = ({
                           (hovered || focused || pressed) &&
                             t.atoms.text_contrast_high,
                         ]}>
-                        <Trans>
-                          Liked by{' '}
+                        <Trans>{t('liked-by')}
                           <Plural
                             value={likeCount}
                             one="# user"
@@ -315,7 +324,8 @@ let ProfileHeaderLabeler = ({
                           />
                         </Trans>
                       </Text>
-                    )}
+                    )
+}}
                   </Link>
                 )}
               </View>
@@ -338,15 +348,14 @@ function CantSubscribePrompt({
 }: {
   control: DialogOuterProps['control']
 }) {
+const { t } = useTranslation("screens/Profile/Header");
+
   const {_} = useLingui()
   return (
     <Prompt.Outer control={control}>
-      <Prompt.TitleText>Unable to subscribe</Prompt.TitleText>
+      <Prompt.TitleText>{t('unable-to-subscribe')}</Prompt.TitleText>
       <Prompt.DescriptionText>
-        <Trans>
-          We're sorry! You can only subscribe to twenty labelers, and you've
-          reached your limit of twenty.
-        </Trans>
+        <Trans>{t('subscription-limit-reached')}</Trans>
       </Prompt.DescriptionText>
       <Prompt.Actions>
         <Prompt.Action onPress={() => control.close()} cta={_(msg`OK`)} />

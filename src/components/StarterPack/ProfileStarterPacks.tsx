@@ -11,6 +11,7 @@ import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useNavigation} from '@react-navigation/native'
 import {InfiniteData, UseInfiniteQueryResult} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {useGenerateStarterPackMutation} from '#/lib/generate-starterpack'
 import {useBottomBarOffset} from '#/lib/hooks/useBottomBarOffset'
@@ -150,6 +151,8 @@ export const ProfileStarterPacks = React.forwardRef<
 })
 
 function CreateAnother() {
+const { t } = useTranslation("components/StarterPack");
+
   const {_} = useLingui()
   const t = useTheme()
   const navigation = useNavigation<NavigationProp>()
@@ -171,7 +174,7 @@ function CreateAnother() {
         style={[a.self_center]}
         onPress={() => navigation.navigate('StarterPackWizard')}>
         <ButtonText>
-          <Trans>Create another</Trans>
+          <Trans>{t('create-another')}</Trans>
         </ButtonText>
         <ButtonIcon icon={Plus} position="right" />
       </Button>
@@ -180,6 +183,8 @@ function CreateAnother() {
 }
 
 function Empty() {
+const { t } = useTranslation("components/StarterPack");
+
   const {_} = useLingui()
   const t = useTheme()
   const navigation = useNavigation<NavigationProp>()
@@ -237,13 +242,10 @@ function Empty() {
             t.atoms.text_contrast_medium,
             {color: 'white'},
           ]}>
-          <Trans>You haven't created a starter pack yet!</Trans>
+          <Trans>{t('starter-pack-not-created')}</Trans>
         </Text>
         <Text style={[a.text_md, {color: 'white'}]}>
-          <Trans>
-            Starter packs let you easily share your favorite feeds and people
-            with your friends.
-          </Trans>
+          <Trans>{t('starter-packs-description')}</Trans>
         </Text>
       </View>
       <View style={[a.flex_row, a.gap_md, {marginLeft: 'auto'}]}>
@@ -262,7 +264,7 @@ function Empty() {
           }}
           style={{backgroundColor: 'transparent'}}>
           <ButtonText style={{color: 'white'}}>
-            <Trans>Make one for me</Trans>
+            <Trans>{t('make-one-for-me')}</Trans>
           </ButtonText>
           {isGenerating && <Loader size="md" />}
         </Button>
@@ -286,20 +288,17 @@ function Empty() {
           }}
           hoverStyle={[{backgroundColor: '#dfdfdf'}]}>
           <ButtonText>
-            <Trans>Create</Trans>
+            <Trans>{t('create')}</Trans>
           </ButtonText>
         </Button>
       </View>
 
       <Prompt.Outer control={confirmDialogControl}>
         <Prompt.TitleText>
-          <Trans>Generate a starter pack</Trans>
+          <Trans>{t('generate-starter-pack')}</Trans>
         </Prompt.TitleText>
         <Prompt.DescriptionText>
-          <Trans>
-            Bluesky will choose a set of recommended accounts from people in
-            your network.
-          </Trans>
+          <Trans>{t('recommended-accounts-description')}</Trans>
         </Prompt.DescriptionText>
         <Prompt.Actions>
           <Prompt.Action

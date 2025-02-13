@@ -3,6 +3,7 @@ import {SafeAreaView, StyleSheet, View} from 'react-native'
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {useOpenLink} from '#/lib/hooks/useOpenLink'
 import {usePalette} from '#/lib/hooks/usePalette'
@@ -27,6 +28,8 @@ export function Component({
   href: string
   share?: boolean
 }) {
+const { t } = useTranslation("view/com/modals");
+
   const pal = usePalette('default')
   const {closeModal} = useModalControls()
   const {isMobile} = useWebMediaQueries()
@@ -57,26 +60,26 @@ export function Component({
                 size={18}
               />
               <Text type="title-lg" style={[pal.text, styles.title]}>
-                <Trans>Potentially Misleading Link</Trans>
+                <Trans>{t('potentially-misleading-link')}</Trans>
               </Text>
             </>
           ) : (
             <Text type="title-lg" style={[pal.text, styles.title]}>
-              <Trans>Leaving Bluesky</Trans>
+              <Trans>{t('leaving-bluesky')}</Trans>
             </Text>
           )}
         </View>
 
         <View style={{gap: 10}}>
           <Text type="lg" style={pal.text}>
-            <Trans>This link is taking you to the following website:</Trans>
+            <Trans>{t('link-taking-you-to-website')}</Trans>
           </Text>
 
           <LinkBox href={href} />
 
           {potentiallyMisleading && (
             <Text type="lg" style={pal.text}>
-              <Trans>Make sure this is where you intend to go!</Trans>
+              <Trans>{t('ensure-intended-destination')}</Trans>
             </Text>
           )}
         </View>

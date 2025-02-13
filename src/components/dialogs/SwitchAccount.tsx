@@ -2,6 +2,7 @@ import {useCallback} from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {useAccountSwitcher} from '#/lib/hooks/useAccountSwitcher'
 import {type SessionAccount, useSession} from '#/state/session'
@@ -16,6 +17,8 @@ export function SwitchAccountDialog({
 }: {
   control: Dialog.DialogControlProps
 }) {
+const { t } = useTranslation("components/dialogs");
+
   const {_} = useLingui()
   const {currentAccount} = useSession()
   const {onPressSwitchAccount, pendingDid} = useAccountSwitcher()
@@ -46,7 +49,7 @@ export function SwitchAccountDialog({
       <Dialog.ScrollableInner label={_(msg`Switch Account`)}>
         <View style={[a.gap_lg]}>
           <Text style={[a.text_2xl, a.font_bold]}>
-            <Trans>Switch Account</Trans>
+            <Trans>{t('switch-account')}</Trans>
           </Text>
 
           <AccountList

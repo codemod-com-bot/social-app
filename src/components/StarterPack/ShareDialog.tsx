@@ -4,6 +4,7 @@ import {requestMediaLibraryPermissionsAsync} from 'expo-image-picker'
 import {AppBskyGraphDefs} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
 import {saveImageToMediaLibrary} from '#/lib/media/manip'
@@ -44,6 +45,8 @@ function ShareDialogInner({
   qrDialogControl,
   control,
 }: Props) {
+const { t } = useTranslation("components/StarterPack");
+
   const {_} = useLingui()
   const t = useTheme()
   const {isTabletOrDesktop} = useWebMediaQueries()
@@ -93,13 +96,10 @@ function ShareDialogInner({
           <View style={[!isTabletOrDesktop && a.gap_lg]}>
             <View style={[a.gap_sm, isTabletOrDesktop && a.pb_lg]}>
               <Text style={[a.font_bold, a.text_2xl]}>
-                <Trans>Invite people to this starter pack!</Trans>
+                <Trans>{t('invite-people-starter-pack')}</Trans>
               </Text>
               <Text style={[a.text_md, t.atoms.text_contrast_medium]}>
-                <Trans>
-                  Share this starter pack and help people join your community on
-                  Bluesky.
-                </Trans>
+                <Trans>{t('share-starter-pack-community')}</Trans>
               </Text>
             </View>
             <Image
@@ -127,7 +127,7 @@ function ShareDialogInner({
                 style={[isWeb && a.self_center]}
                 onPress={onShareLink}>
                 <ButtonText>
-                  {isWeb ? <Trans>Copy Link</Trans> : <Trans>Share link</Trans>}
+                  {isWeb ? <Trans>{t('copy-link')}</Trans> : <Trans>{t('share-link')}</Trans>}
                 </ButtonText>
               </Button>
               <Button
@@ -142,7 +142,7 @@ function ShareDialogInner({
                   })
                 }}>
                 <ButtonText>
-                  <Trans>Share QR code</Trans>
+                  <Trans>{t('share-qr-code')}</Trans>
                 </ButtonText>
               </Button>
               {isNative && (
@@ -154,7 +154,7 @@ function ShareDialogInner({
                   style={[isWeb && a.self_center]}
                   onPress={onSave}>
                   <ButtonText>
-                    <Trans>Save image</Trans>
+                    <Trans>{t('save-image')}</Trans>
                   </ButtonText>
                 </Button>
               )}

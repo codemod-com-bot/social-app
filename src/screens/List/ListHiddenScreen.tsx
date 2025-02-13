@@ -4,6 +4,7 @@ import {AppBskyGraphDefs} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useQueryClient} from '@tanstack/react-query'
+import { Trans,useTranslation } from "react-i18next";
 
 import {useGoBack} from '#/lib/hooks/useGoBack'
 import {sanitizeHandle} from '#/lib/strings/handles'
@@ -31,6 +32,8 @@ export function ListHiddenScreen({
   list: AppBskyGraphDefs.ListView
   preferences: UsePreferencesQueryResponse
 }) {
+const { t } = useTranslation("screens/List");
+
   const {_} = useLingui()
   const t = useTheme()
   const {currentAccount} = useSession()
@@ -124,9 +127,9 @@ export function ListHiddenScreen({
         <View style={[a.gap_sm, a.align_center]}>
           <Text style={[a.font_bold, a.text_3xl]}>
             {list.creator.viewer?.blocking || list.creator.viewer?.blockedBy ? (
-              <Trans>Creator has been blocked</Trans>
+              <Trans>{t('creator-blocked')}</Trans>
             ) : (
-              <Trans>List has been hidden</Trans>
+              <Trans>{t('list-hidden')}</Trans>
             )}
           </Text>
           <Text
@@ -138,21 +141,16 @@ export function ListHiddenScreen({
               {lineHeight: 1.4},
             ]}>
             {list.creator.viewer?.blocking || list.creator.viewer?.blockedBy ? (
-              <Trans>
-                Either the creator of this list has blocked you or you have
-                blocked the creator.
-              </Trans>
+              <Trans>{t('creator-or-you-blocked')}</Trans>
             ) : (
-              <Trans>
-                This list - created by{' '}
-                <Text style={[a.text_md, !isOwner && a.font_bold]}>
-                  {isOwner
+              <Trans><Trans
+i18nKey="list-violations-warning"
+values={{ isOwnerMsgYouSanitizeHandleListCreatorHandle: <>{isOwner
                     ? _(msg`you`)
-                    : sanitizeHandle(list.creator.handle, '@')}
-                </Text>{' '}
-                - contains possible violations of Bluesky's community guidelines
-                in its name or description.
-              </Trans>
+                    : sanitizeHandle(list.creator.handle, '@')}</> }}
+components={{"0": <Text style={[a.text_md, !isOwner && a.font_bold]} />}}
+/>
+                </Trans>
             )}
           </Text>
         </View>
@@ -168,7 +166,7 @@ export function ListHiddenScreen({
               onPress={onRemoveList}
               disabled={isProcessing}>
               <ButtonText>
-                <Trans>Removed from saved feeds</Trans>
+                <Trans>{t('removed-from-saved-feeds')}</Trans>
               </ButtonText>
               {isProcessing ? (
                 <ButtonIcon icon={Loader} position="right" />
@@ -184,7 +182,7 @@ export function ListHiddenScreen({
               onPress={() => setIsContentVisible(true)}
               disabled={isProcessing}>
               <ButtonText>
-                <Trans>Show anyway</Trans>
+                <Trans>{t('show-anyway')}</Trans>
               </ButtonText>
             </Button>
           ) : list.viewer?.muted || list.viewer?.blocked ? (
@@ -202,7 +200,7 @@ export function ListHiddenScreen({
               }}
               disabled={isProcessing}>
               <ButtonText>
-                <Trans>Unsubscribe from list</Trans>
+                <Trans>{t('unsubscribe-from-list')}</Trans>
               </ButtonText>
               {isProcessing ? (
                 <ButtonIcon icon={Loader} position="right" />
@@ -218,7 +216,7 @@ export function ListHiddenScreen({
           size="large"
           disabled={isProcessing}>
           <ButtonText>
-            <Trans>Go Back</Trans>
+            <Trans>{t('go-back')}</Trans>
           </ButtonText>
         </Button>
       </View>

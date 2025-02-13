@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {AtUri} from '@atproto/api'
 import {msg, Plural, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { Trans,useTranslation } from "react-i18next";
 
 import {useHaptics} from '#/lib/haptics'
 import {makeProfileLink} from '#/lib/routes/links'
@@ -384,6 +385,8 @@ function DialogInner({
   onTogglePinned: () => void
   isFeedStateChangePending: boolean
 }) {
+const { t } = useTranslation("screens/Profile/components");
+
   const t = useTheme()
   const {_} = useLingui()
   const {hasSession} = useSession()
@@ -444,9 +447,10 @@ function DialogInner({
           <Text
             style={[a.text_sm, a.leading_tight, t.atoms.text_contrast_medium]}
             numberOfLines={1}>
-            <Trans>
-              By{' '}
-              <InlineLinkText
+            <Trans><Trans
+i18nKey="view-profile-link"
+values={{ sanitizeHandleInfoCreatorHandle: <>{sanitizeHandle(info.creatorHandle, '@')}</> }}
+components={{"0": <InlineLinkText
                 label={_(msg`View ${info.creatorHandle}'s profile`)}
                 to={makeProfileLink({
                   did: info.creatorDid,
@@ -459,9 +463,9 @@ function DialogInner({
                   t.atoms.text_contrast_medium,
                 ]}
                 numberOfLines={1}
-                onPress={() => control.close()}>
-                {sanitizeHandle(info.creatorHandle, '@')}
-              </InlineLinkText>
+                onPress={() => control.close()} />}}
+/>
+              
             </Trans>
           </Text>
         </View>
@@ -486,8 +490,7 @@ function DialogInner({
             to={makeCustomFeedLink(info.creatorDid, feedRkey, 'liked-by')}
             style={[a.underline, t.atoms.text_contrast_medium]}
             onPress={() => control.close()}>
-            <Trans>
-              Liked by <Plural value={likeCount} one="# user" other="# users" />
+            <Trans>{t('liked-by')}<Plural value={likeCount} one="# user" other="# users" />
             </Trans>
           </InlineLinkText>
         )}
@@ -511,7 +514,7 @@ function DialogInner({
               )}
 
               <ButtonText>
-                {isLiked ? <Trans>Unlike</Trans> : <Trans>Like</Trans>}
+                {isLiked ? <Trans>{t('unlike-action')}</Trans> : <Trans>{t('like-action')}</Trans>}
               </ButtonText>
             </Button>
             <Button
@@ -523,7 +526,7 @@ function DialogInner({
               onPress={onTogglePinned}
               style={[a.flex_1]}>
               <ButtonText>
-                {isPinned ? <Trans>Unpin feed</Trans> : <Trans>Pin feed</Trans>}
+                {isPinned ? <Trans>{t('unpin-feed')}</Trans> : <Trans>{t('pin-feed')}</Trans>}
               </ButtonText>
               <ButtonIcon icon={Pin} position="right" />
             </Button>
@@ -535,7 +538,7 @@ function DialogInner({
             <View
               style={[a.flex_row, a.align_center, a.gap_sm, a.justify_between]}>
               <Text style={[a.italic, t.atoms.text_contrast_medium]}>
-                <Trans>Something wrong? Let us know.</Trans>
+                <Trans>{t('report-issue')}</Trans>
               </Text>
 
               <Button
@@ -545,7 +548,7 @@ function DialogInner({
                 color="secondary"
                 onPress={onPressReport}>
                 <ButtonText>
-                  <Trans>Report feed</Trans>
+                  <Trans>{t('report-feed')}</Trans>
                 </ButtonText>
                 <ButtonIcon icon={CircleInfo} position="right" />
               </Button>

@@ -52,6 +52,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useQueryClient} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import * as apilib from '#/lib/api/index'
 import {EmbeddingDisabledError} from '#/lib/api/resolve'
@@ -912,6 +913,8 @@ function ComposerTopBar({
   topBarAnimatedStyle: StyleProp<ViewStyle>
   children?: React.ReactNode
 }) {
+const { t } = useTranslation("view/com/composer");
+
   const pal = usePalette('default')
   return (
     <Animated.View
@@ -928,7 +931,7 @@ function ComposerTopBar({
           onPress={onCancel}
           accessibilityHint="Closes post composer and discards post draft">
           <ButtonText style={[a.text_md]}>
-            <Trans>Cancel</Trans>
+            <Trans>{t('cancel-button')}</Trans>
           </ButtonText>
         </Button>
         <View style={a.flex_1} />
@@ -952,11 +955,11 @@ function ComposerTopBar({
             disabled={!canPost || isPublishQueued}>
             <ButtonText style={[a.text_md]}>
               {isReply ? (
-                <Trans context="action">Reply</Trans>
+                <Trans context="action">{t('reply-button')}</Trans>
               ) : isThread ? (
-                <Trans context="action">Post All</Trans>
+                <Trans context="action">{t('post-all-button')}</Trans>
               ) : (
-                <Trans context="action">Post</Trans>
+                <Trans context="action">{t('post-button')}</Trans>
               )}
             </ButtonText>
           </Button>
@@ -1536,6 +1539,8 @@ function ErrorBanner({
   clearError: () => void
   clearVideo: () => void
 }) {
+const { t } = useTranslation("view/com/composer");
+
   const t = useTheme()
   const {_} = useLingui()
 
@@ -1591,7 +1596,7 @@ function ErrorBanner({
               a.leading_snug,
               t.atoms.text_contrast_low,
             ]}>
-            <Trans>Job ID: {videoState.jobId}</Trans>
+            <Trans>{t('job-id-label')}{videoState.jobId}</Trans>
           </NewText>
         )}
       </View>

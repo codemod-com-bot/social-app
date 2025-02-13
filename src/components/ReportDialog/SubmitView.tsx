@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {AppBskyLabelerDefs} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {getLabelingServiceTitle} from '#/lib/moderation'
 import {ReportOption} from '#/lib/moderation/useReportOptions'
@@ -35,6 +36,8 @@ export function SubmitView({
   goBack: () => void
   onSubmitComplete: () => void
 }) {
+const { t } = useTranslation("components/ReportDialog");
+
   const t = useTheme()
   const {_} = useLingui()
   const agent = useAgent()
@@ -138,7 +141,7 @@ export function SubmitView({
 
       <View style={[a.gap_md]}>
         <Text style={[t.atoms.text_contrast_medium]}>
-          <Trans>Select the moderation service(s) to report to</Trans>
+          <Trans>{t('select-moderation-services')}</Trans>
         </Text>
 
         <Toggle.Group
@@ -165,7 +168,7 @@ export function SubmitView({
       </View>
       <View style={[a.gap_md]}>
         <Text style={[t.atoms.text_contrast_medium]}>
-          <Trans>Optionally provide additional information below:</Trans>
+          <Trans>{t('optional-additional-information')}</Trans>
         </Text>
 
         <View style={[a.relative, a.w_full]}>
@@ -173,7 +176,7 @@ export function SubmitView({
             multiline
             value={details}
             onChangeText={setDetails}
-            label="Text field"
+            label={t('text-field-label')}
             style={{paddingRight: 60}}
             numberOfLines={6}
           />
@@ -208,7 +211,7 @@ export function SubmitView({
               {error ? (
                 error
               ) : (
-                <Trans>You must select at least one labeler for a report</Trans>
+                <Trans>{t('must-select-labeler')}</Trans>
               )}
             </Text>
           ))}
@@ -222,7 +225,7 @@ export function SubmitView({
           onPress={submit}
           disabled={!selectedServices.length}>
           <ButtonText>
-            <Trans>Send report</Trans>
+            <Trans>{t('send-report')}</Trans>
           </ButtonText>
           <ButtonIcon icon={submitting ? Loader : SendIcon} />
         </Button>

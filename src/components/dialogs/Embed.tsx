@@ -3,6 +3,7 @@ import {TextInput, View} from 'react-native'
 import {AppBskyActorDefs, AppBskyFeedPost, AtUri} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {EMBED_SCRIPT} from '#/lib/constants'
 import {niceDate} from '#/lib/strings/time'
@@ -42,6 +43,8 @@ function EmbedDialogInner({
   record,
   timestamp,
 }: Omit<EmbedDialogProps, 'control'>) {
+const { t } = useTranslation("components/dialogs");
+
   const t = useTheme()
   const {_, i18n} = useLingui()
   const ref = useRef<TextInput>(null)
@@ -94,14 +97,11 @@ function EmbedDialogInner({
     <Dialog.Inner label="Embed post" style={[a.gap_md, {maxWidth: 500}]}>
       <View style={[a.gap_sm, a.pb_lg]}>
         <Text style={[a.text_2xl, a.font_bold]}>
-          <Trans>Embed post</Trans>
+          <Trans>{t('embed-post')}</Trans>
         </Text>
         <Text
           style={[a.text_md, t.atoms.text_contrast_medium, a.leading_normal]}>
-          <Trans>
-            Embed this post in your website. Simply copy the following snippet
-            and paste it into the HTML code of your website.
-          </Trans>
+          <Trans>{t('embed-post-instructions')}</Trans>
         </Text>
       </View>
 
@@ -133,12 +133,12 @@ function EmbedDialogInner({
             <>
               <ButtonIcon icon={Check} />
               <ButtonText>
-                <Trans>Copied!</Trans>
+                <Trans>{t('copied-message')}</Trans>
               </ButtonText>
             </>
           ) : (
             <ButtonText>
-              <Trans>Copy code</Trans>
+              <Trans>{t('copy-code-button')}</Trans>
             </ButtonText>
           )}
         </Button>

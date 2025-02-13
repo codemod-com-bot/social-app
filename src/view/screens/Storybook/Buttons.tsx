@@ -1,5 +1,6 @@
 import React from 'react'
 import {View} from 'react-native'
+import { useTranslation } from "react-i18next";
 
 import {atoms as a} from '#/alf'
 import {
@@ -14,9 +15,11 @@ import {Globe_Stroke2_Corner0_Rounded as Globe} from '#/components/icons/Globe'
 import {H1} from '#/components/Typography'
 
 export function Buttons() {
+const { t } = useTranslation("view/screens/Storybook");
+
   return (
     <View style={[a.gap_md]}>
-      <H1>Buttons</H1>
+      <H1>{t('buttons')}</H1>
 
       <View style={[a.flex_row, a.flex_wrap, a.gap_md, a.align_start]}>
         {['primary', 'secondary', 'secondary_inverted', 'negative'].map(
@@ -29,7 +32,7 @@ export function Buttons() {
                     color={color as ButtonColor}
                     size="large"
                     label="Click here">
-                    <ButtonText>Button</ButtonText>
+                    <ButtonText>{t('button-1')}</ButtonText>
                   </Button>
                   <Button
                     disabled
@@ -37,7 +40,7 @@ export function Buttons() {
                     color={color as ButtonColor}
                     size="large"
                     label="Click here">
-                    <ButtonText>Button</ButtonText>
+                    <ButtonText>{t('button-2')}</ButtonText>
                   </Button>
                 </React.Fragment>
               ))}
@@ -55,7 +58,7 @@ export function Buttons() {
                     color={name as ButtonColor}
                     size="large"
                     label="Click here">
-                    <ButtonText>Button</ButtonText>
+                    <ButtonText>{t('button-3')}</ButtonText>
                   </Button>
                   <Button
                     disabled
@@ -63,7 +66,7 @@ export function Buttons() {
                     color={name as ButtonColor}
                     size="large"
                     label="Click here">
-                    <ButtonText>Button</ButtonText>
+                    <ButtonText>{t('button-4')}</ButtonText>
                   </Button>
                 </React.Fragment>
               ),
@@ -74,37 +77,37 @@ export function Buttons() {
 
       <View style={[a.flex_wrap, a.gap_md, a.align_start]}>
         <Button variant="solid" color="primary" size="large" label="Link out">
-          <ButtonText>Button</ButtonText>
+          <ButtonText>{t('button-5')}</ButtonText>
         </Button>
         <Button variant="solid" color="primary" size="large" label="Link out">
-          <ButtonText>Button</ButtonText>
+          <ButtonText>{t('button-6')}</ButtonText>
           <ButtonIcon icon={Globe} position="right" />
         </Button>
 
         <Button variant="solid" color="primary" size="small" label="Link out">
-          <ButtonText>Button</ButtonText>
+          <ButtonText>{t('button-7')}</ButtonText>
         </Button>
         <Button variant="solid" color="primary" size="small" label="Link out">
-          <ButtonText>Button</ButtonText>
+          <ButtonText>{t('button-8')}</ButtonText>
           <ButtonIcon icon={Globe} position="right" />
         </Button>
 
         <Button variant="solid" color="primary" size="tiny" label="Link out">
           <ButtonIcon icon={Globe} position="left" />
-          <ButtonText>Button</ButtonText>
+          <ButtonText>{t('button-9')}</ButtonText>
         </Button>
       </View>
 
       <View style={[a.flex_row, a.gap_md, a.align_center]}>
         <Button variant="solid" color="primary" size="large" label="Link out">
-          <ButtonText>Button</ButtonText>
+          <ButtonText>{t('button-10')}</ButtonText>
         </Button>
         <Button variant="solid" color="primary" size="large" label="Link out">
-          <ButtonText>Button</ButtonText>
+          <ButtonText>{t('button-11')}</ButtonText>
           <ButtonIcon icon={Globe} position="right" />
         </Button>
         <Button variant="solid" color="primary" size="large" label="Link out">
-          <ButtonText>Button</ButtonText>
+          <ButtonText>{t('button-12')}</ButtonText>
           <ButtonIcon icon={Globe} position="right" size="lg" />
         </Button>
         <Button
@@ -127,10 +130,10 @@ export function Buttons() {
 
       <View style={[a.flex_row, a.gap_md, a.align_center]}>
         <Button variant="solid" color="primary" size="small" label="Link out">
-          <ButtonText>Button</ButtonText>
+          <ButtonText>{t('button-13')}</ButtonText>
         </Button>
         <Button variant="solid" color="primary" size="small" label="Link out">
-          <ButtonText>Button</ButtonText>
+          <ButtonText>{t('button-14')}</ButtonText>
           <ButtonIcon icon={Globe} position="right" />
         </Button>
         <Button
@@ -153,10 +156,10 @@ export function Buttons() {
 
       <View style={[a.flex_row, a.gap_md, a.align_center]}>
         <Button variant="solid" color="primary" size="tiny" label="Link out">
-          <ButtonText>Button</ButtonText>
+          <ButtonText>{t('button-15')}</ButtonText>
         </Button>
         <Button variant="solid" color="primary" size="tiny" label="Link out">
-          <ButtonText>Button</ButtonText>
+          <ButtonText>{t('button-16')}</ButtonText>
           <ButtonIcon icon={Globe} position="right" />
         </Button>
         <Button

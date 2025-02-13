@@ -12,6 +12,7 @@ import {ComAtprotoServerCreateAppPassword} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useMutation} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {isWeb} from '#/platform/detection'
 import {useAppPasswordCreateMutation} from '#/state/queries/app-passwords'
@@ -43,6 +44,8 @@ export function AddAppPasswordDialog({
 }
 
 function CreateDialogInner({passwords}: {passwords: string[]}) {
+const { t } = useTranslation("screens/Settings/components");
+
   const control = Dialog.useDialogContext()
   const t = useTheme()
   const {_} = useLingui()
@@ -108,13 +111,10 @@ function CreateDialogInner({passwords}: {passwords: string[]}) {
               exiting={native(SlideOutLeft)}
               key={0}>
               <Text style={[a.text_2xl, a.font_bold]}>
-                <Trans>Add App Password</Trans>
+                <Trans>{t('add-app-password')}</Trans>
               </Text>
               <Text style={[a.text_md, a.leading_snug]}>
-                <Trans>
-                  Please enter a unique name for this app password or use our
-                  randomly generated one.
-                </Trans>
+                <Trans>{t('unique-name-app-password')}</Trans>
               </Text>
               <View>
                 <TextInput.Root isInvalid={!!error}>
@@ -150,7 +150,7 @@ function CreateDialogInner({passwords}: {passwords: string[]}) {
                   <Toggle.Checkbox />
                   <Toggle.LabelText
                     style={[a.font_normal, a.text_md, a.leading_snug]}>
-                    <Trans>Allow access to your direct messages</Trans>
+                    <Trans>{t('allow-access-direct-messages')}</Trans>
                   </Toggle.LabelText>
                 </Toggle.Item>
                 <Button
@@ -162,7 +162,7 @@ function CreateDialogInner({passwords}: {passwords: string[]}) {
                   onPress={() => createAppPassword()}
                   disabled={isPending}>
                   <ButtonText>
-                    <Trans>Next</Trans>
+                    <Trans>{t('next-button')}</Trans>
                   </ButtonText>
                   <ButtonIcon icon={ChevronRight} />
                 </Button>
@@ -170,9 +170,7 @@ function CreateDialogInner({passwords}: {passwords: string[]}) {
                   (error && !(error instanceof DisplayableError) && (
                     <Animated.View entering={FadeIn} exiting={FadeOut}>
                       <Admonition type="error">
-                        <Trans>
-                          Failed to create app password. Please try again.
-                        </Trans>
+                        <Trans>{t('failed-create-app-password')}</Trans>
                       </Admonition>
                     </Animated.View>
                   ))}
@@ -184,12 +182,10 @@ function CreateDialogInner({passwords}: {passwords: string[]}) {
               entering={isWeb ? FadeIn.delay(200) : SlideInRight}
               key={1}>
               <Text style={[a.text_2xl, a.font_bold]}>
-                <Trans>Here is your app password!</Trans>
+                <Trans>{t('app-password-reveal')}</Trans>
               </Text>
               <Text style={[a.text_md, a.leading_snug]}>
-                <Trans>
-                  Use this to sign into the other app along with your handle.
-                </Trans>
+                <Trans>{t('use-app-password-sign-in')}</Trans>
               </Text>
               <CopyButton
                 value={data.password}
@@ -206,10 +202,7 @@ function CreateDialogInner({passwords}: {passwords: string[]}) {
                   a.leading_snug,
                   t.atoms.text_contrast_medium,
                 ]}>
-                <Trans>
-                  For security reasons, you won't be able to view this again. If
-                  you lose this app password, you'll need to generate a new one.
-                </Trans>
+                <Trans>{t('security-warning-app-password')}</Trans>
               </Text>
               <Button
                 label={_(msg`Done`)}
@@ -219,7 +212,7 @@ function CreateDialogInner({passwords}: {passwords: string[]}) {
                 style={[a.flex_1]}
                 onPress={() => control.close()}>
                 <ButtonText>
-                  <Trans>Done</Trans>
+                  <Trans>{t('done-button')}</Trans>
                 </ButtonText>
               </Button>
             </Animated.View>

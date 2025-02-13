@@ -4,6 +4,7 @@ import {ComAtprotoLabelDefs, ComAtprotoModerationDefs} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useMutation} from '@tanstack/react-query'
+import { Trans,useTranslation } from "react-i18next";
 
 import {useLabelSubject} from '#/lib/moderation'
 import {useLabelInfo} from '#/lib/moderation/useLabelInfo'
@@ -39,6 +40,8 @@ export function LabelsOnMeDialog(props: LabelsOnMeDialogProps) {
 }
 
 function LabelsOnMeDialogInner(props: LabelsOnMeDialogProps) {
+const { t } = useTranslation("components/moderation");
+
   const {_} = useLingui()
   const {currentAccount} = useSession()
   const [appealingLabel, setAppealingLabel] = React.useState<
@@ -68,22 +71,16 @@ function LabelsOnMeDialogInner(props: LabelsOnMeDialogProps) {
         <>
           <Text style={[a.text_2xl, a.font_bold, a.pb_xs, a.leading_tight]}>
             {isAccount ? (
-              <Trans>Labels on your account</Trans>
+              <Trans>{t('labels-on-your-account')}</Trans>
             ) : (
-              <Trans>Labels on your content</Trans>
+              <Trans>{t('labels-on-your-content')}</Trans>
             )}
           </Text>
           <Text style={[a.text_md, a.leading_snug]}>
             {containsSelfLabel ? (
-              <Trans>
-                You may appeal non-self labels if you feel they were placed in
-                error.
-              </Trans>
+              <Trans>{t('appeal-non-self-labels')}</Trans>
             ) : (
-              <Trans>
-                You may appeal these labels if you feel they were placed in
-                error.
-              </Trans>
+              <Trans>{t('appeal-these-labels')}</Trans>
             )}
           </Text>
 
@@ -116,6 +113,8 @@ function Label({
   control: Dialog.DialogOuterProps['control']
   onPressAppeal: (label: ComAtprotoLabelDefs.Label) => void
 }) {
+const { t } = useTranslation("components/moderation");
+
   const t = useTheme()
   const {_} = useLingui()
   const {labeler, strings} = useLabelInfo(label)
@@ -148,7 +147,7 @@ function Label({
               label={_(msg`Appeal`)}
               onPress={() => onPressAppeal(label)}>
               <ButtonText>
-                <Trans>Appeal</Trans>
+                <Trans>{t('appeal-button')}</Trans>
               </ButtonText>
             </Button>
           </View>
@@ -160,12 +159,12 @@ function Label({
       <View style={[a.px_md, a.py_sm, t.atoms.bg_contrast_25]}>
         {isSelfLabel ? (
           <Text style={[t.atoms.text_contrast_medium]}>
-            <Trans>This label was applied by you.</Trans>
+            <Trans>{t('label-applied-by-you')}</Trans>
           </Text>
         ) : (
           <View style={{flexDirection: 'row'}}>
             <Text style={[t.atoms.text_contrast_medium]}>
-              <Trans>Source: </Trans>{' '}
+              <Trans>{t('source-label')}</Trans>{' '}
             </Text>
             <InlineLinkText
               label={sourceName}
@@ -191,6 +190,8 @@ function AppealForm({
   control: Dialog.DialogOuterProps['control']
   onPressBack: () => void
 }) {
+const { t } = useTranslation("components/moderation");
+
   const {_} = useLingui()
   const {labeler, strings} = useLabelInfo(label)
   const {gtMobile} = useBreakpoints()
@@ -240,22 +241,21 @@ function AppealForm({
     <>
       <View>
         <Text style={[a.text_2xl, a.font_bold, a.pb_xs, a.leading_tight]}>
-          <Trans>Appeal "{strings.name}" label</Trans>
+          <Trans>{t('appeal-label-prefix')}{strings.name}{t('appeal-label-suffix')}</Trans>
         </Text>
         <Text style={[a.text_md, a.leading_snug]}>
-          <Trans>
-            This appeal will be sent to{' '}
-            <InlineLinkText
+          <Trans><Trans
+i18nKey="appeal-sent-to-source"
+values={{ sourceName: <>{sourceName}</> }}
+components={{"0": <InlineLinkText
               label={sourceName}
               to={makeProfileLink(
                 labeler ? labeler.creator : {did: label.src, handle: ''},
               )}
               onPress={() => control.close()}
-              style={[a.text_md, a.leading_snug]}>
-              {sourceName}
-            </InlineLinkText>
-            .
-          </Trans>
+              style={[a.text_md, a.leading_snug]} />}}
+/>
+            </Trans>
         </Text>
       </View>
       <View style={[a.my_md]}>

@@ -3,6 +3,7 @@ import {AppBskyActorDefs} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useNavigation} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {logger} from '#/logger'
 import {Shadow, useProfileShadow} from '#/state/cache/profile-shadow'
@@ -32,6 +33,8 @@ function PostThreadFollowBtnLoaded({
 }: {
   profile: AppBskyActorDefs.ProfileViewDetailed
 }) {
+const { t } = useTranslation("view/com/post-thread");
+
   const navigation = useNavigation()
   const {_} = useLingui()
   const {gtMobile} = useBreakpoints()
@@ -127,12 +130,12 @@ function PostThreadFollowBtnLoaded({
       <ButtonText>
         {!isFollowing ? (
           isFollowedBy ? (
-            <Trans>Follow Back</Trans>
+            <Trans>{t('follow-back')}</Trans>
           ) : (
-            <Trans>Follow</Trans>
+            <Trans>{t('follow')}</Trans>
           )
         ) : (
-          <Trans>Following</Trans>
+          <Trans>{t('following')}</Trans>
         )}
       </ButtonText>
     </Button>

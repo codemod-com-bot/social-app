@@ -1,6 +1,7 @@
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {NativeStackScreenProps} from '@react-navigation/native-stack'
+import { Trans,useTranslation } from "react-i18next";
 
 import {CommonNavigatorParams} from '#/lib/routes/types'
 import {isNative} from '#/platform/detection'
@@ -28,6 +29,8 @@ type Props = NativeStackScreenProps<
   'AccessibilitySettings'
 >
 export function AccessibilitySettingsScreen({}: Props) {
+const { t } = useTranslation("screens/Settings");
+
   const {_} = useLingui()
 
   const requireAltTextEnabled = useRequireAltTextEnabled()
@@ -43,7 +46,7 @@ export function AccessibilitySettingsScreen({}: Props) {
         <Layout.Header.BackButton />
         <Layout.Header.Content>
           <Layout.Header.TitleText>
-            <Trans>Accessibility</Trans>
+            <Trans>{t('accessibility')}</Trans>
           </Layout.Header.TitleText>
         </Layout.Header.Content>
         <Layout.Header.Slot />
@@ -53,7 +56,7 @@ export function AccessibilitySettingsScreen({}: Props) {
           <SettingsList.Group contentContainerStyle={[a.gap_sm]}>
             <SettingsList.ItemIcon icon={AccessibilityIcon} />
             <SettingsList.ItemText>
-              <Trans>Alt text</Trans>
+              <Trans>{t('alt-text')}</Trans>
             </SettingsList.ItemText>
             <Toggle.Item
               name="require_alt_text"
@@ -62,7 +65,7 @@ export function AccessibilitySettingsScreen({}: Props) {
               onChange={value => setRequireAltTextEnabled(value)}
               style={[a.w_full]}>
               <Toggle.LabelText style={[a.flex_1]}>
-                <Trans>Require alt text before posting</Trans>
+                <Trans>{t('require-alt-text')}</Trans>
               </Toggle.LabelText>
               <Toggle.Platform />
             </Toggle.Item>
@@ -73,7 +76,7 @@ export function AccessibilitySettingsScreen({}: Props) {
               onChange={value => setLargeAltBadgeEnabled(value)}
               style={[a.w_full]}>
               <Toggle.LabelText style={[a.flex_1]}>
-                <Trans>Display larger alt text badges</Trans>
+                <Trans>{t('larger-alt-text-badges')}</Trans>
               </Toggle.LabelText>
               <Toggle.Platform />
             </Toggle.Item>
@@ -84,7 +87,7 @@ export function AccessibilitySettingsScreen({}: Props) {
               <SettingsList.Group contentContainerStyle={[a.gap_sm]}>
                 <SettingsList.ItemIcon icon={HapticIcon} />
                 <SettingsList.ItemText>
-                  <Trans>Haptics</Trans>
+                  <Trans>{t('haptics')}</Trans>
                 </SettingsList.ItemText>
                 <Toggle.Item
                   name="haptics"
@@ -93,7 +96,7 @@ export function AccessibilitySettingsScreen({}: Props) {
                   onChange={value => setHapticsDisabled(value)}
                   style={[a.w_full]}>
                   <Toggle.LabelText style={[a.flex_1]}>
-                    <Trans>Disable haptic feedback</Trans>
+                    <Trans>{t('disable-haptic-feedback')}</Trans>
                   </Toggle.LabelText>
                   <Toggle.Platform />
                 </Toggle.Item>
@@ -102,15 +105,13 @@ export function AccessibilitySettingsScreen({}: Props) {
           )}
           <SettingsList.Item>
             <Admonition type="info" style={[a.flex_1]}>
-              <Trans>
-                Autoplay options have moved to the{' '}
-                <InlineLinkText
+              <Trans><Trans
+i18nKey="autoplay-options-moved-to-settings"
+components={{"0": <InlineLinkText
                   to="/settings/content-and-media"
-                  label={_(msg`Content and media`)}>
-                  Content and Media settings
-                </InlineLinkText>
-                .
-              </Trans>
+                  label={_(msg`Content and media`)} />}}
+/>
+                </Trans>
             </Admonition>
           </SettingsList.Item>
         </SettingsList.Container>

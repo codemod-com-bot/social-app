@@ -1,6 +1,7 @@
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {atoms as a} from '#/alf'
 import {Button, ButtonIcon, ButtonText} from '#/components/Button'
@@ -27,6 +28,8 @@ export function BackNextButtons({
   onRetryPress,
   overrideNextText,
 }: BackNextButtonsProps) {
+const { t } = useTranslation("screens/Signup");
+
   const {_} = useLingui()
 
   return (
@@ -38,7 +41,7 @@ export function BackNextButtons({
         size="large"
         onPress={onBackPress}>
         <ButtonText>
-          <Trans>Back</Trans>
+          <Trans>{t('back-button')}</Trans>
         </ButtonText>
       </Button>
       {!hideNext &&
@@ -50,7 +53,7 @@ export function BackNextButtons({
             size="large"
             onPress={onRetryPress}>
             <ButtonText>
-              <Trans>Retry</Trans>
+              <Trans>{t('retry-button')}</Trans>
             </ButtonText>
             {isLoading && <ButtonIcon icon={Loader} />}
           </Button>
@@ -64,7 +67,7 @@ export function BackNextButtons({
             disabled={isLoading || isNextDisabled}
             onPress={onNextPress}>
             <ButtonText>
-              {overrideNextText ? overrideNextText : <Trans>Next</Trans>}
+              {overrideNextText ? overrideNextText : <Trans>{t('next-button')}</Trans>}
             </ButtonText>
             {isLoading && <ButtonIcon icon={Loader} />}
           </Button>

@@ -5,6 +5,7 @@ import {AppBskyGraphDefs} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useNavigation} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {measureHandle, useHandleRef} from '#/lib/hooks/useHandleRef'
 import {usePalette} from '#/lib/hooks/usePalette'
@@ -46,6 +47,8 @@ export function ProfileSubpageHeader({
     | undefined
   avatarType: UserAvatarType | 'starter-pack'
 }>) {
+const { t } = useTranslation("view/com/profile");
+
   const navigation = useNavigation<NavigationProp>()
   const {_} = useLingui()
   const {isMobile} = useWebMediaQueries()
@@ -151,10 +154,9 @@ export function ProfileSubpageHeader({
             <Text type="lg" style={[pal.textLight]} numberOfLines={1}>
               {purpose === 'app.bsky.graph.defs#curatelist' ? (
                 isOwner ? (
-                  <Trans>List by you</Trans>
+                  <Trans>{t('list-by-you')}</Trans>
                 ) : (
-                  <Trans>
-                    List by{' '}
+                  <Trans>{t('list-by-space')}
                     <TextLink
                       text={sanitizeHandle(creator.handle || '', '@')}
                       href={makeProfileLink(creator)}
@@ -164,10 +166,9 @@ export function ProfileSubpageHeader({
                 )
               ) : purpose === 'app.bsky.graph.defs#modlist' ? (
                 isOwner ? (
-                  <Trans>Moderation list by you</Trans>
+                  <Trans>{t('moderation-list-by-you')}</Trans>
                 ) : (
-                  <Trans>
-                    Moderation list by{' '}
+                  <Trans>{t('moderation-list-by-space')}
                     <TextLink
                       text={sanitizeHandle(creator.handle || '', '@')}
                       href={makeProfileLink(creator)}
@@ -177,10 +178,9 @@ export function ProfileSubpageHeader({
                 )
               ) : purpose === 'app.bsky.graph.defs#referencelist' ? (
                 isOwner ? (
-                  <Trans>Starter pack by you</Trans>
+                  <Trans>{t('starter-pack-by-you')}</Trans>
                 ) : (
-                  <Trans>
-                    Starter pack by{' '}
+                  <Trans>{t('starter-pack-by-space')}
                     <TextLink
                       text={sanitizeHandle(creator.handle || '', '@')}
                       href={makeProfileLink(creator)}

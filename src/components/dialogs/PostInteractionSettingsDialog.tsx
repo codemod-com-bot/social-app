@@ -5,6 +5,7 @@ import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useQueryClient} from '@tanstack/react-query'
 import isEqual from 'lodash.isequal'
+import { Trans,useTranslation } from "react-i18next";
 
 import {logger} from '#/logger'
 import {STALE} from '#/state/queries'
@@ -59,6 +60,8 @@ export function PostInteractionSettingsControlledDialog({
 }: PostInteractionSettingsFormProps & {
   control: Dialog.DialogControlProps
 }) {
+const { t } = useTranslation("components/dialogs");
+
   const t = useTheme()
   const {_} = useLingui()
 
@@ -78,11 +81,11 @@ export function PostInteractionSettingsControlledDialog({
               a.leading_snug,
               t.atoms.text_contrast_medium,
             ]}>
-            <Trans>
-              You can set default interaction settings in{' '}
-              <Text style={[a.font_bold, t.atoms.text_contrast_medium]}>
-                Settings &rarr; Moderation &rarr; Interaction settings.
-              </Text>
+            <Trans><Trans
+i18nKey="default-interaction-settings"
+components={{"0": <Text style={[a.font_bold, t.atoms.text_contrast_medium]} />}}
+/>
+              
             </Trans>
           </Text>
         </View>
@@ -93,13 +96,15 @@ export function PostInteractionSettingsControlledDialog({
 }
 
 export function Header() {
+const { t } = useTranslation("components/dialogs");
+
   return (
     <View style={[a.gap_md, a.pb_sm]}>
       <Text style={[a.text_2xl, a.font_bold]}>
-        <Trans>Post interaction settings</Trans>
+        <Trans>{t('post-interaction-settings')}</Trans>
       </Text>
       <Text style={[a.text_md, a.pb_xs]}>
-        <Trans>Customize who can interact with this post.</Trans>
+        <Trans>{t('customize-interaction-post')}</Trans>
       </Text>
       <Divider />
     </View>
@@ -270,6 +275,8 @@ export function PostInteractionSettingsForm({
   onChangeThreadgateAllowUISettings,
   replySettingsDisabled,
 }: PostInteractionSettingsFormProps) {
+const { t } = useTranslation("components/dialogs");
+
   const t = useTheme()
   const {_} = useLingui()
   const {data: lists} = useMyListsQuery('curate')
@@ -325,7 +332,7 @@ export function PostInteractionSettingsForm({
         <View style={[a.gap_lg]}>
           <View style={[a.gap_sm]}>
             <Text style={[a.font_bold, a.text_lg]}>
-              <Trans>Quote settings</Trans>
+              <Trans>{t('quote-settings')}</Trans>
             </Text>
 
             <Toggle.Item
@@ -340,7 +347,7 @@ export function PostInteractionSettingsForm({
               onChange={onChangeQuotesEnabled}
               style={[a.justify_between, a.pt_xs]}>
               <Text style={[t.atoms.text_contrast_medium]}>
-                <Trans>Allow quote posts</Trans>
+                <Trans>{t('allow-quote-posts')}</Trans>
               </Text>
               <Toggle.Switch />
             </Toggle.Item>
@@ -366,9 +373,7 @@ export function PostInteractionSettingsForm({
                   a.leading_snug,
                   t.atoms.text_contrast_medium,
                 ]}>
-                <Trans>
-                  Reply settings are chosen by the author of the thread
-                </Trans>
+                <Trans>{t('reply-settings-author-choice')}</Trans>
               </Text>
             </View>
           )}
@@ -381,11 +386,11 @@ export function PostInteractionSettingsForm({
               },
             ]}>
             <Text style={[a.font_bold, a.text_lg]}>
-              <Trans>Reply settings</Trans>
+              <Trans>{t('reply-settings')}</Trans>
             </Text>
 
             <Text style={[a.pt_sm, t.atoms.text_contrast_medium]}>
-              <Trans>Allow replies from:</Trans>
+              <Trans>{t('allow-replies-from')}</Trans>
             </Text>
 
             <View style={[a.flex_row, a.gap_sm]}>
@@ -414,7 +419,7 @@ export function PostInteractionSettingsForm({
             {!noOneCanReply && (
               <>
                 <Text style={[a.pt_sm, t.atoms.text_contrast_medium]}>
-                  <Trans>Or combine these options:</Trans>
+                  <Trans>{t('combine-options')}</Trans>
                 </Text>
 
                 <View style={[a.gap_sm]}>

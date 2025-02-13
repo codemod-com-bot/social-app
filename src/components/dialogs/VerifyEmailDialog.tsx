@@ -2,6 +2,7 @@ import React from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { Trans,useTranslation } from "react-i18next";
 
 import {cleanError} from '#/lib/strings/errors'
 import {logger} from '#/logger'
@@ -67,6 +68,8 @@ export function Inner({
   setDidVerify: (value: boolean) => void
   reasonText?: string
 }) {
+const { t } = useTranslation("components/dialogs");
+
   const {_} = useLingui()
   const {currentAccount} = useSession()
   const agent = useAgent()
@@ -151,13 +154,10 @@ export function Inner({
               {reasonText ? (
                 <View style={[a.gap_sm]}>
                   <Text style={[a.text_md, a.leading_snug]}>{reasonText}</Text>
-                  <Text style={[a.text_md, a.leading_snug]}>
-                    Don't have access to{' '}
-                    <Text style={[a.text_md, a.leading_snug, a.font_bold]}>
-                      {currentAccount?.email}
-                    </Text>
-                    ?{' '}
-                    <InlineLinkText
+                  <Text style={[a.text_md, a.leading_snug]}><Trans
+i18nKey="dont-have-access-to-email"
+values={{ currentAccountEmail: <>{currentAccount?.email}</> }}
+components={{"0": <Text style={[a.text_md, a.leading_snug, a.font_bold]} />, "1": <InlineLinkText
                       to="#"
                       label={_(msg`Change email address`)}
                       style={[a.text_md, a.leading_snug]}
@@ -167,21 +167,19 @@ export function Inner({
                           openModal({name: 'change-email'})
                         })
                         return false
-                      }}>
-                      <Trans>Change your email address</Trans>
-                    </InlineLinkText>
-                    .
-                  </Text>
+                      }} />}}
+/>
+                    
+                    </Text>
                 </View>
               ) : (
                 <Text style={[a.text_md, a.leading_snug]}>
-                  <Trans>
-                    You'll receive an email at{' '}
-                    <Text style={[a.text_md, a.leading_snug, a.font_bold]}>
-                      {currentAccount?.email}
-                    </Text>{' '}
-                    to verify it's you.
-                  </Trans>{' '}
+                  <Trans><Trans
+i18nKey="receive-email-to-verify"
+values={{ currentAccountEmail: <>{currentAccount?.email}</> }}
+components={{"0": <Text style={[a.text_md, a.leading_snug, a.font_bold]} />}}
+/>
+                    </Trans>{' '}
                   <InlineLinkText
                     to="#"
                     label={_(msg`Change email address`)}
@@ -193,7 +191,7 @@ export function Inner({
                       })
                       return false
                     }}>
-                    <Trans>Need to change it?</Trans>
+                    <Trans>{t('need-to-change-email')}</Trans>
                   </InlineLinkText>
                 </Text>
               )}
@@ -207,7 +205,7 @@ export function Inner({
         {currentStep === 'StepTwo' ? (
           <View>
             <TextField.LabelText>
-              <Trans>Confirmation Code</Trans>
+              <Trans>{t('confirmation-code')}</Trans>
             </TextField.LabelText>
             <TextField.Root>
               <TextField.Input
@@ -229,7 +227,7 @@ export function Inner({
                 disabled={isProcessing}
                 onPress={onSendEmail}>
                 <ButtonText>
-                  <Trans>Send Confirmation</Trans>
+                  <Trans>{t('send-confirmation')}</Trans>
                 </ButtonText>
                 {isProcessing ? (
                   <Loader size="sm" style={[{color: 'white'}]} />
@@ -243,7 +241,7 @@ export function Inner({
                 disabled={isProcessing}
                 onPress={() => setCurrentStep('StepTwo')}>
                 <ButtonText>
-                  <Trans>I Have a Code</Trans>
+                  <Trans>{t('i-have-a-code')}</Trans>
                 </ButtonText>
               </Button>
             </>
@@ -257,7 +255,7 @@ export function Inner({
                 disabled={isProcessing}
                 onPress={onVerifyEmail}>
                 <ButtonText>
-                  <Trans>Confirm</Trans>
+                  <Trans>{t('confirm-code')}</Trans>
                 </ButtonText>
                 {isProcessing ? (
                   <Loader size="sm" style={[{color: 'white'}]} />
@@ -274,7 +272,7 @@ export function Inner({
                   setCurrentStep('StepOne')
                 }}>
                 <ButtonText>
-                  <Trans>Resend Email</Trans>
+                  <Trans>{t('resend-email')}</Trans>
                 </ButtonText>
               </Button>
             </>
@@ -286,7 +284,7 @@ export function Inner({
               size="large"
               onPress={() => control.close()}>
               <ButtonText>
-                <Trans>Close</Trans>
+                <Trans>{t('close-modal')}</Trans>
               </ButtonText>
             </Button>
           ) : null}

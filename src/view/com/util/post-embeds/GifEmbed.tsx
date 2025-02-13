@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {HITSLOP_20} from '#/lib/constants'
 import {EmbedPlayerParams} from '#/lib/strings/embed-player'
@@ -166,6 +167,8 @@ export function GifEmbed({
 }
 
 function AltText({text}: {text: string}) {
+const { t } = useTranslation("view/com/util/post-embeds");
+
   const control = Prompt.usePromptControl()
   const largeAltBadge = useLargeAltBadgeEnabled()
 
@@ -183,12 +186,12 @@ function AltText({text}: {text: string}) {
         <Text
           style={[styles.alt, largeAltBadge && a.text_xs]}
           accessible={false}>
-          <Trans>ALT</Trans>
+          <Trans>{t('alt')}</Trans>
         </Text>
       </TouchableOpacity>
       <Prompt.Outer control={control}>
         <Prompt.TitleText>
-          <Trans>Alt Text</Trans>
+          <Trans>{t('alt-text')}</Trans>
         </Prompt.TitleText>
         <Prompt.DescriptionText selectable>{text}</Prompt.DescriptionText>
         <Prompt.Actions>

@@ -1,6 +1,7 @@
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {CommonNavigatorParams, NativeStackScreenProps} from '#/lib/routes/types'
 import {
@@ -18,6 +19,8 @@ import * as SettingsList from './components/SettingsList'
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, 'PreferencesThreads'>
 export function ThreadPreferencesScreen({}: Props) {
+const { t } = useTranslation("screens/Settings");
+
   const {_} = useLingui()
   const t = useTheme()
 
@@ -42,7 +45,7 @@ export function ThreadPreferencesScreen({}: Props) {
         <Layout.Header.BackButton />
         <Layout.Header.Content>
           <Layout.Header.TitleText>
-            <Trans>Thread Preferences</Trans>
+            <Trans>{t('thread-preferences')}</Trans>
           </Layout.Header.TitleText>
         </Layout.Header.Content>
         <Layout.Header.Slot />
@@ -52,11 +55,11 @@ export function ThreadPreferencesScreen({}: Props) {
           <SettingsList.Group>
             <SettingsList.ItemIcon icon={BubblesIcon} />
             <SettingsList.ItemText>
-              <Trans>Sort replies</Trans>
+              <Trans>{t('sort-replies')}</Trans>
             </SettingsList.ItemText>
             <View style={[a.w_full, a.gap_md]}>
               <Text style={[a.flex_1, t.atoms.text_contrast_medium]}>
-                <Trans>Sort replies to the same post by:</Trans>
+                <Trans>{t('sort-replies-by-post')}</Trans>
               </Text>
               <Toggle.Group
                 label={_(msg`Sort replies by`)}
@@ -67,7 +70,7 @@ export function ThreadPreferencesScreen({}: Props) {
                   <Toggle.Item name="hotness" label={_(msg`Hot replies first`)}>
                     <Toggle.Radio />
                     <Toggle.LabelText>
-                      <Trans>Hot replies first</Trans>
+                      <Trans>{t('hot-replies-first')}</Trans>
                     </Toggle.LabelText>
                   </Toggle.Item>
                   <Toggle.Item
@@ -75,7 +78,7 @@ export function ThreadPreferencesScreen({}: Props) {
                     label={_(msg`Oldest replies first`)}>
                     <Toggle.Radio />
                     <Toggle.LabelText>
-                      <Trans>Oldest replies first</Trans>
+                      <Trans>{t('oldest-replies-first')}</Trans>
                     </Toggle.LabelText>
                   </Toggle.Item>
                   <Toggle.Item
@@ -83,7 +86,7 @@ export function ThreadPreferencesScreen({}: Props) {
                     label={_(msg`Newest replies first`)}>
                     <Toggle.Radio />
                     <Toggle.LabelText>
-                      <Trans>Newest replies first</Trans>
+                      <Trans>{t('newest-replies-first')}</Trans>
                     </Toggle.LabelText>
                   </Toggle.Item>
                   <Toggle.Item
@@ -91,7 +94,7 @@ export function ThreadPreferencesScreen({}: Props) {
                     label={_(msg`Most-liked replies first`)}>
                     <Toggle.Radio />
                     <Toggle.LabelText>
-                      <Trans>Most-liked first</Trans>
+                      <Trans>{t('most-liked-first')}</Trans>
                     </Toggle.LabelText>
                   </Toggle.Item>
                   <Toggle.Item
@@ -99,7 +102,7 @@ export function ThreadPreferencesScreen({}: Props) {
                     label={_(msg`Random (aka "Poster's Roulette")`)}>
                     <Toggle.Radio />
                     <Toggle.LabelText>
-                      <Trans>Random (aka "Poster's Roulette")</Trans>
+                      <Trans>{t('random-posters-roulette')}</Trans>
                     </Toggle.LabelText>
                   </Toggle.Item>
                 </View>
@@ -109,7 +112,7 @@ export function ThreadPreferencesScreen({}: Props) {
           <SettingsList.Group>
             <SettingsList.ItemIcon icon={PersonGroupIcon} />
             <SettingsList.ItemText>
-              <Trans>Prioritize your Follows</Trans>
+              <Trans>{t('prioritize-follows')}</Trans>
             </SettingsList.ItemText>
             <Toggle.Item
               type="checkbox"
@@ -123,9 +126,7 @@ export function ThreadPreferencesScreen({}: Props) {
               }
               style={[a.w_full, a.gap_md]}>
               <Toggle.LabelText style={[a.flex_1]}>
-                <Trans>
-                  Show replies by people you follow before all other replies
-                </Trans>
+                <Trans>{t('show-replies-by-followed-people')}</Trans>
               </Toggle.LabelText>
               <Toggle.Platform />
             </Toggle.Item>
@@ -134,7 +135,7 @@ export function ThreadPreferencesScreen({}: Props) {
           <SettingsList.Group>
             <SettingsList.ItemIcon icon={BeakerIcon} />
             <SettingsList.ItemText>
-              <Trans>Experimental</Trans>
+              <Trans>{t('experimental')}</Trans>
             </SettingsList.ItemText>
             <Toggle.Item
               type="checkbox"
@@ -148,7 +149,7 @@ export function ThreadPreferencesScreen({}: Props) {
               }
               style={[a.w_full, a.gap_md]}>
               <Toggle.LabelText style={[a.flex_1]}>
-                <Trans>Show replies as threaded</Trans>
+                <Trans>{t('show-replies-threaded')}</Trans>
               </Toggle.LabelText>
               <Toggle.Platform />
             </Toggle.Item>

@@ -7,6 +7,7 @@ import * as Sharing from 'expo-sharing'
 import {AppBskyGraphDefs, AppBskyGraphStarterpack} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {logEvent} from '#/lib/statsig/statsig'
 import {logger} from '#/logger'
@@ -28,6 +29,8 @@ export function QrCodeDialog({
   link?: string
   control: DialogControlProps
 }) {
+const { t } = useTranslation("components/StarterPack");
+
   const {_} = useLingui()
   const [isProcessing, setIsProcessing] = React.useState(false)
 
@@ -172,7 +175,7 @@ export function QrCodeDialog({
                       size="small"
                       onPress={isWeb ? onCopyPress : onSharePress}>
                       <ButtonText>
-                        {isWeb ? <Trans>Copy</Trans> : <Trans>Share</Trans>}
+                        {isWeb ? <Trans>{t('copy-action')}</Trans> : <Trans>{t('share-action')}</Trans>}
                       </ButtonText>
                     </Button>
                     <Button
@@ -182,7 +185,7 @@ export function QrCodeDialog({
                       size="small"
                       onPress={onSavePress}>
                       <ButtonText>
-                        <Trans>Save</Trans>
+                        <Trans>{t('save-action')}</Trans>
                       </ButtonText>
                     </Button>
                   </View>

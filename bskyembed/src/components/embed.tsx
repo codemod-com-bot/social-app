@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import {
   AppBskyEmbedExternal,
   AppBskyEmbedImages,
@@ -29,6 +30,8 @@ export function Embed({
   labels: AppBskyFeedDefs.PostView['labels']
   hideRecord?: boolean
 }) {
+const { t } = useTranslation("../bskyembed/src/components");
+
   const labelInfo = useMemo(() => labelsToInfo(labels), [labels])
 
   if (!content) return null
@@ -59,10 +62,7 @@ export function Embed({
         )
         if (pwiOptOut) {
           return (
-            <Info>
-              The author of the quoted post has requested their posts not be
-              displayed on external sites.
-            </Info>
+            <Info>{t('author-requested-no-display')}</Info>
           )
         }
 
@@ -131,7 +131,7 @@ export function Embed({
             title={record.displayName}
             href={`/profile/${record.creator.did}/feed/${getRkey(record)}`}
             subtitle={`Feed by @${record.creator.handle}`}
-            description={`Liked by ${record.likeCount ?? 0} users`}
+            description={t('liked-by-user-count', { recordLikeCount0: record.likeCount ?? 0 })}
           />
         )
       }
@@ -149,12 +149,12 @@ export function Embed({
 
       // Case 3.6: Post not found
       if (AppBskyEmbedRecord.isViewNotFound(record)) {
-        return <Info>Quoted post not found, it may have been deleted.</Info>
+        return <Info>{t('quoted-post-not-found')}</Info>
       }
 
       // Case 3.7: Post blocked
       if (AppBskyEmbedRecord.isViewBlocked(record)) {
-        return <Info>The quoted post is blocked.</Info>
+        return <Info>{t('quoted-post-blocked')}</Info>
       }
 
       // Case 3.8: Detached quote post
@@ -402,6 +402,8 @@ function StarterPackEmbed({
 }: {
   content: AppBskyGraphDefs.StarterPackViewBasic
 }) {
+const { t } = useTranslation("../bskyembed/src/components");
+
   if (!AppBskyGraphStarterpack.isRecord(content.record)) {
     return null
   }
@@ -421,8 +423,7 @@ function StarterPackEmbed({
             <p className="font-semibold leading-[21px]">
               {content.record.name}
             </p>
-            <p className="text-sm text-textLight dark:text-textDimmed line-clamp-2 leading-[18px]">
-              Starter pack by{' '}
+            <p className="text-sm text-textLight dark:text-textDimmed line-clamp-2 leading-[18px]">{t('starter-pack-introduction')}
               {content.creator.displayName || `@${content.creator.handle}`}
             </p>
           </div>
@@ -432,8 +433,7 @@ function StarterPackEmbed({
         )}
         {!!content.joinedAllTimeCount && content.joinedAllTimeCount > 50 && (
           <p className="text-sm font-semibold text-textLight dark:text-textDimmed mt-1">
-            {content.joinedAllTimeCount} users have joined!
-          </p>
+            {content.joinedAllTimeCount}{t('users-joined-notification')}</p>
         )}
       </div>
     </Link>

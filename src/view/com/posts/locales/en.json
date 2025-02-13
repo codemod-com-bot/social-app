@@ -1,0 +1,23 @@
+{
+  "feed-no-longer-online": "This feed is no longer online. We are showing <0>Discover</0>  instead.",
+  "remove-feed": "Remove feed",
+  "replace-with-discover": "Replace with Discover",
+  "message-from-server": "Message from server:",
+  "following-feed-empty": "Your following feed is empty! Follow more users to see what's happening.",
+  "find-accounts-to-follow": "Find accounts to follow",
+  "discover-new-custom-feeds": "You can also discover new Custom Feeds to follow.",
+  "discover-custom-feeds": "Discover new custom feeds",
+  "ran-out-of-posts": "We ran out of posts from your follows. Here's the latest from",
+  "discover-button": "Discover",
+  "empty-feed-message": "This feed is empty! You may need to follow more users or tune your language settings.",
+  "view-full-thread": "View full thread",
+  "end-of-feed-message": "You've reached the end of your feed! Find some more accounts to follow.",
+  "from-space": "From",
+  "reposted-by-you": "Reposted by you",
+  "reposted-by-space": "Reposted by",
+  "pinned": "Pinned",
+  "reply-to-blocked-post": "Reply to a blocked post",
+  "reply-to-post": "Reply to a post",
+  "reply-to-you": "Reply to you",
+  "reply-to-space": "Reply to"
+}

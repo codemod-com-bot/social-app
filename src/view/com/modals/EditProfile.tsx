@@ -14,6 +14,7 @@ import {LinearGradient} from 'expo-linear-gradient'
 import {AppBskyActorDefs} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {MAX_DESCRIPTION, MAX_DISPLAY_NAME} from '#/lib/constants'
 import {usePalette} from '#/lib/hooks/usePalette'
@@ -44,6 +45,8 @@ export function Component({
   profile: AppBskyActorDefs.ProfileViewDetailed
   onUpdate?: () => void
 }) {
+const { t } = useTranslation("view/com/modals");
+
   const pal = usePalette('default')
   const theme = useTheme()
   const {_} = useLingui()
@@ -144,7 +147,7 @@ export function Component({
     <KeyboardAvoidingView style={s.flex1} behavior="height">
       <ScrollView style={[pal.view]} testID="editProfileModal">
         <Text style={[styles.title, pal.text]}>
-          <Trans>Edit my profile</Trans>
+          <Trans>{t('edit-my-profile')}</Trans>
         </Text>
         <View style={styles.photos}>
           <UserBanner
@@ -172,7 +175,7 @@ export function Component({
         <View style={styles.form}>
           <View>
             <Text style={[styles.label, pal.text]}>
-              <Trans>Display Name</Trans>
+              <Trans>{t('display-name')}</Trans>
             </Text>
             <TextInput
               testID="editProfileDisplayNameInput"
@@ -190,7 +193,7 @@ export function Component({
           </View>
           <View style={s.pb10}>
             <Text style={[styles.label, pal.text]}>
-              <Trans>Description</Trans>
+              <Trans>{t('description')}</Trans>
             </Text>
             <TextInput
               testID="editProfileDescriptionInput"
@@ -224,7 +227,7 @@ export function Component({
                 end={{x: 1, y: 1}}
                 style={[styles.btn]}>
                 <Text style={[s.white, s.bold]}>
-                  <Trans>Save Changes</Trans>
+                  <Trans>{t('save-changes')}</Trans>
                 </Text>
               </LinearGradient>
             </TouchableOpacity>
@@ -241,7 +244,7 @@ export function Component({
               onAccessibilityEscape={onPressCancel}>
               <View style={[styles.btn]}>
                 <Text style={[s.black, s.bold, pal.text]}>
-                  <Trans>Cancel</Trans>
+                  <Trans>{t('cancel')}</Trans>
                 </Text>
               </View>
             </AnimatedTouchableOpacity>

@@ -1,0 +1,8 @@
+{
+  "end-of-feed": "End of feed",
+  "labels-annotations-on-users-and-content": "Labels are annotations on users and content. They can be used to hide, warn, and categorize the network.",
+  "blocking-labeler-placing-labels": "Blocking does not prevent this labeler from placing labels on your account.",
+  "labeler-declaration-status": "This labeler hasn't declared what labels it publishes, and may not be active.",
+  "subscribe-to-labels": "Subscribe to @",
+  "use-these-labels": " to use these labels:"
+}

@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import * as EmailValidator from 'email-validator'
+import { useTranslation } from "react-i18next";
 import type tldts from 'tldts'
 
 import {logEvent} from '#/lib/statsig/statsig'
@@ -43,6 +44,8 @@ export function StepInfo({
   refetchServer: () => void
   isLoadingStarterPack: boolean
 }) {
+const { t } = useTranslation("screens/Signup/StepInfo");
+
   const {_} = useLingui()
   const {state, dispatch} = useSignupContext()
 
@@ -142,7 +145,7 @@ export function StepInfo({
             {state.serviceDescription.inviteCodeRequired && (
               <View>
                 <TextField.LabelText>
-                  <Trans>Invite code</Trans>
+                  <Trans>{t('invite-code')}</Trans>
                 </TextField.LabelText>
                 <TextField.Root>
                   <TextField.Icon icon={Ticket} />
@@ -161,7 +164,7 @@ export function StepInfo({
             )}
             <View>
               <TextField.LabelText>
-                <Trans>Email</Trans>
+                <Trans>{t('email-address')}</Trans>
               </TextField.LabelText>
               <TextField.Root>
                 <TextField.Icon icon={Envelope} />
@@ -183,7 +186,7 @@ export function StepInfo({
             </View>
             <View>
               <TextField.LabelText>
-                <Trans>Password</Trans>
+                <Trans>{t('user-password')}</Trans>
               </TextField.LabelText>
               <TextField.Root>
                 <TextField.Icon icon={Lock} />
@@ -202,7 +205,7 @@ export function StepInfo({
             </View>
             <View>
               <DateField.LabelText>
-                <Trans>Your birth date</Trans>
+                <Trans>{t('birth-date')}</Trans>
               </DateField.LabelText>
               <DateField.DateField
                 testID="date"

@@ -2,6 +2,7 @@ import React from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {logEvent} from '#/lib/statsig/statsig'
 import {
@@ -32,6 +33,8 @@ export function SidebarTrendingTopics() {
 }
 
 function Inner() {
+const { t } = useTranslation("view/shell/desktop");
+
   const t = useTheme()
   const {_} = useLingui()
   const trendingPrompt = Prompt.usePromptControl()
@@ -56,7 +59,7 @@ function Inner() {
               a.font_bold,
               t.atoms.text_contrast_medium,
             ]}>
-            <Trans>Trending</Trans>
+            <Trans>{t('trending')}</Trans>
           </Text>
           <Button
             label={_(msg`Hide trending topics`)}

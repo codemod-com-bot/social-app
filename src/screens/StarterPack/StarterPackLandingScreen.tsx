@@ -10,6 +10,7 @@ import {
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {isAndroidWeb} from '#/lib/browser'
 import {JOINED_THIS_WEEK} from '#/lib/constants'
@@ -112,6 +113,8 @@ function LandingScreenLoaded({
   setScreenState: (state: LoggedOutScreenState) => void
   moderationOpts: ModerationOpts
 }) {
+const { t } = useTranslation("screens/StarterPack");
+
   const {creator, listItemsSample, feeds} = starterPack
   const {_, i18n} = useLingui()
   const t = useTheme()
@@ -188,8 +191,7 @@ function LandingScreenLoaded({
             {record.name}
           </Text>
           <Text
-            style={[a.text_center, a.font_bold, a.text_md, {color: 'white'}]}>
-            Starter pack by {`@${creator.handle}`}
+            style={[a.text_center, a.font_bold, a.text_md, {color: 'white'}]}>{t('starter-pack-by-creator', { creatorHandle: creator.handle })}
           </Text>
         </LinearGradientBackground>
         <View style={[a.gap_2xl, a.mx_lg, a.my_2xl]}>
@@ -204,7 +206,7 @@ function LandingScreenLoaded({
               color="primary"
               size="large">
               <ButtonText style={[a.text_lg]}>
-                <Trans>Join Bluesky</Trans>
+                <Trans>{t('join-bluesky')}</Trans>
               </ButtonText>
             </Button>
             <View style={[a.flex_row, a.align_center, a.gap_sm]}>
@@ -217,8 +219,7 @@ function LandingScreenLoaded({
                 style={[a.font_bold, a.text_sm, t.atoms.text_contrast_medium]}
                 numberOfLines={1}>
                 <Trans>
-                  {formatCount(i18n, JOINED_THIS_WEEK)} joined this week
-                </Trans>
+                  {t('joined-this-week-count', { formatCountI18NJoinedThisWeek: formatCount(i18n, JOINED_THIS_WEEK) })}</Trans>
               </Text>
             </View>
           </View>
@@ -227,11 +228,9 @@ function LandingScreenLoaded({
               <View style={[a.gap_md]}>
                 <Text style={[a.font_heavy, a.text_lg]}>
                   {listItemsCount <= 8 ? (
-                    <Trans>You'll follow these people right away</Trans>
+                    <Trans>{t('follow-people-right-away')}</Trans>
                   ) : (
-                    <Trans>
-                      You'll follow these people and {listItemsCount - 8} others
-                    </Trans>
+                    <Trans>{t('follow-people-and-others')}{listItemsCount - 8}{t('stay-updated-with-feeds')}</Trans>
                   )}
                 </Text>
                 <View
@@ -267,7 +266,7 @@ function LandingScreenLoaded({
             {feeds?.length ? (
               <View style={[a.gap_md]}>
                 <Text style={[a.font_heavy, a.text_lg]}>
-                  <Trans>You'll stay updated with these feeds</Trans>
+                  <Trans>{t('signup-without-starter-pack')}</Trans>
                 </Text>
 
                 <View
@@ -303,7 +302,7 @@ function LandingScreenLoaded({
             style={[a.py_lg]}
             onPress={onJoinWithoutPress}>
             <ButtonText>
-              <Trans>Signup without a starter pack</Trans>
+              <Trans>{t('download-bluesky')}</Trans>
             </ButtonText>
           </Button>
         </View>
@@ -314,13 +313,10 @@ function LandingScreenLoaded({
       />
       <Prompt.Outer control={androidDialogControl}>
         <Prompt.TitleText>
-          <Trans>Download Bluesky</Trans>
+          <Trans>{t('better-experience-in-app')}</Trans>
         </Prompt.TitleText>
         <Prompt.DescriptionText>
-          <Trans>
-            The experience is better in the app. Download Bluesky now and we'll
-            pick back up where you left off.
-          </Trans>
+          <Trans>{t('download-bluesky-to-get-started')}</Trans>
         </Prompt.DescriptionText>
         <Prompt.Actions>
           <Prompt.Action
@@ -363,6 +359,8 @@ export function AppClipOverlay({
   visible: boolean
   setIsVisible: (visible: boolean) => void
 }) {
+const { t } = useTranslation("screens/StarterPack");
+
   if (!visible) return
 
   return (
@@ -386,13 +384,8 @@ export function AppClipOverlay({
         {/* Webkit needs this to have a zindex of 2? */}
         <View style={[a.gap_md, {zIndex: 2}]}>
           <Text
-            style={[a.font_bold, a.text_4xl, {lineHeight: 40, color: 'white'}]}>
-            Download Bluesky to get started!
-          </Text>
-          <Text style={[a.text_lg, {color: 'white'}]}>
-            We'll remember the starter pack you chose and use it when you create
-            an account in the app.
-          </Text>
+            style={[a.font_bold, a.text_4xl, {lineHeight: 40, color: 'white'}]}>{t('remember-starter-pack-choosen')}</Text>
+          <Text style={[a.text_lg, {color: 'white'}]}>{t('key0')}</Text>
         </View>
       </View>
     </AnimatedPressable>

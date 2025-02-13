@@ -18,6 +18,7 @@ import {
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useFocusEffect, useNavigation} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {APP_LANGUAGES, LANGUAGES} from '#/lib/../locale/languages'
 import {createHitslop, HITSLOP_20} from '#/lib/constants'
@@ -88,6 +89,8 @@ function Loader() {
 }
 
 function EmptyState({message, error}: {message: string; error?: string}) {
+const { t } = useTranslation("view/screens/Search");
+
   const pal = usePalette('default')
 
   return (
@@ -111,7 +114,7 @@ function EmptyState({message, error}: {message: string; error?: string}) {
               />
 
               <Text style={[pal.textLight]}>
-                <Trans>Error:</Trans> {error}
+                <Trans>{t('error-message')}</Trans> {error}
               </Text>
             </>
           )}
@@ -327,6 +330,8 @@ function SearchLanguageDropdown({
   value: string
   onChange(value: string): void
 }) {
+const { t } = useTranslation("view/screens/Search");
+
   const {_} = useLingui()
   const {appLanguage, contentLanguages} = useLanguagePrefs()
 
@@ -394,11 +399,11 @@ function SearchLanguageDropdown({
         // so if it's too tall it just goes off screen. TODO: fix internally -sfn
         style={web({maxHeight: '70vh'})}>
         <Menu.LabelText>
-          <Trans>Filter search by language</Trans>
+          <Trans>{t('filter-search-language')}</Trans>
         </Menu.LabelText>
         <Menu.Item label={_(msg`All languages`)} onPress={() => onChange('')}>
           <Menu.ItemText>
-            <Trans>All languages</Trans>
+            <Trans>{t('all-languages')}</Trans>
           </Menu.ItemText>
           <Menu.ItemRadio selected={value === ''} />
         </Menu.Item>
@@ -469,6 +474,8 @@ let SearchScreenInner = ({
   queryWithParams: string
   headerHeight: number
 }): React.ReactNode => {
+const { t } = useTranslation("view/screens/Search");
+
   const pal = usePalette('default')
   const setMinimalShellMode = useSetMinimalShellMode()
   const {hasSession} = useSession()
@@ -558,7 +565,7 @@ let SearchScreenInner = ({
                 borderBottomWidth: 1,
               },
             ]}>
-            <Trans>Search</Trans>
+            <Trans>{t('search-button')}</Trans>
           </Text>
         )}
 
@@ -576,7 +583,7 @@ let SearchScreenInner = ({
             style={pal.textLight}
           />
           <Text type="xl" style={[pal.textLight, {paddingHorizontal: 18}]}>
-            <Trans>Find posts and users on Bluesky</Trans>
+            <Trans>{t('find-posts-users')}</Trans>
           </Text>
         </View>
       </View>
@@ -588,6 +595,8 @@ SearchScreenInner = React.memo(SearchScreenInner)
 export function SearchScreen(
   props: NativeStackScreenProps<SearchTabNavigatorParams, 'Search'>,
 ) {
+const { t } = useTranslation("view/screens/Search");
+
   const t = useTheme()
   const {gtMobile} = useBreakpoints()
   const navigation = useNavigation<NavigationProp>()
@@ -804,7 +813,7 @@ export function SearchScreen(
                 <Layout.Header.MenuButton />
                 <Layout.Header.Content align="left">
                   <Layout.Header.TitleText>
-                    <Trans>Search</Trans>
+                    <Trans>{t('search-button-duplicate')}</Trans>
                   </Layout.Header.TitleText>
                 </Layout.Header.Content>
                 {showFilters ? (
@@ -843,7 +852,7 @@ export function SearchScreen(
                     onPress={onPressCancelSearch}
                     hitSlop={HITSLOP_10}>
                     <ButtonText>
-                      <Trans>Cancel</Trans>
+                      <Trans>{t('cancel-button')}</Trans>
                     </ButtonText>
                   </Button>
                 )}
@@ -978,6 +987,8 @@ function SearchHistory({
   onRemoveItemClick: (item: string) => void
   onRemoveProfileClick: (profile: AppBskyActorDefs.ProfileViewBasic) => void
 }) {
+const { t } = useTranslation("view/screens/Search");
+
   const {isMobile} = useWebMediaQueries()
   const pal = usePalette('default')
   const {_} = useLingui()
@@ -989,7 +1000,7 @@ function SearchHistory({
       <View style={styles.searchHistoryContainer}>
         {(searchHistory.length > 0 || selectedProfiles.length > 0) && (
           <Text style={[pal.text, styles.searchHistoryTitle]}>
-            <Trans>Recent Searches</Trans>
+            <Trans>{t('recent-searches')}</Trans>
           </Text>
         )}
         {selectedProfiles.length > 0 && (

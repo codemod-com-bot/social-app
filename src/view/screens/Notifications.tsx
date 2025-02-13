@@ -4,6 +4,7 @@ import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useFocusEffect, useIsFocused} from '@react-navigation/native'
 import {useQueryClient} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {useNonReactiveCallback} from '#/lib/hooks/useNonReactiveCallback'
 import {ComposeIcon2} from '#/lib/icons'
@@ -48,6 +49,8 @@ type Props = NativeStackScreenProps<
   'Notifications'
 >
 export function NotificationsScreen({}: Props) {
+const { t } = useTranslation("view/screens");
+
   const {_} = useLingui()
   const {openComposer} = useComposerControls()
   const unreadNotifs = useUnreadNotifications()
@@ -125,7 +128,7 @@ export function NotificationsScreen({}: Props) {
         <Layout.Header.MenuButton />
         <Layout.Header.Content>
           <Layout.Header.TitleText>
-            <Trans>Notifications</Trans>
+            <Trans>{t('notifications')}</Trans>
           </Layout.Header.TitleText>
         </Layout.Header.Content>
         <Layout.Header.Slot>

@@ -2,6 +2,7 @@ import React from 'react'
 import {Platform, Pressable, StyleSheet, View, ViewStyle} from 'react-native'
 import {IconProp} from '@fortawesome/fontawesome-svg-core'
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
+import { useTranslation } from "react-i18next";
 import * as DropdownMenu from 'zeego/dropdown-menu'
 import {MenuItemCommonProps} from 'zeego/lib/typescript/menu'
 
@@ -239,12 +240,14 @@ export function NativeDropdown({
 }
 
 function Backdrop() {
+const { t } = useTranslation("view/com/util/forms");
+
   // Not visible but it eats the click outside.
   // Only necessary for iOS.
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel="Dialog backdrop"
+      accessibilityLabel={t('dialog-backdrop')}
       accessibilityHint="Press the backdrop to close the dialog"
       style={{
         top: 0,

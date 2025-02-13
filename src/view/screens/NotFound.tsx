@@ -7,6 +7,7 @@ import {
   useFocusEffect,
   useNavigation,
 } from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {NavigationProp} from '#/lib/routes/types'
@@ -18,6 +19,8 @@ import {ViewHeader} from '#/view/com/util/ViewHeader'
 import * as Layout from '#/components/Layout'
 
 export const NotFoundScreen = () => {
+const { t } = useTranslation("view/screens");
+
   const pal = usePalette('default')
   const {_} = useLingui()
   const navigation = useNavigation<NavigationProp>()
@@ -44,12 +47,10 @@ export const NotFoundScreen = () => {
       <ViewHeader title={_(msg`Page Not Found`)} />
       <View style={styles.container}>
         <Text type="title-2xl" style={[pal.text, s.mb10]}>
-          <Trans>Page not found</Trans>
+          <Trans>{t('page-not-found')}</Trans>
         </Text>
         <Text type="md" style={[pal.text, s.mb10]}>
-          <Trans>
-            We're sorry! We can't find the page you were looking for.
-          </Trans>
+          <Trans>{t('page-not-found-message')}</Trans>
         </Text>
         <Button
           type="primary"

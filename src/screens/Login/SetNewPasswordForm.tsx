@@ -3,6 +3,7 @@ import {ActivityIndicator, View} from 'react-native'
 import {BskyAgent} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {isNetworkError} from '#/lib/strings/errors'
 import {cleanError} from '#/lib/strings/errors'
@@ -30,6 +31,8 @@ export const SetNewPasswordForm = ({
   onPressBack: () => void
   onPasswordSet: () => void
 }) => {
+const { t } = useTranslation("screens/Login");
+
   const {_} = useLingui()
   const t = useTheme()
 
@@ -99,16 +102,13 @@ export const SetNewPasswordForm = ({
   return (
     <FormContainer
       testID="setNewPasswordForm"
-      titleText={<Trans>Set new password</Trans>}>
+      titleText={<Trans>{t('set-new-password')}</Trans>}>
       <Text style={[a.leading_snug, a.mb_sm]}>
-        <Trans>
-          You will receive an email with a "reset code." Enter that code here,
-          then enter your new password.
-        </Trans>
+        <Trans>{t('email-reset-code-instructions')}</Trans>
       </Text>
 
       <View>
-        <TextField.LabelText>Reset code</TextField.LabelText>
+        <TextField.LabelText>{t('reset-code')}</TextField.LabelText>
         <TextField.Root>
           <TextField.Icon icon={Ticket} />
           <TextField.Input
@@ -131,7 +131,7 @@ export const SetNewPasswordForm = ({
       </View>
 
       <View>
-        <TextField.LabelText>New password</TextField.LabelText>
+        <TextField.LabelText>{t('new-password')}</TextField.LabelText>
         <TextField.Root>
           <TextField.Icon icon={Lock} />
           <TextField.Input
@@ -163,7 +163,7 @@ export const SetNewPasswordForm = ({
           size="large"
           onPress={onPressBack}>
           <ButtonText>
-            <Trans>Back</Trans>
+            <Trans>{t('back-button')}</Trans>
           </ButtonText>
         </Button>
         <View style={a.flex_1} />
@@ -177,13 +177,13 @@ export const SetNewPasswordForm = ({
             size="large"
             onPress={onPressNext}>
             <ButtonText>
-              <Trans>Next</Trans>
+              <Trans>{t('next-button')}</Trans>
             </ButtonText>
           </Button>
         )}
         {isProcessing ? (
           <Text style={[t.atoms.text_contrast_high, a.pl_md]}>
-            <Trans>Updating...</Trans>
+            <Trans>{t('updating-status')}</Trans>
           </Text>
         ) : undefined}
       </View>

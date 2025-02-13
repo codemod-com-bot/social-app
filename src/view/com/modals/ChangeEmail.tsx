@@ -2,6 +2,7 @@ import {useState} from 'react'
 import {ActivityIndicator, SafeAreaView, StyleSheet, View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
@@ -25,6 +26,8 @@ enum Stages {
 export const snapPoints = ['90%']
 
 export function Component() {
+const { t } = useTranslation("view/com/modals");
+
   const pal = usePalette('default')
   const {currentAccount} = useSession()
   const agent = useAgent()
@@ -109,18 +112,12 @@ export function Component() {
 
         <Text type="lg" style={[pal.textLight, {marginBottom: 10}]}>
           {stage === Stages.InputEmail ? (
-            <Trans>Enter your new email address below.</Trans>
+            <Trans>{t('enter-new-email-address')}</Trans>
           ) : stage === Stages.ConfirmCode ? (
-            <Trans>
-              An email has been sent to your previous address,{' '}
-              {currentAccount?.email || '(no email)'}. It includes a
-              confirmation code which you can enter below.
-            </Trans>
+            <Trans>{t('email-sent-to-previous-address')}
+              {currentAccount?.email || '(no email)'}{t('confirmation-code-included')}</Trans>
           ) : (
-            <Trans>
-              Your email has been updated but not verified. As a next step,
-              please verify your new email.
-            </Trans>
+            <Trans>{t('email-updated-not-verified')}</Trans>
           )}
         </Text>
 
@@ -128,7 +125,7 @@ export function Component() {
           <TextInput
             testID="emailInput"
             style={[styles.textInput, pal.border, pal.text]}
-            placeholder="alice@mail.com"
+            placeholder={t('example-email-address')}
             placeholderTextColor={pal.colors.textLight}
             value={email}
             onChangeText={setEmail}

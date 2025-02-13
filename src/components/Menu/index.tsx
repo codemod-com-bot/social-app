@@ -2,6 +2,7 @@ import React from 'react'
 import {Pressable, StyleProp, View, ViewStyle} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 import flattenReactChildren from 'react-keyed-flatten-children'
 
 import {isAndroid, isIOS, isNative} from '#/platform/detection'
@@ -290,6 +291,8 @@ export function Group({children, style}: GroupProps) {
 }
 
 function Cancel() {
+const { t } = useTranslation("components/Menu");
+
   const {_} = useLingui()
   const context = useMenuContext()
 
@@ -301,7 +304,7 @@ function Cancel() {
       color="secondary"
       onPress={() => context.control.close()}>
       <ButtonText>
-        <Trans>Cancel</Trans>
+        <Trans>{t('cancel-button')}</Trans>
       </ButtonText>
     </Button>
   )

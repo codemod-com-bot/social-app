@@ -14,6 +14,7 @@ import {msg, Plural, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useFocusEffect, useNavigation} from '@react-navigation/native'
 import {NativeStackScreenProps} from '@react-navigation/native-stack'
+import { Trans,useTranslation } from "react-i18next";
 
 import {STARTER_PACK_MAX_SIZE} from '#/lib/constants'
 import {useEnableKeyboardControllerScreen} from '#/lib/hooks/useEnableKeyboardController'
@@ -323,6 +324,8 @@ function WizardInner({
 }
 
 function Container({children}: {children: React.ReactNode}) {
+const { t } = useTranslation("screens/StarterPack/Wizard");
+
   const {_} = useLingui()
   const [state, dispatch] = useWizardState()
 
@@ -345,7 +348,7 @@ function Container({children}: {children: React.ReactNode}) {
             style={[a.mx_xl, a.mb_lg, {marginTop: 35}]}
             onPress={() => dispatch({type: 'Next'})}>
             <ButtonText>
-              <Trans>Next</Trans>
+              <Trans>{t('next')}</Trans>
             </ButtonText>
           </Button>
         </>
@@ -365,6 +368,8 @@ function Footer({
   moderationOpts: ModerationOpts
   profile: AppBskyActorDefs.ProfileViewBasic
 }) {
+const { t } = useTranslation("screens/StarterPack/Wizard");
+
   const {_} = useLingui()
   const t = useTheme()
   const [state, dispatch] = useWizardState()
@@ -432,35 +437,26 @@ function Footer({
           <Text style={[a.text_center, textStyles]}>
             {
               items.length < 2 ? (
-                <Trans>
-                  It's just you right now! Add more people to your starter pack
-                  by searching above.
-                </Trans>
+                <Trans>{t('starter-pack-empty-message')}</Trans>
               ) : items.length === 2 ? (
                 <Trans>
-                  <Text style={[a.font_bold, textStyles]}>You</Text> and
-                  <Text> </Text>
-                  <Text style={[a.font_bold, textStyles]} emoji>
-                    {getName(items[1] /* [0] is self, skip it */)}{' '}
-                  </Text>
-                  are included in your starter pack
-                </Trans>
+                  <Trans
+i18nKey="you-and-other-included"
+components={{"0": <Text style={[a.font_bold, textStyles]} />, "1": <Text />, "2": <Text style={[a.font_bold, textStyles]} emoji />}}
+/>
+                  </Trans>
               ) : items.length > 2 ? (
                 <Trans context="profiles">
-                  <Text style={[a.font_bold, textStyles]} emoji>
-                    {getName(items[1] /* [0] is self, skip it */)},{' '}
-                  </Text>
-                  <Text style={[a.font_bold, textStyles]} emoji>
-                    {getName(items[2])},{' '}
-                  </Text>
-                  and{' '}
+                  <Trans
+i18nKey="multiple-people-included"
+components={{"0": <Text style={[a.font_bold, textStyles]} emoji />, "1": <Text style={[a.font_bold, textStyles]} emoji />}}
+/>
+                  
                   <Plural
                     value={items.length - 2}
                     one="# other"
                     other="# others"
-                  />{' '}
-                  are included in your starter pack
-                </Trans>
+                  />{t('included-in-starter-pack')}</Trans>
               ) : null /* Should not happen. */
             }
           </Text>
@@ -468,12 +464,10 @@ function Footer({
           items.length === 0 ? (
             <View style={[a.gap_sm]}>
               <Text style={[a.font_bold, a.text_center, textStyles]}>
-                <Trans>Add some feeds to your starter pack!</Trans>
+                <Trans>{t('add-feeds-to-starter-pack')}</Trans>
               </Text>
               <Text style={[a.text_center, textStyles]}>
-                <Trans>
-                  Search for feeds that you want to suggest to others.
-                </Trans>
+                <Trans>{t('search-for-feeds-message')}</Trans>
               </Text>
             </View>
           ) : (
@@ -481,39 +475,31 @@ function Footer({
               {
                 items.length === 1 ? (
                   <Trans>
-                    <Text style={[a.font_bold, textStyles]} emoji>
-                      {getName(items[0])}
-                    </Text>{' '}
-                    is included in your starter pack
-                  </Trans>
+                    <Trans
+i18nKey="first-person-included"
+values={{ getNameItems0: <>{getName(items[0])}</> }}
+components={{"0": <Text style={[a.font_bold, textStyles]} emoji />}}
+/></Trans>
                 ) : items.length === 2 ? (
                   <Trans>
-                    <Text style={[a.font_bold, textStyles]} emoji>
-                      {getName(items[0])}
-                    </Text>{' '}
-                    and
-                    <Text> </Text>
-                    <Text style={[a.font_bold, textStyles]} emoji>
-                      {getName(items[1])}{' '}
-                    </Text>
-                    are included in your starter pack
-                  </Trans>
+                    <Trans
+i18nKey="first-and-second-person-included"
+values={{ getNameItems0: <>{getName(items[0])}</> }}
+components={{"0": <Text style={[a.font_bold, textStyles]} emoji />, "1": <Text />, "2": <Text style={[a.font_bold, textStyles]} emoji />}}
+/>
+                    </Trans>
                 ) : items.length > 2 ? (
                   <Trans context="feeds">
-                    <Text style={[a.font_bold, textStyles]} emoji>
-                      {getName(items[0])},{' '}
-                    </Text>
-                    <Text style={[a.font_bold, textStyles]} emoji>
-                      {getName(items[1])},{' '}
-                    </Text>
-                    and{' '}
+                    <Trans
+i18nKey="first-and-second-people-included"
+components={{"0": <Text style={[a.font_bold, textStyles]} emoji />, "1": <Text style={[a.font_bold, textStyles]} emoji />}}
+/>
+                    
                     <Plural
                       value={items.length - 2}
                       one="# other"
                       other="# others"
-                    />{' '}
-                    are included in your starter pack
-                  </Trans>
+                    />{t('included-in-starter-pack')}</Trans>
                 ) : null /* Should not happen. */
               }
             </Text>
@@ -538,7 +524,7 @@ function Footer({
             style={{width: 70}}
             onPress={editDialogControl.open}>
             <ButtonText>
-              <Trans>Edit</Trans>
+              <Trans>{t('edit')}</Trans>
             </ButtonText>
           </Button>
         ) : (
@@ -548,7 +534,7 @@ function Footer({
           <>
             <Text
               style={[a.font_bold, textStyles, t.atoms.text_contrast_medium]}>
-              <Trans>Add {8 - items.length} more to continue</Trans>
+              <Trans>{t('add')}{8 - items.length}{t('more-to-continue')}</Trans>
             </Text>
             <View style={{width: 70}} />
           </>

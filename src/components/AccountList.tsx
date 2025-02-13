@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {AppBskyActorDefs} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {sanitizeDisplayName} from '#/lib/strings/display-names'
 import {sanitizeHandle} from '#/lib/strings/handles'
@@ -26,6 +27,8 @@ export function AccountList({
   otherLabel?: string
   pendingDid: string | null
 }) {
+const { t } = useTranslation("components");
+
   const {currentAccount, accounts} = useSession()
   const t = useTheme()
   const {_} = useLingui()
@@ -80,7 +83,7 @@ export function AccountList({
                 a.py_sm,
                 {paddingLeft: 48},
               ]}>
-              {otherLabel ?? <Trans>Other account</Trans>}
+              {otherLabel ?? <Trans>{t('other-account')}</Trans>}
             </Text>
             <Chevron size="sm" style={[t.atoms.text, a.mr_md]} />
           </View>

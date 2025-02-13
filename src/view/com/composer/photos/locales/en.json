@@ -1,0 +1,11 @@
+{
+  "edit-image": "Edit image",
+  "save": "Save",
+  "alt-text": "ALT",
+  "alt-text-description": "Alt text describes images for blind and low-vision users, and helps give context to everyone.",
+  "add-alt-text": "Add alt text",
+  "descriptive-alt-text": "Descriptive alt text",
+  "alt-text-truncation-limit": "Alt text will be truncated. Limit:",
+  "alt-text-character-count": "  characters.",
+  "save-button": "Save"
+}

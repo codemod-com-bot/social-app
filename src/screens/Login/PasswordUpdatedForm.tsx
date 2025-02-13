@@ -1,6 +1,7 @@
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {atoms as a, useBreakpoints} from '#/alf'
 import {Button, ButtonText} from '#/components/Button'
@@ -12,6 +13,8 @@ export const PasswordUpdatedForm = ({
 }: {
   onPressNext: () => void
 }) => {
+const { t } = useTranslation("screens/Login");
+
   const {_} = useLingui()
   const {gtMobile} = useBreakpoints()
 
@@ -20,10 +23,10 @@ export const PasswordUpdatedForm = ({
       testID="passwordUpdatedForm"
       style={[a.gap_2xl, !gtMobile && a.mt_5xl]}>
       <Text style={[a.text_3xl, a.font_bold, a.text_center]}>
-        <Trans>Password updated!</Trans>
+        <Trans>{t('password-updated')}</Trans>
       </Text>
       <Text style={[a.text_center, a.mx_auto, {maxWidth: '80%'}]}>
-        <Trans>You can now sign in with your new password.</Trans>
+        <Trans>{t('sign-in-new-password')}</Trans>
       </Text>
       <View style={[a.flex_row, a.justify_center]}>
         <Button
@@ -34,7 +37,7 @@ export const PasswordUpdatedForm = ({
           color="primary"
           size="large">
           <ButtonText>
-            <Trans>Okay</Trans>
+            <Trans>{t('okay')}</Trans>
           </ButtonText>
         </Button>
       </View>

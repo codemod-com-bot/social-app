@@ -2,6 +2,7 @@ import React, {memo, useCallback} from 'react'
 import {View} from 'react-native'
 import {msg, plural, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {POST_CTRL_HITSLOP} from '#/lib/constants'
 import {useHaptics} from '#/lib/haptics'
@@ -122,6 +123,8 @@ let RepostButtonDialogInner = ({
   onQuote: () => void
   embeddingDisabled: boolean
 }): React.ReactNode => {
+const { t } = useTranslation("view/com/util/post-ctrls");
+
   const t = useTheme()
   const {_} = useLingui()
   const playHaptic = useHaptics()
@@ -162,9 +165,9 @@ let RepostButtonDialogInner = ({
             <Repost size="lg" fill={t.palette.primary_500} />
             <Text style={[a.font_bold, a.text_xl]}>
               {isReposted ? (
-                <Trans>Remove repost</Trans>
+                <Trans>{t('remove-repost')}</Trans>
               ) : (
-                <Trans context="action">Repost</Trans>
+                <Trans context="action">{t('repost')}</Trans>
               )}
             </Text>
           </Button>
@@ -196,9 +199,9 @@ let RepostButtonDialogInner = ({
                 embeddingDisabled && t.atoms.text_contrast_low,
               ]}>
               {embeddingDisabled ? (
-                <Trans>Quote posts disabled</Trans>
+                <Trans>{t('quote-posts-disabled')}</Trans>
               ) : (
-                <Trans>Quote post</Trans>
+                <Trans>{t('quote-post')}</Trans>
               )}
             </Text>
           </Button>
@@ -210,7 +213,7 @@ let RepostButtonDialogInner = ({
           variant="outline"
           color="primary">
           <ButtonText>
-            <Trans>Cancel</Trans>
+            <Trans>{t('cancel')}</Trans>
           </ButtonText>
         </Button>
       </View>

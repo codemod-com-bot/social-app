@@ -4,6 +4,7 @@ import {Image, ImageStyle} from 'expo-image'
 import {AppBskyEmbedImages} from '@atproto/api'
 import {msg} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {HandleRef} from '#/lib/hooks/useHandleRef'
 import {Dimensions} from '#/lib/media/types'
@@ -44,6 +45,8 @@ export function GalleryItem({
   containerRefs,
   thumbDimsRef,
 }: Props) {
+const { t } = useTranslation("view/com/util/images");
+
   const t = useTheme()
   const {_} = useLingui()
   const largeAltBadge = useLargeAltBadgeEnabled()
@@ -110,9 +113,7 @@ export function GalleryItem({
             ],
           ]}>
           <Text
-            style={[a.font_heavy, largeAltBadge ? a.text_xs : {fontSize: 8}]}>
-            ALT
-          </Text>
+            style={[a.font_heavy, largeAltBadge ? a.text_xs : {fontSize: 8}]}>{t('alt-text')}</Text>
         </View>
       ) : null}
     </View>

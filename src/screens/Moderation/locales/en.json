@@ -1,0 +1,13 @@
+{
+  "error-loading-data": "Hmmmm, it seems we're having trouble loading this data. See below for more details. If this issue persists, please contact us.",
+  "moderation-tools": "Moderation tools",
+  "content-filters": "Content filters",
+  "confirm-age": "Confirm your age:",
+  "set-birthdate": "Set birthdate",
+  "enable-adult-content": "Enable adult content",
+  "enabled-status": "Enabled",
+  "disabled-status": "Disabled",
+  "adult-content-enable-info": "Adult content can only be enabled via the Web at <0>bsky.app</0> .",
+  "advanced-settings": "Advanced",
+  "error-loading-labelers": "We were unable to load your configured labelers at this time."
+}

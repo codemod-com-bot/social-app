@@ -4,6 +4,7 @@ import {AppBskyEmbedVideo, AtUri} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useQueryClient} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {VIDEO_FEED_URI} from '#/lib/constants'
 import {makeCustomFeedLink} from '#/lib/routes/links'
@@ -35,6 +36,8 @@ const FEED_PARAMS: {
 }
 
 export function TrendingVideos() {
+const { t } = useTranslation("components/interstitials");
+
   const t = useTheme()
   const {_} = useLingui()
   const gutters = useGutters([0, 'base'])
@@ -85,7 +88,7 @@ export function TrendingVideos() {
         <View style={[a.flex_1, a.flex_row, a.align_center, a.gap_xs]}>
           <Graph />
           <Text style={[a.text_md, a.font_bold, a.leading_snug]}>
-            <Trans>Trending Videos</Trans>
+            <Trans>{t('trending-videos')}</Trans>
           </Text>
         </View>
         <Button
@@ -124,7 +127,7 @@ export function TrendingVideos() {
                 ))
             ) : error || !data ? (
               <Text>
-                <Trans>Whoops! Trending videos failed to load.</Trans>
+                <Trans>{t('trending-videos-failed-to-load')}</Trans>
               </Text>
             ) : (
               <VideoCards data={data} />
@@ -149,6 +152,8 @@ function VideoCards({
 }: {
   data: Exclude<ReturnType<typeof usePostFeedQuery>['data'], undefined>
 }) {
+const { t } = useTranslation("components/interstitials");
+
   const t = useTheme()
   const {_} = useLingui()
   const items = React.useMemo(() => {
@@ -207,7 +212,7 @@ function VideoCards({
                 },
               ]}>
               <Text style={[a.text_md]}>
-                <Trans>View more</Trans>
+                <Trans>{t('view-more')}</Trans>
               </Text>
               <View
                 style={[

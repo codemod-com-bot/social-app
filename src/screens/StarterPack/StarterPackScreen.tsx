@@ -14,6 +14,7 @@ import {useLingui} from '@lingui/react'
 import {useNavigation} from '@react-navigation/native'
 import {NativeStackScreenProps} from '@react-navigation/native-stack'
 import {useQueryClient} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {batchedUpdates} from '#/lib/batchedUpdates'
 import {HITSLOP_20} from '#/lib/constants'
@@ -296,6 +297,8 @@ function Header({
   routeParams: StarterPackScreeProps['route']['params']
   onOpenShareDialog: () => void
 }) {
+const { t } = useTranslation("screens/StarterPack");
+
   const {_} = useLingui()
   const t = useTheme()
   const {currentAccount, hasSession} = useSession()
@@ -420,7 +423,7 @@ function Header({
                 size="small"
                 onPress={onOpenShareDialog}>
                 <ButtonText>
-                  <Trans>Share</Trans>
+                  <Trans>{t('share')}</Trans>
                 </ButtonText>
               </Button>
             ) : (
@@ -433,7 +436,7 @@ function Header({
                 onPress={onFollowAll}
                 style={[a.flex_row, a.gap_xs, a.align_center]}>
                 <ButtonText>
-                  <Trans>Follow all</Trans>
+                  <Trans>{t('follow-all')}</Trans>
                 </ButtonText>
                 {isProcessing && <Loader size="xs" />}
               </Button>
@@ -464,7 +467,7 @@ function Header({
               color="primary"
               size="large">
               <ButtonText style={[a.text_lg]}>
-                <Trans>Join Bluesky</Trans>
+                <Trans>{t('join-bluesky')}</Trans>
               </ButtonText>
             </Button>
           ) : null}
@@ -478,9 +481,7 @@ function Header({
               <Text
                 style={[a.font_bold, a.text_sm, t.atoms.text_contrast_medium]}>
                 <Trans>
-                  {starterPack.joinedAllTimeCount || 0} people have used this
-                  starter pack!
-                </Trans>
+                  {starterPack.joinedAllTimeCount || 0}{t('starter-pack-usage')}</Trans>
               </Text>
             </View>
           ) : null}
@@ -499,6 +500,8 @@ function OverflowMenu({
   routeParams: StarterPackScreeProps['route']['params']
   onOpenShareDialog: () => void
 }) {
+const { t } = useTranslation("screens/StarterPack");
+
   const t = useTheme()
   const {_} = useLingui()
   const {gtMobile} = useBreakpoints()
@@ -572,7 +575,7 @@ function OverflowMenu({
                   })
                 }}>
                 <Menu.ItemText>
-                  <Trans>Edit</Trans>
+                  <Trans>{t('edit')}</Trans>
                 </Menu.ItemText>
                 <Menu.ItemIcon icon={Pencil} position="right" />
               </Menu.Item>
@@ -583,7 +586,7 @@ function OverflowMenu({
                   deleteDialogControl.open()
                 }}>
                 <Menu.ItemText>
-                  <Trans>Delete</Trans>
+                  <Trans>{t('delete')}</Trans>
                 </Menu.ItemText>
                 <Menu.ItemIcon icon={Trash} position="right" />
               </Menu.Item>
@@ -596,7 +599,7 @@ function OverflowMenu({
                   testID="shareStarterPackLinkBtn"
                   onPress={onOpenShareDialog}>
                   <Menu.ItemText>
-                    <Trans>Share link</Trans>
+                    <Trans>{t('share-link')}</Trans>
                   </Menu.ItemText>
                   <Menu.ItemIcon icon={ArrowOutOfBox} position="right" />
                 </Menu.Item>
@@ -606,7 +609,7 @@ function OverflowMenu({
                 label={_(msg`Report starter pack`)}
                 onPress={() => reportDialogControl.open()}>
                 <Menu.ItemText>
-                  <Trans>Report starter pack</Trans>
+                  <Trans>{t('report-starter-pack')}</Trans>
                 </Menu.ItemText>
                 <Menu.ItemIcon icon={CircleInfo} position="right" />
               </Menu.Item>
@@ -628,10 +631,10 @@ function OverflowMenu({
 
       <Prompt.Outer control={deleteDialogControl}>
         <Prompt.TitleText>
-          <Trans>Delete starter pack?</Trans>
+          <Trans>{t('confirm-delete-starter-pack')}</Trans>
         </Prompt.TitleText>
         <Prompt.DescriptionText>
-          <Trans>Are you sure you want to delete this starter pack?</Trans>
+          <Trans>{t('confirm-delete-starter-pack-message')}</Trans>
         </Prompt.DescriptionText>
         {deleteError && (
           <View
@@ -647,7 +650,7 @@ function OverflowMenu({
             ]}>
             <View style={[a.flex_1, a.gap_2xs]}>
               <Text style={[a.font_bold]}>
-                <Trans>Unable to delete</Trans>
+                <Trans>{t('unable-to-delete')}</Trans>
               </Text>
               <Text style={[a.leading_snug]}>{cleanError(deleteError)}</Text>
             </View>
@@ -662,7 +665,7 @@ function OverflowMenu({
             label={_(msg`Yes, delete this starter pack`)}
             onPress={onDeleteStarterPack}>
             <ButtonText>
-              <Trans>Delete</Trans>
+              <Trans>{t('delete-again')}</Trans>
             </ButtonText>
             {isDeletePending && <ButtonIcon icon={Loader} />}
           </Button>
@@ -674,6 +677,8 @@ function OverflowMenu({
 }
 
 function InvalidStarterPack({rkey}: {rkey: string}) {
+const { t } = useTranslation("screens/StarterPack");
+
   const {_} = useLingui()
   const t = useTheme()
   const navigation = useNavigation<NavigationProp>()
@@ -713,7 +718,7 @@ function InvalidStarterPack({rkey}: {rkey: string}) {
       sideBorders={true}>
       <View style={[a.w_full, a.align_center, a.gap_lg]}>
         <Text style={[a.font_bold, a.text_3xl]}>
-          <Trans>Starter pack is invalid</Trans>
+          <Trans>{t('invalid-starter-pack')}</Trans>
         </Text>
         <Text
           style={[
@@ -723,10 +728,7 @@ function InvalidStarterPack({rkey}: {rkey: string}) {
             {lineHeight: 1.4},
             gtMobile ? {width: 450} : [a.w_full, a.px_lg],
           ]}>
-          <Trans>
-            The starter pack that you are trying to view is invalid. You may
-            delete this starter pack instead.
-          </Trans>
+          <Trans>{t('invalid-starter-pack-message')}</Trans>
         </Text>
       </View>
       <View style={[a.gap_md, gtMobile ? {width: 350} : [a.w_full, a.px_lg]]}>
@@ -742,7 +744,7 @@ function InvalidStarterPack({rkey}: {rkey: string}) {
             deleteStarterPack({rkey})
           }}>
           <ButtonText>
-            <Trans>Delete</Trans>
+            <Trans>{t('delete-again-2')}</Trans>
           </ButtonText>
           {isProcessing && <Loader size="xs" color="white" />}
         </Button>
@@ -755,7 +757,7 @@ function InvalidStarterPack({rkey}: {rkey: string}) {
           disabled={isProcessing}
           onPress={goBack}>
           <ButtonText>
-            <Trans>Go Back</Trans>
+            <Trans>{t('go-back')}</Trans>
           </ButtonText>
         </Button>
       </View>

@@ -5,6 +5,7 @@ import {AppBskyGraphDefs, AppBskyGraphStarterpack, AtUri} from '@atproto/api'
 import {msg} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useQueryClient} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {sanitizeHandle} from '#/lib/strings/handles'
 import {getStarterPackOgCard} from '#/lib/strings/starter-pack'
@@ -51,6 +52,8 @@ export function Card({
   noIcon?: boolean
   noDescription?: boolean
 }) {
+const { t } = useTranslation("components/StarterPack");
+
   const {record, creator, joinedAllTimeCount} = starterPack
 
   const {_} = useLingui()
@@ -89,8 +92,7 @@ export function Card({
       ) : null}
       {!!joinedAllTimeCount && joinedAllTimeCount >= 50 && (
         <Text style={[a.font_bold, t.atoms.text_contrast_medium]}>
-          {joinedAllTimeCount} users have joined!
-        </Text>
+          {t('users-joined-count', { joinedAllTimeCount })}</Text>
       )}
     </View>
   )

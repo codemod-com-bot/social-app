@@ -2,6 +2,7 @@ import {View} from 'react-native'
 import {ImagePickerAsset} from 'expo-image-picker'
 import {msg} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {CompressedVideo} from '#/lib/media/video/types'
 import {clamp} from '#/lib/numbers'
@@ -22,6 +23,8 @@ export function VideoPreview({
 
   clear: () => void
 }) {
+const { t } = useTranslation("view/com/composer/videos");
+
   const {_} = useLingui()
   // TODO: figure out how to pause a GIF for reduced motion
   // it's not possible using an img tag -sfn
@@ -50,7 +53,7 @@ export function VideoPreview({
         <img
           src={video.uri}
           style={{width: '100%', height: '100%', objectFit: 'cover'}}
-          alt="GIF"
+          alt={t('gif')}
         />
       ) : (
         <>

@@ -2,6 +2,7 @@ import {useState} from 'react'
 import {TouchableOpacity, View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {HITSLOP_10, MAX_ALT_TEXT} from '#/lib/constants'
 import {parseAltFromGIFDescription} from '#/lib/gif-alt-text'
@@ -64,6 +65,8 @@ export function GifAltTextDialogLoaded({
   params: EmbedPlayerParams
   thumb: string | undefined
 }) {
+const { t } = useTranslation("view/com/composer");
+
   const control = Dialog.useDialogControl()
   const {_} = useLingui()
   const t = useTheme()
@@ -97,7 +100,7 @@ export function GifAltTextDialogLoaded({
         <Text
           style={[a.font_bold, {color: t.palette.white}]}
           accessible={false}>
-          <Trans>ALT</Trans>
+          <Trans>{t('alt-text')}</Trans>
         </Text>
       </TouchableOpacity>
 
@@ -137,6 +140,8 @@ function AltTextInner({
   params: EmbedPlayerParams
   thumb: string | undefined
 }) {
+const { t } = useTranslation("view/com/composer");
+
   const t = useTheme()
   const {_, i18n} = useLingui()
 
@@ -147,7 +152,7 @@ function AltTextInner({
           <View style={[a.gap_sm]}>
             <View style={[a.relative]}>
               <TextField.LabelText>
-                <Trans>Descriptive alt text</Trans>
+                <Trans>{t('descriptive-alt-text')}</Trans>
               </TextField.LabelText>
               <TextField.Root>
                 <Dialog.Input
@@ -176,10 +181,8 @@ function AltTextInner({
                     a.leading_snug,
                     t.atoms.text_contrast_medium,
                   ]}>
-                  <Trans>
-                    Alt text will be truncated. Limit:{' '}
-                    {i18n.number(MAX_ALT_TEXT)} characters.
-                  </Trans>
+                  <Trans>{t('alt-text-truncation-limit')}
+                    {i18n.number(MAX_ALT_TEXT)}{t('characters-limit-notice')}</Trans>
                 </Text>
               </View>
             )}
@@ -196,7 +199,7 @@ function AltTextInner({
               }}
               style={[a.flex_grow]}>
               <ButtonText>
-                <Trans>Save</Trans>
+                <Trans>{t('save-button')}</Trans>
               </ButtonText>
             </Button>
           </AltTextCounterWrapper>
@@ -204,7 +207,7 @@ function AltTextInner({
         {/* below the text input to force tab order */}
         <View>
           <Text style={[a.text_2xl, a.font_bold, a.leading_tight, a.pb_sm]}>
-            <Trans>Add alt text</Trans>
+            <Trans>{t('add-alt-text')}</Trans>
           </Text>
           <View style={[a.align_center]}>
             <GifEmbed

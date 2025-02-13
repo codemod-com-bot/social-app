@@ -4,6 +4,7 @@ import {ImageBackground} from 'expo-image'
 import {AppBskyEmbedVideo} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {ConstrainedImage} from '#/view/com/util/images/AutoSizedImage'
 import {VideoEmbedInnerNative} from '#/view/com/util/post-embeds/VideoEmbedInner/VideoEmbedInnerNative'
@@ -154,12 +155,12 @@ function InnerWrapper({embed}: Props) {
 }
 
 function VideoError({retry}: {error: unknown; retry: () => void}) {
+const { t } = useTranslation("view/com/util/post-embeds");
+
   return (
     <VideoFallback.Container>
       <VideoFallback.Text>
-        <Trans>
-          An error occurred while loading the video. Please try again later.
-        </Trans>
+        <Trans>{t('error-loading-video')}</Trans>
       </VideoFallback.Text>
       <VideoFallback.RetryButton onPress={retry} />
     </VideoFallback.Container>

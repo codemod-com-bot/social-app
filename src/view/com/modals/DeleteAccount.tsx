@@ -9,6 +9,7 @@ import {
 import {LinearGradient} from 'expo-linear-gradient'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { Trans,useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
@@ -31,6 +32,8 @@ import {ScrollView, TextInput} from './util'
 export const snapPoints = isAndroid ? ['90%'] : ['55%']
 
 export function Component({}: {}) {
+const { t } = useTranslation("view/com/modals");
+
   const pal = usePalette('default')
   const theme = useTheme()
   const t = useNewTheme()
@@ -98,34 +101,28 @@ export function Component({}: {}) {
       <ScrollView style={[pal.view]} keyboardShouldPersistTaps="handled">
         <View style={[styles.titleContainer, pal.view]}>
           <Text type="title-xl" style={[s.textCenter, pal.text]}>
-            <Trans>
-              Delete Account{' '}
-              <Text type="title-xl" style={[pal.text, s.bold]}>
-                "
-              </Text>
-              <Text
+            <Trans><Trans
+i18nKey="delete-account-confirmation"
+values={{ currentAccountHandle: <>{currentAccount?.handle}</> }}
+components={{"0": <Text type="title-xl" style={[pal.text, s.bold]} />, "1": <Text
                 type="title-xl"
                 numberOfLines={1}
                 style={[
                   isMobile ? styles.titleMobile : styles.titleDesktop,
                   pal.text,
                   s.bold,
-                ]}>
-                {currentAccount?.handle}
-              </Text>
-              <Text type="title-xl" style={[pal.text, s.bold]}>
-                "
-              </Text>
+                ]} />, "2": <Text type="title-xl" style={[pal.text, s.bold]} />}}
+/>
+              
+              
+              
             </Trans>
           </Text>
         </View>
         {!isEmailSent ? (
           <>
             <Text type="lg" style={[styles.description, pal.text]}>
-              <Trans>
-                For security reasons, we'll need to send a confirmation code to
-                your email address.
-              </Trans>
+              <Trans>{t('confirmation-code-email-notice')}</Trans>
             </Text>
             {error ? (
               <View style={s.mt10}>
@@ -155,7 +152,7 @@ export function Component({}: {}) {
                     end={{x: 1, y: 1}}
                     style={[styles.btn]}>
                     <Text type="button-lg" style={[s.white, s.bold]}>
-                      <Trans context="action">Send Email</Trans>
+                      <Trans context="action">{t('send-email')}</Trans>
                     </Text>
                   </LinearGradient>
                 </TouchableOpacity>
@@ -167,7 +164,7 @@ export function Component({}: {}) {
                   accessibilityHint=""
                   onAccessibilityEscape={onCancel}>
                   <Text type="button-lg" style={pal.textLight}>
-                    <Trans context="action">Cancel</Trans>
+                    <Trans context="action">{t('cancel')}</Trans>
                   </Text>
                 </TouchableOpacity>
               </>
@@ -195,10 +192,7 @@ export function Component({}: {}) {
                 />
 
                 <NewText style={[a.leading_snug, a.flex_1]}>
-                  <Trans>
-                    You can also temporarily deactivate your account instead,
-                    and reactivate it at any time.
-                  </Trans>
+                  <Trans>{t('temporary-deactivation-notice')}</Trans>
                 </NewText>
               </View>
             </View>
@@ -210,10 +204,7 @@ export function Component({}: {}) {
               type="lg"
               style={[pal.text, styles.description]}
               nativeID="confirmationCode">
-              <Trans>
-                Check your inbox for an email with the confirmation code to
-                enter below:
-              </Trans>
+              <Trans>{t('check-inbox-confirmation-code')}</Trans>
             </Text>
             <TextInput
               style={[styles.textInput, pal.borderDark, pal.text, styles.mb20]}
@@ -232,7 +223,7 @@ export function Component({}: {}) {
               type="lg"
               style={[pal.text, styles.description]}
               nativeID="password">
-              <Trans>Please enter your password as well:</Trans>
+              <Trans>{t('enter-password-notice')}</Trans>
             </Text>
             <TextInput
               style={[styles.textInput, pal.borderDark, pal.text]}
@@ -264,7 +255,7 @@ export function Component({}: {}) {
                   accessibilityLabel={_(msg`Confirm delete account`)}
                   accessibilityHint="">
                   <Text type="button-lg" style={[s.white, s.bold]}>
-                    <Trans>Delete my account</Trans>
+                    <Trans>{t('delete-my-account')}</Trans>
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -275,7 +266,7 @@ export function Component({}: {}) {
                   accessibilityHint={_(msg`Exits account deletion process`)}
                   onAccessibilityEscape={onCancel}>
                   <Text type="button-lg" style={pal.textLight}>
-                    <Trans context="action">Cancel</Trans>
+                    <Trans context="action">{t('cancel')}</Trans>
                   </Text>
                 </TouchableOpacity>
               </>

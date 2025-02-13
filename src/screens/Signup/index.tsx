@@ -4,6 +4,7 @@ import Animated, {FadeIn, LayoutAnimationConfig} from 'react-native-reanimated'
 import {AppBskyGraphStarterpack} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {FEEDBACK_FORM_URL} from '#/lib/constants'
 import {useServiceQuery} from '#/state/queries/service'
@@ -28,6 +29,8 @@ import {InlineLinkText} from '#/components/Link'
 import {Text} from '#/components/Typography'
 
 export function Signup({onPressBack}: {onPressBack: () => void}) {
+const { t } = useTranslation("screens/Signup");
+
   const {_} = useLingui()
   const t = useTheme()
   const [state, dispatch] = React.useReducer(reducer, initialState)
@@ -104,15 +107,9 @@ export function Signup({onPressBack}: {onPressBack: () => void}) {
                 </Text>
                 <Text style={[{color: 'white'}]}>
                   {starterPack.feeds?.length ? (
-                    <Trans>
-                      You'll follow the suggested users and feeds once you
-                      finish creating your account!
-                    </Trans>
+                    <Trans>{t('user-follow-suggestion-on-account-creation')}</Trans>
                   ) : (
-                    <Trans>
-                      You'll follow the suggested users once you finish creating
-                      your account!
-                    </Trans>
+                    <Trans>{t('user-follow-suggestion-on-account-creation-short')}</Trans>
                   )}
                 </Text>
               </LinearGradientBackground>
@@ -127,21 +124,17 @@ export function Signup({onPressBack}: {onPressBack: () => void}) {
             ]}>
             <View style={[a.gap_sm, a.pb_3xl]}>
               <Text style={[a.font_bold, t.atoms.text_contrast_medium]}>
-                <Trans>
-                  Step {state.activeStep + 1} of{' '}
-                  {state.serviceDescription &&
-                  !state.serviceDescription.phoneVerificationRequired
-                    ? '2'
-                    : '3'}
+                <Trans>{t('step-indicator', { stateActiveStep1: state.activeStep + 1, stateServiceDescription: Boolean(state.serviceDescription) })}
+                  
                 </Trans>
               </Text>
               <Text style={[a.text_3xl, a.font_bold]}>
                 {state.activeStep === SignupStep.INFO ? (
-                  <Trans>Your account</Trans>
+                  <Trans>{t('account-title')}</Trans>
                 ) : state.activeStep === SignupStep.HANDLE ? (
-                  <Trans>Choose your username</Trans>
+                  <Trans>{t('username-prompt')}</Trans>
                 ) : (
-                  <Trans>Complete the challenge</Trans>
+                  <Trans>{t('challenge-completion')}</Trans>
                 )}
               </Text>
             </View>
@@ -170,12 +163,12 @@ export function Signup({onPressBack}: {onPressBack: () => void}) {
               <AppLanguageDropdown />
               <Text
                 style={[t.atoms.text_contrast_medium, !gtMobile && a.text_md]}>
-                <Trans>Having trouble?</Trans>{' '}
+                <Trans>{t('trouble-help')}</Trans>{' '}
                 <InlineLinkText
                   label={_(msg`Contact support`)}
                   to={FEEDBACK_FORM_URL({email: state.email})}
                   style={[!gtMobile && a.text_md]}>
-                  <Trans>Contact support</Trans>
+                  <Trans>{t('support-contact')}</Trans>
                 </InlineLinkText>
               </Text>
             </View>

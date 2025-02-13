@@ -10,6 +10,7 @@ import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {StackActions, useNavigation} from '@react-navigation/native'
 import {useMutation} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {ReportOption} from '#/lib/moderation/useReportOptions'
 import {NavigationProp} from '#/lib/routes/types'
@@ -140,6 +141,8 @@ function SubmitStep({
   goBack: () => void
   onComplete: () => void
 }) {
+const { t } = useTranslation("components/dms");
+
   const {_} = useLingui()
   const {gtMobile} = useBreakpoints()
   const t = useTheme()
@@ -195,9 +198,7 @@ function SubmitStep({
       <View style={[a.justify_center, gtMobile ? a.gap_sm : a.gap_xs]}>
         <Text style={[a.text_2xl, a.font_bold]}>{copy.title}</Text>
         <Text style={[a.text_md, t.atoms.text_contrast_medium]}>
-          <Trans>
-            Your report will be sent to the Bluesky Moderation Service
-          </Trans>
+          <Trans>{t('report-sent-bluesky-service')}</Trans>
         </Text>
       </View>
 
@@ -207,7 +208,7 @@ function SubmitStep({
 
       <Text style={[a.text_md, t.atoms.text_contrast_medium]}>
         <Text style={[a.font_bold, a.text_md, t.atoms.text_contrast_medium]}>
-          <Trans>Reason:</Trans>
+          <Trans>{t('reason-label')}</Trans>
         </Text>{' '}
         <Text style={[a.font_bold, a.text_md]}>{reportOption.title}</Text>
       </Text>
@@ -216,7 +217,7 @@ function SubmitStep({
 
       <View style={[a.gap_md]}>
         <Text style={[t.atoms.text_contrast_medium]}>
-          <Trans>Optionally provide additional information below:</Trans>
+          <Trans>{t('additional-info-optional')}</Trans>
         </Text>
 
         <View style={[a.relative, a.w_full]}>
@@ -254,10 +255,7 @@ function SubmitStep({
               a.leading_snug,
               t.atoms.text_contrast_medium,
             ]}>
-            <Trans>
-              There was an issue sending your report. Please check your internet
-              connection.
-            </Trans>
+            <Trans>{t('issue-sending-report')}</Trans>
           </Text>
         )}
 
@@ -269,7 +267,7 @@ function SubmitStep({
           label={_(msg`Send report`)}
           onPress={() => submit()}>
           <ButtonText>
-            <Trans>Send report</Trans>
+            <Trans>{t('send-report-button')}</Trans>
           </ButtonText>
           <ButtonIcon icon={submitting ? Loader : SendIcon} />
         </Button>
@@ -287,6 +285,8 @@ function DoneStep({
   currentScreen: 'list' | 'conversation'
   profile: AppBskyActorDefs.ProfileViewBasic
 }) {
+const { t } = useTranslation("components/dms");
+
   const {_} = useLingui()
   const navigation = useNavigation<NavigationProp>()
   const control = Dialog.useDialogContext()
@@ -333,10 +333,10 @@ function DoneStep({
     <View style={a.gap_2xl}>
       <View style={[a.justify_center, gtMobile ? a.gap_sm : a.gap_xs]}>
         <Text style={[a.text_2xl, a.font_bold]}>
-          <Trans>Report submitted</Trans>
+          <Trans>{t('report-submitted-message')}</Trans>
         </Text>
         <Text style={[a.text_md, t.atoms.text_contrast_medium]}>
-          <Trans>Our moderation team has received your report.</Trans>
+          <Trans>{t('moderation-team-received')}</Trans>
         </Text>
       </View>
       <Toggle.Group
@@ -347,13 +347,13 @@ function DoneStep({
           <Toggle.Item name="block" label={_(msg`Block user`)}>
             <Toggle.Checkbox />
             <Toggle.LabelText style={[a.text_md]}>
-              <Trans>Block user</Trans>
+              <Trans>{t('block-user-action')}</Trans>
             </Toggle.LabelText>
           </Toggle.Item>
           <Toggle.Item name="leave" label={_(msg`Delete conversation`)}>
             <Toggle.Checkbox />
             <Toggle.LabelText style={[a.text_md]}>
-              <Trans>Delete conversation</Trans>
+              <Trans>{t('delete-conversation-action')}</Trans>
             </Toggle.LabelText>
           </Toggle.Item>
         </View>
@@ -378,7 +378,7 @@ function DoneStep({
           })}
           color="secondary">
           <ButtonText>
-            <Trans>Close</Trans>
+            <Trans>{t('close-button')}</Trans>
           </ButtonText>
         </Button>
       </View>

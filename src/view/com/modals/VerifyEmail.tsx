@@ -10,6 +10,7 @@ import {Circle, Path, Svg} from 'react-native-svg'
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
@@ -40,6 +41,8 @@ export function Component({
   showReminder?: boolean
   onSuccess?: () => void
 }) {
+const { t } = useTranslation("view/com/modals");
+
   const pal = usePalette('default')
   const agent = useAgent()
   const {currentAccount} = useSession()
@@ -106,11 +109,11 @@ export function Component({
         <View style={styles.titleSection}>
           <Text type="title-lg" style={[pal.text, styles.title]}>
             {stage === Stages.Reminder ? (
-              <Trans>Please Verify Your Email</Trans>
+              <Trans>{t('please-verify-your-email')}</Trans>
             ) : stage === Stages.Email ? (
-              <Trans>Verify Your Email</Trans>
+              <Trans>{t('verify-your-email')}</Trans>
             ) : stage === Stages.ConfirmCode ? (
-              <Trans>Enter Confirmation Code</Trans>
+              <Trans>{t('enter-confirmation-code')}</Trans>
             ) : (
               ''
             )}
@@ -119,20 +122,11 @@ export function Component({
 
         <Text type="lg" style={[pal.textLight, {marginBottom: 10}]}>
           {stage === Stages.Reminder ? (
-            <Trans>
-              Your email has not yet been verified. This is an important
-              security step which we recommend.
-            </Trans>
+            <Trans>{t('email-not-verified-warning')}</Trans>
           ) : stage === Stages.Email ? (
-            <Trans>
-              This is important in case you ever need to change your email or
-              reset your password.
-            </Trans>
+            <Trans>{t('importance-of-verifying-email')}</Trans>
           ) : stage === Stages.ConfirmCode ? (
-            <Trans>
-              An email has been sent to {currentAccount?.email || '(no email)'}.
-              It includes a confirmation code which you can enter below.
-            </Trans>
+            <Trans>{t('email-sent-confirmation')}{currentAccount?.email || '(no email)'}{t('confirmation-code-instructions')}</Trans>
           ) : (
             ''
           )}
@@ -157,7 +151,7 @@ export function Component({
               onPress={onEmailIncorrect}
               style={styles.changeEmailLink}>
               <Text type="lg" style={pal.link}>
-                <Trans>Change</Trans>
+                <Trans>{t('change-button')}</Trans>
               </Text>
             </Pressable>
           </>

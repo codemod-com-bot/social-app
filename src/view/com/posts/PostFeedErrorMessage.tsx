@@ -4,6 +4,7 @@ import {AppBskyActorDefs, AppBskyFeedGetAuthorFeed, AtUri} from '@atproto/api'
 import {msg as msgLingui, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useNavigation} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {NavigationProp} from '#/lib/routes/types'
@@ -90,6 +91,8 @@ function FeedgenErrorMessage({
   rawError?: Error
   savedFeedConfig?: AppBskyActorDefs.SavedFeed
 }) {
+const { t } = useTranslation("view/com/posts");
+
   const pal = usePalette('default')
   const {_: _l} = useLingui()
   const navigation = useNavigation<NavigationProp>()
@@ -198,7 +201,7 @@ function FeedgenErrorMessage({
 
         {rawError?.message && (
           <Text style={pal.textLight}>
-            <Trans>Message from server: {rawError.message}</Trans>
+            <Trans>{t('message-from-server')}{rawError.message}</Trans>
           </Text>
         )}
 

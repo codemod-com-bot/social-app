@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {useWindowDimensions} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {BSKY_SERVICE} from '#/lib/constants'
 import * as persisted from '#/state/persisted'
@@ -70,6 +71,8 @@ function DialogInner({
   setFixedOption: (opt: string) => void
   initialCustomAddress: string
 }) {
+const { t } = useTranslation("view/com/auth/server-input");
+
   const control = Dialog.useDialogContext()
   const {_} = useLingui()
   const t = useTheme()
@@ -123,7 +126,7 @@ function DialogInner({
       accessibilityLabelledBy="dialog-title">
       <View style={[a.relative, a.gap_md, a.w_full]}>
         <Text nativeID="dialog-title" style={[a.text_2xl, a.font_bold]}>
-          <Trans>Choose your account provider</Trans>
+          <Trans>{t('choose-your-account-provider')}</Trans>
         </Text>
         <ToggleButton.Group
           label="Preferences"
@@ -142,11 +145,7 @@ function DialogInner({
 
         {fixedOption === BSKY_SERVICE && isFirstTimeUser && (
           <Admonition type="tip">
-            <Trans>
-              Bluesky is an open network where you can choose your own provider.
-              If you're new here, we recommend sticking with the default Bluesky
-              Social option.
-            </Trans>
+            <Trans>{t('bluesky-open-network-provider')}</Trans>
           </Admonition>
         )}
 
@@ -160,7 +159,7 @@ function DialogInner({
               a.py_md,
             ]}>
             <TextField.LabelText nativeID="address-input-label">
-              <Trans>Server address</Trans>
+              <Trans>{t('server-address')}</Trans>
             </TextField.LabelText>
             <TextField.Root>
               <TextField.Icon icon={Globe} />
@@ -201,19 +200,14 @@ function DialogInner({
               a.flex_1,
             ]}>
             {isFirstTimeUser ? (
-              <Trans>
-                If you're a developer, you can host your own server.
-              </Trans>
+              <Trans>{t('developer-host-own-server')}</Trans>
             ) : (
-              <Trans>
-                Bluesky is an open network where you can choose your hosting
-                provider. If you're a developer, you can host your own server.
-              </Trans>
+              <Trans>{t('bluesky-hosting-provider')}</Trans>
             )}{' '}
             <InlineLinkText
               label={_(msg`Learn more about self hosting your PDS.`)}
               to="https://atproto.com/guides/self-hosting">
-              <Trans>Learn more.</Trans>
+              <Trans>{t('learn-more')}</Trans>
             </InlineLinkText>
           </P>
         </View>

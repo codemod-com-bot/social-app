@@ -4,6 +4,7 @@ import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import * as DynamicAppIcon from '@mozzius/expo-dynamic-app-icon'
 import {NativeStackScreenProps} from '@react-navigation/native-stack'
+import { useTranslation } from "react-i18next";
 
 import {IS_INTERNAL} from '#/lib/app-info'
 import {PressableScale} from '#/lib/custom-animations/PressableScale'
@@ -20,6 +21,8 @@ import {Text} from '#/components/Typography'
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, 'AppIconSettings'>
 export function AppIconSettingsScreen({}: Props) {
+const { t } = useTranslation("screens/Settings/AppIconSettings");
+
   const t = useTheme()
   const {_} = useLingui()
   const sets = useAppIconSets()
@@ -64,7 +67,7 @@ export function AppIconSettingsScreen({}: Props) {
         <Layout.Header.BackButton />
         <Layout.Header.Content>
           <Layout.Header.TitleText>
-            <Trans>App Icon</Trans>
+            <Trans>{t('app-icon')}</Trans>
           </Layout.Header.TitleText>
         </Layout.Header.Content>
         <Layout.Header.Slot />
@@ -96,7 +99,7 @@ export function AppIconSettingsScreen({}: Props) {
                 a.font_bold,
                 t.atoms.text_contrast_medium,
               ]}>
-              <Trans>Bluesky+</Trans>
+              <Trans>{t('bluesky-plus')}</Trans>
             </Text>
             <Group
               label={_(msg`Bluesky+ icons`)}

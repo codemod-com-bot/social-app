@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {AppBskyActorDefs, sanitizeMutedWordValue} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { Trans,useTranslation } from "react-i18next";
 
 import {logger} from '#/logger'
 import {isNative} from '#/platform/detection'
@@ -46,6 +47,8 @@ export function MutedWordsDialog() {
 }
 
 function MutedWordsInner() {
+const { t } = useTranslation("components/dialogs");
+
   const t = useTheme()
   const {_} = useLingui()
   const {gtMobile} = useBreakpoints()
@@ -109,14 +112,10 @@ function MutedWordsInner() {
       <View>
         <Text
           style={[a.text_md, a.font_bold, a.pb_sm, t.atoms.text_contrast_high]}>
-          <Trans>Add muted words and tags</Trans>
+          <Trans>{t('add-muted-words-and-tags')}</Trans>
         </Text>
         <Text style={[a.pb_lg, a.leading_snug, t.atoms.text_contrast_medium]}>
-          <Trans>
-            Posts can be muted based on their text, their tags, or both. We
-            recommend avoiding common words that appear in many posts, since it
-            can result in no posts being shown.
-          </Trans>
+          <Trans>{t('muted-words-description')}</Trans>
         </Text>
 
         <View style={[a.pb_sm]}>
@@ -150,7 +149,7 @@ function MutedWordsInner() {
                 a.font_bold,
                 t.atoms.text_contrast_medium,
               ]}>
-              <Trans>Duration:</Trans>
+              <Trans>{t('duration-label')}</Trans>
             </Text>
 
             <View
@@ -175,7 +174,7 @@ function MutedWordsInner() {
                       style={[a.flex_1, a.flex_row, a.align_center, a.gap_sm]}>
                       <Toggle.Radio />
                       <Toggle.LabelText style={[a.flex_1, a.leading_tight]}>
-                        <Trans>Forever</Trans>
+                        <Trans>{t('duration-forever')}</Trans>
                       </Toggle.LabelText>
                     </View>
                   </TargetToggle>
@@ -190,7 +189,7 @@ function MutedWordsInner() {
                       style={[a.flex_1, a.flex_row, a.align_center, a.gap_sm]}>
                       <Toggle.Radio />
                       <Toggle.LabelText style={[a.flex_1, a.leading_tight]}>
-                        <Trans>24 hours</Trans>
+                        <Trans>{t('duration-24-hours')}</Trans>
                       </Toggle.LabelText>
                     </View>
                   </TargetToggle>
@@ -214,7 +213,7 @@ function MutedWordsInner() {
                       style={[a.flex_1, a.flex_row, a.align_center, a.gap_sm]}>
                       <Toggle.Radio />
                       <Toggle.LabelText style={[a.flex_1, a.leading_tight]}>
-                        <Trans>7 days</Trans>
+                        <Trans>{t('duration-7-days')}</Trans>
                       </Toggle.LabelText>
                     </View>
                   </TargetToggle>
@@ -229,7 +228,7 @@ function MutedWordsInner() {
                       style={[a.flex_1, a.flex_row, a.align_center, a.gap_sm]}>
                       <Toggle.Radio />
                       <Toggle.LabelText style={[a.flex_1, a.leading_tight]}>
-                        <Trans>30 days</Trans>
+                        <Trans>{t('duration-30-days')}</Trans>
                       </Toggle.LabelText>
                     </View>
                   </TargetToggle>
@@ -250,7 +249,7 @@ function MutedWordsInner() {
                 a.font_bold,
                 t.atoms.text_contrast_medium,
               ]}>
-              <Trans>Mute in:</Trans>
+              <Trans>{t('mute-in-label')}</Trans>
             </Text>
 
             <View style={[a.flex_row, a.align_center, a.gap_sm, a.flex_wrap]}>
@@ -263,7 +262,7 @@ function MutedWordsInner() {
                     style={[a.flex_1, a.flex_row, a.align_center, a.gap_sm]}>
                     <Toggle.Radio />
                     <Toggle.LabelText style={[a.flex_1, a.leading_tight]}>
-                      <Trans>Text & tags</Trans>
+                      <Trans>{t('mute-in-text')}& tags</Trans>
                     </Toggle.LabelText>
                   </View>
                   <PageText size="sm" />
@@ -279,7 +278,7 @@ function MutedWordsInner() {
                     style={[a.flex_1, a.flex_row, a.align_center, a.gap_sm]}>
                     <Toggle.Radio />
                     <Toggle.LabelText style={[a.flex_1, a.leading_tight]}>
-                      <Trans>Tags only</Trans>
+                      <Trans>{t('mute-in-tags-only')}</Trans>
                     </Toggle.LabelText>
                   </View>
                   <Hashtag size="sm" />
@@ -296,7 +295,7 @@ function MutedWordsInner() {
                 a.font_bold,
                 t.atoms.text_contrast_medium,
               ]}>
-              <Trans>Options:</Trans>
+              <Trans>{t('options-label')}</Trans>
             </Text>
             <Toggle.Item
               label={_(msg`Do not apply this mute word to users you follow`)}
@@ -308,7 +307,7 @@ function MutedWordsInner() {
                 <View style={[a.flex_1, a.flex_row, a.align_center, a.gap_sm]}>
                   <Toggle.Checkbox />
                   <Toggle.LabelText style={[a.flex_1, a.leading_tight]}>
-                    <Trans>Exclude users you follow</Trans>
+                    <Trans>{t('exclude-followed-users')}</Trans>
                   </Toggle.LabelText>
                 </View>
               </TargetToggle>
@@ -325,7 +324,7 @@ function MutedWordsInner() {
               style={[]}
               onPress={submit}>
               <ButtonText>
-                <Trans>Add</Trans>
+                <Trans>{t('add-button')}</Trans>
               </ButtonText>
               <ButtonIcon icon={isPending ? Loader : Plus} position="right" />
             </Button>
@@ -366,7 +365,7 @@ function MutedWordsInner() {
               a.pb_md,
               t.atoms.text_contrast_high,
             ]}>
-            <Trans>Your muted words</Trans>
+            <Trans>{t('your-muted-words')}</Trans>
           </Text>
 
           {isPreferencesLoading ? (
@@ -375,10 +374,7 @@ function MutedWordsInner() {
             <View
               style={[a.py_md, a.px_lg, a.rounded_md, t.atoms.bg_contrast_25]}>
               <Text style={[a.italic, t.atoms.text_contrast_high]}>
-                <Trans>
-                  We're sorry, but we weren't able to load your muted words at
-                  this time. Please try again.
-                </Trans>
+                <Trans>{t('load-muted-words-error')}</Trans>
               </Text>
             </View>
           ) : preferences.moderationPrefs.mutedWords.length ? (
@@ -395,7 +391,7 @@ function MutedWordsInner() {
             <View
               style={[a.py_md, a.px_lg, a.rounded_md, t.atoms.bg_contrast_25]}>
               <Text style={[a.italic, t.atoms.text_contrast_high]}>
-                <Trans>You haven't muted any words or tags yet</Trans>
+                <Trans>{t('no-muted-words-message')}</Trans>
               </Text>
             </View>
           )}
@@ -413,6 +409,8 @@ function MutedWordRow({
   style,
   word,
 }: ViewStyleProp & {word: AppBskyActorDefs.MutedWord}) {
+const { t } = useTranslation("components/dialogs");
+
   const t = useTheme()
   const {_} = useLingui()
   const {isPending, mutateAsync: removeMutedWord} = useRemoveMutedWordMutation()
@@ -464,21 +462,21 @@ function MutedWordRow({
               {word.targets.find(t => t === 'content') ? (
                 <Trans comment="Pattern: {wordValue} in text, tags">
                   {word.value}{' '}
-                  <Text style={[a.font_normal, t.atoms.text_contrast_medium]}>
-                    in{' '}
-                    <Text style={[a.font_bold, t.atoms.text_contrast_medium]}>
-                      text & tags
-                    </Text>
+                  <Text style={[a.font_normal, t.atoms.text_contrast_medium]}><Trans
+i18nKey="in-text-and-tags"
+components={{"0": <Text style={[a.font_bold, t.atoms.text_contrast_medium]} />}}
+/>
+                    
                   </Text>
                 </Trans>
               ) : (
                 <Trans comment="Pattern: {wordValue} in tags">
                   {word.value}{' '}
-                  <Text style={[a.font_normal, t.atoms.text_contrast_medium]}>
-                    in{' '}
-                    <Text style={[a.font_bold, t.atoms.text_contrast_medium]}>
-                      tags
-                    </Text>
+                  <Text style={[a.font_normal, t.atoms.text_contrast_medium]}><Trans
+i18nKey="in-tags"
+components={{"0": <Text style={[a.font_bold, t.atoms.text_contrast_medium]} />}}
+/>
+                    
                   </Text>
                 </Trans>
               )}
@@ -497,13 +495,12 @@ function MutedWordRow({
                 {expiryDate && (
                   <>
                     {isExpired ? (
-                      <Trans>Expired</Trans>
+                      <Trans>{t('expired-label')}</Trans>
                     ) : (
-                      <Trans>
-                        Expires{' '}
-                        {formatDistance(expiryDate, new Date(), {
+                      <Trans>{t('expiry-date-message', { formatDistanceExpiryDateNewDateAddSuffixTrue: formatDistance(expiryDate, new Date(), {
                           addSuffix: true,
-                        })}
+                        }) })}
+                        
                       </Trans>
                     )}
                   </>
@@ -511,7 +508,7 @@ function MutedWordRow({
                 {word.actorTarget === 'exclude-following' && (
                   <>
                     {' • '}
-                    <Trans>Excludes users you follow</Trans>
+                    <Trans>{t('excludes-followed-users')}</Trans>
                   </>
                 )}
               </Text>

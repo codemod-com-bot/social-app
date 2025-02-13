@@ -1,0 +1,10 @@
+{
+  "reply-button": "Reply",
+  "view-on-bluesky": "<0>View on</0>Bluesky",
+  "author-requested-no-display": "The author of the quoted post has requested their posts not be displayed on external sites.",
+  "liked-by-user-count": "Liked by {{recordLikeCount0}} users",
+  "quoted-post-not-found": "Quoted post not found, it may have been deleted.",
+  "quoted-post-blocked": "The quoted post is blocked.",
+  "starter-pack-introduction": "Starter pack by",
+  "users-joined-notification": " users have joined!"
+}

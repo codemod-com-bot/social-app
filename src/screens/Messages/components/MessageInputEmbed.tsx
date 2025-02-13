@@ -9,6 +9,7 @@ import {
 import {msg} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {moderatePost_wrapped as moderatePost} from '#/lib/moderatePost_wrapped'
 import {makeProfileLink} from '#/lib/routes/links'
@@ -98,6 +99,8 @@ export function MessageInputEmbed({
   embedUri: string | undefined
   setEmbed: (embedUrl: string | undefined) => void
 }) {
+const { t } = useTranslation("screens/Messages/components");
+
   const t = useTheme()
   const {_} = useLingui()
 
@@ -146,7 +149,7 @@ export function MessageInputEmbed({
       content = (
         <View
           style={[a.flex_1, {minHeight: 64}, a.justify_center, a.align_center]}>
-          <Text style={a.text_center}>Could not fetch post</Text>
+          <Text style={a.text_center}>{t('could-not-fetch-post')}</Text>
         </View>
       )
       break

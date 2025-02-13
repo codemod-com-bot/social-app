@@ -15,6 +15,7 @@ import {
 } from '@atproto/api'
 import {msg, Plural, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { Trans,useTranslation } from "react-i18next";
 
 import {MAX_POST_LINES} from '#/lib/constants'
 import {useOpenLink} from '#/lib/hooks/useOpenLink'
@@ -135,6 +136,8 @@ export function PostThreadItem({
 }
 
 function PostThreadItemDeleted({hideTopBorder}: {hideTopBorder?: boolean}) {
+const { t } = useTranslation("view/com/post-thread");
+
   const t = useTheme()
   return (
     <View
@@ -149,7 +152,7 @@ function PostThreadItemDeleted({hideTopBorder}: {hideTopBorder?: boolean}) {
       ]}>
       <TrashIcon style={[t.atoms.text]} />
       <Text style={[t.atoms.text_contrast_medium, a.mt_2xs]}>
-        <Trans>This post has been deleted.</Trans>
+        <Trans>{t('post-deleted')}</Trans>
       </Text>
     </View>
   )
@@ -192,6 +195,8 @@ let PostThreadItemLoaded = ({
   hideTopBorder?: boolean
   threadgateRecord?: AppBskyFeedThreadgate.Record
 }): React.ReactNode => {
+const { t } = useTranslation("view/com/post-thread");
+
   const t = useTheme()
   const pal = usePalette('default')
   const {_, i18n} = useLingui()
@@ -634,7 +639,7 @@ let PostThreadItemLoaded = ({
               noFeedback>
               <Text
                 style={[t.atoms.text_contrast_medium, a.font_bold, a.text_sm]}>
-                <Trans>More</Trans>
+                <Trans>{t('more-button')}</Trans>
               </Text>
               <ChevronRightIcon
                 size="xs"
@@ -739,6 +744,8 @@ function ExpandedPostDetails({
   needsTranslation: boolean
   translatorUrl: string
 }) {
+const { t } = useTranslation("view/com/post-thread");
+
   const t = useTheme()
   const pal = usePalette('default')
   const {_, i18n} = useLingui()
@@ -775,7 +782,7 @@ function ExpandedPostDetails({
               label={_(msg`Translate`)}
               style={[a.text_sm, pal.link]}
               onPress={onTranslatePress}>
-              <Trans>Translate</Trans>
+              <Trans>{t('translate-button')}</Trans>
             </InlineLinkText>
           </>
         )}
@@ -785,6 +792,8 @@ function ExpandedPostDetails({
 }
 
 function BackdatedPostIndicator({post}: {post: AppBskyFeedDefs.PostView}) {
+const { t } = useTranslation("view/com/post-thread");
+
   const t = useTheme()
   const {_, i18n} = useLingui()
   const control = Prompt.usePromptControl()
@@ -836,7 +845,7 @@ function BackdatedPostIndicator({post}: {post: AppBskyFeedDefs.PostView}) {
                 a.leading_tight,
                 t.atoms.text_contrast_medium,
               ]}>
-              <Trans>Archived from {niceDate(i18n, createdAt)}</Trans>
+              <Trans>{t('archived-from')}{niceDate(i18n, createdAt)}</Trans>
             </Text>
           </View>
         )}
@@ -844,15 +853,16 @@ function BackdatedPostIndicator({post}: {post: AppBskyFeedDefs.PostView}) {
 
       <Prompt.Outer control={control}>
         <Prompt.TitleText>
-          <Trans>Archived post</Trans>
+          <Trans>{t('archived-post')}</Trans>
         </Prompt.TitleText>
         <Prompt.DescriptionText>
-          <Trans>
-            This post claims to have been created on{' '}
-            <RNText style={[a.font_bold]}>{niceDate(i18n, createdAt)}</RNText>,
-            but was first seen by Bluesky on{' '}
-            <RNText style={[a.font_bold]}>{niceDate(i18n, indexedAt)}</RNText>.
-          </Trans>
+          <Trans><Trans
+i18nKey="post-creation-date-info"
+values={{ niceDateI18NCreatedAt: <>{niceDate(i18n, createdAt)}</>, niceDateI18NIndexedAt: <>{niceDate(i18n, indexedAt)}</> }}
+components={{"0": <RNText style={[a.font_bold]} />, "1": <RNText style={[a.font_bold]} />}}
+/>
+            
+            </Trans>
         </Prompt.DescriptionText>
         <Text
           style={[
@@ -861,9 +871,7 @@ function BackdatedPostIndicator({post}: {post: AppBskyFeedDefs.PostView}) {
             t.atoms.text_contrast_high,
             a.pb_xl,
           ]}>
-          <Trans>
-            Bluesky cannot confirm the authenticity of the claimed date.
-          </Trans>
+          <Trans>{t('authenticity-confirmation')}</Trans>
         </Text>
         <Prompt.Actions>
           <Prompt.Action cta={_(msg`Okay`)} onPress={() => {}} />

@@ -10,6 +10,7 @@ import {
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useQueryClient} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {sanitizeHandle} from '#/lib/strings/handles'
 import {useModerationOpts} from '#/state/preferences/moderation-opts'
@@ -112,6 +113,8 @@ export function TitleAndByline({
   purpose?: AppBskyGraphDefs.ListView['purpose']
   modUi?: ModerationUI
 }) {
+const { t } = useTranslation("components");
+
   const t = useTheme()
   const {_} = useLingui()
   const {currentAccount} = useSession()
@@ -128,7 +131,7 @@ export function TitleAndByline({
           <Text
             style={[a.text_md, a.font_bold, a.leading_snug, a.italic]}
             numberOfLines={1}>
-            <Trans>Hidden list</Trans>
+            <Trans>{t('hidden-list')}</Trans>
           </Text>
         </Hider.Mask>
         <Hider.Content>

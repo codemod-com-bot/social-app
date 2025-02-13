@@ -1,0 +1,19 @@
+{
+  "users-joined-count": "{{joinedAllTimeCount}} users have joined!",
+  "copy-action": "Copy",
+  "share-action": "Share",
+  "save-action": "Save",
+  "invite-people-starter-pack": "Invite people to this starter pack!",
+  "share-starter-pack-community": "Share this starter pack and help people join your community on Bluesky.",
+  "copy-link": "Copy Link",
+  "share-link": "Share link",
+  "share-qr-code": "Share QR code",
+  "save-image": "Save image",
+  "create-another": "Create another",
+  "starter-pack-not-created": "You haven't created a starter pack yet!",
+  "starter-packs-description": "Starter packs let you easily share your favorite feeds and people with your friends.",
+  "make-one-for-me": "Make one for me",
+  "create": "Create",
+  "generate-starter-pack": "Generate a starter pack",
+  "recommended-accounts-description": "Bluesky will choose a set of recommended accounts from people in your network."
+}

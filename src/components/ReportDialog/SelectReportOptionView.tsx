@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {AppBskyLabelerDefs} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {ReportOption, useReportOptions} from '#/lib/moderation/useReportOptions'
 import {Link} from '#/components/Link'
@@ -31,6 +32,8 @@ export function SelectReportOptionView(props: {
   onSelectReportOption: (reportOption: ReportOption) => void
   goBack: () => void
 }) {
+const { t } = useTranslation("components/ReportDialog");
+
   const t = useTheme()
   const {_} = useLingui()
   const {gtMobile} = useBreakpoints()
@@ -125,7 +128,7 @@ export function SelectReportOptionView(props: {
                 a.italic,
                 a.leading_snug,
               ]}>
-              <Trans>Need to report a copyright violation?</Trans>
+              <Trans>{t('report-copyright-violation')}</Trans>
             </Text>
             <Link
               to={DMCA_LINK}
@@ -134,7 +137,7 @@ export function SelectReportOptionView(props: {
               variant="solid"
               color="secondary">
               <ButtonText>
-                <Trans>View details</Trans>
+                <Trans>{t('view-details')}</Trans>
               </ButtonText>
               <ButtonIcon position="right" icon={SquareArrowTopRight} />
             </Link>

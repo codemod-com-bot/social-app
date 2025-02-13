@@ -9,6 +9,7 @@ import {
 } from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {logEvent} from '#/lib/statsig/statsig'
 import {cleanError} from '#/lib/strings/errors'
@@ -99,6 +100,8 @@ function LoadMore({
   item: ExploreScreenItems & {type: 'loadMore'}
   moderationOpts?: ModerationOpts
 }) {
+const { t } = useTranslation("view/screens/Search");
+
   const t = useTheme()
   const {_} = useLingui()
   const items: LoadMoreItem[] = React.useMemo(() => {
@@ -219,9 +222,9 @@ function LoadMore({
                 hovered ? t.atoms.text : t.atoms.text_contrast_medium,
               ]}>
               {type === 'profile' ? (
-                <Trans>Load more suggested follows</Trans>
+                <Trans>{t('load-more-suggested-follows')}</Trans>
               ) : (
-                <Trans>Load more suggested feeds</Trans>
+                <Trans>{t('load-more-suggested-feeds')}</Trans>
               )}
             </Text>
 

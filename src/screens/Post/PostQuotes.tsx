@@ -1,6 +1,7 @@
 import React from 'react'
 import {Plural, Trans} from '@lingui/macro'
 import {useFocusEffect} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {CommonNavigatorParams, NativeStackScreenProps} from '#/lib/routes/types'
 import {makeRecordUri} from '#/lib/strings/url-helpers'
@@ -11,6 +12,8 @@ import * as Layout from '#/components/Layout'
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, 'PostQuotes'>
 export const PostQuotesScreen = ({route}: Props) => {
+const { t } = useTranslation("screens/Post");
+
   const setMinimalShellMode = useSetMinimalShellMode()
   const {name, rkey} = route.params
   const uri = makeRecordUri(name, 'app.bsky.feed.post', rkey)
@@ -35,7 +38,7 @@ export const PostQuotesScreen = ({route}: Props) => {
           {post && (
             <>
               <Layout.Header.TitleText>
-                <Trans>Quotes</Trans>
+                <Trans>{t('quotes')}</Trans>
               </Layout.Header.TitleText>
               <Layout.Header.SubtitleText>
                 <Plural

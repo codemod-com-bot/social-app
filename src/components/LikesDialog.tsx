@@ -3,6 +3,7 @@ import {ActivityIndicator, FlatList, View} from 'react-native'
 import {AppBskyFeedGetLikes as GetLikes} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {cleanError} from '#/lib/strings/errors'
 import {logger} from '#/logger'
@@ -30,6 +31,8 @@ export function LikesDialog(props: LikesDialogProps) {
 }
 
 export function LikesDialogInner({control, uri}: LikesDialogProps) {
+const { t } = useTranslation("components");
+
   const {_} = useLingui()
   const t = useTheme()
 
@@ -82,7 +85,7 @@ export function LikesDialogInner({control, uri}: LikesDialogProps) {
   return (
     <Dialog.Inner label={_(msg`Users that have liked this content or profile`)}>
       <Text style={[a.text_2xl, a.font_bold, a.leading_tight, a.pb_lg]}>
-        <Trans>Liked by</Trans>
+        <Trans>{t('liked-by')}</Trans>
       </Text>
 
       {isLoading ? (
@@ -94,9 +97,7 @@ export function LikesDialogInner({control, uri}: LikesDialogProps) {
       ) : likes.length === 0 ? (
         <View style={[t.atoms.bg_contrast_50, a.px_md, a.py_xl, a.rounded_md]}>
           <Text style={[a.text_center]}>
-            <Trans>
-              Nobody has liked this yet. Maybe you should be the first!
-            </Trans>
+            <Trans>{t('no-likes-yet-first-like-suggestion')}</Trans>
           </Text>
         </View>
       ) : (

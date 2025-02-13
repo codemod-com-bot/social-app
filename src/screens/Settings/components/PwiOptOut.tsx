@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {ComAtprotoLabelDefs} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {
   useProfileQuery,
@@ -14,6 +15,8 @@ import * as Toggle from '#/components/forms/Toggle'
 import {Text} from '#/components/Typography'
 
 export function PwiOptOut() {
+const { t } = useTranslation("screens/Settings/components");
+
   const t = useTheme()
   const {_} = useLingui()
   const {currentAccount} = useSession()
@@ -81,19 +84,13 @@ export function PwiOptOut() {
         )}
         style={[a.w_full]}>
         <Toggle.LabelText style={[a.flex_1]}>
-          <Trans>
-            Discourage apps from showing my account to logged-out users
-          </Trans>
+          <Trans>{t('discourage-apps-showing-account-to-logged-out-users')}</Trans>
         </Toggle.LabelText>
         <Toggle.Platform />
       </Toggle.Item>
 
       <Text style={[a.leading_snug, t.atoms.text_contrast_high]}>
-        <Trans>
-          Bluesky will not show your profile and posts to logged-out users.
-          Other apps may not honor this request. This does not make your account
-          private.
-        </Trans>
+        <Trans>{t('bluesky-profile-posts-visibility-logged-out-users')}</Trans>
       </Text>
     </View>
   )

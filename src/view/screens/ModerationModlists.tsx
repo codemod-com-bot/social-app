@@ -3,6 +3,7 @@ import {AtUri} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useFocusEffect, useNavigation} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {useEmail} from '#/lib/hooks/useEmail'
 import {CommonNavigatorParams, NativeStackScreenProps} from '#/lib/routes/types'
@@ -19,6 +20,8 @@ import * as Layout from '#/components/Layout'
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, 'ModerationModlists'>
 export function ModerationModlistsScreen({}: Props) {
+const { t } = useTranslation("view/screens");
+
   const {_} = useLingui()
   const setMinimalShellMode = useSetMinimalShellMode()
   const navigation = useNavigation<NavigationProp>()
@@ -59,7 +62,7 @@ export function ModerationModlistsScreen({}: Props) {
         <Layout.Header.BackButton />
         <Layout.Header.Content align="left">
           <Layout.Header.TitleText>
-            <Trans>Moderation Lists</Trans>
+            <Trans>{t('moderation-lists')}</Trans>
           </Layout.Header.TitleText>
         </Layout.Header.Content>
         <Button
@@ -71,7 +74,7 @@ export function ModerationModlistsScreen({}: Props) {
           onPress={onPressNewList}>
           <ButtonIcon icon={PlusIcon} />
           <ButtonText>
-            <Trans context="action">New</Trans>
+            <Trans context="action">{t('new-item')}</Trans>
           </ButtonText>
         </Button>
       </Layout.Header.Outer>

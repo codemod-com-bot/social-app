@@ -1,0 +1,12 @@
+{
+  "invite-code": "Invite code",
+  "email-address": "Email",
+  "user-password": "Password",
+  "birth-date": "Your birth date",
+  "terms-service-privacy-policy-not-provided": "This service has not provided terms of service or a privacy policy.",
+  "account-creation-agreement-terms-and-privacy": "By creating an account you agree to the <0>Terms of Service</0>  and <1>Privacy Policy</1> .",
+  "account-creation-agreement-terms": "By creating an account you agree to the <0>Terms of Service</0> .",
+  "account-creation-agreement-privacy": "By creating an account you agree to the <0>Privacy Policy</0> .",
+  "minimum-age-requirement": "You must be 13 years of age or older to sign up.",
+  "parental-consent-requirement": "If you are not yet an adult according to the laws of your country, your parent or legal guardian must read these Terms on your behalf."
+}

@@ -2,6 +2,7 @@ import React from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {logEvent} from '#/lib/statsig/statsig'
 import {logger} from '#/logger'
@@ -21,6 +22,8 @@ export const ChooseAccountForm = ({
   onSelectAccount: (account?: SessionAccount) => void
   onPressBack: () => void
 }) => {
+const { t } = useTranslation("screens/Login");
+
   const [pendingDid, setPendingDid] = React.useState<string | null>(null)
   const {_} = useLingui()
   const {currentAccount} = useSession()
@@ -74,10 +77,10 @@ export const ChooseAccountForm = ({
   return (
     <FormContainer
       testID="chooseAccountForm"
-      titleText={<Trans>Select account</Trans>}>
+      titleText={<Trans>{t('select-account')}</Trans>}>
       <View>
         <TextField.LabelText>
-          <Trans>Sign in as...</Trans>
+          <Trans>{t('sign-in-as')}</Trans>
         </TextField.LabelText>
         <AccountList
           onSelectAccount={onSelect}

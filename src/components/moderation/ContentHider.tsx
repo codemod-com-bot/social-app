@@ -3,6 +3,7 @@ import {StyleProp, View, ViewStyle} from 'react-native'
 import {ModerationUI} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {ADULT_CONTENT_LABELS, isJustAMute} from '#/lib/moderation'
 import {useGlobalLabelStrings} from '#/lib/moderation/useGlobalLabelStrings'
@@ -63,6 +64,8 @@ function ContentHiderActive({
   style?: StyleProp<ViewStyle>
   childContainerStyle?: StyleProp<ViewStyle>
 }>) {
+const { t } = useTranslation("components/moderation");
+
   const t = useTheme()
   const {_} = useLingui()
   const {gtMobile} = useBreakpoints()
@@ -197,7 +200,7 @@ function ContentHiderActive({
                     marginBottom: 1,
                   }),
                 ]}>
-                {override ? <Trans>Hide</Trans> : <Trans>Show</Trans>}
+                {override ? <Trans>{t('hide-button')}</Trans> : <Trans>{t('show-button')}</Trans>}
               </Text>
             )}
           </View>
@@ -226,9 +229,9 @@ function ContentHiderActive({
                 a.text_left,
               ]}>
               {desc.sourceType === 'user' ? (
-                <Trans>Labeled by the author.</Trans>
+                <Trans>{t('labeled-by-author')}</Trans>
               ) : (
-                <Trans>Labeled by {sanitizeDisplayName(desc.source!)}.</Trans>
+                <Trans>{t('labeled-by')}{sanitizeDisplayName(desc.source!)}.</Trans>
               )}{' '}
               <Text
                 style={[
@@ -236,7 +239,7 @@ function ContentHiderActive({
                   a.text_sm,
                   state.hovered && [web({textDecoration: 'underline'})],
                 ]}>
-                <Trans>Learn more.</Trans>
+                <Trans>{t('learn-more')}</Trans>
               </Text>
             </Text>
           )}

@@ -12,6 +12,7 @@ import {
 } from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {useRequestNotificationsPermission} from '#/lib/notifications/notifications'
 import {isNetworkError} from '#/lib/strings/errors'
@@ -56,6 +57,8 @@ export const LoginForm = ({
   onPressBack: () => void
   onPressForgotPassword: () => void
 }) => {
+const { t } = useTranslation("screens/Login");
+
   const t = useTheme()
   const [isProcessing, setIsProcessing] = useState<boolean>(false)
   const [isAuthFactorTokenNeeded, setIsAuthFactorTokenNeeded] =
@@ -170,10 +173,10 @@ export const LoginForm = ({
   }
 
   return (
-    <FormContainer testID="loginForm" titleText={<Trans>Sign in</Trans>}>
+    <FormContainer testID="loginForm" titleText={<Trans>{t('sign-in')}</Trans>}>
       <View>
         <TextField.LabelText>
-          <Trans>Hosting provider</Trans>
+          <Trans>{t('hosting-provider')}</Trans>
         </TextField.LabelText>
         <HostingProvider
           serviceUrl={serviceUrl}
@@ -183,7 +186,7 @@ export const LoginForm = ({
       </View>
       <View>
         <TextField.LabelText>
-          <Trans>Account</Trans>
+          <Trans>{t('account')}</Trans>
         </TextField.LabelText>
         <View style={[a.gap_sm]}>
           <TextField.Root>
@@ -248,7 +251,7 @@ export const LoginForm = ({
                 a.z_10,
               ]}>
               <ButtonText>
-                <Trans>Forgot?</Trans>
+                <Trans>{t('forgot-password')}</Trans>
               </ButtonText>
             </Button>
           </TextField.Root>
@@ -257,7 +260,7 @@ export const LoginForm = ({
       {isAuthFactorTokenNeeded && (
         <View>
           <TextField.LabelText>
-            <Trans>2FA Confirmation</Trans>
+            <Trans>{t('two-fa-confirmation')}</Trans>
           </TextField.LabelText>
           <TextField.Root>
             <TextField.Icon icon={Ticket} />
@@ -290,7 +293,7 @@ export const LoginForm = ({
             />
           </TextField.Root>
           <Text style={[a.text_sm, t.atoms.text_contrast_medium, a.mt_sm]}>
-            <Trans>Check your email for a login code and enter it here.</Trans>
+            <Trans>{t('email-login-code')}</Trans>
           </Text>
         </View>
       )}
@@ -303,7 +306,7 @@ export const LoginForm = ({
           size="large"
           onPress={onPressBack}>
           <ButtonText>
-            <Trans>Back</Trans>
+            <Trans>{t('back')}</Trans>
           </ButtonText>
         </Button>
         <View style={a.flex_1} />
@@ -317,14 +320,14 @@ export const LoginForm = ({
             size="large"
             onPress={onPressRetryConnect}>
             <ButtonText>
-              <Trans>Retry</Trans>
+              <Trans>{t('retry')}</Trans>
             </ButtonText>
           </Button>
         ) : !serviceDescription ? (
           <>
             <ActivityIndicator />
             <Text style={[t.atoms.text_contrast_high, a.pl_md]}>
-              <Trans>Connecting...</Trans>
+              <Trans>{t('connecting')}</Trans>
             </Text>
           </>
         ) : (
@@ -337,7 +340,7 @@ export const LoginForm = ({
             size="large"
             onPress={onPressNext}>
             <ButtonText>
-              <Trans>Next</Trans>
+              <Trans>{t('next')}</Trans>
             </ButtonText>
             {isProcessing && <ButtonIcon icon={Loader} />}
           </Button>

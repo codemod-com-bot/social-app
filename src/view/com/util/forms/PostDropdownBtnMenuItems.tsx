@@ -16,6 +16,7 @@ import {
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useNavigation} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {useOpenLink} from '#/lib/hooks/useOpenLink'
 import {getCurrentRoute} from '#/lib/routes/helpers'
@@ -98,6 +99,8 @@ let PostDropdownMenuItems = ({
   timestamp: string
   threadgateRecord?: AppBskyFeedThreadgate.Record
 }): React.ReactNode => {
+const { t } = useTranslation("view/com/util/forms");
+
   const {hasSession, currentAccount} = useSession()
   const {gtMobile} = useBreakpoints()
   const {_} = useLingui()
@@ -433,7 +436,7 @@ let PostDropdownMenuItems = ({
               label={_(msg`Send via direct message`)}
               onPress={() => sendViaChatControl.open()}>
               <Menu.ItemText>
-                <Trans>Send via direct message</Trans>
+                <Trans>{t('send-via-direct-message')}</Trans>
               </Menu.ItemText>
               <Menu.ItemIcon icon={Send} position="right" />
             </Menu.Item>

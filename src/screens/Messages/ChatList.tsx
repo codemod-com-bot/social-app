@@ -5,6 +5,7 @@ import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useFocusEffect} from '@react-navigation/native'
 import {NativeStackScreenProps} from '@react-navigation/native-stack'
+import { useTranslation } from "react-i18next";
 
 import {useAppState} from '#/lib/hooks/useAppState'
 import {useInitialNumToRender} from '#/lib/hooks/useInitialNumToRender'
@@ -45,6 +46,8 @@ function keyExtractor(item: ChatBskyConvoDefs.ConvoView) {
 }
 
 export function MessagesScreen({navigation, route}: Props) {
+const { t } = useTranslation("screens/Messages");
+
   const {_} = useLingui()
   const t = useTheme()
   const newChatControl = useDialogControl()
@@ -153,7 +156,7 @@ export function MessagesScreen({navigation, route}: Props) {
                       fill={t.atoms.border_contrast_low.borderColor}
                     />
                     <Text style={[a.pt_md, a.pb_sm, a.text_2xl, a.font_bold]}>
-                      <Trans>Whoops!</Trans>
+                      <Trans>{t('whoops')}</Trans>
                     </Text>
                     <Text
                       style={[
@@ -174,7 +177,7 @@ export function MessagesScreen({navigation, route}: Props) {
                       variant="solid"
                       onPress={() => refetch()}>
                       <ButtonText>
-                        <Trans>Retry</Trans>
+                        <Trans>{t('retry')}</Trans>
                       </ButtonText>
                       <ButtonIcon icon={Retry} position="right" />
                     </Button>
@@ -185,7 +188,7 @@ export function MessagesScreen({navigation, route}: Props) {
                   <View style={[a.pt_3xl, a.align_center]}>
                     <Message width={48} fill={t.palette.primary_500} />
                     <Text style={[a.pt_md, a.pb_sm, a.text_2xl, a.font_bold]}>
-                      <Trans>Nothing here</Trans>
+                      <Trans>{t('nothing-here')}</Trans>
                     </Text>
                     <Text
                       style={[
@@ -195,7 +198,7 @@ export function MessagesScreen({navigation, route}: Props) {
                         a.leading_snug,
                         t.atoms.text_contrast_medium,
                       ]}>
-                      <Trans>You have no conversations yet. Start one!</Trans>
+                      <Trans>{t('no-conversations-yet')}</Trans>
                     </Text>
                   </View>
                 </>
@@ -244,6 +247,8 @@ export function MessagesScreen({navigation, route}: Props) {
 }
 
 function Header({newChatControl}: {newChatControl: DialogControlProps}) {
+const { t } = useTranslation("screens/Messages");
+
   const {_} = useLingui()
   const {gtMobile} = useBreakpoints()
 
@@ -266,7 +271,7 @@ function Header({newChatControl}: {newChatControl: DialogControlProps}) {
         <>
           <Layout.Header.Content>
             <Layout.Header.TitleText>
-              <Trans>Messages</Trans>
+              <Trans>{t('messages')}</Trans>
             </Layout.Header.TitleText>
           </Layout.Header.Content>
 
@@ -280,7 +285,7 @@ function Header({newChatControl}: {newChatControl: DialogControlProps}) {
               onPress={newChatControl.open}>
               <ButtonIcon icon={Plus} position="left" />
               <ButtonText>
-                <Trans>New chat</Trans>
+                <Trans>{t('new-chat')}</Trans>
               </ButtonText>
             </Button>
           </View>
@@ -290,7 +295,7 @@ function Header({newChatControl}: {newChatControl: DialogControlProps}) {
           <Layout.Header.MenuButton />
           <Layout.Header.Content>
             <Layout.Header.TitleText>
-              <Trans>Messages</Trans>
+              <Trans>{t('messages-duplicate')}</Trans>
             </Layout.Header.TitleText>
           </Layout.Header.Content>
           <Layout.Header.Slot>{settingsLink}</Layout.Header.Slot>

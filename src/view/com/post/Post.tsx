@@ -11,6 +11,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useQueryClient} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {MAX_POST_LINES} from '#/lib/constants'
 import {usePalette} from '#/lib/hooks/usePalette'
@@ -110,6 +111,8 @@ function PostInner({
   hideTopBorder?: boolean
   style?: StyleProp<ViewStyle>
 }) {
+const { t } = useTranslation("view/com/post");
+
   const queryClient = useQueryClient()
   const pal = usePalette('default')
   const {_} = useLingui()
@@ -199,10 +202,9 @@ function PostInner({
                 lineHeight={1.2}
                 numberOfLines={1}>
                 {isMe ? (
-                  <Trans context="description">Reply to you</Trans>
+                  <Trans context="description">{t('reply-to-you')}</Trans>
                 ) : (
-                  <Trans context="description">
-                    Reply to{' '}
+                  <Trans context="description">{t('reply-to-space')}
                     <ProfileHoverCard inline did={replyAuthorDid}>
                       <UserInfoText
                         type="sm"

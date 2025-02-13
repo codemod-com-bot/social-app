@@ -9,6 +9,7 @@ import {TextInput, View} from 'react-native'
 import {AppBskyActorDefs, moderateProfile, ModerationOpts} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {sanitizeDisplayName} from '#/lib/strings/display-names'
 import {sanitizeHandle} from '#/lib/strings/handles'
@@ -334,6 +335,8 @@ function ProfileCard({
   moderationOpts: ModerationOpts
   onPress: (did: string) => void
 }) {
+const { t } = useTranslation("components/dms/dialogs");
+
   const t = useTheme()
   const {_} = useLingui()
   const moderation = moderateProfile(profile, moderationOpts)
@@ -385,7 +388,7 @@ function ProfileCard({
             <Text
               style={[a.leading_tight, t.atoms.text_contrast_high]}
               numberOfLines={2}>
-              {!enabled ? <Trans>{handle} can't be messaged</Trans> : handle}
+              {!enabled ? <Trans>{t('handle-cannot-be-messaged', { handle })}</Trans> : handle}
             </Text>
           </View>
         </View>

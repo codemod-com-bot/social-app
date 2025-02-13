@@ -8,6 +8,7 @@ import {
 } from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {sanitizeDisplayName} from '#/lib/strings/display-names'
 import {logger} from '#/logger'
@@ -55,6 +56,8 @@ let ProfileHeaderStandard = ({
   hideBackButton = false,
   isPlaceholderProfile,
 }: Props): React.ReactNode => {
+const { t } = useTranslation("screens/Profile/Header");
+
   const profile: Shadow<AppBskyActorDefs.ProfileViewDetailed> =
     useProfileShadow(profileUnshadowed)
   const {currentAccount, hasSession} = useSession()
@@ -179,7 +182,7 @@ let ProfileHeaderStandard = ({
                 label={_(msg`Edit profile`)}
                 style={[a.rounded_full]}>
                 <ButtonText>
-                  <Trans>Edit Profile</Trans>
+                  <Trans>{t('edit-profile')}</Trans>
                 </ButtonText>
               </Button>
               <EditProfileDialog
@@ -199,7 +202,7 @@ let ProfileHeaderStandard = ({
                 onPress={() => unblockPromptControl.open()}
                 style={[a.rounded_full]}>
                 <ButtonText>
-                  <Trans context="action">Unblock</Trans>
+                  <Trans context="action">{t('unblock')}</Trans>
                 </ButtonText>
               </Button>
             )
@@ -227,11 +230,11 @@ let ProfileHeaderStandard = ({
                 />
                 <ButtonText>
                   {profile.viewer?.following ? (
-                    <Trans>Following</Trans>
+                    <Trans>{t('following')}</Trans>
                   ) : profile.viewer?.followedBy ? (
-                    <Trans>Follow Back</Trans>
+                    <Trans>{t('follow-back')}</Trans>
                   ) : (
-                    <Trans>Follow</Trans>
+                    <Trans>{t('follow')}</Trans>
                   )}
                 </ButtonText>
               </Button>

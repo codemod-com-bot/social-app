@@ -5,6 +5,7 @@ import {manipulateAsync, SaveFormat} from 'expo-image-manipulator'
 import {LinearGradient} from 'expo-linear-gradient'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 import ReactCrop, {PercentCrop} from 'react-image-crop'
 
 import {usePalette} from '#/lib/hooks/usePalette'
@@ -27,6 +28,8 @@ export function Component({
   circular?: boolean
   onSelect: (img?: RNImage) => void
 }) {
+const { t } = useTranslation("view/com/modals");
+
   const pal = usePalette('default')
   const {_} = useLingui()
 
@@ -94,7 +97,7 @@ export function Component({
           accessibilityLabel={_(msg`Cancel image crop`)}
           accessibilityHint={_(msg`Exits image cropping process`)}>
           <Text type="xl" style={pal.link}>
-            <Trans>Cancel</Trans>
+            <Trans>{t('cancel-button')}</Trans>
           </Text>
         </TouchableOpacity>
         <View style={s.flex1} />
@@ -109,7 +112,7 @@ export function Component({
             end={{x: 1, y: 1}}
             style={[styles.btn]}>
             <Text type="xl-medium" style={s.white}>
-              <Trans>Done</Trans>
+              <Trans>{t('done-button')}</Trans>
             </Text>
           </LinearGradient>
         </TouchableOpacity>

@@ -1,6 +1,7 @@
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {NativeStackScreenProps} from '@react-navigation/native-stack'
+import { useTranslation } from "react-i18next";
 
 import {CommonNavigatorParams} from '#/lib/routes/types'
 import {useModalControls} from '#/state/modals'
@@ -26,6 +27,8 @@ import {ExportCarDialog} from './components/ExportCarDialog'
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, 'AccountSettings'>
 export function AccountSettingsScreen({}: Props) {
+const { t } = useTranslation("screens/Settings");
+
   const t = useTheme()
   const {_} = useLingui()
   const {currentAccount} = useSession()
@@ -42,7 +45,7 @@ export function AccountSettingsScreen({}: Props) {
         <Layout.Header.BackButton />
         <Layout.Header.Content>
           <Layout.Header.TitleText>
-            <Trans>Account</Trans>
+            <Trans>{t('account')}</Trans>
           </Layout.Header.TitleText>
         </Layout.Header.Content>
         <Layout.Header.Slot />
@@ -57,12 +60,12 @@ export function AccountSettingsScreen({}: Props) {
                 it wouldn't push the BadgeText/Chevron/whatever to the right.
                 TODO: find a general solution for this. workaround in this case is to set the ItemText to flex: 1 and BadgeText to flex: 0 -sfn */}
             <SettingsList.ItemText style={[a.flex_0]}>
-              <Trans>Email</Trans>
+              <Trans>{t('email')}</Trans>
             </SettingsList.ItemText>
             {currentAccount && (
               <>
                 <SettingsList.BadgeText style={[a.flex_1]}>
-                  {currentAccount.email || <Trans>(no email)</Trans>}
+                  {currentAccount.email || <Trans>{t('no-email')}</Trans>}
                 </SettingsList.BadgeText>
                 {currentAccount.emailConfirmed && (
                   <VerifiedIcon fill={t.palette.primary_500} size="md" />
@@ -88,7 +91,7 @@ export function AccountSettingsScreen({}: Props) {
               />
               <SettingsList.ItemText
                 style={[{color: t.palette.primary_500}, a.font_bold]}>
-                <Trans>Verify your email</Trans>
+                <Trans>{t('verify-email')}</Trans>
               </SettingsList.ItemText>
               <SettingsList.Chevron color={t.palette.primary_500} />
             </SettingsList.PressableItem>
@@ -98,7 +101,7 @@ export function AccountSettingsScreen({}: Props) {
             onPress={() => openModal({name: 'change-email'})}>
             <SettingsList.ItemIcon icon={PencilIcon} />
             <SettingsList.ItemText>
-              <Trans>Change email</Trans>
+              <Trans>{t('change-email')}</Trans>
             </SettingsList.ItemText>
             <SettingsList.Chevron />
           </SettingsList.PressableItem>
@@ -106,7 +109,7 @@ export function AccountSettingsScreen({}: Props) {
           <SettingsList.Item>
             <SettingsList.ItemIcon icon={BirthdayCakeIcon} />
             <SettingsList.ItemText>
-              <Trans>Birthday</Trans>
+              <Trans>{t('birthday')}</Trans>
             </SettingsList.ItemText>
             <SettingsList.BadgeButton
               label={_(msg`Edit`)}
@@ -118,7 +121,7 @@ export function AccountSettingsScreen({}: Props) {
             onPress={() => openModal({name: 'change-password'})}>
             <SettingsList.ItemIcon icon={LockIcon} />
             <SettingsList.ItemText>
-              <Trans>Password</Trans>
+              <Trans>{t('password')}</Trans>
             </SettingsList.ItemText>
             <SettingsList.Chevron />
           </SettingsList.PressableItem>
@@ -128,7 +131,7 @@ export function AccountSettingsScreen({}: Props) {
             onPress={() => changeHandleControl.open()}>
             <SettingsList.ItemIcon icon={AtIcon} />
             <SettingsList.ItemText>
-              <Trans>Handle</Trans>
+              <Trans>{t('handle')}</Trans>
             </SettingsList.ItemText>
             <SettingsList.Chevron />
           </SettingsList.PressableItem>
@@ -138,7 +141,7 @@ export function AccountSettingsScreen({}: Props) {
             onPress={() => exportCarControl.open()}>
             <SettingsList.ItemIcon icon={CarIcon} />
             <SettingsList.ItemText>
-              <Trans>Export my data</Trans>
+              <Trans>{t('export-data')}</Trans>
             </SettingsList.ItemText>
             <SettingsList.Chevron />
           </SettingsList.PressableItem>
@@ -148,7 +151,7 @@ export function AccountSettingsScreen({}: Props) {
             destructive>
             <SettingsList.ItemIcon icon={FreezeIcon} />
             <SettingsList.ItemText>
-              <Trans>Deactivate account</Trans>
+              <Trans>{t('deactivate-account')}</Trans>
             </SettingsList.ItemText>
             <SettingsList.Chevron />
           </SettingsList.PressableItem>
@@ -158,7 +161,7 @@ export function AccountSettingsScreen({}: Props) {
             destructive>
             <SettingsList.ItemIcon icon={Trash_Stroke2_Corner2_Rounded} />
             <SettingsList.ItemText>
-              <Trans>Delete account</Trans>
+              <Trans>{t('delete-account')}</Trans>
             </SettingsList.ItemText>
             <SettingsList.Chevron />
           </SettingsList.PressableItem>

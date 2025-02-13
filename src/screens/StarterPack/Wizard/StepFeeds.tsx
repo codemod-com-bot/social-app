@@ -3,6 +3,7 @@ import {ListRenderItemInfo, View} from 'react-native'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-controller'
 import {AppBskyFeedDefs, ModerationOpts} from '@atproto/api'
 import {Trans} from '@lingui/macro'
+import { useTranslation } from "react-i18next";
 
 import {DISCOVER_FEED_URI} from '#/lib/constants'
 import {useA11y} from '#/state/a11y'
@@ -26,6 +27,8 @@ function keyExtractor(item: AppBskyFeedDefs.GeneratorView) {
 }
 
 export function StepFeeds({moderationOpts}: {moderationOpts: ModerationOpts}) {
+const { t } = useTranslation("screens/StarterPack/Wizard");
+
   const t = useTheme()
   const [state, dispatch] = useWizardState()
   const [query, setQuery] = useState('')
@@ -116,7 +119,7 @@ export function StepFeeds({moderationOpts}: {moderationOpts: ModerationOpts}) {
                   a.mt_lg,
                   a.leading_snug,
                 ]}>
-                <Trans>No feeds found. Try searching for something else.</Trans>
+                <Trans>{t('no-feeds-found')}</Trans>
               </Text>
             )}
           </View>

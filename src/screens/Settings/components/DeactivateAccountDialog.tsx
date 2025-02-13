@@ -2,6 +2,7 @@ import React from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {logger} from '#/logger'
 import {useAgent, useSessionApi} from '#/state/session'
@@ -31,6 +32,8 @@ function DeactivateAccountDialogInner({
 }: {
   control: DialogOuterProps['control']
 }) {
+const { t } = useTranslation("screens/Settings/components");
+
   const t = useTheme()
   const {gtMobile} = useBreakpoints()
   const {_} = useLingui()
@@ -72,27 +75,17 @@ function DeactivateAccountDialogInner({
     <>
       <Prompt.TitleText>{_(msg`Deactivate account`)}</Prompt.TitleText>
       <Prompt.DescriptionText>
-        <Trans>
-          Your profile, posts, feeds, and lists will no longer be visible to
-          other Bluesky users. You can reactivate your account at any time by
-          logging in.
-        </Trans>
+        <Trans>{t('account-deactivation-notice')}</Trans>
       </Prompt.DescriptionText>
 
       <View style={[a.pb_xl]}>
         <Divider />
         <View style={[a.gap_sm, a.pt_lg, a.pb_xl]}>
           <Text style={[t.atoms.text_contrast_medium, a.leading_snug]}>
-            <Trans>
-              There is no time limit for account deactivation, come back any
-              time.
-            </Trans>
+            <Trans>{t('no-time-limit-for-deactivation')}</Trans>
           </Text>
           <Text style={[t.atoms.text_contrast_medium, a.leading_snug]}>
-            <Trans>
-              If you're trying to change your handle or email, do so before you
-              deactivate.
-            </Trans>
+            <Trans>{t('change-handle-or-email-before-deactivation')}</Trans>
           </Text>
         </View>
 

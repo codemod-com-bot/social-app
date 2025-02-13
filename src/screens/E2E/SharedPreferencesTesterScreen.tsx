@@ -1,5 +1,6 @@
 import React from 'react'
 import {View} from 'react-native'
+import { useTranslation } from "react-i18next";
 
 import {ScrollView} from '#/view/com/util/Views'
 import {atoms as a} from '#/alf'
@@ -9,6 +10,8 @@ import {Text} from '#/components/Typography'
 import {SharedPrefs} from '../../../modules/expo-bluesky-swiss-army'
 
 export function SharedPreferencesTesterScreen() {
+const { t } = useTranslation("screens/E2E");
+
   const [currentTestOutput, setCurrentTestOutput] = React.useState<string>('')
 
   return (
@@ -33,7 +36,7 @@ export function SharedPreferencesTesterScreen() {
                 console.log(JSON.stringify(str))
                 setCurrentTestOutput(`${str}`)
               }}>
-              <ButtonText>Set String</ButtonText>
+              <ButtonText>{t('set-string')}</ButtonText>
             </Button>
             <Button
               label="btn"
@@ -47,7 +50,7 @@ export function SharedPreferencesTesterScreen() {
                 const str = SharedPrefs.getString('testerString')
                 setCurrentTestOutput(`${str}`)
               }}>
-              <ButtonText>Remove String</ButtonText>
+              <ButtonText>{t('remove-string')}</ButtonText>
             </Button>
             <Button
               label="btn"
@@ -62,7 +65,7 @@ export function SharedPreferencesTesterScreen() {
                 const bool = SharedPrefs.getBool('testerBool')
                 setCurrentTestOutput(`${bool}`)
               }}>
-              <ButtonText>Set Bool</ButtonText>
+              <ButtonText>{t('set-bool')}</ButtonText>
             </Button>
             <Button
               label="btn"
@@ -77,7 +80,7 @@ export function SharedPreferencesTesterScreen() {
                 const num = SharedPrefs.getNumber('testerNumber')
                 setCurrentTestOutput(`${num}`)
               }}>
-              <ButtonText>Set Number</ButtonText>
+              <ButtonText>{t('set-number')}</ButtonText>
             </Button>
             <Button
               label="btn"
@@ -92,7 +95,7 @@ export function SharedPreferencesTesterScreen() {
                 const contains = SharedPrefs.setContains('testerSet', 'Hello!')
                 setCurrentTestOutput(`${contains}`)
               }}>
-              <ButtonText>Add to Set</ButtonText>
+              <ButtonText>{t('add-to-set')}</ButtonText>
             </Button>
             <Button
               label="btn"
@@ -106,7 +109,7 @@ export function SharedPreferencesTesterScreen() {
                 const contains = SharedPrefs.setContains('testerSet', 'Hello!')
                 setCurrentTestOutput(`${contains}`)
               }}>
-              <ButtonText>Remove from Set</ButtonText>
+              <ButtonText>{t('remove-from-set')}</ButtonText>
             </Button>
           </View>
         </View>

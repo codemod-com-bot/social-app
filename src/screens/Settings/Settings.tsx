@@ -7,6 +7,7 @@ import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useNavigation} from '@react-navigation/native'
 import {NativeStackScreenProps} from '@react-navigation/native-stack'
+import { useTranslation } from "react-i18next";
 
 import {IS_INTERNAL} from '#/lib/app-info'
 import {HELP_DESK_URL} from '#/lib/constants'
@@ -55,6 +56,8 @@ import * as Prompt from '#/components/Prompt'
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, 'Settings'>
 export function SettingsScreen({}: Props) {
+const { t } = useTranslation("screens/Settings");
+
   const {_} = useLingui()
   const reducedMotion = useReducedMotion()
   const {logoutEveryAccount} = useSessionApi()
@@ -77,7 +80,7 @@ export function SettingsScreen({}: Props) {
         <Layout.Header.BackButton />
         <Layout.Header.Content>
           <Layout.Header.TitleText>
-            <Trans>Settings</Trans>
+            <Trans>{t('settings')}</Trans>
           </Layout.Header.TitleText>
         </Layout.Header.Content>
         <Layout.Header.Slot />
@@ -113,7 +116,7 @@ export function SettingsScreen({}: Props) {
                 }}>
                 <SettingsList.ItemIcon icon={PersonGroupIcon} />
                 <SettingsList.ItemText>
-                  <Trans>Switch account</Trans>
+                  <Trans>{t('switch-account')}</Trans>
                 </SettingsList.ItemText>
                 {showAccounts ? (
                   <SettingsList.ItemIcon icon={ChevronUpIcon} size="md" />
@@ -153,7 +156,7 @@ export function SettingsScreen({}: Props) {
           <SettingsList.LinkItem to="/settings/account" label={_(msg`Account`)}>
             <SettingsList.ItemIcon icon={PersonIcon} />
             <SettingsList.ItemText>
-              <Trans>Account</Trans>
+              <Trans>{t('account')}</Trans>
             </SettingsList.ItemText>
           </SettingsList.LinkItem>
           <SettingsList.LinkItem
@@ -161,13 +164,13 @@ export function SettingsScreen({}: Props) {
             label={_(msg`Privacy and security`)}>
             <SettingsList.ItemIcon icon={LockIcon} />
             <SettingsList.ItemText>
-              <Trans>Privacy and security</Trans>
+              <Trans>{t('privacy-and-security')}</Trans>
             </SettingsList.ItemText>
           </SettingsList.LinkItem>
           <SettingsList.LinkItem to="/moderation" label={_(msg`Moderation`)}>
             <SettingsList.ItemIcon icon={HandIcon} />
             <SettingsList.ItemText>
-              <Trans>Moderation</Trans>
+              <Trans>{t('moderation')}</Trans>
             </SettingsList.ItemText>
           </SettingsList.LinkItem>
           <SettingsList.LinkItem
@@ -175,7 +178,7 @@ export function SettingsScreen({}: Props) {
             label={_(msg`Content and media`)}>
             <SettingsList.ItemIcon icon={WindowIcon} />
             <SettingsList.ItemText>
-              <Trans>Content and media</Trans>
+              <Trans>{t('content-and-media')}</Trans>
             </SettingsList.ItemText>
           </SettingsList.LinkItem>
           <SettingsList.LinkItem
@@ -183,7 +186,7 @@ export function SettingsScreen({}: Props) {
             label={_(msg`Appearance`)}>
             <SettingsList.ItemIcon icon={PaintRollerIcon} />
             <SettingsList.ItemText>
-              <Trans>Appearance</Trans>
+              <Trans>{t('appearance')}</Trans>
             </SettingsList.ItemText>
           </SettingsList.LinkItem>
           <SettingsList.LinkItem
@@ -191,7 +194,7 @@ export function SettingsScreen({}: Props) {
             label={_(msg`Accessibility`)}>
             <SettingsList.ItemIcon icon={AccessibilityIcon} />
             <SettingsList.ItemText>
-              <Trans>Accessibility</Trans>
+              <Trans>{t('accessibility')}</Trans>
             </SettingsList.ItemText>
           </SettingsList.LinkItem>
           <SettingsList.LinkItem
@@ -199,7 +202,7 @@ export function SettingsScreen({}: Props) {
             label={_(msg`Languages`)}>
             <SettingsList.ItemIcon icon={EarthIcon} />
             <SettingsList.ItemText>
-              <Trans>Languages</Trans>
+              <Trans>{t('languages')}</Trans>
             </SettingsList.ItemText>
           </SettingsList.LinkItem>
           <SettingsList.PressableItem
@@ -208,14 +211,14 @@ export function SettingsScreen({}: Props) {
             accessibilityHint={_(msg`Opens helpdesk in browser`)}>
             <SettingsList.ItemIcon icon={CircleQuestionIcon} />
             <SettingsList.ItemText>
-              <Trans>Help</Trans>
+              <Trans>{t('help')}</Trans>
             </SettingsList.ItemText>
             <SettingsList.Chevron />
           </SettingsList.PressableItem>
           <SettingsList.LinkItem to="/settings/about" label={_(msg`About`)}>
             <SettingsList.ItemIcon icon={BubbleInfoIcon} />
             <SettingsList.ItemText>
-              <Trans>About</Trans>
+              <Trans>{t('about')}</Trans>
             </SettingsList.ItemText>
           </SettingsList.LinkItem>
           <SettingsList.Divider />
@@ -224,7 +227,7 @@ export function SettingsScreen({}: Props) {
             onPress={() => signOutPromptControl.open()}
             label={_(msg`Sign out`)}>
             <SettingsList.ItemText>
-              <Trans>Sign out</Trans>
+              <Trans>{t('sign-out')}</Trans>
             </SettingsList.ItemText>
           </SettingsList.PressableItem>
           {IS_INTERNAL && (
@@ -242,7 +245,7 @@ export function SettingsScreen({}: Props) {
                 label={_(msg`Developer options`)}>
                 <SettingsList.ItemIcon icon={CodeBracketsIcon} />
                 <SettingsList.ItemText>
-                  <Trans>Developer options</Trans>
+                  <Trans>{t('developer-options')}</Trans>
                 </SettingsList.ItemText>
               </SettingsList.PressableItem>
               {showDevOptions && <DevOptions />}
@@ -293,6 +296,8 @@ function ProfilePreview({
 }
 
 function DevOptions() {
+const { t } = useTranslation("screens/Settings");
+
   const {_} = useLingui()
   const onboardingDispatch = useOnboardingDispatch()
   const navigation = useNavigation<NavigationProp>()
@@ -315,42 +320,42 @@ function DevOptions() {
         onPress={() => navigation.navigate('Log')}
         label={_(msg`Open system log`)}>
         <SettingsList.ItemText>
-          <Trans>System log</Trans>
+          <Trans>{t('system-log')}</Trans>
         </SettingsList.ItemText>
       </SettingsList.PressableItem>
       <SettingsList.PressableItem
         onPress={() => navigation.navigate('Debug')}
         label={_(msg`Open storybook page`)}>
         <SettingsList.ItemText>
-          <Trans>Storybook</Trans>
+          <Trans>{t('storybook')}</Trans>
         </SettingsList.ItemText>
       </SettingsList.PressableItem>
       <SettingsList.PressableItem
         onPress={() => navigation.navigate('DebugMod')}
         label={_(msg`Open moderation debug page`)}>
         <SettingsList.ItemText>
-          <Trans>Debug Moderation</Trans>
+          <Trans>{t('debug-moderation')}</Trans>
         </SettingsList.ItemText>
       </SettingsList.PressableItem>
       <SettingsList.PressableItem
         onPress={() => deleteChatDeclarationRecord()}
         label={_(msg`Open storybook page`)}>
         <SettingsList.ItemText>
-          <Trans>Delete chat declaration record</Trans>
+          <Trans>{t('delete-chat-declaration-record')}</Trans>
         </SettingsList.ItemText>
       </SettingsList.PressableItem>
       <SettingsList.PressableItem
         onPress={() => resetOnboarding()}
         label={_(msg`Reset onboarding state`)}>
         <SettingsList.ItemText>
-          <Trans>Reset onboarding state</Trans>
+          <Trans>{t('reset-onboarding-state')}</Trans>
         </SettingsList.ItemText>
       </SettingsList.PressableItem>
       <SettingsList.PressableItem
         onPress={() => clearAllStorage()}
         label={_(msg`Clear all storage data`)}>
         <SettingsList.ItemText>
-          <Trans>Clear all storage data (restart after this)</Trans>
+          <Trans>{t('clear-all-storage-data')}</Trans>
         </SettingsList.ItemText>
       </SettingsList.PressableItem>
     </>
@@ -358,6 +363,8 @@ function DevOptions() {
 }
 
 function AddAccountRow() {
+const { t } = useTranslation("screens/Settings");
+
   const {_} = useLingui()
   const {setShowLoggedOut} = useLoggedOutViewControls()
   const closeEverything = useCloseAllActiveElements()
@@ -373,7 +380,7 @@ function AddAccountRow() {
       label={_(msg`Add another account`)}>
       <SettingsList.ItemIcon icon={PersonPlusIcon} />
       <SettingsList.ItemText>
-        <Trans>Add another account</Trans>
+        <Trans>{t('add-another-account')}</Trans>
       </SettingsList.ItemText>
     </SettingsList.PressableItem>
   )
@@ -393,6 +400,8 @@ function AccountRow({
     logContext: 'Settings',
   ) => void
 }) {
+const { t } = useTranslation("screens/Settings");
+
   const {_} = useLingui()
   const t = useTheme()
 
@@ -447,7 +456,7 @@ function AccountRow({
               label={_(msg`Remove account`)}
               onPress={() => removePromptControl.open()}>
               <Menu.ItemText>
-                <Trans>Remove account</Trans>
+                <Trans>{t('remove-account')}</Trans>
               </Menu.ItemText>
               <Menu.ItemIcon icon={PersonXIcon} />
             </Menu.Item>

@@ -3,6 +3,7 @@ import {AppBskyActorDefs} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useQueryClient} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {HITSLOP_20} from '#/lib/constants'
 import {makeProfileLink} from '#/lib/routes/links'
@@ -43,6 +44,8 @@ let ProfileMenu = ({
 }: {
   profile: Shadow<AppBskyActorDefs.ProfileViewDetailed>
 }): React.ReactNode => {
+const { t } = useTranslation("view/com/profile");
+
   const {_} = useLingui()
   const {currentAccount, hasSession} = useSession()
   const {openModal} = useModalControls()
@@ -211,7 +214,7 @@ let ProfileMenu = ({
                 }
               }}>
               <Menu.ItemText>
-                <Trans>Share</Trans>
+                <Trans>{t('share')}</Trans>
               </Menu.ItemText>
               <Menu.ItemIcon icon={Share} />
             </Menu.Item>
@@ -238,9 +241,9 @@ let ProfileMenu = ({
                         }>
                         <Menu.ItemText>
                           {isFollowing ? (
-                            <Trans>Unfollow Account</Trans>
+                            <Trans>{t('unfollow-account')}</Trans>
                           ) : (
-                            <Trans>Follow Account</Trans>
+                            <Trans>{t('follow-account')}</Trans>
                           )}
                         </Menu.ItemText>
                         <Menu.ItemIcon icon={isFollowing ? UserMinus : Plus} />
@@ -253,7 +256,7 @@ let ProfileMenu = ({
                   label={_(msg`Add to Lists`)}
                   onPress={onPressAddRemoveLists}>
                   <Menu.ItemText>
-                    <Trans>Add to Lists</Trans>
+                    <Trans>{t('add-to-lists')}</Trans>
                   </Menu.ItemText>
                   <Menu.ItemIcon icon={List} />
                 </Menu.Item>
@@ -271,9 +274,9 @@ let ProfileMenu = ({
                           onPress={onPressMuteAccount}>
                           <Menu.ItemText>
                             {profile.viewer?.muted ? (
-                              <Trans>Unmute Account</Trans>
+                              <Trans>{t('unmute-account')}</Trans>
                             ) : (
-                              <Trans>Mute Account</Trans>
+                              <Trans>{t('mute-account')}</Trans>
                             )}
                           </Menu.ItemText>
                           <Menu.ItemIcon
@@ -292,9 +295,9 @@ let ProfileMenu = ({
                         onPress={() => blockPromptControl.open()}>
                         <Menu.ItemText>
                           {profile.viewer?.blocking ? (
-                            <Trans>Unblock Account</Trans>
+                            <Trans>{t('unblock-account')}</Trans>
                           ) : (
-                            <Trans>Block Account</Trans>
+                            <Trans>{t('block-account')}</Trans>
                           )}
                         </Menu.ItemText>
                         <Menu.ItemIcon
@@ -309,7 +312,7 @@ let ProfileMenu = ({
                       label={_(msg`Report Account`)}
                       onPress={onPressReportAccount}>
                       <Menu.ItemText>
-                        <Trans>Report Account</Trans>
+                        <Trans>{t('report-account')}</Trans>
                       </Menu.ItemText>
                       <Menu.ItemIcon icon={Flag} />
                     </Menu.Item>
@@ -327,7 +330,7 @@ let ProfileMenu = ({
                   label={_(msg`Copy at:// URI`)}
                   onPress={onPressShareATUri}>
                   <Menu.ItemText>
-                    <Trans>Copy at:// URI</Trans>
+                    <Trans>{t('copy-uri')}</Trans>
                   </Menu.ItemText>
                   <Menu.ItemIcon icon={Share} />
                 </Menu.Item>
@@ -336,7 +339,7 @@ let ProfileMenu = ({
                   label={_(msg`Copy DID`)}
                   onPress={onPressShareDID}>
                   <Menu.ItemText>
-                    <Trans>Copy DID</Trans>
+                    <Trans>{t('copy-did')}</Trans>
                   </Menu.ItemText>
                   <Menu.ItemIcon icon={Share} />
                 </Menu.Item>

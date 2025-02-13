@@ -2,6 +2,7 @@ import React from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {atoms as a, useTheme} from '#/alf'
 import {Button, ButtonText} from '#/components/Button'
@@ -44,6 +45,8 @@ export function Text({children}: {children: React.ReactNode}) {
 }
 
 export function RetryButton({onPress}: {onPress: () => void}) {
+const { t } = useTranslation("view/com/util/post-embeds/VideoEmbedInner");
+
   const {_} = useLingui()
 
   return (
@@ -54,7 +57,7 @@ export function RetryButton({onPress}: {onPress: () => void}) {
       variant="solid"
       label={_(msg`Retry`)}>
       <ButtonText>
-        <Trans>Retry</Trans>
+        <Trans>{t('retry-action')}</Trans>
       </ButtonText>
     </Button>
   )

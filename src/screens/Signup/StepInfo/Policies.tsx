@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {ComAtprotoServerDescribeServer} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { Trans,useTranslation } from "react-i18next";
 
 import {atoms as a, useTheme} from '#/alf'
 import {CircleInfo_Stroke2_Corner0_Rounded as CircleInfo} from '#/components/icons/CircleInfo'
@@ -18,6 +19,8 @@ export const Policies = ({
   needsGuardian: boolean
   under13: boolean
 }) => {
+const { t } = useTranslation("screens/Signup/StepInfo");
+
   const t = useTheme()
   const {_} = useLingui()
 
@@ -34,9 +37,7 @@ export const Policies = ({
         <CircleInfo size="md" fill={t.atoms.text_contrast_low.color} />
 
         <Text style={[t.atoms.text_contrast_medium]}>
-          <Trans>
-            This service has not provided terms of service or a privacy policy.
-          </Trans>
+          <Trans>{t('terms-service-privacy-policy-not-provided')}</Trans>
         </Text>
       </View>
     )
@@ -45,49 +46,40 @@ export const Policies = ({
   let els: ReactElement
   if (tos && pp) {
     els = (
-      <Trans>
-        By creating an account you agree to the{' '}
-        <InlineLinkText
+      <Trans><Trans
+i18nKey="account-creation-agreement-terms-and-privacy"
+components={{"0": <InlineLinkText
           label={_(msg`Read the Bluesky Terms of Service`)}
           key="tos"
-          to={tos}>
-          Terms of Service
-        </InlineLinkText>{' '}
-        and{' '}
-        <InlineLinkText
+          to={tos} />, "1": <InlineLinkText
           label={_(msg`Read the Bluesky Privacy Policy`)}
           key="pp"
-          to={pp}>
-          Privacy Policy
-        </InlineLinkText>
-        .
-      </Trans>
+          to={pp} />}}
+/>
+        
+        </Trans>
     )
   } else if (tos) {
     els = (
-      <Trans>
-        By creating an account you agree to the{' '}
-        <InlineLinkText
+      <Trans><Trans
+i18nKey="account-creation-agreement-terms"
+components={{"0": <InlineLinkText
           label={_(msg`Read the Bluesky Terms of Service`)}
           key="tos"
-          to={tos}>
-          Terms of Service
-        </InlineLinkText>
-        .
-      </Trans>
+          to={tos} />}}
+/>
+        </Trans>
     )
   } else if (pp) {
     els = (
-      <Trans>
-        By creating an account you agree to the{' '}
-        <InlineLinkText
+      <Trans><Trans
+i18nKey="account-creation-agreement-privacy"
+components={{"0": <InlineLinkText
           label={_(msg`Read the Bluesky Privacy Policy`)}
           key="pp"
-          to={pp}>
-          Privacy Policy
-        </InlineLinkText>
-        .
-      </Trans>
+          to={pp} />}}
+/>
+        </Trans>
     )
   } else {
     return null
@@ -103,14 +95,11 @@ export const Policies = ({
 
       {under13 ? (
         <Text style={[a.font_bold, a.leading_snug, t.atoms.text_contrast_high]}>
-          <Trans>You must be 13 years of age or older to sign up.</Trans>
+          <Trans>{t('minimum-age-requirement')}</Trans>
         </Text>
       ) : needsGuardian ? (
         <Text style={[a.font_bold, a.leading_snug, t.atoms.text_contrast_high]}>
-          <Trans>
-            If you are not yet an adult according to the laws of your country,
-            your parent or legal guardian must read these Terms on your behalf.
-          </Trans>
+          <Trans>{t('parental-consent-requirement')}</Trans>
         </Text>
       ) : undefined}
     </View>

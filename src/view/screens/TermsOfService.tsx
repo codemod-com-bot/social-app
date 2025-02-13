@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useFocusEffect} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {CommonNavigatorParams, NativeStackScreenProps} from '#/lib/routes/types'
@@ -16,6 +17,8 @@ import {ViewHeader} from '../com/util/ViewHeader'
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, 'TermsOfService'>
 export const TermsOfServiceScreen = (_props: Props) => {
+const { t } = useTranslation("view/screens");
+
   const pal = usePalette('default')
   const setMinimalShellMode = useSetMinimalShellMode()
   const {_} = useLingui()
@@ -32,11 +35,11 @@ export const TermsOfServiceScreen = (_props: Props) => {
       <ScrollView style={[s.hContentRegion, pal.view]}>
         <View style={[s.p20]}>
           <Text style={pal.text}>
-            <Trans>The Terms of Service have been moved to</Trans>{' '}
+            <Trans>{t('terms-of-service-moved')}</Trans>{' '}
             <TextLink
               style={pal.link}
               href="https://bsky.social/about/support/tos"
-              text="bsky.social/about/support/tos"
+              text={t('bsky-support-tos-link')}
             />
           </Text>
         </View>

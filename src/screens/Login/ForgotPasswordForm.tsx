@@ -5,6 +5,7 @@ import {BskyAgent} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import * as EmailValidator from 'email-validator'
+import { useTranslation } from "react-i18next";
 
 import {isNetworkError} from '#/lib/strings/errors'
 import {cleanError} from '#/lib/strings/errors'
@@ -37,6 +38,8 @@ export const ForgotPasswordForm = ({
   onPressBack: () => void
   onEmailSent: () => void
 }) => {
+const { t } = useTranslation("screens/Login");
+
   const t = useTheme()
   const [isProcessing, setIsProcessing] = useState<boolean>(false)
   const [email, setEmail] = useState<string>('')
@@ -77,10 +80,10 @@ export const ForgotPasswordForm = ({
   return (
     <FormContainer
       testID="forgotPasswordForm"
-      titleText={<Trans>Reset password</Trans>}>
+      titleText={<Trans>{t('reset-password')}</Trans>}>
       <View>
         <TextField.LabelText>
-          <Trans>Hosting provider</Trans>
+          <Trans>{t('hosting-provider')}</Trans>
         </TextField.LabelText>
         <HostingProvider
           serviceUrl={serviceUrl}
@@ -90,7 +93,7 @@ export const ForgotPasswordForm = ({
       </View>
       <View>
         <TextField.LabelText>
-          <Trans>Email address</Trans>
+          <Trans>{t('email-address')}</Trans>
         </TextField.LabelText>
         <TextField.Root>
           <TextField.Icon icon={At} />
@@ -110,10 +113,7 @@ export const ForgotPasswordForm = ({
       </View>
 
       <Text style={[t.atoms.text_contrast_high, a.leading_snug]}>
-        <Trans>
-          Enter the email you used to create your account. We'll send you a
-          "reset code" so you can set a new password.
-        </Trans>
+        <Trans>{t('enter-email-for-reset')}</Trans>
       </Text>
 
       <FormError error={error} />
@@ -126,7 +126,7 @@ export const ForgotPasswordForm = ({
           size="large"
           onPress={onPressBack}>
           <ButtonText>
-            <Trans>Back</Trans>
+            <Trans>{t('back-button')}</Trans>
           </ButtonText>
         </Button>
         <View style={a.flex_1} />
@@ -140,13 +140,13 @@ export const ForgotPasswordForm = ({
             size="large"
             onPress={onPressNext}>
             <ButtonText>
-              <Trans>Next</Trans>
+              <Trans>{t('next-button')}</Trans>
             </ButtonText>
           </Button>
         )}
         {!serviceDescription || isProcessing ? (
           <Text style={[t.atoms.text_contrast_high, a.pl_md]}>
-            <Trans>Processing...</Trans>
+            <Trans>{t('processing-message')}</Trans>
           </Text>
         ) : undefined}
       </View>
@@ -168,7 +168,7 @@ export const ForgotPasswordForm = ({
           variant="ghost"
           color="secondary">
           <ButtonText>
-            <Trans>Already have a code?</Trans>
+            <Trans>{t('already-have-code')}</Trans>
           </ButtonText>
         </Button>
       </View>

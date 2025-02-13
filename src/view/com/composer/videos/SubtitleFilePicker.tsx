@@ -2,6 +2,7 @@ import React, {useRef} from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {logger} from '#/logger'
 import * as Toast from '#/view/com/util/Toast'
@@ -16,6 +17,8 @@ export function SubtitleFilePicker({
   onSelectFile: (file: File) => void
   disabled?: boolean
 }) {
+const { t } = useTranslation("view/com/composer/videos");
+
   const {_} = useLingui()
   const ref = useRef<HTMLInputElement>(null)
 
@@ -63,7 +66,7 @@ export function SubtitleFilePicker({
           disabled={disabled}>
           <ButtonIcon icon={CCIcon} />
           <ButtonText>
-            <Trans>Select subtitle file (.vtt)</Trans>
+            <Trans>{t('select-subtitle-file')}</Trans>
           </ButtonText>
         </Button>
       </View>

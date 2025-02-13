@@ -3,6 +3,7 @@ import {ListRenderItemInfo, View} from 'react-native'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-controller'
 import {AppBskyActorDefs, ModerationOpts} from '@atproto/api'
 import {Trans} from '@lingui/macro'
+import { useTranslation } from "react-i18next";
 
 import {isNative} from '#/platform/detection'
 import {useA11y} from '#/state/a11y'
@@ -26,6 +27,8 @@ export function StepProfiles({
 }: {
   moderationOpts: ModerationOpts
 }) {
+const { t } = useTranslation("screens/StarterPack/Wizard");
+
   const t = useTheme()
   const [state, dispatch] = useWizardState()
   const [query, setQuery] = useState('')
@@ -100,7 +103,7 @@ export function StepProfiles({
                   a.mt_lg,
                   a.leading_snug,
                 ]}>
-                <Trans>Nobody was found. Try searching for someone else.</Trans>
+                <Trans>{t('nobody-found-try-searching')}</Trans>
               </Text>
             )}
           </View>

@@ -6,6 +6,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context'
 import {AppBskyFeedDefs, AppBskyFeedThreadgate} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {HITSLOP_10} from '#/lib/constants'
 import {useInitialNumToRender} from '#/lib/hooks/useInitialNumToRender'
@@ -91,6 +92,8 @@ const keyExtractor = (item: RowItem) => {
 }
 
 export function PostThread({uri}: {uri: string | undefined}) {
+const { t } = useTranslation("view/com/post-thread");
+
   const {hasSession, currentAccount} = useSession()
   const {_} = useLingui()
   const t = useTheme()
@@ -447,7 +450,7 @@ export function PostThread({uri}: {uri: string | undefined}) {
             t.atoms.bg_contrast_25,
           ]}>
           <Text style={[a.font_bold, a.text_md, t.atoms.text_contrast_medium]}>
-            <Trans>Deleted post.</Trans>
+            <Trans>{t('deleted-post')}</Trans>
           </Text>
         </View>
       )
@@ -461,7 +464,7 @@ export function PostThread({uri}: {uri: string | undefined}) {
             t.atoms.bg_contrast_25,
           ]}>
           <Text style={[a.font_bold, a.text_md, t.atoms.text_contrast_medium]}>
-            <Trans>Blocked post.</Trans>
+            <Trans>{t('blocked-post')}</Trans>
           </Text>
         </View>
       )
@@ -533,7 +536,7 @@ export function PostThread({uri}: {uri: string | undefined}) {
         <Header.BackButton />
         <Header.Content>
           <Header.TitleText>
-            <Trans context="description">Post</Trans>
+            <Trans context="description">{t('post')}</Trans>
           </Header.TitleText>
         </Header.Content>
         <Header.Slot>
@@ -600,6 +603,8 @@ let ThreadMenu = ({
   setSortReplies: (newValue: string) => void
   setTreeViewEnabled: (newValue: boolean) => void
 }): React.ReactNode => {
+const { t } = useTranslation("view/com/post-thread");
+
   const {_} = useLingui()
   return (
     <Menu.Root>
@@ -619,7 +624,7 @@ let ThreadMenu = ({
       </Menu.Trigger>
       <Menu.Outer>
         <Menu.LabelText>
-          <Trans>Show replies as</Trans>
+          <Trans>{t('show-replies-as')}</Trans>
         </Menu.LabelText>
         <Menu.Group>
           <Menu.Item
@@ -628,7 +633,7 @@ let ThreadMenu = ({
               setTreeViewEnabled(false)
             }}>
             <Menu.ItemText>
-              <Trans>Linear</Trans>
+              <Trans>{t('linear')}</Trans>
             </Menu.ItemText>
             <Menu.ItemRadio selected={!treeViewEnabled} />
           </Menu.Item>
@@ -638,14 +643,14 @@ let ThreadMenu = ({
               setTreeViewEnabled(true)
             }}>
             <Menu.ItemText>
-              <Trans>Threaded</Trans>
+              <Trans>{t('threaded')}</Trans>
             </Menu.ItemText>
             <Menu.ItemRadio selected={treeViewEnabled} />
           </Menu.Item>
         </Menu.Group>
         <Menu.Divider />
         <Menu.LabelText>
-          <Trans>Reply sorting</Trans>
+          <Trans>{t('reply-sorting')}</Trans>
         </Menu.LabelText>
         <Menu.Group>
           <Menu.Item
@@ -654,7 +659,7 @@ let ThreadMenu = ({
               setSortReplies('hotness')
             }}>
             <Menu.ItemText>
-              <Trans>Hot replies first</Trans>
+              <Trans>{t('hot-replies-first')}</Trans>
             </Menu.ItemText>
             <Menu.ItemRadio selected={sortReplies === 'hotness'} />
           </Menu.Item>
@@ -664,7 +669,7 @@ let ThreadMenu = ({
               setSortReplies('oldest')
             }}>
             <Menu.ItemText>
-              <Trans>Oldest replies first</Trans>
+              <Trans>{t('oldest-replies-first')}</Trans>
             </Menu.ItemText>
             <Menu.ItemRadio selected={sortReplies === 'oldest'} />
           </Menu.Item>
@@ -674,7 +679,7 @@ let ThreadMenu = ({
               setSortReplies('newest')
             }}>
             <Menu.ItemText>
-              <Trans>Newest replies first</Trans>
+              <Trans>{t('newest-replies-first')}</Trans>
             </Menu.ItemText>
             <Menu.ItemRadio selected={sortReplies === 'newest'} />
           </Menu.Item>
@@ -684,7 +689,7 @@ let ThreadMenu = ({
               setSortReplies('most-likes')
             }}>
             <Menu.ItemText>
-              <Trans>Most-liked replies first</Trans>
+              <Trans>{t('most-liked-replies-first')}</Trans>
             </Menu.ItemText>
             <Menu.ItemRadio selected={sortReplies === 'most-likes'} />
           </Menu.Item>
@@ -694,7 +699,7 @@ let ThreadMenu = ({
               setSortReplies('random')
             }}>
             <Menu.ItemText>
-              <Trans>Random (aka "Poster's Roulette")</Trans>
+              <Trans>{t('random-posters-roulette')}</Trans>
             </Menu.ItemText>
             <Menu.ItemRadio selected={sortReplies === 'random'} />
           </Menu.Item>

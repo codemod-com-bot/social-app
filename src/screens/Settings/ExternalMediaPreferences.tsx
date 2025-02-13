@@ -1,6 +1,7 @@
 import {Fragment} from 'react'
 import {View} from 'react-native'
 import {Trans} from '@lingui/macro'
+import { useTranslation } from "react-i18next";
 
 import {CommonNavigatorParams, NativeStackScreenProps} from '#/lib/routes/types'
 import {
@@ -22,13 +23,15 @@ type Props = NativeStackScreenProps<
   'PreferencesExternalEmbeds'
 >
 export function ExternalMediaPreferencesScreen({}: Props) {
+const { t } = useTranslation("screens/Settings");
+
   return (
     <Layout.Screen testID="externalMediaPreferencesScreen">
       <Layout.Header.Outer>
         <Layout.Header.BackButton />
         <Layout.Header.Content>
           <Layout.Header.TitleText>
-            <Trans>External Media Preferences</Trans>
+            <Trans>{t('external-media-preferences')}</Trans>
           </Layout.Header.TitleText>
         </Layout.Header.Content>
         <Layout.Header.Slot />
@@ -37,16 +40,12 @@ export function ExternalMediaPreferencesScreen({}: Props) {
         <SettingsList.Container>
           <SettingsList.Item>
             <Admonition type="info" style={[a.flex_1]}>
-              <Trans>
-                External media may allow websites to collect information about
-                you and your device. No information is sent or requested until
-                you press the "play" button.
-              </Trans>
+              <Trans>{t('external-media-collection-notice')}</Trans>
             </Admonition>
           </SettingsList.Item>
           <SettingsList.Group iconInset={false}>
             <SettingsList.ItemText>
-              <Trans>Enable media players for</Trans>
+              <Trans>{t('enable-media-players-for')}</Trans>
             </SettingsList.ItemText>
             <View style={[a.mt_sm, a.w_full]}>
               {native(<SettingsList.Divider style={[a.my_0]} />)}

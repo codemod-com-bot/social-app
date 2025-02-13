@@ -1,0 +1,8 @@
+{
+  "set-string": "Set String",
+  "remove-string": "Remove String",
+  "set-bool": "Set Bool",
+  "set-number": "Set Number",
+  "add-to-set": "Add to Set",
+  "remove-from-set": "Remove from Set"
+}

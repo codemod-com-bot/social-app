@@ -10,6 +10,7 @@ import {
 import {msg, Plural, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useQueryClient} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {sanitizeHandle} from '#/lib/strings/handles'
 import {logger} from '#/logger'
@@ -117,6 +118,8 @@ export function TitleAndByline({
   title: string
   creator?: AppBskyActorDefs.ProfileViewBasic
 }) {
+const { t } = useTranslation("components");
+
   const t = useTheme()
 
   return (
@@ -131,7 +134,7 @@ export function TitleAndByline({
         <Text
           style={[a.leading_snug, t.atoms.text_contrast_medium]}
           numberOfLines={1}>
-          <Trans>Feed by {sanitizeHandle(creator.handle, '@')}</Trans>
+          <Trans>{t('feed-by')}{sanitizeHandle(creator.handle, '@')}</Trans>
         </Text>
       )}
     </View>
@@ -207,11 +210,12 @@ export function DescriptionPlaceholder() {
 }
 
 export function Likes({count}: {count: number}) {
+const { t } = useTranslation("components");
+
   const t = useTheme()
   return (
     <Text style={[a.text_sm, t.atoms.text_contrast_medium]}>
-      <Trans>
-        Liked by <Plural value={count || 0} one="# user" other="# users" />
+      <Trans>{t('liked-by')}<Plural value={count || 0} one="# user" other="# users" />
       </Trans>
     </Text>
   )

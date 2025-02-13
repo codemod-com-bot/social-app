@@ -1,0 +1,13 @@
+{
+  "alt-text": "ALT",
+  "descriptive-alt-text": "Descriptive alt text",
+  "alt-text-truncation-limit": "Alt text will be truncated. Limit:",
+  "characters-limit-notice": " characters.",
+  "save-button": "Save",
+  "add-alt-text": "Add alt text",
+  "cancel-button": "Cancel",
+  "reply-button": "Reply",
+  "post-all-button": "Post All",
+  "post-button": "Post",
+  "job-id-label": "Job ID:"
+}

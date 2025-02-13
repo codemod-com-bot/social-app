@@ -1,6 +1,7 @@
 import {View} from 'react-native'
 import Animated, {FadeInDown, FadeOut} from 'react-native-reanimated'
 import {Trans} from '@lingui/macro'
+import { useTranslation } from "react-i18next";
 
 import {PressableScale} from '#/lib/custom-animations/PressableScale'
 import {sanitizeDisplayName} from '#/lib/strings/display-names'
@@ -17,6 +18,8 @@ export function Autocomplete({
   prefix: string
   onSelect: (item: string) => void
 }) {
+const { t } = useTranslation("view/com/composer/text-input/mobile");
+
   const t = useTheme()
 
   const isActive = !!prefix
@@ -91,7 +94,7 @@ export function Autocomplete({
         })
       ) : (
         <Text style={[a.text_md, a.px_sm, a.py_md]}>
-          {isFetching ? <Trans>Loading...</Trans> : <Trans>No result</Trans>}
+          {isFetching ? <Trans>{t('loading-message')}</Trans> : <Trans>{t('no-results-message')}</Trans>}
         </Text>
       )}
     </Animated.View>

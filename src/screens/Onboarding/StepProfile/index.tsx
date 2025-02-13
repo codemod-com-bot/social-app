@@ -8,6 +8,7 @@ import {
 } from 'expo-image-picker'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {usePhotoLibraryPermission} from '#/lib/hooks/usePermissions'
 import {compressIfNeeded} from '#/lib/media/manip'
@@ -65,6 +66,8 @@ const randomColor =
   avatarColors[Math.floor(Math.random() * avatarColors.length)]
 
 export function StepProfile() {
+const { t } = useTranslation("screens/Onboarding/StepProfile");
+
   const {_} = useLingui()
   const t = useTheme()
   const {gtMobile} = useBreakpoints()
@@ -231,13 +234,10 @@ export function StepProfile() {
       <View style={[a.align_start, t.atoms.bg, a.justify_between]}>
         <IconCircle icon={StreamingLive} style={[a.mb_2xl]} />
         <TitleText>
-          <Trans>Give your profile a face</Trans>
+          <Trans>{t('give-your-profile-a-face')}</Trans>
         </TitleText>
         <DescriptionText>
-          <Trans>
-            Help people know you're not a bot by uploading a picture or creating
-            an avatar.
-          </Trans>
+          <Trans>{t('help-people-know-not-a-bot')}</Trans>
         </DescriptionText>
         <View
           style={[a.w_full, a.align_center, {paddingTop: gtMobile ? 80 : 40}]}>
@@ -275,7 +275,7 @@ export function StepProfile() {
               label={_(msg`Continue to next step`)}
               onPress={onContinue}>
               <ButtonText>
-                <Trans>Continue</Trans>
+                <Trans>{t('continue')}</Trans>
               </ButtonText>
               <ButtonIcon icon={ChevronRight} position="right" />
             </Button>
@@ -287,9 +287,9 @@ export function StepProfile() {
               onPress={onSecondaryPress}>
               <ButtonText>
                 {avatar.useCreatedAvatar ? (
-                  <Trans>Upload a photo instead</Trans>
+                  <Trans>{t('upload-a-photo-instead')}</Trans>
                 ) : (
-                  <Trans>Create an avatar instead</Trans>
+                  <Trans>{t('create-an-avatar-instead')}</Trans>
                 )}
               </ButtonText>
             </Button>
@@ -330,7 +330,7 @@ export function StepProfile() {
               label={_(msg`Done`)}
               onPress={onDoneCreating}>
               <ButtonText>
-                <Trans>Done</Trans>
+                <Trans>{t('done')}</Trans>
               </ButtonText>
             </Button>
           </View>

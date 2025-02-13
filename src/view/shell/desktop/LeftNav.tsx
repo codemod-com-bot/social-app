@@ -9,6 +9,7 @@ import {
   useNavigation,
   useNavigationState,
 } from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {useAccountSwitcher} from '#/lib/hooks/useAccountSwitcher'
 import {usePalette} from '#/lib/hooks/usePalette'
@@ -225,6 +226,8 @@ function SwitchMenuItems({
     | undefined
   signOutPromptControl: DialogControlProps
 }) {
+const { t } = useTranslation("view/shell/desktop");
+
   const {_} = useLingui()
   const {onPressSwitchAccount, pendingDid} = useAccountSwitcher()
   const {setShowLoggedOut} = useLoggedOutViewControls()
@@ -243,7 +246,7 @@ function SwitchMenuItems({
         <>
           <Menu.Group>
             <Menu.LabelText>
-              <Trans>Switch account</Trans>
+              <Trans>{t('switch-account')}</Trans>
             </Menu.LabelText>
             {accounts.map(other => (
               <Menu.Item
@@ -285,13 +288,13 @@ function SwitchMenuItems({
         onPress={onAddAnotherAccount}>
         <Menu.ItemIcon icon={PlusIcon} />
         <Menu.ItemText>
-          <Trans>Add another account</Trans>
+          <Trans>{t('add-another-account')}</Trans>
         </Menu.ItemText>
       </Menu.Item>
       <Menu.Item label={_(msg`Sign out`)} onPress={signOutPromptControl.open}>
         <Menu.ItemIcon icon={LeaveIcon} />
         <Menu.ItemText>
-          <Trans>Sign out</Trans>
+          <Trans>{t('sign-out')}</Trans>
         </Menu.ItemText>
       </Menu.Item>
     </Menu.Outer>
@@ -445,6 +448,8 @@ function NavItem({count, hasNew, href, icon, iconFilled, label}: NavItemProps) {
 }
 
 function ComposeBtn() {
+const { t } = useTranslation("view/shell/desktop");
+
   const {currentAccount} = useSession()
   const {getState} = useNavigation()
   const {openComposer} = useComposerControls()
@@ -504,7 +509,7 @@ function ComposeBtn() {
         style={[a.rounded_full]}>
         <ButtonIcon icon={EditBig} position="left" />
         <ButtonText>
-          <Trans context="action">New Post</Trans>
+          <Trans context="action">{t('new-post')}</Trans>
         </ButtonText>
       </Button>
     </View>

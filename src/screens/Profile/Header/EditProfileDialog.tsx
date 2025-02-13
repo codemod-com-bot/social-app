@@ -4,6 +4,7 @@ import {Image as RNImage} from 'react-native-image-crop-picker'
 import {AppBskyActorDefs} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {compressIfNeeded} from '#/lib/media/manip'
 import {cleanError} from '#/lib/strings/errors'
@@ -99,6 +100,8 @@ function DialogInner({
   setDirty: (dirty: boolean) => void
   onPressCancel: () => void
 }) {
+const { t } = useTranslation("screens/Profile/Header");
+
   const {_} = useLingui()
   const t = useTheme()
   const control = Dialog.useDialogContext()
@@ -225,7 +228,7 @@ function DialogInner({
         style={[a.rounded_full]}
         testID="editProfileCancelBtn">
         <ButtonText style={[a.text_md]}>
-          <Trans>Cancel</Trans>
+          <Trans>{t('cancel-button')}</Trans>
         </ButtonText>
       </Button>
     ),
@@ -249,7 +252,7 @@ function DialogInner({
         style={[a.rounded_full]}
         testID="editProfileSaveBtn">
         <ButtonText style={[a.text_md, !dirty && t.atoms.text_contrast_low]}>
-          <Trans>Save</Trans>
+          <Trans>{t('save-button')}</Trans>
         </ButtonText>
       </Button>
     ),
@@ -272,7 +275,7 @@ function DialogInner({
       header={
         <Dialog.Header renderLeft={cancelButton} renderRight={saveButton}>
           <Dialog.HeaderText>
-            <Trans>Edit profile</Trans>
+            <Trans>{t('edit-profile')}</Trans>
           </Dialog.HeaderText>
         </Dialog.Header>
       }>
@@ -311,7 +314,7 @@ function DialogInner({
       <View style={[a.mt_4xl, a.px_xl, a.gap_xl]}>
         <View>
           <TextField.LabelText>
-            <Trans>Display name</Trans>
+            <Trans>{t('display-name')}</Trans>
           </TextField.LabelText>
           <TextField.Root isInvalid={displayNameTooLong}>
             <Dialog.Input
@@ -331,17 +334,15 @@ function DialogInner({
                 {color: t.palette.negative_400},
               ]}
               label={_(msg`Display name is too long`)}>
-              <Trans>
-                Display name is too long. The maximum number of characters is{' '}
-                {DISPLAY_NAME_MAX_GRAPHEMES}.
-              </Trans>
+              <Trans>{t('display-name-too-long-warning', { DISPLAY_NAME_MAX_GRAPHEMES })}
+                </Trans>
             </TextField.SuffixText>
           )}
         </View>
 
         <View>
           <TextField.LabelText>
-            <Trans>Description</Trans>
+            <Trans>{t('description')}</Trans>
           </TextField.LabelText>
           <TextField.Root isInvalid={descriptionTooLong}>
             <Dialog.Input
@@ -362,10 +363,8 @@ function DialogInner({
                 {color: t.palette.negative_400},
               ]}
               label={_(msg`Description is too long`)}>
-              <Trans>
-                Description is too long. The maximum number of characters is{' '}
-                {DESCRIPTION_MAX_GRAPHEMES}.
-              </Trans>
+              <Trans>{t('description-too-long-warning', { DESCRIPTION_MAX_GRAPHEMES })}
+                </Trans>
             </TextField.SuffixText>
           )}
         </View>
