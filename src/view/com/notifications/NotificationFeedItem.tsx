@@ -27,6 +27,7 @@ import {msg, Plural, plural, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useNavigation} from '@react-navigation/native'
 import {useQueryClient} from '@tanstack/react-query'
+import { Trans,useTranslation } from "react-i18next";
 
 import {useAnimatedValue} from '#/lib/hooks/useAnimatedValue'
 import {usePalette} from '#/lib/hooks/usePalette'
@@ -87,6 +88,8 @@ let NotificationFeedItem = ({
   highlightUnread: boolean
   hideTopBorder?: boolean
 }): React.ReactNode => {
+const { t } = useTranslation("view/com/notifications");
+
   const queryClient = useQueryClient()
   const pal = usePalette('default')
   const {_, i18n} = useLingui()
@@ -221,18 +224,18 @@ let NotificationFeedItem = ({
       : _(msg`${firstAuthorName} liked your post`)
     notificationContent = hasMultipleAuthors ? (
       <Trans>
-        {firstAuthorLink} and{' '}
-        <Text style={[pal.text, s.bold]}>
-          <Plural
+        <Trans
+i18nKey="authors-liked-post"
+values={{ firstAuthorLink, pluralValueAdditionalAuthorsCountOneFormattedAuthorsCountOtherOtherFormattedAuthorsCountOthers: <><Plural
             value={additionalAuthorsCount}
             one={`${formattedAuthorsCount} other`}
             other={`${formattedAuthorsCount} others`}
-          />
-        </Text>{' '}
-        liked your post
-      </Trans>
+          /></> }}
+components={{"0": <Text style={[pal.text, s.bold]} />}}
+/>
+        </Trans>
     ) : (
-      <Trans>{firstAuthorLink} liked your post</Trans>
+      <Trans>{t('single-author-liked-post', { firstAuthorLink })}</Trans>
     )
   } else if (item.type === 'repost') {
     a11yLabel = hasMultipleAuthors
@@ -245,18 +248,18 @@ let NotificationFeedItem = ({
       : _(msg`${firstAuthorName} reposted your post`)
     notificationContent = hasMultipleAuthors ? (
       <Trans>
-        {firstAuthorLink} and{' '}
-        <Text style={[pal.text, s.bold]}>
-          <Plural
+        <Trans
+i18nKey="authors-reposted-post"
+values={{ firstAuthorLink, pluralValueAdditionalAuthorsCountOneFormattedAuthorsCountOtherOtherFormattedAuthorsCountOthers: <><Plural
             value={additionalAuthorsCount}
             one={`${formattedAuthorsCount} other`}
             other={`${formattedAuthorsCount} others`}
-          />
-        </Text>{' '}
-        reposted your post
-      </Trans>
+          /></> }}
+components={{"0": <Text style={[pal.text, s.bold]} />}}
+/>
+        </Trans>
     ) : (
-      <Trans>{firstAuthorLink} reposted your post</Trans>
+      <Trans>{t('single-author-reposted-post', { firstAuthorLink })}</Trans>
     )
     icon = <RepostIcon size="xl" style={{color: t.palette.positive_600}} />
   } else if (item.type === 'follow') {
@@ -287,7 +290,7 @@ let NotificationFeedItem = ({
        * see `src/state/queries/notifications/util.ts`
        */
       a11yLabel = _(msg`${firstAuthorName} followed you back`)
-      notificationContent = <Trans>{firstAuthorLink} followed you back</Trans>
+      notificationContent = <Trans>{t('single-author-followed-back', { firstAuthorLink })}</Trans>
     } else {
       a11yLabel = hasMultipleAuthors
         ? _(
@@ -299,18 +302,18 @@ let NotificationFeedItem = ({
         : _(msg`${firstAuthorName} followed you`)
       notificationContent = hasMultipleAuthors ? (
         <Trans>
-          {firstAuthorLink} and{' '}
-          <Text style={[pal.text, s.bold]}>
-            <Plural
+          <Trans
+i18nKey="authors-followed-you"
+values={{ firstAuthorLink, pluralValueAdditionalAuthorsCountOneFormattedAuthorsCountOtherOtherFormattedAuthorsCountOthers: <><Plural
               value={additionalAuthorsCount}
               one={`${formattedAuthorsCount} other`}
               other={`${formattedAuthorsCount} others`}
-            />
-          </Text>{' '}
-          followed you
-        </Trans>
+            /></> }}
+components={{"0": <Text style={[pal.text, s.bold]} />}}
+/>
+          </Trans>
       ) : (
-        <Trans>{firstAuthorLink} followed you</Trans>
+        <Trans>{t('single-author-followed-you', { firstAuthorLink })}</Trans>
       )
     }
     icon = <PersonPlusIcon size="xl" style={{color: t.palette.primary_500}} />
@@ -325,18 +328,18 @@ let NotificationFeedItem = ({
       : _(msg`${firstAuthorName} liked your custom feed`)
     notificationContent = hasMultipleAuthors ? (
       <Trans>
-        {firstAuthorLink} and{' '}
-        <Text style={[pal.text, s.bold]}>
-          <Plural
+        <Trans
+i18nKey="authors-liked-custom-feed"
+values={{ firstAuthorLink, pluralValueAdditionalAuthorsCountOneFormattedAuthorsCountOtherOtherFormattedAuthorsCountOthers: <><Plural
             value={additionalAuthorsCount}
             one={`${formattedAuthorsCount} other`}
             other={`${formattedAuthorsCount} others`}
-          />
-        </Text>{' '}
-        liked your custom feed
-      </Trans>
+          /></> }}
+components={{"0": <Text style={[pal.text, s.bold]} />}}
+/>
+        </Trans>
     ) : (
-      <Trans>{firstAuthorLink} liked your custom feed</Trans>
+      <Trans>{t('single-author-liked-custom-feed', { firstAuthorLink })}</Trans>
     )
   } else if (item.type === 'starterpack-joined') {
     a11yLabel = hasMultipleAuthors
@@ -349,18 +352,18 @@ let NotificationFeedItem = ({
       : _(msg`${firstAuthorName} signed up with your starter pack`)
     notificationContent = hasMultipleAuthors ? (
       <Trans>
-        {firstAuthorLink} and{' '}
-        <Text style={[pal.text, s.bold]}>
-          <Plural
+        <Trans
+i18nKey="authors-signed-up-starter-pack"
+values={{ firstAuthorLink, pluralValueAdditionalAuthorsCountOneFormattedAuthorsCountOtherOtherFormattedAuthorsCountOthers: <><Plural
             value={additionalAuthorsCount}
             one={`${formattedAuthorsCount} other`}
             other={`${formattedAuthorsCount} others`}
-          />
-        </Text>{' '}
-        signed up with your starter pack
-      </Trans>
+          /></> }}
+components={{"0": <Text style={[pal.text, s.bold]} />}}
+/>
+        </Trans>
     ) : (
-      <Trans>{firstAuthorLink} signed up with your starter pack</Trans>
+      <Trans>{t('single-author-signed-up-starter-pack', { firstAuthorLink })}</Trans>
     )
     icon = (
       <View style={{height: 30, width: 30}}>
@@ -522,6 +525,8 @@ function ExpandListPressable({
 }
 
 function SayHelloBtn({profile}: {profile: AppBskyActorDefs.ProfileViewBasic}) {
+const { t } = useTranslation("view/com/notifications");
+
   const {_} = useLingui()
   const agent = useAgent()
   const navigation = useNavigation<NavigationProp>()
@@ -562,7 +567,7 @@ function SayHelloBtn({profile}: {profile: AppBskyActorDefs.ProfileViewBasic}) {
         }
       }}>
       <ButtonText>
-        <Trans>Say hello!</Trans>
+        <Trans>{t('say-hello')}</Trans>
       </ButtonText>
     </Button>
   )
@@ -579,6 +584,8 @@ function CondensedAuthorsList({
   onToggleAuthorsExpanded: () => void
   showDmButton?: boolean
 }) {
+const { t } = useTranslation("view/com/notifications");
+
   const pal = usePalette('default')
   const {_} = useLingui()
 
@@ -598,7 +605,7 @@ function CondensedAuthorsList({
             style={[styles.expandedAuthorsCloseBtnIcon, pal.text]}
           />
           <Text type="sm-medium" style={pal.text}>
-            <Trans context="action">Hide</Trans>
+            <Trans context="action">{t('hide')}</Trans>
           </Text>
         </TouchableOpacity>
       </View>

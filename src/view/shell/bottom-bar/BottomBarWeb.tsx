@@ -4,6 +4,7 @@ import Animated from 'react-native-reanimated'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useNavigationState} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {useMinimalShellFooterTransform} from '#/lib/hooks/useMinimalShellTransform'
 import {getCurrentRoute, isTab} from '#/lib/routes/helpers'
@@ -43,6 +44,8 @@ import {Text} from '#/components/Typography'
 import {styles} from './BottomBarStyles'
 
 export function BottomBarWeb() {
+const { t } = useTranslation("view/shell/bottom-bar");
+
   const {_} = useLingui()
   const {hasSession, currentAccount} = useSession()
   const t = useTheme()
@@ -204,7 +207,7 @@ export function BottomBarWeb() {
                 variant="solid"
                 color="primary">
                 <ButtonText>
-                  <Trans>Create account</Trans>
+                  <Trans>{t('create-account')}</Trans>
                 </ButtonText>
               </Button>
               <Button
@@ -214,7 +217,7 @@ export function BottomBarWeb() {
                 variant="solid"
                 color="secondary">
                 <ButtonText>
-                  <Trans>Sign in</Trans>
+                  <Trans>{t('sign-in')}</Trans>
                 </ButtonText>
               </Button>
             </View>

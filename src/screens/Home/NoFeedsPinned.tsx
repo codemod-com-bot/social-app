@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {TID} from '@atproto/common-web'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {DISCOVER_SAVED_FEED, TIMELINE_SAVED_FEED} from '#/lib/constants'
 import {useOverwriteSavedFeedsMutation} from '#/state/queries/preferences'
@@ -21,6 +22,8 @@ export function NoFeedsPinned({
 }: {
   preferences: UsePreferencesQueryResponse
 }) {
+const { t } = useTranslation("screens/Home");
+
   const {_} = useLingui()
   const headerOffset = useHeaderOffset()
   const {isPending, mutateAsync: overwriteSavedFeeds} =
@@ -76,14 +79,11 @@ export function NoFeedsPinned({
         ]}>
         <View style={[a.align_center, a.gap_sm, a.pb_xl]}>
           <Text style={[a.text_xl, a.font_bold]}>
-            <Trans>Whoops!</Trans>
+            <Trans>{t('whoops-message')}</Trans>
           </Text>
           <Text
             style={[a.text_md, a.text_center, a.leading_snug, {maxWidth: 340}]}>
-            <Trans>
-              Looks like you unpinned all your feeds. But don't worry, you can
-              add some below 😄
-            </Trans>
+            <Trans>{t('unpinned-feeds-message')}</Trans>
           </Text>
         </View>
 

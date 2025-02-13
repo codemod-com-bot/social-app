@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {TID} from '@atproto/common-web'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {RECOMMENDED_SAVED_FEEDS} from '#/lib/constants'
 import {useOverwriteSavedFeedsMutation} from '#/state/queries/preferences'
@@ -17,6 +18,8 @@ import {Text} from '#/components/Typography'
  * have no other feeds saved.
  */
 export function NoSavedFeedsOfAnyType() {
+const { t } = useTranslation("screens/Feeds");
+
   const t = useTheme()
   const {_} = useLingui()
   const {isPending, mutateAsync: overwriteSavedFeeds} =
@@ -36,10 +39,7 @@ export function NoSavedFeedsOfAnyType() {
       style={[a.flex_row, a.flex_wrap, a.justify_between, a.p_xl, a.gap_md]}>
       <Text
         style={[a.leading_snug, t.atoms.text_contrast_medium, {maxWidth: 310}]}>
-        <Trans>
-          Looks like you haven't saved any feeds! Use our recommendations or
-          browse more below.
-        </Trans>
+        <Trans>{t('no-saved-feeds-message')}</Trans>
       </Text>
 
       <Button

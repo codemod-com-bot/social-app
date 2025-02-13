@@ -3,6 +3,7 @@ import {ScrollView, View} from 'react-native'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
 import {msg} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {isWeb} from '#/platform/detection'
 import {useOnboardingDispatch} from '#/state/shell'
@@ -27,6 +28,8 @@ const COL_WIDTH = 420
 export const OnboardingControls = createPortalGroup()
 
 export function Layout({children}: React.PropsWithChildren<{}>) {
+const { t } = useTranslation("screens/Onboarding");
+
   const {_} = useLingui()
   const t = useTheme()
   const insets = useSafeAreaInsets()
@@ -70,7 +73,7 @@ export function Layout({children}: React.PropsWithChildren<{}>) {
             onPress={() => onboardDispatch({type: 'skip'})}
             // DEV ONLY
             label="Clear onboarding state">
-            <ButtonText>Clear</ButtonText>
+            <ButtonText>{t('clear-button')}</ButtonText>
           </Button>
         </View>
       )}

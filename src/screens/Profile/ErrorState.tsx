@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useNavigation} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {NavigationProp} from '#/lib/routes/types'
 import {atoms as a, useTheme} from '#/alf'
@@ -11,6 +12,8 @@ import {CircleInfo_Stroke2_Corner0_Rounded as CircleInfo} from '#/components/ico
 import {Text} from '#/components/Typography'
 
 export function ErrorState({error}: {error: string}) {
+const { t } = useTranslation("screens/Profile");
+
   const t = useTheme()
   const {_} = useLingui()
   const navigation = useNavigation<NavigationProp>()
@@ -28,7 +31,7 @@ export function ErrorState({error}: {error: string}) {
       <CircleInfo width={48} style={[t.atoms.text_contrast_low]} />
 
       <Text style={[a.text_xl, a.font_bold, a.pb_md, a.pt_xl]}>
-        <Trans>Hmmmm, we couldn't load that moderation service.</Trans>
+        <Trans>{t('could-not-load-moderation-service')}</Trans>
       </Text>
       <Text
         style={[
@@ -37,10 +40,7 @@ export function ErrorState({error}: {error: string}) {
           a.pb_md,
           t.atoms.text_contrast_medium,
         ]}>
-        <Trans>
-          This moderation service is unavailable. See below for more details. If
-          this issue persists, contact us.
-        </Trans>
+        <Trans>{t('moderation-service-unavailable-details')}</Trans>
       </Text>
       <View
         style={[
@@ -63,7 +63,7 @@ export function ErrorState({error}: {error: string}) {
           accessibilityHint="Returns to previous page"
           onPress={onPressBack}>
           <ButtonText>
-            <Trans>Go Back</Trans>
+            <Trans>{t('go-back')}</Trans>
           </ButtonText>
         </Button>
       </View>

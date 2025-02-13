@@ -3,6 +3,7 @@ import {Keyboard, View} from 'react-native'
 import DatePicker from 'react-native-date-picker'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {atoms as a, useTheme} from '#/alf'
 import {Button, ButtonText} from '#/components/Button'
@@ -32,6 +33,8 @@ export function DateField({
   accessibilityHint,
   maximumDate,
 }: DateFieldProps) {
+const { t } = useTranslation("components/forms/DateField");
+
   const {_} = useLingui()
   const t = useTheme()
   const control = Dialog.useDialogControl()
@@ -90,7 +93,7 @@ export function DateField({
               color="primary"
               variant="solid">
               <ButtonText>
-                <Trans>Done</Trans>
+                <Trans>{t('done')}</Trans>
               </ButtonText>
             </Button>
           </View>

@@ -2,6 +2,7 @@ import {View} from 'react-native'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {ErrorBoundary} from '#/view/com/util/ErrorBoundary'
 import {Logo} from '#/view/icons/Logo'
@@ -19,6 +20,8 @@ export const SplashScreen = ({
   onPressSignin: () => void
   onPressCreateAccount: () => void
 }) => {
+const { t } = useTranslation("view/com/auth");
+
   const t = useTheme()
   const {_} = useLingui()
 
@@ -35,7 +38,7 @@ export const SplashScreen = ({
           </View>
 
           <Text style={[a.text_md, a.font_bold, t.atoms.text_contrast_medium]}>
-            <Trans>What's up?</Trans>
+            <Trans>{t('whats-up')}</Trans>
           </Text>
         </View>
         <View
@@ -52,7 +55,7 @@ export const SplashScreen = ({
             variant="solid"
             color="primary">
             <ButtonText>
-              <Trans>Create account</Trans>
+              <Trans>{t('create-account')}</Trans>
             </ButtonText>
           </Button>
           <Button
@@ -66,7 +69,7 @@ export const SplashScreen = ({
             variant="solid"
             color="secondary">
             <ButtonText>
-              <Trans>Sign in</Trans>
+              <Trans>{t('sign-in')}</Trans>
             </ButtonText>
           </Button>
         </View>

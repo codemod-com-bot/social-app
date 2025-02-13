@@ -5,6 +5,7 @@ import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useFocusEffect} from '@react-navigation/native'
 import {useQueryClient} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {useAccountSwitcher} from '#/lib/hooks/useAccountSwitcher'
 import {logger} from '#/logger'
@@ -30,6 +31,8 @@ import {Text} from '#/components/Typography'
 const COL_WIDTH = 400
 
 export function Deactivated() {
+const { t } = useTranslation("screens");
+
   const {_} = useLingui()
   const t = useTheme()
   const insets = useSafeAreaInsets()
@@ -121,18 +124,14 @@ export function Deactivated() {
 
           <View style={[a.gap_xs, a.pb_3xl]}>
             <Text style={[a.text_xl, a.font_bold, a.leading_snug]}>
-              <Trans>Welcome back!</Trans>
+              <Trans>{t('welcome-back')}</Trans>
             </Text>
             <Text style={[a.text_sm, a.leading_snug]}>
-              <Trans>
-                You previously deactivated @{currentAccount?.handle}.
+              <Trans>{t('previously-deactivated-user')}{currentAccount?.handle}.
               </Trans>
             </Text>
             <Text style={[a.text_sm, a.leading_snug, a.pb_md]}>
-              <Trans>
-                You can reactivate your account to continue logging in. Your
-                profile and posts will be visible to other users.
-              </Trans>
+              <Trans>{t('reactivate-account-info')}</Trans>
             </Text>
 
             <View style={[a.gap_sm]}>
@@ -143,7 +142,7 @@ export function Deactivated() {
                 color="primary"
                 onPress={handleActivate}>
                 <ButtonText>
-                  <Trans>Yes, reactivate my account</Trans>
+                  <Trans>{t('reactivate-account-button')}</Trans>
                 </ButtonText>
                 {pending && <ButtonIcon icon={Loader} position="right" />}
               </Button>
@@ -154,7 +153,7 @@ export function Deactivated() {
                 color="secondary"
                 onPress={onPressLogout}>
                 <ButtonText>
-                  <Trans>Cancel</Trans>
+                  <Trans>{t('cancel-button')}</Trans>
                 </ButtonText>
               </Button>
             </View>
@@ -183,7 +182,7 @@ export function Deactivated() {
             <>
               <Text
                 style={[t.atoms.text_contrast_medium, a.pb_md, a.leading_snug]}>
-                <Trans>Or, log into one of your other accounts.</Trans>
+                <Trans>{t('other-accounts-login-info')}</Trans>
               </Text>
               <AccountList
                 onSelectAccount={onSelectAccount}
@@ -196,7 +195,7 @@ export function Deactivated() {
             <>
               <Text
                 style={[t.atoms.text_contrast_medium, a.pb_md, a.leading_snug]}>
-                <Trans>Or, continue with another account.</Trans>
+                <Trans>{t('continue-with-another-account')}</Trans>
               </Text>
               <Button
                 label={_(msg`Log in or sign up`)}
@@ -205,7 +204,7 @@ export function Deactivated() {
                 color="secondary"
                 onPress={() => setShowLoggedOut(true)}>
                 <ButtonText>
-                  <Trans>Log in or sign up</Trans>
+                  <Trans>{t('login-or-signup')}</Trans>
                 </ButtonText>
               </Button>
             </>

@@ -1,0 +1,10 @@
+{
+  "select-subtitle-file": "Select subtitle file (.vtt)",
+  "gif": "GIF",
+  "captions": "Captions",
+  "alt-text": "Alt text",
+  "alt-text-duplicate": "Alt text",
+  "captions-vtt": "Captions (.vtt)",
+  "ensure-language-selected": "Ensure you have selected a language for each subtitle file.",
+  "done": "Done"
+}

@@ -2,6 +2,7 @@ import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {NativeStackScreenProps} from '@react-navigation/native-stack'
+import { useTranslation } from "react-i18next";
 
 import {CommonNavigatorParams} from '#/lib/routes/types'
 import {useAppPasswordsQuery} from '#/state/queries/app-passwords'
@@ -22,6 +23,8 @@ type Props = NativeStackScreenProps<
   'PrivacyAndSecuritySettings'
 >
 export function PrivacyAndSecuritySettingsScreen({}: Props) {
+const { t } = useTranslation("screens/Settings");
+
   const {_} = useLingui()
   const t = useTheme()
   const {data: appPasswords} = useAppPasswordsQuery()
@@ -33,7 +36,7 @@ export function PrivacyAndSecuritySettingsScreen({}: Props) {
         <Layout.Header.BackButton />
         <Layout.Header.Content>
           <Layout.Header.TitleText>
-            <Trans>Privacy and Security</Trans>
+            <Trans>{t('privacy-and-security')}</Trans>
           </Layout.Header.TitleText>
         </Layout.Header.Content>
         <Layout.Header.Slot />
@@ -51,9 +54,9 @@ export function PrivacyAndSecuritySettingsScreen({}: Props) {
             />
             <SettingsList.ItemText>
               {currentAccount?.emailAuthFactor ? (
-                <Trans>Email 2FA enabled</Trans>
+                <Trans>{t('email-2fa-enabled')}</Trans>
               ) : (
-                <Trans>Two-factor authentication (2FA)</Trans>
+                <Trans>{t('two-factor-authentication')}</Trans>
               )}
             </SettingsList.ItemText>
             <Email2FAToggle />
@@ -63,7 +66,7 @@ export function PrivacyAndSecuritySettingsScreen({}: Props) {
             label={_(msg`App passwords`)}>
             <SettingsList.ItemIcon icon={KeyIcon} />
             <SettingsList.ItemText>
-              <Trans>App passwords</Trans>
+              <Trans>{t('app-passwords')}</Trans>
             </SettingsList.ItemText>
             {appPasswords && appPasswords.length > 0 && (
               <SettingsList.BadgeText>
@@ -75,7 +78,7 @@ export function PrivacyAndSecuritySettingsScreen({}: Props) {
           <SettingsList.Group>
             <SettingsList.ItemIcon icon={EyeSlashIcon} />
             <SettingsList.ItemText>
-              <Trans>Logged-out visibility</Trans>
+              <Trans>{t('logged-out-visibility')}</Trans>
             </SettingsList.ItemText>
             <PwiOptOut />
           </SettingsList.Group>
@@ -85,13 +88,7 @@ export function PrivacyAndSecuritySettingsScreen({}: Props) {
                 <Admonition.Icon />
                 <View style={[a.flex_1, a.gap_sm]}>
                   <Admonition.Text>
-                    <Trans>
-                      Note: Bluesky is an open and public network. This setting
-                      only limits the visibility of your content on the Bluesky
-                      app and website, and other apps may not respect this
-                      setting. Your content may still be shown to logged-out
-                      users by other apps and websites.
-                    </Trans>
+                    <Trans>{t('bluesky-visibility-note')}</Trans>
                   </Admonition.Text>
                   <Admonition.Text>
                     <InlineLinkText
@@ -99,7 +96,7 @@ export function PrivacyAndSecuritySettingsScreen({}: Props) {
                         msg`Learn more about what is public on Bluesky.`,
                       )}
                       to="https://blueskyweb.zendesk.com/hc/en-us/articles/15835264007693-Data-Privacy">
-                      <Trans>Learn more about what is public on Bluesky.</Trans>
+                      <Trans>{t('learn-more-public-content')}</Trans>
                     </InlineLinkText>
                   </Admonition.Text>
                 </View>

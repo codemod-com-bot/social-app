@@ -22,6 +22,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useQueryClient} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {HITSLOP_20} from '#/lib/constants'
 import {usePalette} from '#/lib/hooks/usePalette'
@@ -57,6 +58,8 @@ export function MaybeQuoteEmbed({
   allowNestedQuotes?: boolean
   viewContext?: QuoteEmbedViewContext
 }) {
+const { t } = useTranslation("view/com/util/post-embeds");
+
   const t = useTheme()
   const pal = usePalette('default')
   const {currentAccount} = useSession()
@@ -80,7 +83,7 @@ export function MaybeQuoteEmbed({
         style={[styles.errorContainer, a.border, t.atoms.border_contrast_low]}>
         <InfoCircleIcon size={18} style={pal.text} />
         <Text type="lg" style={pal.text}>
-          <Trans>Blocked</Trans>
+          <Trans>{t('status-blocked')}</Trans>
         </Text>
       </View>
     )
@@ -90,7 +93,7 @@ export function MaybeQuoteEmbed({
         style={[styles.errorContainer, a.border, t.atoms.border_contrast_low]}>
         <InfoCircleIcon size={18} style={pal.text} />
         <Text type="lg" style={pal.text}>
-          <Trans>Deleted</Trans>
+          <Trans>{t('status-deleted')}</Trans>
         </Text>
       </View>
     )
@@ -104,9 +107,9 @@ export function MaybeQuoteEmbed({
         <InfoCircleIcon size={18} style={pal.text} />
         <Text type="lg" style={pal.text}>
           {isViewerOwner ? (
-            <Trans>Removed by you</Trans>
+            <Trans>{t('action-removed-by-you')}</Trans>
           ) : (
-            <Trans>Removed by author</Trans>
+            <Trans>{t('action-removed-by-author')}</Trans>
           )}
         </Text>
       </View>

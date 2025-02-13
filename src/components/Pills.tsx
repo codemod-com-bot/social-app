@@ -2,6 +2,7 @@ import React from 'react'
 import {View} from 'react-native'
 import {BSKY_LABELER_DID, ModerationCause} from '@atproto/api'
 import {Trans} from '@lingui/macro'
+import { useTranslation } from "react-i18next";
 
 import {useModerationCauseDescription} from '#/lib/moderation/useModerationCauseDescription'
 import {UserAvatar} from '#/view/com/util/UserAvatar'
@@ -152,6 +153,8 @@ export function Label({
 }
 
 export function FollowsYou({size = 'sm'}: CommonProps) {
+const { t } = useTranslation("components");
+
   const t = useTheme()
 
   const variantStyles = React.useMemo(() => {
@@ -172,7 +175,7 @@ export function FollowsYou({size = 'sm'}: CommonProps) {
   return (
     <View style={[variantStyles, a.justify_center, t.atoms.bg_contrast_25]}>
       <Text style={[a.text_xs, a.leading_tight]}>
-        <Trans>Follows You</Trans>
+        <Trans>{t('follows-you')}</Trans>
       </Text>
     </View>
   )

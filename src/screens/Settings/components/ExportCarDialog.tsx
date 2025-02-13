@@ -2,6 +2,7 @@ import React from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { Trans,useTranslation } from "react-i18next";
 
 import {saveBytesToDisk} from '#/lib/media/manip'
 import {logger} from '#/logger'
@@ -20,6 +21,8 @@ export function ExportCarDialog({
 }: {
   control: Dialog.DialogOuterProps['control']
 }) {
+const { t } = useTranslation("screens/Settings/components");
+
   const {_} = useLingui()
   const t = useTheme()
   const agent = useAgent()
@@ -59,15 +62,10 @@ export function ExportCarDialog({
         accessibilityLabelledBy="dialog-title">
         <View style={[a.relative, a.gap_lg, a.w_full]}>
           <Text nativeID="dialog-title" style={[a.text_2xl, a.font_bold]}>
-            <Trans>Export My Data</Trans>
+            <Trans>{t('export-my-data')}</Trans>
           </Text>
           <Text nativeID="dialog-description" style={[a.text_sm]}>
-            <Trans>
-              Your account repository, containing all public data records, can
-              be downloaded as a "CAR" file. This file does not include media
-              embeds, such as images, or your private data, which must be
-              fetched separately.
-            </Trans>
+            <Trans>{t('account-repository-download-info')}</Trans>
           </Text>
 
           <Button
@@ -79,7 +77,7 @@ export function ExportCarDialog({
             onPress={download}>
             <ButtonIcon icon={DownloadIcon} />
             <ButtonText>
-              <Trans>Download CAR file</Trans>
+              <Trans>{t('download-car-file')}</Trans>
             </ButtonText>
             {loading && <ButtonIcon icon={Loader} />}
           </Button>
@@ -91,17 +89,14 @@ export function ExportCarDialog({
               a.leading_snug,
               a.flex_1,
             ]}>
-            <Trans>
-              This feature is in beta. You can read more about repository
-              exports in{' '}
-              <InlineLinkText
+            <Trans><Trans
+i18nKey="beta-feature-repository-exports"
+components={{"0": <InlineLinkText
                 label={_(msg`View blogpost for more details`)}
                 to="https://docs.bsky.app/blog/repo-export"
-                style={[a.text_sm]}>
-                this blogpost
-              </InlineLinkText>
-              .
-            </Trans>
+                style={[a.text_sm]} />}}
+/>
+              </Trans>
           </Text>
         </View>
       </Dialog.ScrollableInner>

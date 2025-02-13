@@ -4,6 +4,7 @@ import {ComAtprotoModerationDefs} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useMutation} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {logger} from '#/logger'
 import {useAgent, useSession} from '#/state/session'
@@ -15,6 +16,8 @@ import {Loader} from '#/components/Loader'
 import {Text} from '#/components/Typography'
 
 export function ChatDisabled() {
+const { t } = useTranslation("screens/Messages/components");
+
   const t = useTheme()
   return (
     <View style={[a.p_md]}>
@@ -22,13 +25,10 @@ export function ChatDisabled() {
         style={[a.align_start, a.p_xl, a.rounded_md, t.atoms.bg_contrast_25]}>
         <Text
           style={[a.text_md, a.font_bold, a.pb_sm, t.atoms.text_contrast_high]}>
-          <Trans>Your chats have been disabled</Trans>
+          <Trans>{t('chats-disabled')}</Trans>
         </Text>
         <Text style={[a.text_sm, a.leading_snug, t.atoms.text_contrast_medium]}>
-          <Trans>
-            Our moderators have reviewed reports and decided to disable your
-            access to chats on Bluesky.
-          </Trans>
+          <Trans>{t('moderation-decision-disable-access')}</Trans>
         </Text>
         <AppealDialog />
       </View>
@@ -62,6 +62,8 @@ function AppealDialog() {
 }
 
 function DialogInner() {
+const { t } = useTranslation("screens/Messages/components");
+
   const {_} = useLingui()
   const control = Dialog.useDialogContext()
   const [details, setDetails] = useState('')
@@ -98,10 +100,10 @@ function DialogInner() {
   return (
     <Dialog.ScrollableInner label={_(msg`Appeal this decision`)}>
       <Text style={[a.text_2xl, a.font_bold, a.pb_xs, a.leading_tight]}>
-        <Trans>Appeal this decision</Trans>
+        <Trans>{t('appeal-decision')}</Trans>
       </Text>
       <Text style={[a.text_md, a.leading_snug]}>
-        <Trans>This appeal will be sent to Bluesky's moderation service.</Trans>
+        <Trans>{t('appeal-sent-to-moderation-service')}</Trans>
       </Text>
       <View style={[a.my_md]}>
         <Dialog.Input

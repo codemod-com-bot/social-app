@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useFocusEffect} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {CommonNavigatorParams, NativeStackScreenProps} from '#/lib/routes/types'
@@ -19,6 +20,8 @@ type Props = NativeStackScreenProps<
   'CommunityGuidelines'
 >
 export const CommunityGuidelinesScreen = (_props: Props) => {
+const { t } = useTranslation("view/screens");
+
   const pal = usePalette('default')
   const {_} = useLingui()
   const setMinimalShellMode = useSetMinimalShellMode()
@@ -35,12 +38,11 @@ export const CommunityGuidelinesScreen = (_props: Props) => {
       <ScrollView style={[s.hContentRegion, pal.view]}>
         <View style={[s.p20]}>
           <Text style={pal.text}>
-            <Trans>
-              The Community Guidelines have been moved to{' '}
+            <Trans>{t('community-guidelines-moved')}
               <TextLink
                 style={pal.link}
                 href="https://bsky.social/about/support/community-guidelines"
-                text="bsky.social/about/support/community-guidelines"
+                text={t('community-guidelines-link')}
               />
             </Trans>
           </Text>

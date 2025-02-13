@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {AppBskyActorDefs, ModerationDecision} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {useProfileShadow} from '#/state/cache/profile-shadow'
 import {useProfileBlockMutationQueue} from '#/state/queries/profile'
@@ -26,6 +27,8 @@ export function MessagesListBlockedFooter({
   hasMessages: boolean
   moderation: ModerationDecision
 }) {
+const { t } = useTranslation("components/dms");
+
   const t = useTheme()
   const {gtMobile} = useBreakpoints()
   const {_} = useLingui()
@@ -62,9 +65,9 @@ export function MessagesListBlockedFooter({
       <Divider />
       <Text style={[a.text_md, a.font_bold, a.text_center]}>
         {isBlocking ? (
-          <Trans>You have blocked this user</Trans>
+          <Trans>{t('user-blocked-notification')}</Trans>
         ) : (
-          <Trans>This user has blocked you</Trans>
+          <Trans>{t('you-blocked-notification')}</Trans>
         )}
       </Text>
 
@@ -77,7 +80,7 @@ export function MessagesListBlockedFooter({
           style={[a.flex_1]}
           onPress={leaveConvoControl.open}>
           <ButtonText style={{color: t.palette.negative_500}}>
-            <Trans>Leave chat</Trans>
+            <Trans>{t('leave-chat-action')}</Trans>
           </ButtonText>
         </Button>
         <Button
@@ -88,7 +91,7 @@ export function MessagesListBlockedFooter({
           style={[a.flex_1]}
           onPress={reportControl.open}>
           <ButtonText style={{color: t.palette.negative_500}}>
-            <Trans>Report</Trans>
+            <Trans>{t('report-action')}</Trans>
           </ButtonText>
         </Button>
         {isBlocking && gtMobile && (
@@ -100,7 +103,7 @@ export function MessagesListBlockedFooter({
             style={[a.flex_1]}
             onPress={onUnblockPress}>
             <ButtonText style={{color: t.palette.primary_500}}>
-              <Trans>Unblock</Trans>
+              <Trans>{t('unblock-action')}</Trans>
             </ButtonText>
           </Button>
         )}
@@ -115,7 +118,7 @@ export function MessagesListBlockedFooter({
             style={[a.flex_1]}
             onPress={onUnblockPress}>
             <ButtonText style={{color: t.palette.primary_500}}>
-              <Trans>Unblock</Trans>
+              <Trans>{t('unblock-action-duplicate')}</Trans>
             </ButtonText>
           </Button>
         </View>

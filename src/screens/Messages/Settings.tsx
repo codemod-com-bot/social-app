@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {NativeStackScreenProps} from '@react-navigation/native-stack'
+import { useTranslation } from "react-i18next";
 
 import {CommonNavigatorParams} from '#/lib/routes/types'
 import {isNative} from '#/platform/detection'
@@ -22,6 +23,8 @@ type AllowIncoming = 'all' | 'none' | 'following'
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, 'MessagesSettings'>
 export function MessagesSettingsScreen({}: Props) {
+const { t } = useTranslation("screens/Messages");
+
   const {_} = useLingui()
   const {currentAccount} = useSession()
   const {data: profile} = useProfileQuery({
@@ -59,7 +62,7 @@ export function MessagesSettingsScreen({}: Props) {
         <Layout.Header.BackButton />
         <Layout.Header.Content>
           <Layout.Header.TitleText>
-            <Trans>Chat Settings</Trans>
+            <Trans>{t('chat-settings')}</Trans>
           </Layout.Header.TitleText>
         </Layout.Header.Content>
         <Layout.Header.Slot />
@@ -67,7 +70,7 @@ export function MessagesSettingsScreen({}: Props) {
       <Layout.Content>
         <View style={[a.p_lg, a.gap_md]}>
           <Text style={[a.text_lg, a.font_bold]}>
-            <Trans>Allow new messages from</Trans>
+            <Trans>{t('allow-new-messages-from')}</Trans>
           </Text>
           <Toggle.Group
             label={_(msg`Allow new messages from`)}
@@ -83,7 +86,7 @@ export function MessagesSettingsScreen({}: Props) {
                 label={_(msg`Everyone`)}
                 style={[a.justify_between, a.py_sm]}>
                 <Toggle.LabelText>
-                  <Trans>Everyone</Trans>
+                  <Trans>{t('everyone')}</Trans>
                 </Toggle.LabelText>
                 <Toggle.Radio />
               </Toggle.Item>
@@ -92,7 +95,7 @@ export function MessagesSettingsScreen({}: Props) {
                 label={_(msg`Users I follow`)}
                 style={[a.justify_between, a.py_sm]}>
                 <Toggle.LabelText>
-                  <Trans>Users I follow</Trans>
+                  <Trans>{t('users-i-follow')}</Trans>
                 </Toggle.LabelText>
                 <Toggle.Radio />
               </Toggle.Item>
@@ -101,23 +104,20 @@ export function MessagesSettingsScreen({}: Props) {
                 label={_(msg`No one`)}
                 style={[a.justify_between, a.py_sm]}>
                 <Toggle.LabelText>
-                  <Trans>No one</Trans>
+                  <Trans>{t('no-one')}</Trans>
                 </Toggle.LabelText>
                 <Toggle.Radio />
               </Toggle.Item>
             </View>
           </Toggle.Group>
           <Admonition type="tip">
-            <Trans>
-              You can continue ongoing conversations regardless of which setting
-              you choose.
-            </Trans>
+            <Trans>{t('ongoing-conversations-notice')}</Trans>
           </Admonition>
           {isNative && (
             <>
               <Divider style={a.my_md} />
               <Text style={[a.text_lg, a.font_bold]}>
-                <Trans>Notification Sounds</Trans>
+                <Trans>{t('notification-sounds')}</Trans>
               </Text>
               <Toggle.Group
                 label={_(msg`Notification sounds`)}
@@ -130,7 +130,7 @@ export function MessagesSettingsScreen({}: Props) {
                     label={_(msg`Enabled`)}
                     style={[a.justify_between, a.py_sm]}>
                     <Toggle.LabelText>
-                      <Trans>Enabled</Trans>
+                      <Trans>{t('enabled')}</Trans>
                     </Toggle.LabelText>
                     <Toggle.Radio />
                   </Toggle.Item>
@@ -139,7 +139,7 @@ export function MessagesSettingsScreen({}: Props) {
                     label={_(msg`Disabled`)}
                     style={[a.justify_between, a.py_sm]}>
                     <Toggle.LabelText>
-                      <Trans>Disabled</Trans>
+                      <Trans>{t('disabled')}</Trans>
                     </Toggle.LabelText>
                     <Toggle.Radio />
                   </Toggle.Item>

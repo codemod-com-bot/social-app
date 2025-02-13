@@ -11,6 +11,7 @@ import {ComAtprotoServerListAppPasswords} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {NativeStackScreenProps} from '@react-navigation/native-stack'
+import { useTranslation } from "react-i18next";
 
 import {CommonNavigatorParams} from '#/lib/routes/types'
 import {cleanError} from '#/lib/strings/errors'
@@ -38,6 +39,8 @@ import * as SettingsList from './components/SettingsList'
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, 'AppPasswords'>
 export function AppPasswordsScreen({}: Props) {
+const { t } = useTranslation("screens/Settings");
+
   const {_} = useLingui()
   const {data: appPasswords, error} = useAppPasswordsQuery()
   const createAppPasswordControl = useDialogControl()
@@ -48,7 +51,7 @@ export function AppPasswordsScreen({}: Props) {
         <Layout.Header.BackButton />
         <Layout.Header.Content>
           <Layout.Header.TitleText>
-            <Trans>App Passwords</Trans>
+            <Trans>{t('app-passwords-title')}</Trans>
           </Layout.Header.TitleText>
         </Layout.Header.Content>
         <Layout.Header.Slot />
@@ -64,10 +67,7 @@ export function AppPasswordsScreen({}: Props) {
           <SettingsList.Container>
             <SettingsList.Item>
               <Admonition type="tip" style={[a.flex_1]}>
-                <Trans>
-                  Use app passwords to sign in to other Bluesky clients without
-                  giving full access to your account or password.
-                </Trans>
+                <Trans>{t('app-passwords-description')}</Trans>
               </Admonition>
             </SettingsList.Item>
             <SettingsList.Item>
@@ -80,7 +80,7 @@ export function AppPasswordsScreen({}: Props) {
                 style={[a.flex_1]}>
                 <ButtonIcon icon={PlusIcon} />
                 <ButtonText>
-                  <Trans>Add App Password</Trans>
+                  <Trans>{t('add-app-password-button')}</Trans>
                 </ButtonText>
               </Button>
             </SettingsList.Item>
@@ -137,6 +137,8 @@ function AppPasswordCard({
 }: {
   appPassword: ComAtprotoServerListAppPasswords.AppPassword
 }) {
+const { t } = useTranslation("screens/Settings");
+
   const t = useTheme()
   const {i18n, _} = useLingui()
   const deleteControl = Prompt.usePromptControl()
@@ -171,8 +173,7 @@ function AppPasswordCard({
             {appPassword.name}
           </Text>
           <Text style={[t.atoms.text_contrast_medium]}>
-            <Trans>
-              Created{' '}
+            <Trans>{t('created-status')}
               {i18n.date(appPassword.createdAt, {
                 year: 'numeric',
                 month: 'numeric',
@@ -197,7 +198,7 @@ function AppPasswordCard({
         <View style={[a.flex_row, a.gap_sm, a.align_center, a.mt_md]}>
           <WarningIcon style={[{color: colors.warning[t.scheme]}]} />
           <Text style={t.atoms.text_contrast_high}>
-            <Trans>Allows access to direct messages</Trans>
+            <Trans>{t('direct-messages-access')}</Trans>
           </Text>
         </View>
       )}

@@ -2,6 +2,7 @@ import {Pressable, StyleSheet, Text, View} from 'react-native'
 import {LinearGradient} from 'expo-linear-gradient'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
@@ -14,6 +15,8 @@ export const ConfirmLanguagesButton = ({
   onPress: () => void
   extraText?: string
 }) => {
+const { t } = useTranslation("view/com/modals/lang-settings");
+
   const pal = usePalette('default')
   const {_} = useLingui()
   const {isMobile} = useWebMediaQueries()
@@ -39,7 +42,7 @@ export const ConfirmLanguagesButton = ({
           end={{x: 1, y: 1}}
           style={[styles.btn]}>
           <Text style={[s.white, s.bold, s.f18]}>
-            <Trans>Done{extraText}</Trans>
+            <Trans>{t('done-with-extra-text', { extraText })}</Trans>
           </Text>
         </LinearGradient>
       </Pressable>

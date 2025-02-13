@@ -16,6 +16,7 @@ import {
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useQueryClient} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {isReasonFeedSource, ReasonFeedSource} from '#/lib/api/feed/types'
 import {MAX_POST_LINES} from '#/lib/constants'
@@ -148,6 +149,8 @@ let FeedItemInner = ({
   post: Shadow<AppBskyFeedDefs.PostView>
   rootPost: AppBskyFeedDefs.PostView
 }): React.ReactNode => {
+const { t } = useTranslation("view/com/posts");
+
   const queryClient = useQueryClient()
   const {openComposer} = useComposerControls()
   const pal = usePalette('default')
@@ -279,8 +282,7 @@ let FeedItemInner = ({
                 style={pal.textLight}
                 lineHeight={1.2}
                 numberOfLines={1}>
-                <Trans context="from-feed">
-                  From{' '}
+                <Trans context="from-feed">{t('from-space')}
                   <FeedNameText
                     type="sm-bold"
                     uri={reason.uri}
@@ -317,10 +319,9 @@ let FeedItemInner = ({
                 lineHeight={1.2}
                 numberOfLines={1}>
                 {isOwner ? (
-                  <Trans>Reposted by you</Trans>
+                  <Trans>{t('reposted-by-you')}</Trans>
                 ) : (
-                  <Trans>
-                    Reposted by{' '}
+                  <Trans>{t('reposted-by-space')}
                     <ProfileHoverCard inline did={reason.by.did}>
                       <TextLinkOnWebOnly
                         type="sm-bold"
@@ -360,7 +361,7 @@ let FeedItemInner = ({
                 style={pal.textLight}
                 lineHeight={1.2}
                 numberOfLines={1}>
-                <Trans>Pinned</Trans>
+                <Trans>{t('pinned')}</Trans>
               </Text>
             </View>
           ) : null}
@@ -536,22 +537,23 @@ function ReplyToLabel({
   blocked?: boolean
   notFound?: boolean
 }) {
+const { t } = useTranslation("view/com/posts");
+
   const pal = usePalette('default')
   const {currentAccount} = useSession()
 
   let label
   if (blocked) {
-    label = <Trans context="description">Reply to a blocked post</Trans>
+    label = <Trans context="description">{t('reply-to-blocked-post')}</Trans>
   } else if (notFound) {
-    label = <Trans context="description">Reply to a post</Trans>
+    label = <Trans context="description">{t('reply-to-post')}</Trans>
   } else if (profile != null) {
     const isMe = profile.did === currentAccount?.did
     if (isMe) {
-      label = <Trans context="description">Reply to you</Trans>
+      label = <Trans context="description">{t('reply-to-you')}</Trans>
     } else {
       label = (
-        <Trans context="description">
-          Reply to{' '}
+        <Trans context="description">{t('reply-to-space')}
           <ProfileHoverCard inline did={profile.did}>
             <TextLinkOnWebOnly
               type="md"

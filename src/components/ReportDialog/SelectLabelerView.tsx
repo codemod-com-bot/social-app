@@ -2,6 +2,7 @@ import {View} from 'react-native'
 import {AppBskyLabelerDefs} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {getLabelingServiceTitle} from '#/lib/moderation'
 import {atoms as a, useBreakpoints, useTheme} from '#/alf'
@@ -17,6 +18,8 @@ export function SelectLabelerView({
   labelers: AppBskyLabelerDefs.LabelerViewDetailed[]
   onSelectLabeler: (v: string) => void
 }) {
+const { t } = useTranslation("components/ReportDialog");
+
   const t = useTheme()
   const {_} = useLingui()
   const {gtMobile} = useBreakpoints()
@@ -25,10 +28,10 @@ export function SelectLabelerView({
     <View style={[a.gap_lg]}>
       <View style={[a.justify_center, gtMobile ? a.gap_sm : a.gap_xs]}>
         <Text style={[a.text_2xl, a.font_bold]}>
-          <Trans>Select moderator</Trans>
+          <Trans>{t('select-moderator')}</Trans>
         </Text>
         <Text style={[a.text_md, t.atoms.text_contrast_medium]}>
-          <Trans>To whom would you like to send this report?</Trans>
+          <Trans>{t('send-report-question')}</Trans>
         </Text>
       </View>
 

@@ -1,0 +1,10 @@
+{
+  "oh-no-something-went-wrong": "Oh no! Something went wrong.",
+  "user-interests-question": "What are your interests?",
+  "connection-failure-message": "We weren't able to connect. Please try again to continue setting up your account. If it continues to fail, you can skip this flow.",
+  "customize-experience-note": "We'll use this to help customize your experience.",
+  "error-label": "Error:",
+  "retry-button": "Retry",
+  "skip-button": "Skip",
+  "continue-button": "Continue"
+}

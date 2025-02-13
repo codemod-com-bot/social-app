@@ -8,6 +8,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
 import {Trans} from '@lingui/macro'
+import { useTranslation } from "react-i18next";
 
 import {
   ScaleAndFadeIn,
@@ -25,6 +26,8 @@ export function NewMessagesPill({
 }: {
   onPress: () => void
 }) {
+const { t } = useTranslation("components/dms");
+
   const t = useTheme()
   const playHaptic = useHaptics()
   const {bottom: bottomInset} = useSafeAreaInsets()
@@ -89,7 +92,7 @@ export function NewMessagesPill({
         onPressIn={onPressIn}
         onPressOut={onPressOut}>
         <Text style={[a.font_bold]}>
-          <Trans>New messages</Trans>
+          <Trans>{t('new-messages')}</Trans>
         </Text>
       </AnimatedPressable>
     </View>

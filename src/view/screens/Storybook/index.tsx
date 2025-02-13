@@ -1,6 +1,7 @@
 import React from 'react'
 import {ScrollView, View} from 'react-native'
 import {useNavigation} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {NavigationProp} from '#/lib/routes/types'
 import {isWeb} from '#/platform/detection'
@@ -39,6 +40,8 @@ export function Storybook() {
 }
 
 function StorybookInner() {
+const { t } = useTranslation("view/screens/Storybook");
+
   const t = useTheme()
   const {setColorMode, setDarkTheme} = useSetThemePrefs()
   const [showContainedList, setShowContainedList] = React.useState(false)
@@ -56,7 +59,7 @@ function StorybookInner() {
                 size="small"
                 label='Set theme to "system"'
                 onPress={() => setColorMode('system')}>
-                <ButtonText>System</ButtonText>
+                <ButtonText>{t('system')}</ButtonText>
               </Button>
               <Button
                 variant="solid"
@@ -64,7 +67,7 @@ function StorybookInner() {
                 size="small"
                 label='Set theme to "light"'
                 onPress={() => setColorMode('light')}>
-                <ButtonText>Light</ButtonText>
+                <ButtonText>{t('light')}</ButtonText>
               </Button>
               <Button
                 variant="solid"
@@ -75,7 +78,7 @@ function StorybookInner() {
                   setColorMode('dark')
                   setDarkTheme('dim')
                 }}>
-                <ButtonText>Dim</ButtonText>
+                <ButtonText>{t('dim')}</ButtonText>
               </Button>
               <Button
                 variant="solid"
@@ -86,7 +89,7 @@ function StorybookInner() {
                   setColorMode('dark')
                   setDarkTheme('dark')
                 }}>
-                <ButtonText>Dark</ButtonText>
+                <ButtonText>{t('dark')}</ButtonText>
               </Button>
             </View>
 
@@ -97,7 +100,7 @@ function StorybookInner() {
               onPress={() => navigation.navigate('SharedPreferencesTester')}
               label="two"
               testID="sharedPrefsTestOpenBtn">
-              <ButtonText>Open Shared Prefs Tester</ButtonText>
+              <ButtonText>{t('open-shared-preferences-tester')}</ButtonText>
             </Button>
 
             <Admonitions />
@@ -133,7 +136,7 @@ function StorybookInner() {
               size="large"
               label="Switch to Contained List"
               onPress={() => setShowContainedList(true)}>
-              <ButtonText>Switch to Contained List</ButtonText>
+              <ButtonText>{t('switch-to-contained-list')}</ButtonText>
             </Button>
           </>
         ) : (
@@ -144,7 +147,7 @@ function StorybookInner() {
               size="large"
               label="Switch to Storybook"
               onPress={() => setShowContainedList(false)}>
-              <ButtonText>Switch to Storybook</ButtonText>
+              <ButtonText>{t('switch-to-storybook')}</ButtonText>
             </Button>
             <ListContained />
           </>

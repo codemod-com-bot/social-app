@@ -5,6 +5,7 @@ import {Image} from 'expo-image'
 import {ModerationUI} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {
@@ -38,6 +39,8 @@ export function UserBanner({
   moderation?: ModerationUI
   onSelectNewBanner?: (img: RNImage | null) => void
 }) {
+const { t } = useTranslation("view/com/util");
+
   const pal = usePalette('default')
   const theme = useTheme()
   const t = useAlfTheme()
@@ -123,7 +126,7 @@ export function UserBanner({
                 label={_(msg`Upload from Camera`)}
                 onPress={onOpenCamera}>
                 <Menu.ItemText>
-                  <Trans>Upload from Camera</Trans>
+                  <Trans>{t('upload-from-camera')}</Trans>
                 </Menu.ItemText>
                 <Menu.ItemIcon icon={Camera} />
               </Menu.Item>
@@ -135,9 +138,9 @@ export function UserBanner({
               onPress={onOpenLibrary}>
               <Menu.ItemText>
                 {isNative ? (
-                  <Trans>Upload from Library</Trans>
+                  <Trans>{t('upload-from-library')}</Trans>
                 ) : (
-                  <Trans>Upload from Files</Trans>
+                  <Trans>{t('upload-from-files')}</Trans>
                 )}
               </Menu.ItemText>
               <Menu.ItemIcon icon={Library} />
@@ -152,7 +155,7 @@ export function UserBanner({
                   label={_(`Remove Banner`)}
                   onPress={onRemoveBanner}>
                   <Menu.ItemText>
-                    <Trans>Remove Banner</Trans>
+                    <Trans>{t('remove-banner')}</Trans>
                   </Menu.ItemText>
                   <Menu.ItemIcon icon={Trash} />
                 </Menu.Item>

@@ -1,0 +1,10 @@
+{
+  "creator-blocked": "Creator has been blocked",
+  "list-hidden": "List has been hidden",
+  "creator-or-you-blocked": "Either the creator of this list has blocked you or you have blocked the creator.",
+  "list-violations-warning": "This list - created by <0>{{isOwnerMsgYouSanitizeHandleListCreatorHandle}}</0>  - contains possible violations of Bluesky's community guidelines in its name or description.",
+  "removed-from-saved-feeds": "Removed from saved feeds",
+  "show-anyway": "Show anyway",
+  "unsubscribe-from-list": "Unsubscribe from list",
+  "go-back": "Go Back"
+}

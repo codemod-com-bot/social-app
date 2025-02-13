@@ -7,6 +7,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useQueryClient} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {
@@ -268,6 +269,8 @@ let EditableUserAvatar = ({
   avatar,
   onSelectNewAvatar,
 }: EditableUserAvatarProps): React.ReactNode => {
+const { t } = useTranslation("view/com/util");
+
   const t = useTheme()
   const pal = usePalette('default')
   const {_} = useLingui()
@@ -372,7 +375,7 @@ let EditableUserAvatar = ({
               label={_(msg`Upload from Camera`)}
               onPress={onOpenCamera}>
               <Menu.ItemText>
-                <Trans>Upload from Camera</Trans>
+                <Trans>{t('upload-from-camera')}</Trans>
               </Menu.ItemText>
               <Menu.ItemIcon icon={Camera} />
             </Menu.Item>
@@ -384,9 +387,9 @@ let EditableUserAvatar = ({
             onPress={onOpenLibrary}>
             <Menu.ItemText>
               {isNative ? (
-                <Trans>Upload from Library</Trans>
+                <Trans>{t('upload-from-library')}</Trans>
               ) : (
-                <Trans>Upload from Files</Trans>
+                <Trans>{t('upload-from-files')}</Trans>
               )}
             </Menu.ItemText>
             <Menu.ItemIcon icon={Library} />
@@ -401,7 +404,7 @@ let EditableUserAvatar = ({
                 label={_(`Remove Avatar`)}
                 onPress={onRemoveAvatar}>
                 <Menu.ItemText>
-                  <Trans>Remove Avatar</Trans>
+                  <Trans>{t('remove-avatar')}</Trans>
                 </Menu.ItemText>
                 <Menu.ItemIcon icon={Trash} />
               </Menu.Item>

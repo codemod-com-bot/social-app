@@ -1,0 +1,15 @@
+{
+  "authors-liked-post": "{{firstAuthorLink}} and <0>{{pluralValueAdditionalAuthorsCountOneFormattedAuthorsCountOtherOtherFormattedAuthorsCountOthers}}</0>  liked your post",
+  "single-author-liked-post": "{{firstAuthorLink}} liked your post",
+  "authors-reposted-post": "{{firstAuthorLink}} and <0>{{pluralValueAdditionalAuthorsCountOneFormattedAuthorsCountOtherOtherFormattedAuthorsCountOthers}}</0>  reposted your post",
+  "single-author-reposted-post": "{{firstAuthorLink}} reposted your post",
+  "single-author-followed-back": "{{firstAuthorLink}} followed you back",
+  "authors-followed-you": "{{firstAuthorLink}} and <0>{{pluralValueAdditionalAuthorsCountOneFormattedAuthorsCountOtherOtherFormattedAuthorsCountOthers}}</0>  followed you",
+  "single-author-followed-you": "{{firstAuthorLink}} followed you",
+  "authors-liked-custom-feed": "{{firstAuthorLink}} and <0>{{pluralValueAdditionalAuthorsCountOneFormattedAuthorsCountOtherOtherFormattedAuthorsCountOthers}}</0>  liked your custom feed",
+  "single-author-liked-custom-feed": "{{firstAuthorLink}} liked your custom feed",
+  "authors-signed-up-starter-pack": "{{firstAuthorLink}} and <0>{{pluralValueAdditionalAuthorsCountOneFormattedAuthorsCountOtherOtherFormattedAuthorsCountOthers}}</0>  signed up with your starter pack",
+  "single-author-signed-up-starter-pack": "{{firstAuthorLink}} signed up with your starter pack",
+  "say-hello": "Say hello!",
+  "hide": "Hide"
+}

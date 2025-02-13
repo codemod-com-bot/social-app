@@ -1,6 +1,7 @@
 import React from 'react'
 import {StyleSheet, View} from 'react-native'
 import {Trans} from '@lingui/macro'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
@@ -21,6 +22,8 @@ import {ConfirmLanguagesButton} from './ConfirmLanguagesButton'
 export const snapPoints = ['100%']
 
 export function Component() {
+const { t } = useTranslation("view/com/modals/lang-settings");
+
   const {closeModal} = useModalControls()
   const langPrefs = useLanguagePrefs()
   const setLangPrefs = useLanguagePrefsApi()
@@ -74,10 +77,10 @@ export function Component() {
             },
       ]}>
       <Text style={[pal.text, styles.title]}>
-        <Trans>Post Languages</Trans>
+        <Trans>{t('post-languages')}</Trans>
       </Text>
       <Text style={[pal.text, styles.description]}>
-        <Trans>Which languages are used in this post?</Trans>
+        <Trans>{t('languages-used-in-post')}</Trans>
       </Text>
       <ScrollView style={styles.scrollContainer}>
         {languages.map(lang => {

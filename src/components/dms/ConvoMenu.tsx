@@ -8,6 +8,7 @@ import {
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useNavigation} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {NavigationProp} from '#/lib/routes/types'
 import {Shadow} from '#/state/cache/types'
@@ -158,6 +159,8 @@ function MenuContent({
   reportControl: Prompt.PromptControlProps
   blockedByListControl: Prompt.PromptControlProps
 }) {
+const { t } = useTranslation("components/dms");
+
   const navigation = useNavigation<NavigationProp>()
   const {_} = useLingui()
   const {mutate: markAsRead} = useMarkAsReadMutation()
@@ -206,7 +209,7 @@ function MenuContent({
       label={_(msg`Leave conversation`)}
       onPress={() => leaveConvoControl.open()}>
       <Menu.ItemText>
-        <Trans>Leave conversation</Trans>
+        <Trans>{t('leave-conversation')}</Trans>
       </Menu.ItemText>
       <Menu.ItemIcon icon={ArrowBoxLeft} />
     </Menu.Item>
@@ -218,7 +221,7 @@ function MenuContent({
             label={_(msg`Mark as read`)}
             onPress={() => markAsRead({convoId})}>
             <Menu.ItemText>
-              <Trans>Mark as read</Trans>
+              <Trans>{t('mark-as-read')}</Trans>
             </Menu.ItemText>
             <Menu.ItemIcon icon={Bubble} />
           </Menu.Item>
@@ -227,7 +230,7 @@ function MenuContent({
           label={_(msg`Go to user's profile`)}
           onPress={onNavigateToProfile}>
           <Menu.ItemText>
-            <Trans>Go to profile</Trans>
+            <Trans>{t('go-to-profile')}</Trans>
           </Menu.ItemText>
           <Menu.ItemIcon icon={Person} />
         </Menu.Item>
@@ -236,9 +239,9 @@ function MenuContent({
           onPress={() => muteConvo({mute: !convo?.muted})}>
           <Menu.ItemText>
             {convo?.muted ? (
-              <Trans>Unmute conversation</Trans>
+              <Trans>{t('unmute-conversation')}</Trans>
             ) : (
-              <Trans>Mute conversation</Trans>
+              <Trans>{t('mute-conversation')}</Trans>
             )}
           </Menu.ItemText>
           <Menu.ItemIcon icon={convo?.muted ? Unmute : Mute} />
@@ -258,7 +261,7 @@ function MenuContent({
           label={_(msg`Report conversation`)}
           onPress={() => reportControl.open()}>
           <Menu.ItemText>
-            <Trans>Report conversation</Trans>
+            <Trans>{t('report-conversation')}</Trans>
           </Menu.ItemText>
           <Menu.ItemIcon icon={Flag} />
         </Menu.Item>
@@ -269,7 +272,7 @@ function MenuContent({
           label={_(msg`Leave conversation`)}
           onPress={() => leaveConvoControl.open()}>
           <Menu.ItemText>
-            <Trans>Leave conversation</Trans>
+            <Trans>{t('leave-conversation-again')}</Trans>
           </Menu.ItemText>
           <Menu.ItemIcon icon={ArrowBoxLeft} />
         </Menu.Item>

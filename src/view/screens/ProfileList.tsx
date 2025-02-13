@@ -14,6 +14,7 @@ import {useLingui} from '@lingui/react'
 import {useFocusEffect, useIsFocused} from '@react-navigation/native'
 import {useNavigation} from '@react-navigation/native'
 import {useQueryClient} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {useHaptics} from '#/lib/haptics'
 import {usePalette} from '#/lib/hooks/usePalette'
@@ -298,6 +299,8 @@ function Header({
   list: AppBskyGraphDefs.ListView
   preferences: UsePreferencesQueryResponse
 }) {
+const { t } = useTranslation("view/screens");
+
   const pal = usePalette('default')
   const palInverted = usePalette('inverted')
   const {_} = useLingui()
@@ -709,7 +712,7 @@ function Header({
               accessibilityHint="">
               <View style={[palInverted.view, styles.btn]}>
                 <Text style={palInverted.text}>
-                  <Trans>Subscribe</Trans>
+                  <Trans>{t('subscribe-button')}</Trans>
                 </Text>
               </View>
             </NativeDropdown>
@@ -974,6 +977,8 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(
 )
 
 function ErrorScreen({error}: {error: string}) {
+const { t } = useTranslation("view/screens");
+
   const pal = usePalette('default')
   const navigation = useNavigation<NavigationProp>()
   const {_} = useLingui()
@@ -997,7 +1002,7 @@ function ErrorScreen({error}: {error: string}) {
         },
       ]}>
       <Text type="title-lg" style={[pal.text, s.mb10]}>
-        <Trans>Could not load list</Trans>
+        <Trans>{t('load-list-error')}</Trans>
       </Text>
       <Text type="md" style={[pal.text, s.mb20]}>
         {error}
@@ -1011,7 +1016,7 @@ function ErrorScreen({error}: {error: string}) {
           onPress={onPressBack}
           style={{flexShrink: 1}}>
           <Text type="button" style={pal.text}>
-            <Trans>Go Back</Trans>
+            <Trans>{t('go-back-button')}</Trans>
           </Text>
         </Button>
       </View>

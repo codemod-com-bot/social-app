@@ -4,6 +4,7 @@ import React from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 import ReactCrop, {PercentCrop} from 'react-image-crop'
 
 import {
@@ -27,6 +28,8 @@ export const EditImageDialog = (props: EditImageDialogProps) => {
 }
 
 const EditImageInner = ({control, image, onChange}: EditImageDialogProps) => {
+const { t } = useTranslation("view/com/composer/photos");
+
   const {_} = useLingui()
 
   const source = image.source
@@ -59,7 +62,7 @@ const EditImageInner = ({control, image, onChange}: EditImageDialogProps) => {
       <Dialog.Close />
 
       <Text style={[a.text_2xl, a.font_bold, a.leading_tight, a.pb_sm]}>
-        <Trans>Edit image</Trans>
+        <Trans>{t('edit-image')}</Trans>
       </Text>
 
       <View style={[a.align_center]}>
@@ -80,7 +83,7 @@ const EditImageInner = ({control, image, onChange}: EditImageDialogProps) => {
           variant="solid"
           onPress={onPressSubmit}>
           <ButtonText>
-            <Trans>Save</Trans>
+            <Trans>{t('save')}</Trans>
           </ButtonText>
         </Button>
       </View>

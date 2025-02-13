@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import RNPickerSelect, {PickerSelectProps} from 'react-native-picker-select'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {APP_LANGUAGES, LANGUAGES} from '#/lib/../locale/languages'
 import {CommonNavigatorParams, NativeStackScreenProps} from '#/lib/routes/types'
@@ -20,6 +21,8 @@ import * as SettingsList from './components/SettingsList'
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, 'LanguageSettings'>
 export function LanguageSettingsScreen({}: Props) {
+const { t } = useTranslation("screens/Settings");
+
   const {_} = useLingui()
   const langPrefs = useLanguagePrefs()
   const setLangPrefs = useLanguagePrefsApi()
@@ -68,7 +71,7 @@ export function LanguageSettingsScreen({}: Props) {
         <Layout.Header.BackButton />
         <Layout.Header.Content>
           <Layout.Header.TitleText>
-            <Trans>Languages</Trans>
+            <Trans>{t('languages')}</Trans>
           </Layout.Header.TitleText>
         </Layout.Header.Content>
         <Layout.Header.Slot />
@@ -77,14 +80,11 @@ export function LanguageSettingsScreen({}: Props) {
         <SettingsList.Container>
           <SettingsList.Group iconInset={false}>
             <SettingsList.ItemText>
-              <Trans>App Language</Trans>
+              <Trans>{t('app-language')}</Trans>
             </SettingsList.ItemText>
             <View style={[a.gap_md, a.w_full]}>
               <Text style={[a.leading_snug]}>
-                <Trans>
-                  Select your app language for the default text to display in
-                  the app.
-                </Trans>
+                <Trans>{t('select-app-language-description')}</Trans>
               </Text>
               <View style={[a.relative, web([a.w_full, {maxWidth: 400}])]}>
                 <RNPickerSelect
@@ -164,13 +164,11 @@ export function LanguageSettingsScreen({}: Props) {
           <SettingsList.Divider />
           <SettingsList.Group iconInset={false}>
             <SettingsList.ItemText>
-              <Trans>Primary Language</Trans>
+              <Trans>{t('primary-language')}</Trans>
             </SettingsList.ItemText>
             <View style={[a.gap_md, a.w_full]}>
               <Text style={[a.leading_snug]}>
-                <Trans>
-                  Select your preferred language for translations in your feed.
-                </Trans>
+                <Trans>{t('select-preferred-language-description')}</Trans>
               </Text>
               <View style={[a.relative, web([a.w_full, {maxWidth: 400}])]}>
                 <RNPickerSelect
@@ -248,14 +246,11 @@ export function LanguageSettingsScreen({}: Props) {
           <SettingsList.Divider />
           <SettingsList.Group iconInset={false}>
             <SettingsList.ItemText>
-              <Trans>Content Languages</Trans>
+              <Trans>{t('content-languages')}</Trans>
             </SettingsList.ItemText>
             <View style={[a.gap_md]}>
               <Text style={[a.leading_snug]}>
-                <Trans>
-                  Select which languages you want your subscribed feeds to
-                  include. If none are selected, all languages will be shown.
-                </Trans>
+                <Trans>{t('select-subscribed-languages-description')}</Trans>
               </Text>
 
               <Button

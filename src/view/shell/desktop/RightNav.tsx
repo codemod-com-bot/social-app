@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useNavigation} from '@react-navigation/core'
+import { Trans,useTranslation } from "react-i18next";
 
 import {FEEDBACK_FORM_URL, HELP_DESK_URL} from '#/lib/constants'
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
@@ -36,6 +37,8 @@ function useWebQueryParams() {
 }
 
 export function DesktopRightNav({routeName}: {routeName: string}) {
+const { t } = useTranslation("view/shell/desktop");
+
   const t = useTheme()
   const {_} = useLingui()
   const {hasSession, currentAccount} = useSession()
@@ -115,13 +118,13 @@ export function DesktopRightNav({routeName}: {routeName: string}) {
 
       {kawaii && (
         <Text style={[t.atoms.text_contrast_medium, {marginTop: 12}]}>
-          <Trans>
-            Logo by{' '}
-            <InlineLinkText
+          <Trans><Trans
+i18nKey="logo-by-sawaratsuki"
+components={{"0": <InlineLinkText
               label={_(msg`Logo by @sawaratsuki.bsky.social`)}
-              to="/profile/sawaratsuki.bsky.social">
-              @sawaratsuki.bsky.social
-            </InlineLinkText>
+              to="/profile/sawaratsuki.bsky.social" />}}
+/>
+            
           </Trans>
         </Text>
       )}

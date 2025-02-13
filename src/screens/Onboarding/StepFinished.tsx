@@ -6,6 +6,7 @@ import {TID} from '@atproto/common-web'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useQueryClient} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {uploadBlob} from '#/lib/api'
 import {
@@ -46,6 +47,8 @@ import {Loader} from '#/components/Loader'
 import {Text} from '#/components/Typography'
 
 export function StepFinished() {
+const { t } = useTranslation("screens/Onboarding");
+
   const {_} = useLingui()
   const t = useTheme()
   const {state, dispatch} = React.useContext(Context)
@@ -239,10 +242,10 @@ export function StepFinished() {
       <IconCircle icon={Check} style={[a.mb_2xl]} />
 
       <TitleText>
-        <Trans>You're ready to go!</Trans>
+        <Trans>{t('youre-ready-to-go')}</Trans>
       </TitleText>
       <DescriptionText>
-        <Trans>We hope you have a wonderful time. Remember, Bluesky is:</Trans>
+        <Trans>{t('hope-you-have-wonderful-time')}</Trans>
       </DescriptionText>
 
       <View style={[a.pt_5xl, a.gap_3xl]}>
@@ -250,13 +253,11 @@ export function StepFinished() {
           <IconCircle icon={Growth} size="lg" style={{width: 48, height: 48}} />
           <View style={[a.flex_1, a.gap_xs]}>
             <Text style={[a.font_bold, a.text_lg]}>
-              <Trans>Public</Trans>
+              <Trans>{t('public')}</Trans>
             </Text>
             <Text
               style={[t.atoms.text_contrast_medium, a.text_md, a.leading_snug]}>
-              <Trans>
-                Your posts, likes, and blocks are public. Mutes are private.
-              </Trans>
+              <Trans>{t('posts-likes-blocks-public')}</Trans>
             </Text>
           </View>
         </View>
@@ -264,11 +265,11 @@ export function StepFinished() {
           <IconCircle icon={News} size="lg" style={{width: 48, height: 48}} />
           <View style={[a.flex_1, a.gap_xs]}>
             <Text style={[a.font_bold, a.text_lg]}>
-              <Trans>Open</Trans>
+              <Trans>{t('open')}</Trans>
             </Text>
             <Text
               style={[t.atoms.text_contrast_medium, a.text_md, a.leading_snug]}>
-              <Trans>Never lose access to your followers or data.</Trans>
+              <Trans>{t('never-lose-access-followers-data')}</Trans>
             </Text>
           </View>
         </View>
@@ -280,11 +281,11 @@ export function StepFinished() {
           />
           <View style={[a.flex_1, a.gap_xs]}>
             <Text style={[a.font_bold, a.text_lg]}>
-              <Trans>Flexible</Trans>
+              <Trans>{t('flexible')}</Trans>
             </Text>
             <Text
               style={[t.atoms.text_contrast_medium, a.text_md, a.leading_snug]}>
-              <Trans>Choose the algorithms that power your custom feeds.</Trans>
+              <Trans>{t('choose-algorithms-custom-feeds')}</Trans>
             </Text>
           </View>
         </View>
@@ -300,7 +301,7 @@ export function StepFinished() {
           label={_(msg`Complete onboarding and start using your account`)}
           onPress={finishOnboarding}>
           <ButtonText>
-            {saving ? <Trans>Finalizing</Trans> : <Trans>Let's go!</Trans>}
+            {saving ? <Trans>{t('finalizing')}</Trans> : <Trans>{t('lets-go')}</Trans>}
           </ButtonText>
           {saving && <ButtonIcon icon={Loader} position="right" />}
         </Button>

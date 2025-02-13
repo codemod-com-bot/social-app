@@ -1,6 +1,7 @@
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {useProfileQuery} from '#/state/queries/profile'
 import {useSession} from '#/state/session'
@@ -12,6 +13,8 @@ import {ScreenTransition} from '#/components/StarterPack/Wizard/ScreenTransition
 import {Text} from '#/components/Typography'
 
 export function StepDetails() {
+const { t } = useTranslation("screens/StarterPack/Wizard");
+
   const {_} = useLingui()
   const t = useTheme()
   const [state, dispatch] = useWizardState()
@@ -28,17 +31,15 @@ export function StepDetails() {
         <View style={[a.gap_md, a.align_center, a.px_md, a.mb_md]}>
           <StarterPack width={90} gradient="sky" />
           <Text style={[a.font_bold, a.text_3xl]}>
-            <Trans>Invites, but personal</Trans>
+            <Trans>{t('invites-but-personal')}</Trans>
           </Text>
           <Text style={[a.text_center, a.text_md, a.px_md]}>
-            <Trans>
-              Invite your friends to follow your favorite feeds and people
-            </Trans>
+            <Trans>{t('invite-friends-to-follow')}</Trans>
           </Text>
         </View>
         <View>
           <TextField.LabelText>
-            <Trans>What do you want to call your starter pack?</Trans>
+            <Trans>{t('starter-pack-name-prompt')}</Trans>
           </TextField.LabelText>
           <TextField.Root>
             <TextField.Input
@@ -59,7 +60,7 @@ export function StepDetails() {
         </View>
         <View>
           <TextField.LabelText>
-            <Trans>Tell us a little more</Trans>
+            <Trans>{t('tell-us-more')}</Trans>
           </TextField.LabelText>
           <TextField.Root>
             <TextField.Input

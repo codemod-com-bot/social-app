@@ -1,0 +1,7 @@
+{
+  "could-not-fetch-post": "Could not fetch post",
+  "chats-disabled": "Your chats have been disabled",
+  "moderation-decision-disable-access": "Our moderators have reviewed reports and decided to disable your access to chats on Bluesky.",
+  "appeal-decision": "Appeal this decision",
+  "appeal-sent-to-moderation-service": "This appeal will be sent to Bluesky's moderation service."
+}

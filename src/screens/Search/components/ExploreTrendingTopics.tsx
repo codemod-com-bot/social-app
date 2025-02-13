@@ -2,6 +2,7 @@ import React from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {logEvent} from '#/lib/statsig/statsig'
 import {isWeb} from '#/platform/detection'
@@ -34,6 +35,8 @@ export function ExploreTrendingTopics() {
 }
 
 function Inner() {
+const { t } = useTranslation("screens/Search/components");
+
   const t = useTheme()
   const {_} = useLingui()
   const gutters = useGutters([0, 'compact'])
@@ -66,17 +69,17 @@ function Inner() {
               style={{marginLeft: -2}}
             />
             <Text style={[a.text_2xl, a.font_heavy, t.atoms.text]}>
-              <Trans>Trending</Trans>
+              <Trans>{t('trending')}</Trans>
             </Text>
             <View style={[a.py_xs, a.px_sm, a.rounded_sm, a.overflow_hidden]}>
               <GradientFill gradient={tokens.gradients.primary} />
               <Text style={[a.text_sm, a.font_heavy, {color: 'white'}]}>
-                <Trans>BETA</Trans>
+                <Trans>{t('beta')}</Trans>
               </Text>
             </View>
           </View>
           <Text style={[t.atoms.text_contrast_high, a.leading_snug]}>
-            <Trans>What people are posting about.</Trans>
+            <Trans>{t('what-people-are-posting')}</Trans>
           </Text>
         </View>
         <Button

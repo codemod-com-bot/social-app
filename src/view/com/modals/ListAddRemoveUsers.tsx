@@ -10,6 +10,7 @@ import {AppBskyActorDefs, AppBskyGraphDefs} from '@atproto/api'
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {HITSLOP_20} from '#/lib/constants'
 import {useIsKeyboardVisible} from '#/lib/hooks/useIsKeyboardVisible'
@@ -47,6 +48,8 @@ export function Component({
     profile: AppBskyActorDefs.ProfileViewBasic,
   ) => void
 }) {
+const { t } = useTranslation("view/com/modals");
+
   const pal = usePalette('default')
   const {_} = useLingui()
   const {closeModal} = useModalControls()
@@ -125,7 +128,7 @@ export function Component({
                 pal.textLight,
                 {paddingHorizontal: 12, paddingVertical: 16},
               ]}>
-              <Trans>No results found for {query}</Trans>
+              <Trans>{t('no-results-found-for-query', { query })}</Trans>
             </Text>
           )}
         </ScrollView>

@@ -1,0 +1,10 @@
+{
+  "view-profile-link": "By <0>{{sanitizeHandleInfoCreatorHandle}}</0>",
+  "liked-by": "Liked by",
+  "unlike-action": "Unlike",
+  "like-action": "Like",
+  "unpin-feed": "Unpin feed",
+  "pin-feed": "Pin feed",
+  "report-issue": "Something wrong? Let us know.",
+  "report-feed": "Report feed"
+}

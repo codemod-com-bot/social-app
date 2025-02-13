@@ -13,6 +13,7 @@ import {
 } from '@fortawesome/react-native-fontawesome'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
@@ -50,6 +51,8 @@ export function Component() {
 }
 
 export function Inner({invites}: {invites: InviteCodesQueryResponse}) {
+const { t } = useTranslation("view/com/modals");
+
   const pal = usePalette('default')
   const {_} = useLingui()
   const {closeModal} = useModalControls()
@@ -64,10 +67,7 @@ export function Inner({invites}: {invites: InviteCodesQueryResponse}) {
       <View style={[styles.container, pal.view]} testID="inviteCodesModal">
         <View style={[styles.empty, pal.viewLight]}>
           <Text type="lg" style={[pal.text, styles.emptyText]}>
-            <Trans>
-              You don't have any invite codes yet! We'll send you some when
-              you've been on Bluesky for a little longer.
-            </Trans>
+            <Trans>{t('no-invite-codes-message')}</Trans>
           </Text>
         </View>
         <View style={styles.flex1} />
@@ -91,12 +91,10 @@ export function Inner({invites}: {invites: InviteCodesQueryResponse}) {
   return (
     <View style={[styles.container, pal.view]} testID="inviteCodesModal">
       <Text type="title-xl" style={[styles.title, pal.text]}>
-        <Trans>Invite a Friend</Trans>
+        <Trans>{t('invite-friend-title')}</Trans>
       </Text>
       <Text type="lg" style={[styles.description, pal.text]}>
-        <Trans>
-          Each code works once. You'll receive more invite codes periodically.
-        </Trans>
+        <Trans>{t('invite-code-usage-info')}</Trans>
       </Text>
       <ScrollView style={[styles.scrollContainer, pal.border]}>
         {invites.available.map((invite, i) => (
@@ -142,6 +140,8 @@ function InviteCode({
   used?: boolean
   invites: InviteCodesQueryResponse
 }) {
+const { t } = useTranslation("view/com/modals");
+
   const pal = usePalette('default')
   const {_} = useLingui()
   const invitesState = useInvitesState()
@@ -180,7 +180,7 @@ function InviteCode({
         <View style={styles.flex1} />
         {!used && invitesState.copiedInvites.includes(invite.code) && (
           <Text style={[pal.textLight, styles.codeCopied]}>
-            <Trans>Copied</Trans>
+            <Trans>{t('copied-message')}</Trans>
           </Text>
         )}
         {!used && (
@@ -198,7 +198,7 @@ function InviteCode({
             paddingTop: 6,
           }}>
           <Text style={pal.text}>
-            <Trans>Used by:</Trans>{' '}
+            <Trans>{t('used-by-label')}</Trans>{' '}
             {uses.map((use, i) => (
               <Link
                 key={use.usedBy}

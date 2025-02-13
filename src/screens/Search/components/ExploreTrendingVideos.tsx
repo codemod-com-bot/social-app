@@ -5,6 +5,7 @@ import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useFocusEffect} from '@react-navigation/native'
 import {useQueryClient} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {VIDEO_FEED_URI} from '#/lib/constants'
 import {makeCustomFeedLink} from '#/lib/routes/links'
@@ -37,6 +38,8 @@ const FEED_PARAMS: {
 }
 
 export function ExploreTrendingVideos() {
+const { t } = useTranslation("screens/Search/components");
+
   const t = useTheme()
   const {_} = useLingui()
   const gutters = useGutters([0, 'base'])
@@ -103,17 +106,17 @@ export function ExploreTrendingVideos() {
               style={{marginLeft: -2}}
             />
             <Text style={[a.text_2xl, a.font_heavy, t.atoms.text]}>
-              <Trans>Trending Videos</Trans>
+              <Trans>{t('trending-videos')}</Trans>
             </Text>
             <View style={[a.py_xs, a.px_sm, a.rounded_sm, a.overflow_hidden]}>
               <GradientFill gradient={tokens.gradients.primary} />
               <Text style={[a.text_sm, a.font_heavy, {color: 'white'}]}>
-                <Trans>BETA</Trans>
+                <Trans>{t('beta-label')}</Trans>
               </Text>
             </View>
           </View>
           <Text style={[t.atoms.text_contrast_high, a.leading_snug]}>
-            <Trans>Popular videos in your network.</Trans>
+            <Trans>{t('popular-videos-network')}</Trans>
           </Text>
         </View>
       </View>
@@ -144,7 +147,7 @@ export function ExploreTrendingVideos() {
                 ))
             ) : error || !data ? (
               <Text>
-                <Trans>Whoops! Trending videos failed to load.</Trans>
+                <Trans>{t('trending-videos-load-error')}</Trans>
               </Text>
             ) : (
               <VideoCards data={data} />
@@ -164,9 +167,7 @@ export function ExploreTrendingVideos() {
             a.gap_xl,
           ]}>
           <Text style={[a.flex_1, a.text_sm, a.leading_snug]}>
-            <Trans>
-              Pin the trending videos feed to your home screen for easy access
-            </Trans>
+            <Trans>{t('pin-trending-videos-feed')}</Trans>
           </Text>
           <Button
             disabled={isPinPending}
@@ -189,6 +190,8 @@ function VideoCards({
 }: {
   data: Exclude<ReturnType<typeof usePostFeedQuery>['data'], undefined>
 }) {
+const { t } = useTranslation("screens/Search/components");
+
   const t = useTheme()
   const {_} = useLingui()
   const items = React.useMemo(() => {
@@ -247,7 +250,7 @@ function VideoCards({
                 },
               ]}>
               <Text style={[a.text_md]}>
-                <Trans>View more</Trans>
+                <Trans>{t('view-more')}</Trans>
               </Text>
               <View
                 style={[

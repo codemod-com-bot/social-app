@@ -3,6 +3,7 @@ import {Pressable, View} from 'react-native'
 import {ScrollView} from 'react-native-gesture-handler'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {ReportOption} from '#/lib/moderation/useReportOptions'
 import {useMyLabelersQuery} from '#/state/queries/preferences'
@@ -30,6 +31,8 @@ export function ReportDialog(props: ReportDialogProps) {
 }
 
 function ReportDialogInner(props: ReportDialogProps) {
+const { t } = useTranslation("components/ReportDialog");
+
   const {_} = useLingui()
   const {
     isLoading: isLabelerLoading,
@@ -51,7 +54,7 @@ function ReportDialogInner(props: ReportDialogProps) {
       ) : error || !labelers ? (
         <View>
           <Text style={[a.text_md]}>
-            <Trans>Something went wrong, please try again.</Trans>
+            <Trans>{t('something-went-wrong-try-again')}</Trans>
           </Text>
         </View>
       ) : (

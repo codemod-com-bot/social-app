@@ -1,0 +1,14 @@
+{
+  "trending": "Trending",
+  "beta": "BETA",
+  "what-people-are-posting": "What people are posting about.",
+  "recommended": "Recommended",
+  "content-suggestion-network": "Content from across the network we think you might like.",
+  "feeds-suggestion": "Feeds we think you might like.",
+  "trending-videos": "Trending Videos",
+  "beta-label": "BETA",
+  "popular-videos-network": "Popular videos in your network.",
+  "trending-videos-load-error": "Whoops! Trending videos failed to load.",
+  "pin-trending-videos-feed": "Pin the trending videos feed to your home screen for easy access",
+  "view-more": "View more"
+}

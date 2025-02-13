@@ -2,6 +2,7 @@ import React, {memo} from 'react'
 import {StyleProp, View, ViewStyle} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {cleanError} from '#/lib/strings/errors'
 import {CenteredView} from '#/view/com/util/Views'
@@ -32,6 +33,8 @@ export function ListFooter({
   endMessageText?: string
   renderEndMessage?: () => React.ReactNode
 }) {
+const { t } = useTranslation("components");
+
   const t = useTheme()
 
   return (
@@ -54,7 +57,7 @@ export function ListFooter({
           renderEndMessage()
         ) : (
           <Text style={[a.text_sm, t.atoms.text_contrast_low]}>
-            {endMessageText ?? <Trans>You have reached the end</Trans>}
+            {endMessageText ?? <Trans>{t('end-of-content')}</Trans>}
           </Text>
         )
       ) : null}
@@ -69,6 +72,8 @@ function ListFooterMaybeError({
   error?: string
   onRetry?: () => Promise<unknown>
 }) {
+const { t } = useTranslation("components");
+
   const t = useTheme()
   const {_} = useLingui()
 
@@ -91,7 +96,7 @@ function ListFooterMaybeError({
           {error ? (
             cleanError(error)
           ) : (
-            <Trans>Oops, something went wrong!</Trans>
+            <Trans>{t('error-something-went-wrong')}</Trans>
           )}
         </Text>
         <Button
@@ -107,7 +112,7 @@ function ListFooterMaybeError({
           ]}
           onPress={onRetry}>
           <ButtonText>
-            <Trans>Retry</Trans>
+            <Trans>{t('action-retry')}</Trans>
           </ButtonText>
         </Button>
       </View>

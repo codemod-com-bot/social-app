@@ -3,6 +3,7 @@ import {Keyboard, StyleProp, View, ViewStyle} from 'react-native'
 import RNPickerSelect from 'react-native-picker-select'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {MAX_ALT_TEXT} from '#/lib/constants'
 import {useEnforceMaxGraphemeCount} from '#/lib/strings/helpers'
@@ -32,6 +33,8 @@ interface Props {
 }
 
 export function SubtitleDialogBtn(props: Props) {
+const { t } = useTranslation("view/com/composer/videos");
+
   const control = Dialog.useDialogControl()
   const {_} = useLingui()
 
@@ -53,7 +56,7 @@ export function SubtitleDialogBtn(props: Props) {
         }}>
         <ButtonIcon icon={CCIcon} />
         <ButtonText>
-          {isWeb ? <Trans>Captions & alt text</Trans> : <Trans>Alt text</Trans>}
+          {isWeb ? <Trans>{t('captions')}& alt text</Trans> : <Trans>{t('alt-text')}</Trans>}
         </ButtonText>
       </Button>
       <Dialog.Outer control={control}>
@@ -70,6 +73,8 @@ function SubtitleDialogInner({
   captions,
   setCaptions,
 }: Props) {
+const { t } = useTranslation("view/com/composer/videos");
+
   const control = Dialog.useDialogContext()
   const {_} = useLingui()
   const t = useTheme()
@@ -99,7 +104,7 @@ function SubtitleDialogInner({
     <Dialog.ScrollableInner label={_(msg`Video settings`)}>
       <View style={a.gap_md}>
         <Text style={[a.text_xl, a.font_bold, a.leading_tight]}>
-          <Trans>Alt text</Trans>
+          <Trans>{t('alt-text-duplicate')}</Trans>
         </Text>
         <TextField.Root>
           <Dialog.Input
@@ -130,7 +135,7 @@ function SubtitleDialogInner({
               ]}
             />
             <Text style={[a.text_xl, a.font_bold, a.leading_tight]}>
-              <Trans>Captions (.vtt)</Trans>
+              <Trans>{t('captions-vtt')}</Trans>
             </Text>
             <SubtitleFilePicker
               onSelectFile={handleSelectFile}
@@ -156,9 +161,7 @@ function SubtitleDialogInner({
             </View>
             {subtitleMissingLanguage && (
               <Text style={[a.text_sm, t.atoms.text_contrast_medium]}>
-                <Trans>
-                  Ensure you have selected a language for each subtitle file.
-                </Trans>
+                <Trans>{t('ensure-language-selected')}</Trans>
               </Text>
             )}
           </>
@@ -176,7 +179,7 @@ function SubtitleDialogInner({
             }}
             style={a.mt_lg}>
             <ButtonText>
-              <Trans>Done</Trans>
+              <Trans>{t('done')}</Trans>
             </ButtonText>
           </Button>
         </View>

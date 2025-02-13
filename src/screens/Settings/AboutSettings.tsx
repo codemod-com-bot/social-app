@@ -3,6 +3,7 @@ import {setStringAsync} from 'expo-clipboard'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {NativeStackScreenProps} from '@react-navigation/native-stack'
+import { useTranslation } from "react-i18next";
 
 import {appVersion, BUNDLE_DATE, bundleInfo} from '#/lib/app-info'
 import {STATUS_PAGE_URL} from '#/lib/constants'
@@ -18,6 +19,8 @@ import * as Layout from '#/components/Layout'
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, 'AboutSettings'>
 export function AboutSettingsScreen({}: Props) {
+const { t } = useTranslation("screens/Settings");
+
   const {_} = useLingui()
   const [devModeEnabled, setDevModeEnabled] = useDevModeEnabled()
 
@@ -27,7 +30,7 @@ export function AboutSettingsScreen({}: Props) {
         <Layout.Header.BackButton />
         <Layout.Header.Content>
           <Layout.Header.TitleText>
-            <Trans>About</Trans>
+            <Trans>{t('about')}</Trans>
           </Layout.Header.TitleText>
         </Layout.Header.Content>
         <Layout.Header.Slot />
@@ -39,7 +42,7 @@ export function AboutSettingsScreen({}: Props) {
             label={_(msg`Terms of Service`)}>
             <SettingsList.ItemIcon icon={NewspaperIcon} />
             <SettingsList.ItemText>
-              <Trans>Terms of Service</Trans>
+              <Trans>{t('terms-of-service')}</Trans>
             </SettingsList.ItemText>
           </SettingsList.LinkItem>
           <SettingsList.LinkItem
@@ -47,7 +50,7 @@ export function AboutSettingsScreen({}: Props) {
             label={_(msg`Privacy Policy`)}>
             <SettingsList.ItemIcon icon={NewspaperIcon} />
             <SettingsList.ItemText>
-              <Trans>Privacy Policy</Trans>
+              <Trans>{t('privacy-policy')}</Trans>
             </SettingsList.ItemText>
           </SettingsList.LinkItem>
           <SettingsList.LinkItem
@@ -55,14 +58,14 @@ export function AboutSettingsScreen({}: Props) {
             label={_(msg`Status Page`)}>
             <SettingsList.ItemIcon icon={GlobeIcon} />
             <SettingsList.ItemText>
-              <Trans>Status Page</Trans>
+              <Trans>{t('status-page')}</Trans>
             </SettingsList.ItemText>
           </SettingsList.LinkItem>
           <SettingsList.Divider />
           <SettingsList.LinkItem to="/sys/log" label={_(msg`System log`)}>
             <SettingsList.ItemIcon icon={CodeLinesIcon} />
             <SettingsList.ItemText>
-              <Trans>System log</Trans>
+              <Trans>{t('system-log')}</Trans>
             </SettingsList.ItemText>
           </SettingsList.LinkItem>
           <SettingsList.PressableItem
@@ -85,7 +88,7 @@ export function AboutSettingsScreen({}: Props) {
             }}>
             <SettingsList.ItemIcon icon={WrenchIcon} />
             <SettingsList.ItemText>
-              <Trans>Version {appVersion}</Trans>
+              <Trans>{t('version-info', { appVersion })}</Trans>
             </SettingsList.ItemText>
             <SettingsList.BadgeText>{bundleInfo}</SettingsList.BadgeText>
           </SettingsList.PressableItem>

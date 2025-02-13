@@ -4,6 +4,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context'
 import {msg, Plural, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {StackActions, useNavigation} from '@react-navigation/native'
+import { Trans,useTranslation } from "react-i18next";
 
 import {FEEDBACK_FORM_URL, HELP_DESK_URL} from '#/lib/constants'
 import {PressableScale} from '#/lib/custom-animations/PressableScale'
@@ -296,6 +297,8 @@ let DrawerFooter = ({
   onPressFeedback: () => void
   onPressHelp: () => void
 }): React.ReactNode => {
+const { t } = useTranslation("view/shell");
+
   const {_} = useLingui()
   const insets = useSafeAreaInsets()
   return (
@@ -321,7 +324,7 @@ let DrawerFooter = ({
         onPress={onPressFeedback}>
         <ButtonIcon icon={Message} position="left" />
         <ButtonText>
-          <Trans>Feedback</Trans>
+          <Trans>{t('feedback')}</Trans>
         </ButtonText>
       </Button>
       <Button
@@ -334,7 +337,7 @@ let DrawerFooter = ({
           backgroundColor: 'transparent',
         }}>
         <ButtonText>
-          <Trans>Help</Trans>
+          <Trans>{t('help')}</Trans>
         </ButtonText>
       </Button>
     </View>
@@ -611,6 +614,8 @@ function MenuItem({icon, label, count, bold, onPress}: MenuItemProps) {
 }
 
 function ExtraLinks() {
+const { t } = useTranslation("view/shell");
+
   const {_} = useLingui()
   const t = useTheme()
   const kawaii = useKawaiiMode()
@@ -621,24 +626,24 @@ function ExtraLinks() {
         style={[a.text_md]}
         label={_(msg`Terms of Service`)}
         to="https://bsky.social/about/support/tos">
-        <Trans>Terms of Service</Trans>
+        <Trans>{t('terms-of-service')}</Trans>
       </InlineLinkText>
       <InlineLinkText
         style={[a.text_md]}
         to="https://bsky.social/about/support/privacy-policy"
         label={_(msg`Privacy Policy`)}>
-        <Trans>Privacy Policy</Trans>
+        <Trans>{t('privacy-policy')}</Trans>
       </InlineLinkText>
       {kawaii && (
         <Text style={t.atoms.text_contrast_medium}>
-          <Trans>
-            Logo by{' '}
-            <InlineLinkText
+          <Trans><Trans
+i18nKey="logo-inline-link"
+components={{"0": <InlineLinkText
               style={[a.text_md]}
               to="/profile/sawaratsuki.bsky.social"
-              label="@sawaratsuki.bsky.social">
-              @sawaratsuki.bsky.social
-            </InlineLinkText>
+              label="@sawaratsuki.bsky.social" />}}
+/>
+            
           </Trans>
         </Text>
       )}

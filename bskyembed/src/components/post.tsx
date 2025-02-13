@@ -1,3 +1,4 @@
+import { useTranslation, Trans } from "react-i18next";
 import {
   AppBskyFeedDefs,
   AppBskyFeedPost,
@@ -21,6 +22,8 @@ interface Props {
 }
 
 export function Post({thread}: Props) {
+const { t } = useTranslation("../bskyembed/src/components");
+
   const post = thread.post
 
   const isAuthorLabeled = post.author.labels?.some(label =>
@@ -92,9 +95,7 @@ export function Post({thread}: Props) {
           )}
           <div className="flex items-center gap-2 cursor-pointer">
             <img src={replyIcon} className="w-5 h-5" />
-            <p className="font-bold text-neutral-500 dark:text-neutral-300 mb-px">
-              Reply
-            </p>
+            <p className="font-bold text-neutral-500 dark:text-neutral-300 mb-px">{t('reply-button')}</p>
           </div>
           <div className="flex-1" />
           <p className="cursor-pointer text-brand dark:text-brandLighten font-bold hover:underline hidden min-[450px]:inline">
@@ -105,8 +106,10 @@ export function Post({thread}: Props) {
               : `View on Bluesky`}
           </p>
           <p className="cursor-pointer text-brand font-bold hover:underline min-[450px]:hidden">
-            <span className="hidden min-[380px]:inline">View on </span>Bluesky
-          </p>
+            <Trans
+i18nKey="view-on-bluesky"
+components={{"0": <span className="hidden min-[380px]:inline" />}}
+/></p>
         </div>
       </div>
     </Container>

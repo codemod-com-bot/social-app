@@ -3,6 +3,7 @@ import {findNodeHandle, View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useQueryClient} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {useInitialNumToRender} from '#/lib/hooks/useInitialNumToRender'
 import {usePalette} from '#/lib/hooks/usePalette'
@@ -104,6 +105,8 @@ export const ProfileFeedSection = React.forwardRef<
 })
 
 function ProfileEndOfFeed() {
+const { t } = useTranslation("screens/Profile/Sections");
+
   const pal = usePalette('default')
 
   return (
@@ -113,7 +116,7 @@ function ProfileEndOfFeed() {
         {paddingTop: 32, paddingBottom: 32, borderTopWidth: 1},
       ]}>
       <Text style={[pal.textLight, pal.border, {textAlign: 'center'}]}>
-        <Trans>End of feed</Trans>
+        <Trans>{t('end-of-feed')}</Trans>
       </Text>
     </View>
   )

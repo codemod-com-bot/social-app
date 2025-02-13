@@ -1,6 +1,7 @@
 import {Keyboard, View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {
   ADULT_CONTENT_LABELS,
@@ -25,6 +26,8 @@ export function LabelsBtn({
   labels: SelfLabel[]
   onChange: (v: SelfLabel[]) => void
 }) {
+const { t } = useTranslation("view/com/composer/labels");
+
   const control = Dialog.useDialogControl()
   const {_} = useLingui()
 
@@ -70,9 +73,9 @@ export function LabelsBtn({
         <ButtonIcon icon={hasLabel ? Check : Shield_Stroke2_Corner0_Rounded} />
         <ButtonText numberOfLines={1}>
           {labels.length > 0 ? (
-            <Trans>Labels added</Trans>
+            <Trans>{t('labels-added')}</Trans>
           ) : (
-            <Trans>Labels</Trans>
+            <Trans>{t('labels')}</Trans>
           )}
         </ButtonText>
       </Button>
@@ -98,6 +101,8 @@ function DialogInner({
   updateAdultLabels: (labels: AdultSelfLabel[]) => void
   updateOtherLabels: (labels: OtherSelfLabel[]) => void
 }) {
+const { t } = useTranslation("view/com/composer/labels");
+
   const {_} = useLingui()
   const control = Dialog.useDialogContext()
   const t = useTheme()
@@ -109,14 +114,10 @@ function DialogInner({
       <View style={[a.flex_1]}>
         <View style={[a.gap_sm]}>
           <Text style={[a.text_2xl, a.font_bold]}>
-            <Trans>Add a content warning</Trans>
+            <Trans>{t('add-content-warning')}</Trans>
           </Text>
           <Text style={[t.atoms.text_contrast_medium, a.leading_snug]}>
-            <Trans>
-              Choose self-labels that are applicable for the media you are
-              posting. If none are selected, this post is suitable for all
-              audiences.
-            </Trans>
+            <Trans>{t('choose-self-labels-instructions')}</Trans>
           </Text>
         </View>
 
@@ -125,7 +126,7 @@ function DialogInner({
             <View
               style={[a.flex_row, a.align_center, a.justify_between, a.pb_sm]}>
               <Text style={[a.font_bold, a.text_lg]}>
-                <Trans>Adult Content</Trans>
+                <Trans>{t('adult-content')}</Trans>
               </Text>
             </View>
             <View
@@ -145,19 +146,19 @@ function DialogInner({
                   <Toggle.Item name="sexual" label={_(msg`Suggestive`)}>
                     <Toggle.Checkbox />
                     <Toggle.LabelText>
-                      <Trans>Suggestive</Trans>
+                      <Trans>{t('suggestive')}</Trans>
                     </Toggle.LabelText>
                   </Toggle.Item>
                   <Toggle.Item name="nudity" label={_(msg`Nudity`)}>
                     <Toggle.Checkbox />
                     <Toggle.LabelText>
-                      <Trans>Nudity</Trans>
+                      <Trans>{t('nudity')}</Trans>
                     </Toggle.LabelText>
                   </Toggle.Item>
                   <Toggle.Item name="porn" label={_(msg`Porn`)}>
                     <Toggle.Checkbox />
                     <Toggle.LabelText>
-                      <Trans>Adult</Trans>
+                      <Trans>{t('adult')}</Trans>
                     </Toggle.LabelText>
                   </Toggle.Item>
                 </View>
@@ -167,11 +168,11 @@ function DialogInner({
               labels.includes('porn') ? (
                 <Text style={[a.mt_sm, t.atoms.text_contrast_medium]}>
                   {labels.includes('sexual') ? (
-                    <Trans>Pictures meant for adults.</Trans>
+                    <Trans>{t('pictures-for-adults')}</Trans>
                   ) : labels.includes('nudity') ? (
-                    <Trans>Artistic or non-erotic nudity.</Trans>
+                    <Trans>{t('artistic-nudity')}</Trans>
                   ) : labels.includes('porn') ? (
-                    <Trans>Sexual activity or erotic nudity.</Trans>
+                    <Trans>{t('sexual-activity-nudity')}</Trans>
                   ) : (
                     ''
                   )}
@@ -183,7 +184,7 @@ function DialogInner({
             <View
               style={[a.flex_row, a.align_center, a.justify_between, a.pb_sm]}>
               <Text style={[a.font_bold, a.text_lg]}>
-                <Trans>Other</Trans>
+                <Trans>{t('other')}</Trans>
               </Text>
             </View>
             <View
@@ -202,16 +203,13 @@ function DialogInner({
                 <Toggle.Item name="graphic-media" label={_(msg`Graphic Media`)}>
                   <Toggle.Checkbox />
                   <Toggle.LabelText>
-                    <Trans>Graphic Media</Trans>
+                    <Trans>{t('graphic-media')}</Trans>
                   </Toggle.LabelText>
                 </Toggle.Item>
               </Toggle.Group>
               {labels.includes('graphic-media') ? (
                 <Text style={[a.mt_sm, t.atoms.text_contrast_medium]}>
-                  <Trans>
-                    Media that may be disturbing or inappropriate for some
-                    audiences.
-                  </Trans>
+                  <Trans>{t('disturbing-media-instructions')}</Trans>
                 </Text>
               ) : null}
             </View>
@@ -228,7 +226,7 @@ function DialogInner({
           variant="solid"
           testID="confirmBtn">
           <ButtonText>
-            <Trans>Done</Trans>
+            <Trans>{t('done')}</Trans>
           </ButtonText>
         </Button>
       </View>

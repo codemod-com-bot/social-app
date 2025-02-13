@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import deepEqual from 'lodash.isequal'
+import { useTranslation } from "react-i18next";
 
 import {logger} from '#/logger'
 import {usePostInteractionSettingsMutation} from '#/state/queries/post-interaction-settings'
@@ -23,6 +24,8 @@ import * as Layout from '#/components/Layout'
 import {Loader} from '#/components/Loader'
 
 export function Screen() {
+const { t } = useTranslation("screens/ModerationInteractionSettings");
+
   const gutters = useGutters(['base'])
   const {data: preferences} = usePreferencesQuery()
   return (
@@ -31,7 +34,7 @@ export function Screen() {
         <Layout.Header.BackButton />
         <Layout.Header.Content>
           <Layout.Header.TitleText>
-            <Trans>Post Interaction Settings</Trans>
+            <Trans>{t('post-interaction-settings-title')}</Trans>
           </Layout.Header.TitleText>
         </Layout.Header.Content>
         <Layout.Header.Slot />
@@ -39,11 +42,7 @@ export function Screen() {
       <Layout.Content>
         <View style={[gutters, a.gap_xl]}>
           <Admonition type="tip">
-            <Trans>
-              The following settings will be used as your defaults when creating
-              new posts. You can edit these for a specific post from the
-              composer.
-            </Trans>
+            <Trans>{t('post-interaction-settings-description')}</Trans>
           </Admonition>
           {preferences ? (
             <Inner preferences={preferences} />

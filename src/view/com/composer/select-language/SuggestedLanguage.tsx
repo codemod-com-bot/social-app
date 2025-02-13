@@ -7,6 +7,7 @@ import {
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import lande from 'lande'
+import { Trans,useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {s} from '#/lib/styles'
@@ -24,6 +25,8 @@ const onIdle = globalThis.requestIdleCallback || (cb => setTimeout(cb, 1))
 const cancelIdle = globalThis.cancelIdleCallback || clearTimeout
 
 export function SuggestedLanguage({text}: {text: string}) {
+const { t } = useTranslation("view/com/composer/select-language");
+
   const [suggestedLanguage, setSuggestedLanguage] = useState<
     string | undefined
   >()
@@ -66,13 +69,12 @@ export function SuggestedLanguage({text}: {text: string}) {
           size={24}
         />
         <Text style={[pal.text, s.flex1]}>
-          <Trans>
-            Are you writing in{' '}
-            <Text type="sm-bold" style={pal.text}>
-              {suggestedLanguageName}
-            </Text>
-            ?
-          </Trans>
+          <Trans><Trans
+i18nKey="are-you-writing-in-suggested-language"
+values={{ suggestedLanguageName: <>{suggestedLanguageName}</> }}
+components={{"0": <Text type="sm-bold" style={pal.text} />}}
+/>
+            </Trans>
         </Text>
 
         <Button
@@ -83,7 +85,7 @@ export function SuggestedLanguage({text}: {text: string}) {
           )}
           accessibilityHint="">
           <Text type="button" style={[pal.link, s.fw600]}>
-            <Trans>Yes</Trans>
+            <Trans>{t('yes')}</Trans>
           </Text>
         </Button>
       </View>

@@ -1,0 +1,18 @@
+{
+  "chat-settings": "Chat Settings",
+  "allow-new-messages-from": "Allow new messages from",
+  "everyone": "Everyone",
+  "users-i-follow": "Users I follow",
+  "no-one": "No one",
+  "ongoing-conversations-notice": "You can continue ongoing conversations regardless of which setting you choose.",
+  "notification-sounds": "Notification Sounds",
+  "enabled": "Enabled",
+  "disabled": "Disabled",
+  "whoops": "Whoops!",
+  "retry": "Retry",
+  "nothing-here": "Nothing here",
+  "no-conversations-yet": "You have no conversations yet. Start one!",
+  "messages": "Messages",
+  "new-chat": "New chat",
+  "messages-duplicate": "Messages"
+}

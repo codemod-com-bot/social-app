@@ -10,6 +10,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import * as EmailValidator from 'email-validator'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
@@ -35,6 +36,8 @@ enum Stages {
 export const snapPoints = isAndroid ? ['90%'] : ['45%']
 
 export function Component() {
+const { t } = useTranslation("view/com/modals");
+
   const pal = usePalette('default')
   const {currentAccount} = useSession()
   const agent = useAgent()
@@ -146,16 +149,11 @@ export function Component() {
 
           <Text type="lg" style={[pal.textLight, {marginBottom: 10}]}>
             {stage === Stages.RequestCode ? (
-              <Trans>
-                If you want to change your password, we will send you a code to
-                verify that this is your account.
-              </Trans>
+              <Trans>{t('change-password-verification-message')}</Trans>
             ) : stage === Stages.ChangePassword ? (
-              <Trans>
-                Enter the code you received to change your password.
-              </Trans>
+              <Trans>{t('enter-code-to-change-password')}</Trans>
             ) : (
-              <Trans>Your password has been changed successfully!</Trans>
+              <Trans>{t('password-changed-successfully')}</Trans>
             )}
           </Text>
 
@@ -168,7 +166,7 @@ export function Component() {
                 accessibilityLabel={_(msg`Go to next`)}
                 accessibilityHint={_(msg`Navigates to the next screen`)}>
                 <Text type="xl" style={[pal.link, s.pr5]}>
-                  <Trans>Already have a code?</Trans>
+                  <Trans>{t('already-have-code')}</Trans>
                 </Text>
               </TouchableOpacity>
             </View>

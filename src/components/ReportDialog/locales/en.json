@@ -1,0 +1,12 @@
+{
+  "select-moderator": "Select moderator",
+  "send-report-question": "To whom would you like to send this report?",
+  "something-went-wrong-try-again": "Something went wrong, please try again.",
+  "report-copyright-violation": "Need to report a copyright violation?",
+  "view-details": "View details",
+  "select-moderation-services": "Select the moderation service(s) to report to",
+  "optional-additional-information": "Optionally provide additional information below:",
+  "text-field-label": "Text field",
+  "must-select-labeler": "You must select at least one labeler for a report",
+  "send-report": "Send report"
+}

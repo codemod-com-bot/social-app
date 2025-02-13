@@ -1,6 +1,7 @@
 import React from 'react'
 import {Plural, Trans} from '@lingui/macro'
 import {useFocusEffect} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {CommonNavigatorParams, NativeStackScreenProps} from '#/lib/routes/types'
 import {makeRecordUri} from '#/lib/strings/url-helpers'
@@ -11,6 +12,8 @@ import * as Layout from '#/components/Layout'
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, 'PostRepostedBy'>
 export const PostRepostedByScreen = ({route}: Props) => {
+const { t } = useTranslation("screens/Post");
+
   const {name, rkey} = route.params
   const uri = makeRecordUri(name, 'app.bsky.feed.post', rkey)
   const setMinimalShellMode = useSetMinimalShellMode()
@@ -35,7 +38,7 @@ export const PostRepostedByScreen = ({route}: Props) => {
           {post && (
             <>
               <Layout.Header.TitleText>
-                <Trans>Reposted By</Trans>
+                <Trans>{t('reposted-by')}</Trans>
               </Layout.Header.TitleText>
               <Layout.Header.SubtitleText>
                 <Plural

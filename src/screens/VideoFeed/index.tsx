@@ -44,6 +44,7 @@ import {
   useRoute,
 } from '@react-navigation/native'
 import {NativeStackScreenProps} from '@react-navigation/native-stack'
+import { useTranslation } from "react-i18next";
 
 import {HITSLOP_20} from '#/lib/constants'
 import {useHaptics} from '#/lib/haptics'
@@ -469,6 +470,8 @@ let VideoItem = ({
   moderation?: ModerationDecision
   feedContext: string | undefined
 }): React.ReactNode => {
+const { t } = useTranslation("screens/VideoFeed");
+
   const postShadow = usePostShadow(post)
   const {width, height} = useSafeAreaFrame()
   const {sendInteraction} = useFeedFeedbackContext()
@@ -508,7 +511,7 @@ let VideoItem = ({
               a.leading_tight,
               a.mx_xl,
             ]}>
-            <Trans>Post has been deleted</Trans>
+            <Trans>{t('post-deleted')}</Trans>
           </Text>
         </View>
       ) : (
@@ -579,6 +582,8 @@ function ModerationOverlay({
   embed: AppBskyEmbedVideo.View
   onPressShow: () => void
 }) {
+const { t } = useTranslation("screens/VideoFeed");
+
   const {_} = useLingui()
   const hider = Hider.useHider()
   const {bottom} = useSafeAreaInsets()
@@ -603,7 +608,7 @@ function ModerationOverlay({
         <View style={[a.align_center, a.gap_sm]}>
           <Eye width={36} fill="white" />
           <Text style={[a.text_center, a.leading_snug, a.pb_xs]}>
-            <Trans>Hidden by your moderation settings.</Trans>
+            <Trans>{t('hidden-by-moderation-settings')}</Trans>
           </Text>
           <Button
             label={_(msg`Show anyway`)}
@@ -612,7 +617,7 @@ function ModerationOverlay({
             color="secondary_inverted"
             onPress={onShow}>
             <ButtonText>
-              <Trans>Show anyway</Trans>
+              <Trans>{t('show-anyway')}</Trans>
             </ButtonText>
           </Button>
         </View>
@@ -652,7 +657,7 @@ function ModerationOverlay({
                     a.text_center,
                     {opacity: pressed ? 0.5 : 1},
                   ]}>
-                  <Trans>View details</Trans>
+                  <Trans>{t('view-details')}</Trans>
                 </Text>
               )}
             </Button>
@@ -680,6 +685,8 @@ function Overlay({
   moderation: ModerationDecision
   feedContext: string | undefined
 }) {
+const { t } = useTranslation("screens/VideoFeed");
+
   const {_} = useLingui()
   const t = useTheme()
   const {openComposer} = useComposerControls()
@@ -818,9 +825,9 @@ function Overlay({
                       )}
                       <ButtonText>
                         {profile.viewer?.following ? (
-                          <Trans>Following</Trans>
+                          <Trans>{t('following')}</Trans>
                         ) : (
-                          <Trans>Follow</Trans>
+                          <Trans>{t('follow')}</Trans>
                         )}
                       </ButtonText>
                     </Button>
@@ -1047,6 +1054,8 @@ function PlayPauseTapArea({
 }
 
 function EndMessage() {
+const { t } = useTranslation("screens/VideoFeed");
+
   const navigation = useNavigation<NavigationProp>()
   const {_} = useLingui()
   const t = useTheme()
@@ -1072,7 +1081,7 @@ function EndMessage() {
       </View>
       <View style={[a.w_full, a.gap_md]}>
         <Text style={[a.text_3xl, a.text_center, a.font_heavy]}>
-          <Trans>That's everything!</Trans>
+          <Trans>{t('everything-complete')}</Trans>
         </Text>
         <Text
           style={[
@@ -1081,10 +1090,7 @@ function EndMessage() {
             t.atoms.text_contrast_high,
             a.leading_snug,
           ]}>
-          <Trans>
-            You've run out of videos to watch. Maybe it's a good time to take a
-            break?
-          </Trans>
+          <Trans>{t('out-of-videos')}</Trans>
         </Text>
       </View>
       <Button
@@ -1103,7 +1109,7 @@ function EndMessage() {
         accessibilityHint={_(msg`Returns to previous page`)}>
         <ButtonIcon icon={ArrowLeftIcon} />
         <ButtonText>
-          <Trans>Go back</Trans>
+          <Trans>{t('go-back')}</Trans>
         </ButtonText>
       </Button>
     </View>

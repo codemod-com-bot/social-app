@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {InterpretedLabelValueDefinition, LabelPreference} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { Trans,useTranslation } from "react-i18next";
 
 import {useGlobalLabelStrings} from '#/lib/moderation/useGlobalLabelStrings'
 import {useLabelBehaviorDescription} from '#/lib/moderation/useLabelBehaviorDescription'
@@ -175,6 +176,8 @@ export function LabelerLabelPreference({
   disabled?: boolean
   labelerDid?: string
 }) {
+const { t } = useTranslation("components/moderation");
+
   const {_, i18n} = useLingui()
   const t = useTheme()
   const {gtPhone} = useBreakpoints()
@@ -239,18 +242,16 @@ export function LabelerLabelPreference({
 
             <Text style={[t.atoms.text_contrast_medium, a.font_bold, a.italic]}>
               {adultDisabled ? (
-                <Trans>Adult content is disabled.</Trans>
+                <Trans>{t('adult-content-disabled')}</Trans>
               ) : isGlobalLabel ? (
-                <Trans>
-                  Configured in{' '}
-                  <InlineLinkText
+                <Trans><Trans
+i18nKey="configured-moderation-settings-link"
+components={{"0": <InlineLinkText
                     label={_(msg`moderation settings`)}
                     to="/moderation"
-                    style={a.text_sm}>
-                    moderation settings
-                  </InlineLinkText>
-                  .
-                </Trans>
+                    style={a.text_sm} />}}
+/>
+                  </Trans>
               ) : null}
             </Text>
           </View>

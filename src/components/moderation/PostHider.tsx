@@ -4,6 +4,7 @@ import {AppBskyActorDefs, ModerationCause, ModerationUI} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useQueryClient} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {useModerationCauseDescription} from '#/lib/moderation/useModerationCauseDescription'
 import {addStyle} from '#/lib/styles'
@@ -39,6 +40,8 @@ export function PostHider({
   interpretFilterAsBlur,
   ...props
 }: Props) {
+const { t } = useTranslation("components/moderation");
+
   const queryClient = useQueryClient()
   const t = useTheme()
   const {_} = useLingui()
@@ -119,7 +122,7 @@ export function PostHider({
       </Text>
       {!modui.noOverride && (
         <Text style={[{color: t.palette.primary_500}]}>
-          {override ? <Trans>Hide</Trans> : <Trans>Show</Trans>}
+          {override ? <Trans>{t('hide-button')}</Trans> : <Trans>{t('show-button')}</Trans>}
         </Text>
       )}
     </Pressable>

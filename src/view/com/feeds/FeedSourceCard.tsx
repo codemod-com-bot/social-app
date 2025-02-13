@@ -11,6 +11,7 @@ import {AtUri} from '@atproto/api'
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {msg, Plural, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {useNavigationDeduped} from '#/lib/hooks/useNavigationDeduped'
 import {usePalette} from '#/lib/hooks/usePalette'
@@ -95,6 +96,8 @@ export function FeedSourceCardLoaded({
   showMinimalPlaceholder?: boolean
   hideTopBorder?: boolean
 }) {
+const { t } = useTranslation("view/com/feeds");
+
   const t = useTheme()
   const pal = usePalette('default')
   const {_} = useLingui()
@@ -250,9 +253,9 @@ export function FeedSourceCardLoaded({
             </Text>
             <Text style={[pal.textLight]} numberOfLines={1}>
               {feed.type === 'feed' ? (
-                <Trans>Feed by {sanitizeHandle(feed.creatorHandle, '@')}</Trans>
+                <Trans>{t('feed-by')}{sanitizeHandle(feed.creatorHandle, '@')}</Trans>
               ) : (
-                <Trans>List by {sanitizeHandle(feed.creatorHandle, '@')}</Trans>
+                <Trans>{t('list-by')}{sanitizeHandle(feed.creatorHandle, '@')}</Trans>
               )}
             </Text>
           </View>
@@ -300,8 +303,7 @@ export function FeedSourceCardLoaded({
 
         {showLikes && feed.type === 'feed' ? (
           <Text type="sm-medium" style={[pal.text, pal.textLight]}>
-            <Trans>
-              Liked by{' '}
+            <Trans>{t('liked-by')}
               <Plural
                 value={feed.likeCount || 0}
                 one="# user"

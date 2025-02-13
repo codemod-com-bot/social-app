@@ -1,6 +1,7 @@
 import React from 'react'
 import {StyleSheet, View} from 'react-native'
 import {Trans} from '@lingui/macro'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
@@ -20,6 +21,8 @@ import {LanguageToggle} from './LanguageToggle'
 export const snapPoints = ['100%']
 
 export function Component({}: {}) {
+const { t } = useTranslation("view/com/modals/lang-settings");
+
   const {closeModal} = useModalControls()
   const langPrefs = useLanguagePrefs()
   const setLangPrefs = useLanguagePrefsApi()
@@ -73,15 +76,13 @@ export function Component({}: {}) {
             },
       ]}>
       <Text style={[pal.text, styles.title]}>
-        <Trans>Content Languages</Trans>
+        <Trans>{t('content-languages')}</Trans>
       </Text>
       <Text style={[pal.text, styles.description]}>
-        <Trans>
-          Which languages would you like to see in your algorithmic feeds?
-        </Trans>
+        <Trans>{t('algorithmic-feeds-language-selection')}</Trans>
       </Text>
       <Text style={[pal.textLight, styles.description]}>
-        <Trans>Leave them all unchecked to see any language.</Trans>
+        <Trans>{t('unchecked-languages-message')}</Trans>
       </Text>
       <ScrollView style={styles.scrollContainer}>
         {languages.map(lang => (

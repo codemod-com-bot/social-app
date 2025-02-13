@@ -14,6 +14,7 @@ import {ComAtprotoServerDescribeServer} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useMutation, useQueryClient} from '@tanstack/react-query'
+import { Trans,useTranslation } from "react-i18next";
 
 import {HITSLOP_10} from '#/lib/constants'
 import {cleanError} from '#/lib/strings/errors'
@@ -57,6 +58,8 @@ export function ChangeHandleDialog({
 }
 
 function ChangeHandleDialogInner() {
+const { t } = useTranslation("screens/Settings/components");
+
   const control = Dialog.useDialogContext()
   const {_} = useLingui()
   const agent = useAgent()
@@ -80,7 +83,7 @@ function ChangeHandleDialogInner() {
         variant="ghost"
         style={[a.rounded_full]}>
         <ButtonText style={[a.text_md]}>
-          <Trans>Cancel</Trans>
+          <Trans>{t('cancel-button')}</Trans>
         </ButtonText>
       </Button>
     ),
@@ -93,7 +96,7 @@ function ChangeHandleDialogInner() {
       header={
         <Dialog.Header renderLeft={cancelButton}>
           <Dialog.HeaderText>
-            <Trans>Change Handle</Trans>
+            <Trans>{t('change-handle')}</Trans>
           </Dialog.HeaderText>
         </Dialog.Header>
       }
@@ -146,6 +149,8 @@ function ProvidedHandlePage({
   serviceInfo: ComAtprotoServerDescribeServer.OutputSchema
   goToOwnHandle: () => void
 }) {
+const { t } = useTranslation("screens/Settings/components");
+
   const {_} = useLingui()
   const [subdomain, setSubdomain] = useState('')
   const agent = useAgent()
@@ -199,7 +204,7 @@ function ProvidedHandlePage({
           style={[a.flex_1, a.gap_md]}>
           <View>
             <TextField.LabelText>
-              <Trans>New handle</Trans>
+              <Trans>{t('new-handle')}</Trans>
             </TextField.LabelText>
             <TextField.Root isInvalid={isInvalid}>
               <TextField.Icon icon={AtIcon} />
@@ -218,11 +223,11 @@ function ProvidedHandlePage({
             </TextField.Root>
           </View>
           <Text>
-            <Trans>
-              Your full handle will be{' '}
-              <Text style={[a.font_bold]}>
-                @{createFullHandle(subdomain, host)}
-              </Text>
+            <Trans><Trans
+i18nKey="full-handle-display"
+components={{"0": <Text style={[a.font_bold]} />}}
+/>
+              
             </Trans>
           </Text>
           <Button
@@ -240,21 +245,20 @@ function ProvidedHandlePage({
               <ButtonIcon icon={Loader} />
             ) : (
               <ButtonText>
-                <Trans>Save</Trans>
+                <Trans>{t('save-button')}</Trans>
               </ButtonText>
             )}
           </Button>
           <Text style={[a.leading_snug]}>
-            <Trans>
-              If you have your own domain, you can use that as your handle. This
-              lets you self-verify your identity.{' '}
-              <InlineLinkText
+            <Trans><Trans
+i18nKey="custom-domain-info"
+components={{"0": <InlineLinkText
                 label={_(msg`learn more`)}
                 to="https://bsky.social/about/blog/4-28-2023-domain-handle-tutorial"
                 style={[a.font_bold]}
-                disableMismatchWarning>
-                Learn more here.
-              </InlineLinkText>
+                disableMismatchWarning />}}
+/>
+              
             </Trans>
           </Text>
           <Button
@@ -264,7 +268,7 @@ function ProvidedHandlePage({
             size="large"
             onPress={goToOwnHandle}>
             <ButtonText>
-              <Trans>I have my own domain</Trans>
+              <Trans>{t('own-domain-option')}</Trans>
             </ButtonText>
             <ButtonIcon icon={ArrowRightIcon} position="right" />
           </Button>
@@ -275,6 +279,8 @@ function ProvidedHandlePage({
 }
 
 function OwnHandlePage({goToServiceHandle}: {goToServiceHandle: () => void}) {
+const { t } = useTranslation("screens/Settings/components");
+
   const {_} = useLingui()
   const t = useTheme()
   const {currentAccount} = useSession()
@@ -334,11 +340,10 @@ function OwnHandlePage({goToServiceHandle}: {goToServiceHandle: () => void}) {
         <Animated.View entering={FadeIn} exiting={FadeOut}>
           <Admonition type="error">
             {verifyError instanceof DidMismatchError ? (
-              <Trans>
-                Wrong DID returned from server. Received: {verifyError.did}
+              <Trans>{t('wrong-did-error')}{verifyError.did}
               </Trans>
             ) : (
-              <Trans>Failed to verify handle. Please try again.</Trans>
+              <Trans>{t('handle-verification-failed')}</Trans>
             )}
           </Admonition>
         </Animated.View>
@@ -348,7 +353,7 @@ function OwnHandlePage({goToServiceHandle}: {goToServiceHandle: () => void}) {
         style={[a.flex_1, a.gap_md, a.overflow_hidden]}>
         <View>
           <TextField.LabelText>
-            <Trans>Enter the domain you want to use</Trans>
+            <Trans>{t('enter-domain-prompt')}</Trans>
           </TextField.LabelText>
           <TextField.Root>
             <TextField.Icon icon={AtIcon} />
@@ -372,19 +377,19 @@ function OwnHandlePage({goToServiceHandle}: {goToServiceHandle: () => void}) {
           onChange={values => setDNSPanel(values[0] === 'dns')}>
           <ToggleButton.Button name="dns" label={_(msg`DNS Panel`)}>
             <ToggleButton.ButtonText>
-              <Trans>DNS Panel</Trans>
+              <Trans>{t('dns-panel')}</Trans>
             </ToggleButton.ButtonText>
           </ToggleButton.Button>
           <ToggleButton.Button name="file" label={_(msg`No DNS Panel`)}>
             <ToggleButton.ButtonText>
-              <Trans>No DNS Panel</Trans>
+              <Trans>{t('no-dns-panel')}</Trans>
             </ToggleButton.ButtonText>
           </ToggleButton.Button>
         </ToggleButton.Group>
         {dnsPanel ? (
           <>
             <Text>
-              <Trans>Add the following DNS record to your domain:</Trans>
+              <Trans>{t('dns-record-instruction')}</Trans>
             </Text>
             <View
               style={[
@@ -395,7 +400,7 @@ function OwnHandlePage({goToServiceHandle}: {goToServiceHandle: () => void}) {
                 t.atoms.border_contrast_low,
               ]}>
               <Text style={[t.atoms.text_contrast_medium]}>
-                <Trans>Host:</Trans>
+                <Trans>{t('host-label')}</Trans>
               </Text>
               <View style={[a.py_xs]}>
                 <CopyButton
@@ -405,18 +410,18 @@ function OwnHandlePage({goToServiceHandle}: {goToServiceHandle: () => void}) {
                   label={_(msg`Copy host`)}
                   hoverStyle={[a.bg_transparent]}
                   hitSlop={HITSLOP_10}>
-                  <Text style={[a.text_md, a.flex_1]}>_atproto</Text>
+                  <Text style={[a.text_md, a.flex_1]}>{t('atproto-label')}</Text>
                   <ButtonIcon icon={CopyIcon} />
                 </CopyButton>
               </View>
               <Text style={[a.mt_xs, t.atoms.text_contrast_medium]}>
-                <Trans>Type:</Trans>
+                <Trans>{t('type-label')}</Trans>
               </Text>
               <View style={[a.py_xs]}>
-                <Text style={[a.text_md]}>TXT</Text>
+                <Text style={[a.text_md]}>{t('txt-type')}</Text>
               </View>
               <Text style={[a.mt_xs, t.atoms.text_contrast_medium]}>
-                <Trans>Value:</Trans>
+                <Trans>{t('value-label')}</Trans>
               </Text>
               <View style={[a.py_xs]}>
                 <CopyButton
@@ -426,15 +431,14 @@ function OwnHandlePage({goToServiceHandle}: {goToServiceHandle: () => void}) {
                   label={_(msg`Copy TXT record value`)}
                   hoverStyle={[a.bg_transparent]}
                   hitSlop={HITSLOP_10}>
-                  <Text style={[a.text_md, a.flex_1]}>
-                    did={currentAccount?.did}
+                  <Text style={[a.text_md, a.flex_1]}>{t('did-prefix')}{currentAccount?.did}
                   </Text>
                   <ButtonIcon icon={CopyIcon} />
                 </CopyButton>
               </View>
             </View>
             <Text>
-              <Trans>This should create a domain record at:</Trans>
+              <Trans>{t('domain-record-creation-info')}</Trans>
             </Text>
             <View
               style={[
@@ -444,13 +448,13 @@ function OwnHandlePage({goToServiceHandle}: {goToServiceHandle: () => void}) {
                 a.border,
                 t.atoms.border_contrast_low,
               ]}>
-              <Text style={[a.text_md]}>_atproto.{domain}</Text>
+              <Text style={[a.text_md]}>{t('atproto-domain-format', { domain })}</Text>
             </View>
           </>
         ) : (
           <>
             <Text>
-              <Trans>Upload a text file to:</Trans>
+              <Trans>{t('upload-text-file-info')}</Trans>
             </Text>
             <View
               style={[
@@ -460,12 +464,10 @@ function OwnHandlePage({goToServiceHandle}: {goToServiceHandle: () => void}) {
                 a.border,
                 t.atoms.border_contrast_low,
               ]}>
-              <Text style={[a.text_md]}>
-                https://{domain}/.well-known/atproto-did
-              </Text>
+              <Text style={[a.text_md]}>{t('text-file-url', { domain })}</Text>
             </View>
             <Text>
-              <Trans>That contains the following:</Trans>
+              <Trans>{t('file-contents-info')}</Trans>
             </Text>
             <CopyButton
               value={currentAccount?.did ?? ''}
@@ -491,14 +493,12 @@ function OwnHandlePage({goToServiceHandle}: {goToServiceHandle: () => void}) {
       <Animated.View layout={native(LinearTransition)}>
         {currentAccount?.handle?.endsWith('.bsky.social') && (
           <Admonition type="info" style={[a.mb_md]}>
-            <Trans>
-              Your current handle{' '}
-              <Text style={[a.font_bold]}>
-                {sanitizeHandle(currentAccount?.handle || '', '@')}
-              </Text>{' '}
-              will automatically remain reserved for you. You can switch back to
-              it at any time from this account.
-            </Trans>
+            <Trans><Trans
+i18nKey="current-handle-reservation"
+values={{ sanitizeHandleCurrentAccountHandle: <>{sanitizeHandle(currentAccount?.handle || '', '@')}</> }}
+components={{"0": <Text style={[a.font_bold]} />}}
+/>
+              </Trans>
           </Admonition>
         )}
         <Button
@@ -525,11 +525,11 @@ function OwnHandlePage({goToServiceHandle}: {goToServiceHandle: () => void}) {
           ) : (
             <ButtonText>
               {isVerified ? (
-                <Trans>Update to {domain}</Trans>
+                <Trans>{t('update-domain', { domain })}</Trans>
               ) : dnsPanel ? (
-                <Trans>Verify DNS Record</Trans>
+                <Trans>{t('verify-dns-record')}</Trans>
               ) : (
-                <Trans>Verify Text File</Trans>
+                <Trans>{t('verify-text-file')}</Trans>
               )}
             </ButtonText>
           )}
@@ -545,7 +545,7 @@ function OwnHandlePage({goToServiceHandle}: {goToServiceHandle: () => void}) {
           style={[a.mt_sm]}>
           <ButtonIcon icon={ArrowLeftIcon} position="left" />
           <ButtonText>
-            <Trans>Nevermind, create a handle for me</Trans>
+            <Trans>{t('create-handle-option')}</Trans>
           </ButtonText>
         </Button>
       </Animated.View>

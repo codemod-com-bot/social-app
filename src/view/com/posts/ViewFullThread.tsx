@@ -3,6 +3,7 @@ import {StyleSheet, View} from 'react-native'
 import Svg, {Circle, Line} from 'react-native-svg'
 import {AtUri} from '@atproto/api'
 import {Trans} from '@lingui/macro'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {makeProfileLink} from '#/lib/routes/links'
@@ -12,6 +13,8 @@ import {Link} from '../util/Link'
 import {Text} from '../util/text/Text'
 
 export function ViewFullThread({uri}: {uri: string}) {
+const { t } = useTranslation("view/com/posts");
+
   const {
     state: hover,
     onIn: onHoverIn,
@@ -53,7 +56,7 @@ export function ViewFullThread({uri}: {uri: string}) {
       </View>
 
       <Text type="md" style={[pal.link, {paddingTop: 18, paddingBottom: 4}]}>
-        <Trans>View full thread</Trans>
+        <Trans>{t('view-full-thread')}</Trans>
       </Text>
     </Link>
   )

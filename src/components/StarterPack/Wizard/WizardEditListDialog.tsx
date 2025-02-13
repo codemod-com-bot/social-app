@@ -5,6 +5,7 @@ import {AppBskyActorDefs, ModerationOpts} from '@atproto/api'
 import {GeneratorView} from '@atproto/api/dist/client/types/app/bsky/feed/defs'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {useInitialNumToRender} from '#/lib/hooks/useInitialNumToRender'
 import {isWeb} from '#/platform/detection'
@@ -40,6 +41,8 @@ export function WizardEditListDialog({
   moderationOpts: ModerationOpts
   profile: AppBskyActorDefs.ProfileViewBasic
 }) {
+const { t } = useTranslation("components/StarterPack/Wizard");
+
   const {_} = useLingui()
   const t = useTheme()
   const {currentAccount} = useSession()
@@ -106,9 +109,9 @@ export function WizardEditListDialog({
             <View style={{width: 60}} />
             <Text style={[a.font_bold, a.text_xl]}>
               {state.currentStep === 'Profiles' ? (
-                <Trans>Edit People</Trans>
+                <Trans>{t('edit-people')}</Trans>
               ) : (
-                <Trans>Edit Feeds</Trans>
+                <Trans>{t('edit-feeds')}</Trans>
               )}
             </Text>
             <View style={{width: 60}}>
@@ -120,7 +123,7 @@ export function WizardEditListDialog({
                   size="small"
                   onPress={() => control.close()}>
                   <ButtonText>
-                    <Trans>Close</Trans>
+                    <Trans>{t('close')}</Trans>
                   </ButtonText>
                 </Button>
               )}

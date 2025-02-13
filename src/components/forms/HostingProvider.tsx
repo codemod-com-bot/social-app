@@ -2,6 +2,7 @@ import React from 'react'
 import {Keyboard, View} from 'react-native'
 import {msg} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {toNiceDomain} from '#/lib/strings/url-helpers'
 import {isAndroid} from '#/platform/detection'
@@ -24,6 +25,8 @@ export function HostingProvider({
   onOpenDialog?: () => void
   minimal?: boolean
 }) {
+const { t } = useTranslation("components/forms");
+
   const serverInputControl = useDialogControl()
   const t = useTheme()
   const {_} = useLingui()
@@ -42,8 +45,7 @@ export function HostingProvider({
       />
       {minimal ? (
         <View style={[a.flex_row, a.align_center, a.flex_wrap]}>
-          <Text style={[a.text_sm, t.atoms.text_contrast_medium]}>
-            You are creating an account on{' '}
+          <Text style={[a.text_sm, t.atoms.text_contrast_medium]}>{t('creating-account-message')}
           </Text>
           <Button
             label={toNiceDomain(serviceUrl)}

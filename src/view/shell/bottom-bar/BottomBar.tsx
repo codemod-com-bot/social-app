@@ -6,6 +6,7 @@ import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs'
 import {StackActions} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {PressableScale} from '#/lib/custom-animations/PressableScale'
 import {useHaptics} from '#/lib/haptics'
@@ -58,6 +59,8 @@ type TabOptions =
   | 'Messages'
 
 export function BottomBar({navigation}: BottomTabBarProps) {
+const { t } = useTranslation("view/shell/bottom-bar");
+
   const {hasSession, currentAccount} = useSession()
   const pal = usePalette('default')
   const {_} = useLingui()
@@ -306,7 +309,7 @@ export function BottomBar({navigation}: BottomTabBarProps) {
                   variant="solid"
                   color="primary">
                   <ButtonText>
-                    <Trans>Create account</Trans>
+                    <Trans>{t('create-account')}</Trans>
                   </ButtonText>
                 </Button>
                 <Button
@@ -316,7 +319,7 @@ export function BottomBar({navigation}: BottomTabBarProps) {
                   variant="solid"
                   color="secondary">
                   <ButtonText>
-                    <Trans>Sign in</Trans>
+                    <Trans>{t('sign-in')}</Trans>
                   </ButtonText>
                 </Button>
               </View>

@@ -7,6 +7,7 @@ import {useLingui} from '@lingui/react'
 import {useIsFocused, useNavigation} from '@react-navigation/native'
 import {NativeStackScreenProps} from '@react-navigation/native-stack'
 import {useQueryClient} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {VIDEO_FEED_URIS} from '#/lib/constants'
 import {usePalette} from '#/lib/hooks/usePalette'
@@ -46,6 +47,8 @@ import * as Layout from '#/components/Layout'
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, 'ProfileFeed'>
 export function ProfileFeedScreen(props: Props) {
+const { t } = useTranslation("screens/Profile/ProfileFeed");
+
   const {rkey, name: handleOrDid} = props.route.params
 
   const feedParams: FeedParams | undefined = props.route.params.feedCacheKey
@@ -77,7 +80,7 @@ export function ProfileFeedScreen(props: Props) {
         <Layout.Content>
           <View style={[pal.view, pal.border, styles.notFoundContainer]}>
             <Text type="title-lg" style={[pal.text, s.mb10]}>
-              <Trans>Could not load feed</Trans>
+              <Trans>{t('could-not-load-feed')}</Trans>
             </Text>
             <Text type="md" style={[pal.text, s.mb20]}>
               {error.toString()}
@@ -91,7 +94,7 @@ export function ProfileFeedScreen(props: Props) {
                 onPress={onPressBack}
                 style={{flexShrink: 1}}>
                 <Text type="button" style={pal.text}>
-                  <Trans>Go Back</Trans>
+                  <Trans>{t('go-back')}</Trans>
                 </Text>
               </Button>
             </View>

@@ -1,4 +1,5 @@
 import {View} from 'react-native'
+import { useTranslation } from "react-i18next";
 
 import {atoms as a, useTheme} from '#/alf'
 import {ArrowTopRight_Stroke2_Corner0_Rounded as ArrowTopRight} from '#/components/icons/Arrow'
@@ -8,10 +9,12 @@ import {Loader} from '#/components/Loader'
 import {H1} from '#/components/Typography'
 
 export function Icons() {
+const { t } = useTranslation("view/screens/Storybook");
+
   const t = useTheme()
   return (
     <View style={[a.gap_md]}>
-      <H1>Icons</H1>
+      <H1>{t('icons')}</H1>
 
       <View style={[a.flex_row, a.gap_xl]}>
         <Globe size="xs" fill={t.atoms.text.color} />

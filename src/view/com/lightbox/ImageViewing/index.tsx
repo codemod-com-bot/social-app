@@ -7,7 +7,6 @@
  */
 // Original code copied and simplified from the link below as the codebase is currently not maintained:
 // https://github.com/jobtoday/react-native-image-viewing
-
 import React, {useCallback, useEffect, useMemo, useState} from 'react'
 import {
   LayoutAnimation,
@@ -44,6 +43,7 @@ import * as ScreenOrientation from 'expo-screen-orientation'
 import {StatusBar} from 'expo-status-bar'
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {Trans} from '@lingui/macro'
+import { useTranslation } from "react-i18next";
 
 import {Dimensions} from '#/lib/media/types'
 import {colors, s} from '#/lib/styles'
@@ -574,6 +574,8 @@ function LightboxFooter({
   onPressSave: (uri: string) => void
   onPressShare: (uri: string) => void
 }) {
+const { t } = useTranslation("view/com/lightbox/ImageViewing");
+
   const {alt: altText, uri} = images[index]
   const isMomentumScrolling = React.useRef(false)
   return (
@@ -619,7 +621,7 @@ function LightboxFooter({
             onPress={() => onPressSave(uri)}>
             <FontAwesomeIcon icon={['far', 'floppy-disk']} style={s.white} />
             <Text type="xl" style={s.white}>
-              <Trans context="action">Save</Trans>
+              <Trans context="action">{t('save-action')}</Trans>
             </Text>
           </Button>
           <Button
@@ -628,7 +630,7 @@ function LightboxFooter({
             onPress={() => onPressShare(uri)}>
             <FontAwesomeIcon icon="arrow-up-from-bracket" style={s.white} />
             <Text type="xl" style={s.white}>
-              <Trans context="action">Share</Trans>
+              <Trans context="action">{t('share-action')}</Trans>
             </Text>
           </Button>
         </View>

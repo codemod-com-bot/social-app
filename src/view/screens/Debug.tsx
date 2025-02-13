@@ -2,6 +2,7 @@ import React from 'react'
 import {ScrollView, View} from 'react-native'
 import {msg} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {CommonNavigatorParams, NativeStackScreenProps} from '#/lib/routes/types'
@@ -110,19 +111,21 @@ function Heading({label}: {label: string}) {
 }
 
 function BaseView() {
+const { t } = useTranslation("view/screens");
+
   return (
     <View style={[s.pl10, s.pr10]}>
-      <Heading label="Typography" />
+      <Heading label={t('typography')} />
       <TypographyView />
-      <Heading label="Palettes" />
+      <Heading label={t('palettes')} />
       <PaletteView palette="default" />
       <PaletteView palette="primary" />
       <PaletteView palette="secondary" />
       <PaletteView palette="inverted" />
       <PaletteView palette="error" />
-      <Heading label="Empty state" />
+      <Heading label={t('empty-state')} />
       <EmptyStateView />
-      <Heading label="Loading placeholders" />
+      <Heading label={t('loading-placeholders')} />
       <LoadingPlaceholderView />
       <View style={s.footerSpacer} />
     </View>
@@ -130,13 +133,15 @@ function BaseView() {
 }
 
 function ControlsView() {
+const { t } = useTranslation("view/screens");
+
   return (
     <ScrollView style={[s.pl10, s.pr10]}>
-      <Heading label="Buttons" />
+      <Heading label={t('buttons')} />
       <ButtonsView />
-      <Heading label="Dropdown Buttons" />
+      <Heading label={t('dropdown-buttons')} />
       <DropdownButtonsView />
-      <Heading label="Toggle Buttons" />
+      <Heading label={t('toggle-buttons')} />
       <ToggleButtonsView />
       <View style={s.footerSpacer} />
     </ScrollView>
@@ -144,11 +149,13 @@ function ControlsView() {
 }
 
 function ErrorView() {
+const { t } = useTranslation("view/screens");
+
   return (
     <View style={s.p10}>
       <View style={s.mb5}>
         <ErrorScreen
-          title="Error screen"
+          title={t('error-screen')}
           message="A major error occurred that led the entire screen to fail"
           details="Here are some details"
           onPressTryAgain={() => {}}
@@ -181,6 +188,8 @@ function ErrorView() {
 }
 
 function NotifsView() {
+const { t } = useTranslation("view/screens");
+
   const triggerPush = () => {
     // TODO: implement local notification for testing
   }
@@ -193,25 +202,27 @@ function NotifsView() {
   return (
     <View style={s.p10}>
       <View style={s.flexRow}>
-        <Button onPress={triggerPush} label="Trigger Push" />
-        <Button onPress={triggerToast} label="Trigger Toast" />
-        <Button onPress={triggerToast2} label="Trigger Toast 2" />
+        <Button onPress={triggerPush} label={t('trigger-push')} />
+        <Button onPress={triggerToast} label={t('trigger-toast')} />
+        <Button onPress={triggerToast2} label={t('trigger-toast-2')} />
       </View>
     </View>
   )
 }
 
 function PaletteView({palette}: {palette: PaletteColorName}) {
+const { t } = useTranslation("view/screens");
+
   const defaultPal = usePalette('default')
   const pal = usePalette(palette)
   return (
     <View style={[pal.view, pal.border, s.p10, s.mb5, s.border1]}>
-      <Text style={[pal.text]}>{palette} colors</Text>
-      <Text style={[pal.textLight]}>Light text</Text>
-      <Text style={[pal.link]}>Link text</Text>
+      <Text style={[pal.text]}>{t('palette-colors', { palette })}</Text>
+      <Text style={[pal.textLight]}>{t('light-text')}</Text>
+      <Text style={[pal.link]}>{t('link-text')}</Text>
       {palette !== 'default' && (
         <View style={[defaultPal.view]}>
-          <Text style={[pal.textInverted]}>Inverted text</Text>
+          <Text style={[pal.textInverted]}>{t('inverted-text')}</Text>
         </View>
       )}
     </View>
@@ -219,115 +230,47 @@ function PaletteView({palette}: {palette: PaletteColorName}) {
 }
 
 function TypographyView() {
+const { t } = useTranslation("view/screens");
+
   const pal = usePalette('default')
   return (
     <View style={[pal.view]}>
-      <Text type="2xl-thin" style={[pal.text]}>
-        '2xl-thin' lorem ipsum dolor
-      </Text>
-      <Text type="2xl" style={[pal.text]}>
-        '2xl' lorem ipsum dolor
-      </Text>
-      <Text type="2xl-medium" style={[pal.text]}>
-        '2xl-medium' lorem ipsum dolor
-      </Text>
-      <Text type="2xl-bold" style={[pal.text]}>
-        '2xl-bold' lorem ipsum dolor
-      </Text>
-      <Text type="2xl-heavy" style={[pal.text]}>
-        '2xl-heavy' lorem ipsum dolor
-      </Text>
-      <Text type="xl-thin" style={[pal.text]}>
-        'xl-thin' lorem ipsum dolor
-      </Text>
-      <Text type="xl" style={[pal.text]}>
-        'xl' lorem ipsum dolor
-      </Text>
-      <Text type="xl-medium" style={[pal.text]}>
-        'xl-medium' lorem ipsum dolor
-      </Text>
-      <Text type="xl-bold" style={[pal.text]}>
-        'xl-bold' lorem ipsum dolor
-      </Text>
-      <Text type="xl-heavy" style={[pal.text]}>
-        'xl-heavy' lorem ipsum dolor
-      </Text>
-      <Text type="lg-thin" style={[pal.text]}>
-        'lg-thin' lorem ipsum dolor
-      </Text>
-      <Text type="lg" style={[pal.text]}>
-        'lg' lorem ipsum dolor
-      </Text>
-      <Text type="lg-medium" style={[pal.text]}>
-        'lg-medium' lorem ipsum dolor
-      </Text>
-      <Text type="lg-bold" style={[pal.text]}>
-        'lg-bold' lorem ipsum dolor
-      </Text>
-      <Text type="lg-heavy" style={[pal.text]}>
-        'lg-heavy' lorem ipsum dolor
-      </Text>
-      <Text type="md-thin" style={[pal.text]}>
-        'md-thin' lorem ipsum dolor
-      </Text>
-      <Text type="md" style={[pal.text]}>
-        'md' lorem ipsum dolor
-      </Text>
-      <Text type="md-medium" style={[pal.text]}>
-        'md-medium' lorem ipsum dolor
-      </Text>
-      <Text type="md-bold" style={[pal.text]}>
-        'md-bold' lorem ipsum dolor
-      </Text>
-      <Text type="md-heavy" style={[pal.text]}>
-        'md-heavy' lorem ipsum dolor
-      </Text>
-      <Text type="sm-thin" style={[pal.text]}>
-        'sm-thin' lorem ipsum dolor
-      </Text>
-      <Text type="sm" style={[pal.text]}>
-        'sm' lorem ipsum dolor
-      </Text>
-      <Text type="sm-medium" style={[pal.text]}>
-        'sm-medium' lorem ipsum dolor
-      </Text>
-      <Text type="sm-bold" style={[pal.text]}>
-        'sm-bold' lorem ipsum dolor
-      </Text>
-      <Text type="sm-heavy" style={[pal.text]}>
-        'sm-heavy' lorem ipsum dolor
-      </Text>
-      <Text type="xs-thin" style={[pal.text]}>
-        'xs-thin' lorem ipsum dolor
-      </Text>
-      <Text type="xs" style={[pal.text]}>
-        'xs' lorem ipsum dolor
-      </Text>
-      <Text type="xs-medium" style={[pal.text]}>
-        'xs-medium' lorem ipsum dolor
-      </Text>
-      <Text type="xs-bold" style={[pal.text]}>
-        'xs-bold' lorem ipsum dolor
-      </Text>
-      <Text type="xs-heavy" style={[pal.text]}>
-        'xs-heavy' lorem ipsum dolor
-      </Text>
+      <Text type="2xl-thin" style={[pal.text]}>{t('text-2xl-thin')}</Text>
+      <Text type="2xl" style={[pal.text]}>{t('text-2xl')}</Text>
+      <Text type="2xl-medium" style={[pal.text]}>{t('text-2xl-medium')}</Text>
+      <Text type="2xl-bold" style={[pal.text]}>{t('text-2xl-bold')}</Text>
+      <Text type="2xl-heavy" style={[pal.text]}>{t('text-2xl-heavy')}</Text>
+      <Text type="xl-thin" style={[pal.text]}>{t('text-xl-thin')}</Text>
+      <Text type="xl" style={[pal.text]}>{t('text-xl')}</Text>
+      <Text type="xl-medium" style={[pal.text]}>{t('text-xl-medium')}</Text>
+      <Text type="xl-bold" style={[pal.text]}>{t('text-xl-bold')}</Text>
+      <Text type="xl-heavy" style={[pal.text]}>{t('text-xl-heavy')}</Text>
+      <Text type="lg-thin" style={[pal.text]}>{t('text-lg-thin')}</Text>
+      <Text type="lg" style={[pal.text]}>{t('text-lg')}</Text>
+      <Text type="lg-medium" style={[pal.text]}>{t('text-lg-medium')}</Text>
+      <Text type="lg-bold" style={[pal.text]}>{t('text-lg-bold')}</Text>
+      <Text type="lg-heavy" style={[pal.text]}>{t('text-lg-heavy')}</Text>
+      <Text type="md-thin" style={[pal.text]}>{t('text-md-thin')}</Text>
+      <Text type="md" style={[pal.text]}>{t('text-md')}</Text>
+      <Text type="md-medium" style={[pal.text]}>{t('text-md-medium')}</Text>
+      <Text type="md-bold" style={[pal.text]}>{t('text-md-bold')}</Text>
+      <Text type="md-heavy" style={[pal.text]}>{t('text-md-heavy')}</Text>
+      <Text type="sm-thin" style={[pal.text]}>{t('text-sm-thin')}</Text>
+      <Text type="sm" style={[pal.text]}>{t('text-sm')}</Text>
+      <Text type="sm-medium" style={[pal.text]}>{t('text-sm-medium')}</Text>
+      <Text type="sm-bold" style={[pal.text]}>{t('text-sm-bold')}</Text>
+      <Text type="sm-heavy" style={[pal.text]}>{t('text-sm-heavy')}</Text>
+      <Text type="xs-thin" style={[pal.text]}>{t('text-xs-thin')}</Text>
+      <Text type="xs" style={[pal.text]}>{t('text-xs')}</Text>
+      <Text type="xs-medium" style={[pal.text]}>{t('text-xs-medium')}</Text>
+      <Text type="xs-bold" style={[pal.text]}>{t('text-xs-bold')}</Text>
+      <Text type="xs-heavy" style={[pal.text]}>{t('text-xs-heavy')}</Text>
 
-      <Text type="title-2xl" style={[pal.text]}>
-        'title-2xl' lorem ipsum dolor
-      </Text>
-      <Text type="title-xl" style={[pal.text]}>
-        'title-xl' lorem ipsum dolor
-      </Text>
-      <Text type="title-lg" style={[pal.text]}>
-        'title-lg' lorem ipsum dolor
-      </Text>
-      <Text type="title" style={[pal.text]}>
-        'title' lorem ipsum dolor
-      </Text>
-      <Text type="button" style={[pal.text]}>
-        Button
-      </Text>
+      <Text type="title-2xl" style={[pal.text]}>{t('title-2xl')}</Text>
+      <Text type="title-xl" style={[pal.text]}>{t('title-xl')}</Text>
+      <Text type="title-lg" style={[pal.text]}>{t('title-lg')}</Text>
+      <Text type="title" style={[pal.text]}>{t('title')}</Text>
+      <Text type="button" style={[pal.text]}>{t('button')}</Text>
       <Text type="button-lg" style={[pal.text]}>
         Button-lg
       </Text>
@@ -349,46 +292,48 @@ function LoadingPlaceholderView() {
 }
 
 function ButtonsView() {
+const { t } = useTranslation("view/screens");
+
   const defaultPal = usePalette('default')
   const buttonStyles = {marginRight: 5}
   return (
     <View style={[defaultPal.view]}>
       <View style={[s.flexRow, s.mb5]}>
-        <Button type="primary" label="Primary solid" style={buttonStyles} />
-        <Button type="secondary" label="Secondary solid" style={buttonStyles} />
+        <Button type="primary" label={t('primary-solid')} style={buttonStyles} />
+        <Button type="secondary" label={t('secondary-solid')} style={buttonStyles} />
       </View>
       <View style={[s.flexRow, s.mb5]}>
-        <Button type="default" label="Default solid" style={buttonStyles} />
-        <Button type="inverted" label="Inverted solid" style={buttonStyles} />
+        <Button type="default" label={t('default-solid')} style={buttonStyles} />
+        <Button type="inverted" label={t('inverted-solid')} style={buttonStyles} />
       </View>
       <View style={s.flexRow}>
         <Button
           type="primary-outline"
-          label="Primary outline"
+          label={t('primary-outline')}
           style={buttonStyles}
         />
         <Button
           type="secondary-outline"
-          label="Secondary outline"
+          label={t('secondary-outline')}
           style={buttonStyles}
         />
       </View>
       <View style={s.flexRow}>
         <Button
           type="primary-light"
-          label="Primary light"
+          label={t('primary-light')}
           style={buttonStyles}
         />
         <Button
           type="secondary-light"
-          label="Secondary light"
+          label={t('secondary-light')}
           style={buttonStyles}
         />
       </View>
       <View style={s.flexRow}>
         <Button
           type="default-light"
-          label="Default light"
+          label={t('default-light')}
           style={buttonStyles}
         />
       </View>
@@ -414,6 +359,8 @@ const DROPDOWN_ITEMS: DropdownItem[] = [
   },
 ]
 function DropdownButtonsView() {
+const { t } = useTranslation("view/screens");
+
   const defaultPal = usePalette('default')
   return (
     <View style={[defaultPal.view]}>
@@ -422,12 +369,12 @@ function DropdownButtonsView() {
           type="primary"
           items={DROPDOWN_ITEMS}
           menuWidth={200}
-          label="Primary button"
+          label={t('primary-button')}
         />
       </View>
       <View style={s.mb5}>
         <DropdownButton type="bare" items={DROPDOWN_ITEMS} menuWidth={200}>
-          <Text>Bare</Text>
+          <Text>{t('bare-button')}</Text>
         </DropdownButton>
       </View>
     </View>
@@ -435,6 +382,8 @@ function DropdownButtonsView() {
 }
 
 function ToggleButtonsView() {
+const { t } = useTranslation("view/screens");
+
   const defaultPal = usePalette('default')
   const buttonStyles = s.mb5
   const [isSelected, setIsSelected] = React.useState(false)
@@ -443,56 +392,56 @@ function ToggleButtonsView() {
     <View style={[defaultPal.view]}>
       <ToggleButton
         type="primary"
-        label="Primary solid"
+        label={t('primary-solid-duplicate')}
         style={buttonStyles}
         isSelected={isSelected}
         onPress={onToggle}
       />
       <ToggleButton
         type="secondary"
-        label="Secondary solid"
+        label={t('secondary-solid-duplicate')}
         style={buttonStyles}
         isSelected={isSelected}
         onPress={onToggle}
       />
       <ToggleButton
         type="inverted"
-        label="Inverted solid"
+        label={t('inverted-solid-duplicate')}
         style={buttonStyles}
         isSelected={isSelected}
         onPress={onToggle}
       />
       <ToggleButton
         type="primary-outline"
-        label="Primary outline"
+        label={t('primary-outline-duplicate')}
         style={buttonStyles}
         isSelected={isSelected}
         onPress={onToggle}
       />
       <ToggleButton
         type="secondary-outline"
-        label="Secondary outline"
+        label={t('secondary-outline-duplicate')}
         style={buttonStyles}
         isSelected={isSelected}
         onPress={onToggle}
       />
       <ToggleButton
         type="primary-light"
-        label="Primary light"
+        label={t('primary-light-duplicate')}
         style={buttonStyles}
         isSelected={isSelected}
         onPress={onToggle}
       />
       <ToggleButton
         type="secondary-light"
-        label="Secondary light"
+        label={t('secondary-light-duplicate')}
         style={buttonStyles}
         isSelected={isSelected}
         onPress={onToggle}
       />
       <ToggleButton
         type="default-light"
-        label="Default light"
+        label={t('default-light-duplicate')}
         style={buttonStyles}
         isSelected={isSelected}
         onPress={onToggle}

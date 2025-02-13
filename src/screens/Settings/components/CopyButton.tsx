@@ -7,6 +7,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import * as Clipboard from 'expo-clipboard'
 import {Trans} from '@lingui/macro'
+import { useTranslation } from "react-i18next";
 
 import {atoms as a, useTheme} from '#/alf'
 import {Button, ButtonProps} from '#/components/Button'
@@ -18,6 +19,8 @@ export function CopyButton({
   onPress: onPressProp,
   ...props
 }: ButtonProps & {value: string}) {
+const { t } = useTranslation("screens/Settings/components");
+
   const [hasBeenCopied, setHasBeenCopied] = useState(false)
   const t = useTheme()
   const isReducedMotionEnabled = useReducedMotion()
@@ -63,7 +66,7 @@ export function CopyButton({
               a.text_md,
               t.atoms.text_contrast_high,
             ]}>
-            <Trans>Copied!</Trans>
+            <Trans>{t('copied-message')}</Trans>
           </Text>
         </Animated.View>
       )}

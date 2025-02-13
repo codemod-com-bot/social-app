@@ -8,6 +8,7 @@ import {
 } from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { Trans,useTranslation } from "react-i18next";
 
 import {HITSLOP_10} from '#/lib/constants'
 import {makeListLink, makeProfileLink} from '#/lib/routes/links'
@@ -167,6 +168,8 @@ function WhoCanReplyDialog({
   settings: ThreadgateAllowUISetting[]
   embeddingDisabled: boolean
 }) {
+const { t } = useTranslation("components");
+
   const {_} = useLingui()
   return (
     <Dialog.Outer control={control}>
@@ -176,7 +179,7 @@ function WhoCanReplyDialog({
         style={[{width: 'auto', maxWidth: 400, minWidth: 200}]}>
         <View style={[a.gap_sm]}>
           <Text style={[a.font_bold, a.text_xl, a.pb_sm]}>
-            <Trans>Who can interact with this post?</Trans>
+            <Trans>{t('who-can-interact-with-this-post')}</Trans>
           </Text>
           <Rules
             post={post}
@@ -198,6 +201,8 @@ function Rules({
   settings: ThreadgateAllowUISetting[]
   embeddingDisabled: boolean
 }) {
+const { t } = useTranslation("components");
+
   const t = useTheme()
 
   return (
@@ -210,25 +215,19 @@ function Rules({
           t.atoms.text_contrast_medium,
         ]}>
         {settings.length === 0 ? (
-          <Trans>
-            This post has an unknown type of threadgate on it. Your app may be
-            out of date.
-          </Trans>
+          <Trans>{t('unknown-type-of-threadgate')}</Trans>
         ) : settings[0].type === 'everybody' ? (
-          <Trans>Everybody can reply to this post.</Trans>
+          <Trans>{t('everybody-can-reply')}</Trans>
         ) : settings[0].type === 'nobody' ? (
-          <Trans>Replies to this post are disabled.</Trans>
+          <Trans>{t('replies-disabled')}</Trans>
         ) : (
-          <Trans>
-            Only{' '}
+          <Trans>{t('only')}
             {settings.map((rule, i) => (
               <React.Fragment key={`rule-${i}`}>
                 <Rule rule={rule} post={post} lists={post.threadgate!.lists} />
                 <Separator i={i} length={settings.length} />
               </React.Fragment>
-            ))}{' '}
-            can reply.
-          </Trans>
+            ))}{t('can-reply')}</Trans>
         )}{' '}
       </Text>
       {embeddingDisabled && (
@@ -239,7 +238,7 @@ function Rules({
             a.flex_wrap,
             t.atoms.text_contrast_medium,
           ]}>
-          <Trans>No one but the author can quote this post.</Trans>
+          <Trans>{t('no-one-but-author-can-quote')}</Trans>
         </Text>
       )}
     </>
@@ -255,32 +254,34 @@ function Rule({
   post: AppBskyFeedDefs.PostView
   lists: AppBskyGraphDefs.ListViewBasic[] | undefined
 }) {
+const { t } = useTranslation("components");
+
   if (rule.type === 'mention') {
-    return <Trans>mentioned users</Trans>
+    return <Trans>{t('mentioned-users')}</Trans>
   }
   if (rule.type === 'followers') {
     return (
-      <Trans>
-        users following{' '}
-        <InlineLinkText
+      <Trans><Trans
+i18nKey="users-following-author"
+components={{"0": <InlineLinkText
           label={`@${post.author.handle}`}
           to={makeProfileLink(post.author)}
-          style={[a.text_sm, a.leading_snug]}>
-          @{post.author.handle}
-        </InlineLinkText>
+          style={[a.text_sm, a.leading_snug]} />}}
+/>
+        
       </Trans>
     )
   }
   if (rule.type === 'following') {
     return (
-      <Trans>
-        users followed by{' '}
-        <InlineLinkText
+      <Trans><Trans
+i18nKey="users-followed-by-author"
+components={{"0": <InlineLinkText
           label={`@${post.author.handle}`}
           to={makeProfileLink(post.author)}
-          style={[a.text_sm, a.leading_snug]}>
-          @{post.author.handle}
-        </InlineLinkText>
+          style={[a.text_sm, a.leading_snug]} />}}
+/>
+        
       </Trans>
     )
   }
@@ -290,27 +291,29 @@ function Rule({
       const listUrip = new AtUri(list.uri)
       return (
         <Trans>
-          <InlineLinkText
+          <Trans
+i18nKey="list-members"
+values={{ listName: <>{list.name}</> }}
+components={{"0": <InlineLinkText
             label={list.name}
             to={makeListLink(listUrip.hostname, listUrip.rkey)}
-            style={[a.text_sm, a.leading_snug]}>
-            {list.name}
-          </InlineLinkText>{' '}
-          members
-        </Trans>
+            style={[a.text_sm, a.leading_snug]} />}}
+/></Trans>
       )
     }
   }
 }
 
 function Separator({i, length}: {i: number; length: number}) {
+const { t } = useTranslation("components");
+
   if (length < 2 || i === length - 1) {
     return null
   }
   if (i === length - 2) {
     return (
       <>
-        {length > 2 ? ',' : ''} <Trans>and</Trans>{' '}
+        {length > 2 ? ',' : ''} <Trans>{t('and')}</Trans>{' '}
       </>
     )
   }

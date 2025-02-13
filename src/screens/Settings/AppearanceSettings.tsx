@@ -7,6 +7,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {IS_INTERNAL} from '#/lib/app-info'
 import {CommonNavigatorParams, NativeStackScreenProps} from '#/lib/routes/types'
@@ -27,6 +28,8 @@ import * as SettingsList from './components/SettingsList'
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, 'AppearanceSettings'>
 export function AppearanceSettingsScreen({}: Props) {
+const { t } = useTranslation("screens/Settings");
+
   const {_} = useLingui()
   const {fonts} = useAlf()
   const gate = useGate()
@@ -82,7 +85,7 @@ export function AppearanceSettingsScreen({}: Props) {
           <Layout.Header.BackButton />
           <Layout.Header.Content>
             <Layout.Header.TitleText>
-              <Trans>Appearance</Trans>
+              <Trans>{t('appearance')}</Trans>
             </Layout.Header.TitleText>
           </Layout.Header.Content>
           <Layout.Header.Slot />

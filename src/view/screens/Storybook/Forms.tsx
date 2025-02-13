@@ -1,5 +1,6 @@
 import React from 'react'
 import {View} from 'react-native'
+import { useTranslation } from "react-i18next";
 
 import {atoms as a} from '#/alf'
 import {Button, ButtonText} from '#/components/Button'
@@ -11,6 +12,8 @@ import {Globe_Stroke2_Corner0_Rounded as Globe} from '#/components/icons/Globe'
 import {H1, H3} from '#/components/Typography'
 
 export function Forms() {
+const { t } = useTranslation("view/screens/Storybook");
+
   const [toggleGroupAValues, setToggleGroupAValues] = React.useState(['a'])
   const [toggleGroupBValues, setToggleGroupBValues] = React.useState(['a', 'b'])
   const [toggleGroupCValues, setToggleGroupCValues] = React.useState(['a', 'b'])
@@ -21,7 +24,7 @@ export function Forms() {
 
   return (
     <View style={[a.gap_4xl, a.align_start]}>
-      <H1>Forms</H1>
+      <H1>{t('forms')}</H1>
 
       <View style={[a.gap_md, a.align_start, a.w_full]}>
         <H3>InputText</H3>
@@ -29,7 +32,7 @@ export function Forms() {
         <TextField.Input
           value={value}
           onChangeText={setValue}
-          label="Text field"
+          label={t('text-field-quote')}
         />
 
         <View style={[a.flex_row, a.align_start, a.gap_sm]}>
@@ -44,12 +47,12 @@ export function Forms() {
               <TextField.Input
                 value={value}
                 onChangeText={setValue}
-                label="Text field"
+                label={t('text-field-quote-duplicate')}
               />
             </TextField.Root>
           </View>
           <Button label="Submit" size="large" variant="solid" color="primary">
-            <ButtonText>Submit</ButtonText>
+            <ButtonText>{t('submit-button')}</ButtonText>
           </Button>
         </View>
 
@@ -58,7 +61,7 @@ export function Forms() {
           <TextField.Input
             value={value}
             onChangeText={setValue}
-            label="Text field"
+            label={t('text-field-quote-duplicate-2')}
           />
         </TextField.Root>
 
@@ -67,41 +70,39 @@ export function Forms() {
           <TextField.Input
             value={value}
             onChangeText={setValue}
-            label="Text field"
+            label={t('text-field-quote-duplicate-3')}
             isInvalid
           />
         </TextField.Root>
 
         <View style={[a.w_full]}>
-          <TextField.LabelText>Text field</TextField.LabelText>
+          <TextField.LabelText>{t('text-field')}</TextField.LabelText>
           <TextField.Root>
             <TextField.Icon icon={Globe} />
             <TextField.Input
               value={value}
               onChangeText={setValue}
-              label="Text field"
+              label={t('text-field-quote-duplicate-4')}
             />
-            <TextField.SuffixText label="@gmail.com">
-              @gmail.com
-            </TextField.SuffixText>
+            <TextField.SuffixText label={t('gmail-email')}>{t('gmail-email-newline')}</TextField.SuffixText>
           </TextField.Root>
         </View>
 
         <View style={[a.w_full]}>
-          <TextField.LabelText>Textarea</TextField.LabelText>
+          <TextField.LabelText>{t('textarea')}</TextField.LabelText>
           <TextField.Input
             multiline
             numberOfLines={4}
             value={value}
             onChangeText={setValue}
-            label="Text field"
+            label={t('text-field-quote-duplicate-5')}
           />
         </View>
 
         <H3>DateField</H3>
 
         <View style={[a.w_full]}>
-          <LabelText>Date</LabelText>
+          <LabelText>{t('date-field')}</LabelText>
           <DateField
             testID="date"
             value={date}
@@ -109,17 +110,17 @@ export function Forms() {
               console.log(date)
               setDate(date)
             }}
-            label="Input"
+            label={t('input-field')}
           />
         </View>
       </View>
 
       <View style={[a.gap_md, a.align_start, a.w_full]}>
-        <H3>Toggles</H3>
+        <H3>{t('toggles')}</H3>
 
         <Toggle.Item name="a" label="Click me">
           <Toggle.Checkbox />
-          <Toggle.LabelText>Uncontrolled toggle</Toggle.LabelText>
+          <Toggle.LabelText>{t('uncontrolled-toggle')}</Toggle.LabelText>
         </Toggle.Item>
 
         <Toggle.Group
@@ -131,23 +132,23 @@ export function Forms() {
           <View style={[a.gap_md]}>
             <Toggle.Item name="a" label="Click me">
               <Toggle.Switch />
-              <Toggle.LabelText>Click me</Toggle.LabelText>
+              <Toggle.LabelText>{t('click-me-button-1')}</Toggle.LabelText>
             </Toggle.Item>
             <Toggle.Item name="b" label="Click me">
               <Toggle.Switch />
-              <Toggle.LabelText>Click me</Toggle.LabelText>
+              <Toggle.LabelText>{t('click-me-button-2')}</Toggle.LabelText>
             </Toggle.Item>
             <Toggle.Item name="c" label="Click me">
               <Toggle.Switch />
-              <Toggle.LabelText>Click me</Toggle.LabelText>
+              <Toggle.LabelText>{t('click-me-button-3')}</Toggle.LabelText>
             </Toggle.Item>
             <Toggle.Item name="d" disabled label="Click me">
               <Toggle.Switch />
-              <Toggle.LabelText>Click me</Toggle.LabelText>
+              <Toggle.LabelText>{t('click-me-button-4')}</Toggle.LabelText>
             </Toggle.Item>
             <Toggle.Item name="e" isInvalid label="Click me">
               <Toggle.Switch />
-              <Toggle.LabelText>Click me</Toggle.LabelText>
+              <Toggle.LabelText>{t('click-me-button-5')}</Toggle.LabelText>
             </Toggle.Item>
           </View>
         </Toggle.Group>
@@ -161,23 +162,23 @@ export function Forms() {
           <View style={[a.gap_md]}>
             <Toggle.Item name="a" label="Click me">
               <Toggle.Checkbox />
-              <Toggle.LabelText>Click me</Toggle.LabelText>
+              <Toggle.LabelText>{t('click-me-button-6')}</Toggle.LabelText>
             </Toggle.Item>
             <Toggle.Item name="b" label="Click me">
               <Toggle.Checkbox />
-              <Toggle.LabelText>Click me</Toggle.LabelText>
+              <Toggle.LabelText>{t('click-me-button-7')}</Toggle.LabelText>
             </Toggle.Item>
             <Toggle.Item name="c" label="Click me">
               <Toggle.Checkbox />
-              <Toggle.LabelText>Click me</Toggle.LabelText>
+              <Toggle.LabelText>{t('click-me-button-8')}</Toggle.LabelText>
             </Toggle.Item>
             <Toggle.Item name="d" disabled label="Click me">
               <Toggle.Checkbox />
-              <Toggle.LabelText>Click me</Toggle.LabelText>
+              <Toggle.LabelText>{t('click-me-button-9')}</Toggle.LabelText>
             </Toggle.Item>
             <Toggle.Item name="e" isInvalid label="Click me">
               <Toggle.Checkbox />
-              <Toggle.LabelText>Click me</Toggle.LabelText>
+              <Toggle.LabelText>{t('click-me-button-10')}</Toggle.LabelText>
             </Toggle.Item>
           </View>
         </Toggle.Group>
@@ -190,23 +191,23 @@ export function Forms() {
           <View style={[a.gap_md]}>
             <Toggle.Item name="a" label="Click me">
               <Toggle.Radio />
-              <Toggle.LabelText>Click me</Toggle.LabelText>
+              <Toggle.LabelText>{t('click-me-button-11')}</Toggle.LabelText>
             </Toggle.Item>
             <Toggle.Item name="b" label="Click me">
               <Toggle.Radio />
-              <Toggle.LabelText>Click me</Toggle.LabelText>
+              <Toggle.LabelText>{t('click-me-button-12')}</Toggle.LabelText>
             </Toggle.Item>
             <Toggle.Item name="c" label="Click me">
               <Toggle.Radio />
-              <Toggle.LabelText>Click me</Toggle.LabelText>
+              <Toggle.LabelText>{t('click-me-button-13')}</Toggle.LabelText>
             </Toggle.Item>
             <Toggle.Item name="d" disabled label="Click me">
               <Toggle.Radio />
-              <Toggle.LabelText>Click me</Toggle.LabelText>
+              <Toggle.LabelText>{t('click-me-button-14')}</Toggle.LabelText>
             </Toggle.Item>
             <Toggle.Item name="e" isInvalid label="Click me">
               <Toggle.Radio />
-              <Toggle.LabelText>Click me</Toggle.LabelText>
+              <Toggle.LabelText>{t('click-me-button-15')}</Toggle.LabelText>
             </Toggle.Item>
           </View>
         </Toggle.Group>
@@ -222,7 +223,7 @@ export function Forms() {
           setToggleGroupBValues(['a', 'b'])
           setToggleGroupCValues(['a'])
         }}>
-        <ButtonText>Reset all toggles</ButtonText>
+        <ButtonText>{t('reset-all-toggles')}</ButtonText>
       </Button>
 
       <View style={[a.gap_md, a.align_start, a.w_full]}>
@@ -233,13 +234,13 @@ export function Forms() {
           values={toggleGroupDValues}
           onChange={setToggleGroupDValues}>
           <ToggleButton.Button name="hide" label="Hide">
-            <ToggleButton.ButtonText>Hide</ToggleButton.ButtonText>
+            <ToggleButton.ButtonText>{t('hide-button')}</ToggleButton.ButtonText>
           </ToggleButton.Button>
           <ToggleButton.Button name="warn" label="Warn">
-            <ToggleButton.ButtonText>Warn</ToggleButton.ButtonText>
+            <ToggleButton.ButtonText>{t('warn-button')}</ToggleButton.ButtonText>
           </ToggleButton.Button>
           <ToggleButton.Button name="show" label="Show">
-            <ToggleButton.ButtonText>Show</ToggleButton.ButtonText>
+            <ToggleButton.ButtonText>{t('show-button')}</ToggleButton.ButtonText>
           </ToggleButton.Button>
         </ToggleButton.Group>
 
@@ -249,13 +250,13 @@ export function Forms() {
             values={toggleGroupDValues}
             onChange={setToggleGroupDValues}>
             <ToggleButton.Button name="hide" label="Hide">
-              <ToggleButton.ButtonText>Hide</ToggleButton.ButtonText>
+              <ToggleButton.ButtonText>{t('hide-button-duplicate')}</ToggleButton.ButtonText>
             </ToggleButton.Button>
             <ToggleButton.Button name="warn" label="Warn">
-              <ToggleButton.ButtonText>Warn</ToggleButton.ButtonText>
+              <ToggleButton.ButtonText>{t('warn-button-duplicate')}</ToggleButton.ButtonText>
             </ToggleButton.Button>
             <ToggleButton.Button name="show" label="Show">
-              <ToggleButton.ButtonText>Show</ToggleButton.ButtonText>
+              <ToggleButton.ButtonText>{t('show-button-duplicate')}</ToggleButton.ButtonText>
             </ToggleButton.Button>
           </ToggleButton.Group>
         </View>

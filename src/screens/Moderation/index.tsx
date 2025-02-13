@@ -4,6 +4,7 @@ import {LABELS} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useFocusEffect} from '@react-navigation/native'
+import { Trans,useTranslation } from "react-i18next";
 
 import {getLabelingServiceTitle} from '#/lib/moderation'
 import {CommonNavigatorParams, NativeStackScreenProps} from '#/lib/routes/types'
@@ -41,6 +42,8 @@ import {GlobalLabelPreference} from '#/components/moderation/LabelPreference'
 import {Text} from '#/components/Typography'
 
 function ErrorState({error}: {error: string}) {
+const { t } = useTranslation("screens/Moderation");
+
   const t = useTheme()
   return (
     <View style={[a.p_xl]}>
@@ -51,10 +54,7 @@ function ErrorState({error}: {error: string}) {
           a.pb_md,
           t.atoms.text_contrast_medium,
         ]}>
-        <Trans>
-          Hmmmm, it seems we're having trouble loading this data. See below for
-          more details. If this issue persists, please contact us.
-        </Trans>
+        <Trans>{t('error-loading-data')}</Trans>
       </Text>
       <View
         style={[
@@ -142,6 +142,8 @@ export function ModerationScreenInner({
 }: {
   preferences: UsePreferencesQueryResponse
 }) {
+const { t } = useTranslation("screens/Moderation");
+
   const {_} = useLingui()
   const t = useTheme()
   const setMinimalShellMode = useSetMinimalShellMode()
@@ -190,7 +192,7 @@ export function ModerationScreenInner({
     <View style={[a.pt_2xl, a.px_lg, gtMobile && a.px_2xl]}>
       <Text
         style={[a.text_md, a.font_bold, a.pb_md, t.atoms.text_contrast_high]}>
-        <Trans>Moderation tools</Trans>
+        <Trans>{t('moderation-tools')}</Trans>
       </Text>
 
       <View
@@ -284,7 +286,7 @@ export function ModerationScreenInner({
           a.font_bold,
           t.atoms.text_contrast_high,
         ]}>
-        <Trans>Content filters</Trans>
+        <Trans>{t('content-filters')}</Trans>
       </Text>
 
       <View style={[a.gap_md]}>
@@ -300,10 +302,10 @@ export function ModerationScreenInner({
               }}
               style={[a.justify_between, a.rounded_md, a.px_lg, a.py_lg]}>
               <ButtonText>
-                <Trans>Confirm your age:</Trans>
+                <Trans>{t('confirm-age')}</Trans>
               </ButtonText>
               <ButtonText>
-                <Trans>Set birthdate</Trans>
+                <Trans>{t('set-birthdate')}</Trans>
               </ButtonText>
             </Button>
 
@@ -329,7 +331,7 @@ export function ModerationScreenInner({
                   disabledOnIOS && {opacity: 0.5},
                 ]}>
                 <Text style={[a.font_bold, t.atoms.text_contrast_high]}>
-                  <Trans>Enable adult content</Trans>
+                  <Trans>{t('enable-adult-content')}</Trans>
                 </Text>
                 <Toggle.Item
                   label={_(msg`Toggle to enable or disable adult content`)}
@@ -340,9 +342,9 @@ export function ModerationScreenInner({
                   <View style={[a.flex_row, a.align_center, a.gap_sm]}>
                     <Text style={[t.atoms.text_contrast_medium]}>
                       {adultContentEnabled ? (
-                        <Trans>Enabled</Trans>
+                        <Trans>{t('enabled-status')}</Trans>
                       ) : (
-                        <Trans>Disabled</Trans>
+                        <Trans>{t('disabled-status')}</Trans>
                       )}
                     </Text>
                     <Toggle.Switch />
@@ -352,20 +354,18 @@ export function ModerationScreenInner({
               {disabledOnIOS && (
                 <View style={[a.pb_lg, a.px_lg]}>
                   <Text>
-                    <Trans>
-                      Adult content can only be enabled via the Web at{' '}
-                      <InlineLinkText
+                    <Trans><Trans
+i18nKey="adult-content-enable-info"
+components={{"0": <InlineLinkText
                         label={_(msg`The Bluesky web application`)}
                         to=""
                         onPress={evt => {
                           evt.preventDefault()
                           Linking.openURL('https://bsky.app/')
                           return false
-                        }}>
-                        bsky.app
-                      </InlineLinkText>
-                      .
-                    </Trans>
+                        }} />}}
+/>
+                      </Trans>
                   </Text>
                 </View>
               )}
@@ -396,7 +396,7 @@ export function ModerationScreenInner({
           a.pb_md,
           t.atoms.text_contrast_high,
         ]}>
-        <Trans>Advanced</Trans>
+        <Trans>{t('advanced-settings')}</Trans>
       </Text>
 
       {isLabelersLoading ? (
@@ -406,9 +406,7 @@ export function ModerationScreenInner({
       ) : labelersError || !labelers ? (
         <View style={[a.p_lg, a.rounded_sm, t.atoms.bg_contrast_25]}>
           <Text>
-            <Trans>
-              We were unable to load your configured labelers at this time.
-            </Trans>
+            <Trans>{t('error-loading-labelers')}</Trans>
           </Text>
         </View>
       ) : (

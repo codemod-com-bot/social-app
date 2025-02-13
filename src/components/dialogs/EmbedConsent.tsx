@@ -2,6 +2,7 @@ import {useCallback} from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {
   type EmbedPlayerSource,
@@ -23,6 +24,8 @@ export function EmbedConsentDialog({
   source: EmbedPlayerSource
   onAccept: () => void
 }) {
+const { t } = useTranslation("components/dialogs");
+
   const {_} = useLingui()
   const t = useTheme()
   const setExternalEmbedPref = useSetExternalEmbedPref()
@@ -55,23 +58,16 @@ export function EmbedConsentDialog({
         style={[gtMobile ? {width: 'auto', maxWidth: 400} : a.w_full]}>
         <View style={a.gap_sm}>
           <Text style={[a.text_2xl, a.font_bold]}>
-            <Trans>External Media</Trans>
+            <Trans>{t('external-media-title')}</Trans>
           </Text>
 
           <View style={[a.mt_sm, a.mb_2xl, a.gap_lg]}>
             <Text>
-              <Trans>
-                This content is hosted by {externalEmbedLabels[source]}. Do you
-                want to enable external media?
-              </Trans>
+              <Trans>{t('external-media-hosted-by')}{externalEmbedLabels[source]}{t('external-media-enable-prompt')}</Trans>
             </Text>
 
             <Text style={t.atoms.text_contrast_medium}>
-              <Trans>
-                External media may allow websites to collect information about
-                you and your device. No information is sent or requested until
-                you press the "play" button.
-              </Trans>
+              <Trans>{t('external-media-privacy-warning')}</Trans>
             </Text>
           </View>
         </View>
@@ -85,7 +81,7 @@ export function EmbedConsentDialog({
             size="large"
             variant="solid">
             <ButtonText>
-              <Trans>Enable external media</Trans>
+              <Trans>{t('external-media-enable-button')}</Trans>
             </ButtonText>
           </Button>
           <Button
@@ -97,7 +93,7 @@ export function EmbedConsentDialog({
             size="large"
             variant="solid">
             <ButtonText>
-              <Trans>Enable {externalEmbedLabels[source]} only</Trans>
+              <Trans>{t('external-media-enable-prefix')}{externalEmbedLabels[source]}{t('external-media-only-suffix')}</Trans>
             </ButtonText>
           </Button>
           <Button
@@ -108,7 +104,7 @@ export function EmbedConsentDialog({
             size="large"
             variant="ghost">
             <ButtonText>
-              <Trans>No thanks</Trans>
+              <Trans>{t('external-media-no-thanks')}</Trans>
             </ButtonText>
           </Button>
         </View>

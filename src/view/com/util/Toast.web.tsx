@@ -1,7 +1,6 @@
 /*
  * Note: the dataSet properties are used to leverage custom CSS in public/index.html
  */
-
 import React, {useEffect, useState} from 'react'
 import {Pressable, StyleSheet, Text, View} from 'react-native'
 import {
@@ -9,6 +8,7 @@ import {
   FontAwesomeIconStyle,
   Props as FontAwesomeProps,
 } from '@fortawesome/react-native-fontawesome'
+import { useTranslation } from "react-i18next";
 
 const DURATION = 3500
 
@@ -27,6 +27,8 @@ let toastTimeout: NodeJS.Timeout | undefined
 // =
 type ToastContainerProps = {}
 export const ToastContainer: React.FC<ToastContainerProps> = ({}) => {
+const { t } = useTranslation("view/com/util");
+
   const [activeToast, setActiveToast] = useState<ActiveToast | undefined>()
   useEffect(() => {
     globalSetActiveToast = (t: ActiveToast | undefined) => {
@@ -45,7 +47,7 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({}) => {
           <Text style={styles.text}>{activeToast.text}</Text>
           <Pressable
             style={styles.dismissBackdrop}
-            accessibilityLabel="Dismiss"
+            accessibilityLabel={t('dismiss-button')}
             accessibilityHint=""
             onPress={() => {
               setActiveToast(undefined)

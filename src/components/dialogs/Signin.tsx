@@ -2,6 +2,7 @@ import React from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {isNative} from '#/platform/detection'
 import {useLoggedOutViewControls} from '#/state/shell/logged-out'
@@ -25,6 +26,8 @@ export function SigninDialog() {
 }
 
 function SigninDialogInner({}: {control: Dialog.DialogOuterProps['control']}) {
+const { t } = useTranslation("components/dialogs");
+
   const t = useTheme()
   const {_} = useLingui()
   const {gtMobile} = useBreakpoints()
@@ -72,9 +75,7 @@ function SigninDialogInner({}: {control: Dialog.DialogOuterProps['control']}) {
               maxWidth: 300,
             },
           ]}>
-          <Trans>
-            Sign in or create your account to join the conversation!
-          </Trans>
+          <Trans>{t('sign-in-or-create-account')}</Trans>
         </Text>
 
         <View style={[a.flex_col, a.gap_md]}>
@@ -85,7 +86,7 @@ function SigninDialogInner({}: {control: Dialog.DialogOuterProps['control']}) {
             onPress={showCreateAccount}
             label={_(msg`Create an account`)}>
             <ButtonText>
-              <Trans>Create an account</Trans>
+              <Trans>{t('create-account')}</Trans>
             </ButtonText>
           </Button>
 
@@ -96,7 +97,7 @@ function SigninDialogInner({}: {control: Dialog.DialogOuterProps['control']}) {
             onPress={showSignIn}
             label={_(msg`Sign in`)}>
             <ButtonText>
-              <Trans>Sign in</Trans>
+              <Trans>{t('sign-in')}</Trans>
             </ButtonText>
           </Button>
         </View>

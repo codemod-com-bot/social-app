@@ -1,4 +1,5 @@
 import {View} from 'react-native'
+import { useTranslation } from "react-i18next";
 
 import {atoms as a, useTheme} from '#/alf'
 import {ButtonText} from '#/components/Button'
@@ -6,30 +7,24 @@ import {InlineLinkText, Link} from '#/components/Link'
 import {H1, Text} from '#/components/Typography'
 
 export function Links() {
+const { t } = useTranslation("view/screens/Storybook");
+
   const t = useTheme()
   return (
     <View style={[a.gap_md, a.align_start]}>
-      <H1>Links</H1>
+      <H1>{t('links')}</H1>
 
       <View style={[a.gap_md, a.align_start]}>
-        <InlineLinkText label="foo" to="https://google.com" style={[a.text_lg]}>
-          https://google.com
-        </InlineLinkText>
-        <InlineLinkText label="foo" to="https://google.com" style={[a.text_lg]}>
-          External with custom children (google.com)
-        </InlineLinkText>
+        <InlineLinkText label={t('foo-string')} to="https://google.com" style={[a.text_lg]}>{t('google-url')}</InlineLinkText>
+        <InlineLinkText label={t('foo-string-duplicate')} to="https://google.com" style={[a.text_lg]}>{t('external-with-custom-children')}</InlineLinkText>
         <InlineLinkText
-          label="foo"
+          label={t('foo-string-duplicate-2')}
           to="https://bsky.social"
-          style={[a.text_md, t.atoms.text_contrast_low]}>
-          Internal (bsky.social)
-        </InlineLinkText>
+          style={[a.text_md, t.atoms.text_contrast_low]}>{t('internal-bsky-social')}</InlineLinkText>
         <InlineLinkText
-          label="foo"
+          label={t('foo-string-duplicate-3')}
           to="https://bsky.app/profile/bsky.app"
-          style={[a.text_md]}>
-          Internal (bsky.app)
-        </InlineLinkText>
+          style={[a.text_md]}>{t('internal-bsky-app')}</InlineLinkText>
 
         <Link
           variant="solid"
@@ -37,7 +32,7 @@ export function Links() {
           size="large"
           label="View @bsky.app's profile"
           to="https://bsky.app/profile/bsky.app">
-          <ButtonText>Link as a button</ButtonText>
+          <ButtonText>{t('link-as-button')}</ButtonText>
         </Link>
 
         <Link
@@ -59,7 +54,7 @@ export function Links() {
                 t.atoms.bg_contrast_200,
               ]}
             />
-            <Text>View @bsky.app's profile</Text>
+            <Text>{t('view-bsky-app-profile')}</Text>
           </View>
         </Link>
       </View>

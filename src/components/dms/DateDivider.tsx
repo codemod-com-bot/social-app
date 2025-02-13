@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {subDays} from 'date-fns'
+import { Trans,useTranslation } from "react-i18next";
 
 import {atoms as a, useTheme} from '#/alf'
 import {Text} from '../Typography'
@@ -28,6 +29,8 @@ const longDateFormatterWithYear = new Intl.DateTimeFormat(undefined, {
 })
 
 let DateDivider = ({date: dateStr}: {date: string}): React.ReactNode => {
+const { t } = useTranslation("components/dms");
+
   const {_} = useLingui()
   const t = useTheme()
 
@@ -67,10 +70,11 @@ let DateDivider = ({date: dateStr}: {date: string}): React.ReactNode => {
           a.px_md,
         ]}>
         <Trans>
-          <Text style={[a.text_xs, t.atoms.text_contrast_medium, a.font_bold]}>
-            {date}
-          </Text>{' '}
-          at {time}
+          <Trans
+i18nKey="event-date-time"
+values={{ date: <>{date}</>, time }}
+components={{"0": <Text style={[a.text_xs, t.atoms.text_contrast_medium, a.font_bold]} />}}
+/>
         </Trans>
       </Text>
     </View>

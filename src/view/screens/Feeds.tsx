@@ -5,6 +5,7 @@ import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useFocusEffect} from '@react-navigation/native'
 import debounce from 'lodash.debounce'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
@@ -101,6 +102,8 @@ type FlatlistSlice =
     }
 
 export function FeedsScreen(_props: Props) {
+const { t } = useTranslation("view/screens");
+
   const pal = usePalette('default')
   const {openComposer} = useComposerControls()
   const {isMobile} = useWebMediaQueries()
@@ -467,7 +470,7 @@ export function FeedsScreen(_props: Props) {
               paddingBottom: '150%',
             }}>
             <Text type="lg" style={pal.textLight}>
-              <Trans>No results found for "{query}"</Trans>
+              <Trans>{t('no-results-found-for-query', { query })}</Trans>
             </Text>
           </View>
         )
@@ -505,7 +508,7 @@ export function FeedsScreen(_props: Props) {
           <Layout.Header.BackButton />
           <Layout.Header.Content>
             <Layout.Header.TitleText>
-              <Trans>Feeds</Trans>
+              <Trans>{t('feeds')}</Trans>
             </Layout.Header.TitleText>
           </Layout.Header.Content>
           <Layout.Header.Slot>
@@ -671,6 +674,8 @@ function SavedFeedPlaceholder() {
 }
 
 function FeedsSavedHeader() {
+const { t } = useTranslation("view/screens");
+
   const t = useTheme()
 
   return (
@@ -696,10 +701,10 @@ function FeedsSavedHeader() {
       <IconCircle icon={ListSparkle_Stroke2_Corner0_Rounded} size="lg" />
       <View style={[a.flex_1, a.gap_xs]}>
         <Text style={[a.flex_1, a.text_2xl, a.font_heavy, t.atoms.text]}>
-          <Trans>My Feeds</Trans>
+          <Trans>{t('my-feeds')}</Trans>
         </Text>
         <Text style={[t.atoms.text_contrast_high]}>
-          <Trans>All the feeds you've saved, right in one place.</Trans>
+          <Trans>{t('all-saved-feeds-description')}</Trans>
         </Text>
       </View>
     </View>
@@ -707,6 +712,8 @@ function FeedsSavedHeader() {
 }
 
 function FeedsAboutHeader() {
+const { t } = useTranslation("view/screens");
+
   const t = useTheme()
 
   return (
@@ -722,13 +729,10 @@ function FeedsAboutHeader() {
       />
       <View style={[a.flex_1, a.gap_sm]}>
         <Text style={[a.flex_1, a.text_2xl, a.font_heavy, t.atoms.text]}>
-          <Trans>Discover New Feeds</Trans>
+          <Trans>{t('discover-new-feeds')}</Trans>
         </Text>
         <Text style={[t.atoms.text_contrast_high]}>
-          <Trans>
-            Choose your own timeline! Feeds built by the community help you find
-            content you love.
-          </Trans>
+          <Trans>{t('choose-your-own-timeline-description')}</Trans>
         </Text>
       </View>
     </View>

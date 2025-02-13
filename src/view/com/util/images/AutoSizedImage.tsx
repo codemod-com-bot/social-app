@@ -4,6 +4,7 @@ import {Image} from 'expo-image'
 import {AppBskyEmbedImages} from '@atproto/api'
 import {msg} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {HandleRef, useHandleRef} from '#/lib/hooks/useHandleRef'
 import type {Dimensions} from '#/lib/media/types'
@@ -72,6 +73,8 @@ export function AutoSizedImage({
   onLongPress?: () => void
   onPressIn?: () => void
 }) {
+const { t } = useTranslation("view/com/util/images");
+
   const t = useTheme()
   const {_} = useLingui()
   const largeAlt = useLargeAltBadgeEnabled()
@@ -178,9 +181,7 @@ export function AutoSizedImage({
                 ],
               ]}>
               <Text
-                style={[a.font_heavy, largeAlt ? a.text_xs : {fontSize: 8}]}>
-                ALT
-              </Text>
+                style={[a.font_heavy, largeAlt ? a.text_xs : {fontSize: 8}]}>{t('alt-text')}</Text>
             </View>
           )}
         </View>

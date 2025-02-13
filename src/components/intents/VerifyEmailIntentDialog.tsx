@@ -2,6 +2,7 @@ import React from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { Trans,useTranslation } from "react-i18next";
 
 import {isNative} from '#/platform/detection'
 import {useAgent, useSession} from '#/state/session'
@@ -27,6 +28,8 @@ export function VerifyEmailIntentDialog() {
 }
 
 function Inner({}: {control: DialogControlProps}) {
+const { t } = useTranslation("components/intents");
+
   const t = useTheme()
   const {gtMobile} = useBreakpoints()
   const {_} = useLingui()
@@ -76,41 +79,33 @@ function Inner({}: {control: DialogControlProps}) {
         ) : status === 'success' ? (
           <View style={[a.gap_sm, isNative && a.pb_xl]}>
             <Text style={[a.font_heavy, a.text_2xl]}>
-              <Trans>Email Verified</Trans>
+              <Trans>{t('email-verified')}</Trans>
             </Text>
             <Text style={[a.text_md, a.leading_snug]}>
-              <Trans>
-                Thanks, you have successfully verified your email address. You
-                can close this dialog.
-              </Trans>
+              <Trans>{t('email-verification-success-message')}</Trans>
             </Text>
           </View>
         ) : status === 'failure' ? (
           <View style={[a.gap_sm]}>
             <Text style={[a.font_heavy, a.text_2xl]}>
-              <Trans>Invalid Verification Code</Trans>
+              <Trans>{t('invalid-verification-code')}</Trans>
             </Text>
             <Text style={[a.text_md, a.leading_snug]}>
-              <Trans>
-                The verification code you have provided is invalid. Please make
-                sure that you have used the correct verification link or request
-                a new one.
-              </Trans>
+              <Trans>{t('invalid-verification-code-message')}</Trans>
             </Text>
           </View>
         ) : (
           <View style={[a.gap_sm, isNative && a.pb_xl]}>
             <Text style={[a.font_heavy, a.text_2xl]}>
-              <Trans>Email Resent</Trans>
+              <Trans>{t('email-resent')}</Trans>
             </Text>
             <Text style={[a.text_md, a.leading_snug]}>
-              <Trans>
-                We have sent another verification email to{' '}
-                <Text style={[a.text_md, a.font_bold]}>
-                  {currentAccount?.email}
-                </Text>
-                .
-              </Trans>
+              <Trans><Trans
+i18nKey="verification-email-sent-to-user"
+values={{ currentAccountEmail: <>{currentAccount?.email}</> }}
+components={{"0": <Text style={[a.text_md, a.font_bold]} />}}
+/>
+                </Trans>
             </Text>
           </View>
         )}
@@ -127,7 +122,7 @@ function Inner({}: {control: DialogControlProps}) {
               disabled={sending}>
               <ButtonIcon icon={sending ? Loader : Resend} position="left" />
               <ButtonText>
-                <Trans>Resend Email</Trans>
+                <Trans>{t('resend-email')}</Trans>
               </ButtonText>
             </Button>
           </>

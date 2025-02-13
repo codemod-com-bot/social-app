@@ -1,5 +1,6 @@
 import React from 'react'
 import {View} from 'react-native'
+import { useTranslation } from "react-i18next";
 
 import {ScrollProvider} from '#/lib/ScrollContext'
 import {List, ListMethods} from '#/view/com/util/List'
@@ -8,6 +9,8 @@ import * as Toggle from '#/components/forms/Toggle'
 import {Text} from '#/components/Typography'
 
 export function ListContained() {
+const { t } = useTranslation("view/screens/Storybook");
+
   const [animated, setAnimated] = React.useState(false)
   const ref = React.useRef<ListMethods>(null)
 
@@ -69,7 +72,7 @@ export function ListContained() {
           value={animated}
           onChange={() => setAnimated(prev => !prev)}>
           <Toggle.Checkbox />
-          <Toggle.LabelText>Animated Scrolling</Toggle.LabelText>
+          <Toggle.LabelText>{t('animated-scrolling')}</Toggle.LabelText>
         </Toggle.Item>
       </View>
 
@@ -79,7 +82,7 @@ export function ListContained() {
         size="large"
         label="Scroll to End"
         onPress={() => ref.current?.scrollToOffset({animated, offset: 0})}>
-        <ButtonText>Scroll to Top</ButtonText>
+        <ButtonText>{t('scroll-to-top')}</ButtonText>
       </Button>
 
       <Button
@@ -88,7 +91,7 @@ export function ListContained() {
         size="large"
         label="Scroll to End"
         onPress={() => ref.current?.scrollToEnd({animated})}>
-        <ButtonText>Scroll to End</ButtonText>
+        <ButtonText>{t('scroll-to-end')}</ButtonText>
       </Button>
 
       <Button
@@ -97,7 +100,7 @@ export function ListContained() {
         size="large"
         label="Scroll to Offset 100"
         onPress={() => ref.current?.scrollToOffset({animated, offset: 500})}>
-        <ButtonText>Scroll to Offset 500</ButtonText>
+        <ButtonText>{t('scroll-to-offset-500')}</ButtonText>
       </Button>
     </>
   )

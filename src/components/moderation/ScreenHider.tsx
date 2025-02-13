@@ -9,6 +9,7 @@ import {ModerationUI} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useNavigation} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
 import {useModerationCauseDescription} from '#/lib/moderation/useModerationCauseDescription'
@@ -36,6 +37,8 @@ export function ScreenHider({
   style?: StyleProp<ViewStyle>
   containerStyle?: StyleProp<ViewStyle>
 }>) {
+const { t } = useTranslation("components/moderation");
+
   const t = useTheme()
   const {_} = useLingui()
   const [override, setOverride] = React.useState(false)
@@ -88,9 +91,9 @@ export function ScreenHider({
       <Text
         style={[a.text_4xl, a.font_bold, a.text_center, a.mb_md, t.atoms.text]}>
         {isNoPwi ? (
-          <Trans>Sign-in Required</Trans>
+          <Trans>{t('sign-in-required')}</Trans>
         ) : (
-          <Trans>Content Warning</Trans>
+          <Trans>{t('content-warning')}</Trans>
         )}
       </Text>
       <Text
@@ -103,12 +106,10 @@ export function ScreenHider({
           t.atoms.text_contrast_medium,
         ]}>
         {isNoPwi ? (
-          <Trans>
-            This account has requested that users sign in to view their profile.
-          </Trans>
+          <Trans>{t('account-sign-in-request')}</Trans>
         ) : (
           <>
-            <Trans>This {screenDescription} has been flagged:</Trans>{' '}
+            <Trans>{t('screen-flagged-notification', { screenDescription })}</Trans>{' '}
             <Text
               style={[
                 a.text_lg,
@@ -137,7 +138,7 @@ export function ScreenHider({
                     cursor: 'pointer',
                   }),
                 ]}>
-                <Trans>Learn More</Trans>
+                <Trans>{t('learn-more')}</Trans>
               </Text>
             </TouchableWithoutFeedback>
             <ModerationDetailsDialog control={control} modcause={blur} />
@@ -160,7 +161,7 @@ export function ScreenHider({
             }
           }}>
           <ButtonText>
-            <Trans>Go back</Trans>
+            <Trans>{t('go-back')}</Trans>
           </ButtonText>
         </Button>
         {!modui.noOverride && (
@@ -172,7 +173,7 @@ export function ScreenHider({
             label={_(msg`Show anyway`)}
             onPress={() => setOverride(v => !v)}>
             <ButtonText>
-              <Trans>Show anyway</Trans>
+              <Trans>{t('show-anyway')}</Trans>
             </ButtonText>
           </Button>
         )}

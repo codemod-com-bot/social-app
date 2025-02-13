@@ -2,6 +2,7 @@ import {View} from 'react-native'
 import {ModerationCause} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { Trans,useTranslation } from "react-i18next";
 
 import {useModerationCauseDescription} from '#/lib/moderation/useModerationCauseDescription'
 import {makeProfileLink} from '#/lib/routes/links'
@@ -37,6 +38,8 @@ function ModerationDetailsDialogInner({
 }: ModerationDetailsDialogProps & {
   control: Dialog.DialogOuterProps['control']
 }) {
+const { t } = useTranslation("components/moderation");
+
   const t = useTheme()
   const {_} = useLingui()
   const desc = useModerationCauseDescription(modcause)
@@ -54,16 +57,15 @@ function ModerationDetailsDialogInner({
       const list = modcause.source.list
       name = _(msg`User Blocked by List`)
       description = (
-        <Trans>
-          This user is included in the{' '}
-          <InlineLinkText
+        <Trans><Trans
+i18nKey="user-included-in-blocked-list"
+values={{ listName: <>{list.name}</> }}
+components={{"0": <InlineLinkText
             label={list.name}
             to={listUriToHref(list.uri)}
-            style={[a.text_sm]}>
-            {list.name}
-          </InlineLinkText>{' '}
-          list which you have blocked.
-        </Trans>
+            style={[a.text_sm]} />}}
+/>
+          </Trans>
       )
     } else {
       name = _(msg`User Blocked`)
@@ -86,16 +88,15 @@ function ModerationDetailsDialogInner({
       const list = modcause.source.list
       name = _(msg`Account Muted by List`)
       description = (
-        <Trans>
-          This user is included in the{' '}
-          <InlineLinkText
+        <Trans><Trans
+i18nKey="user-included-in-muted-list"
+values={{ listName: <>{list.name}</> }}
+components={{"0": <InlineLinkText
             label={list.name}
             to={listUriToHref(list.uri)}
-            style={[a.text_sm]}>
-            {list.name}
-          </InlineLinkText>{' '}
-          list which you have muted.
-        </Trans>
+            style={[a.text_sm]} />}}
+/>
+          </Trans>
       )
     } else {
       name = _(msg`Account Muted`)
@@ -142,22 +143,21 @@ function ModerationDetailsDialogInner({
           <Divider />
           {modcause.source.type === 'user' ? (
             <Text style={[t.atoms.text, a.text_md, a.leading_snug, a.mt_lg]}>
-              <Trans>This label was applied by the author.</Trans>
+              <Trans>{t('label-applied-by-author')}</Trans>
             </Text>
           ) : (
             <>
               <Text style={[t.atoms.text, a.text_md, a.leading_snug, a.mt_lg]}>
-                <Trans>
-                  This label was applied by{' '}
-                  <InlineLinkText
+                <Trans><Trans
+i18nKey="label-applied-by-inline-link"
+values={{ descSourceMsgAnUnknownLabeler: <>{desc.source || _(msg`an unknown labeler`)}</> }}
+components={{"0": <InlineLinkText
                     label={desc.source || _(msg`an unknown labeler`)}
                     to={makeProfileLink({did: modcause.label.src, handle: ''})}
                     onPress={() => control.close()}
-                    style={a.text_md}>
-                    {desc.source || _(msg`an unknown labeler`)}
-                  </InlineLinkText>
-                  .
-                </Trans>
+                    style={a.text_md} />}}
+/>
+                  </Trans>
               </Text>
             </>
           )}

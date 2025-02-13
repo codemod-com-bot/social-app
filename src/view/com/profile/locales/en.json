@@ -1,0 +1,19 @@
+{
+  "share": "Share",
+  "unfollow-account": "Unfollow Account",
+  "follow-account": "Follow Account",
+  "add-to-lists": "Add to Lists",
+  "unmute-account": "Unmute Account",
+  "mute-account": "Mute Account",
+  "unblock-account": "Unblock Account",
+  "block-account": "Block Account",
+  "report-account": "Report Account",
+  "copy-uri": "Copy at:// URI",
+  "copy-did": "Copy DID",
+  "list-by-you": "List by you",
+  "list-by-space": "List by",
+  "moderation-list-by-you": "Moderation list by you",
+  "moderation-list-by-space": "Moderation list by",
+  "starter-pack-by-you": "Starter pack by you",
+  "starter-pack-by-space": "Starter pack by"
+}

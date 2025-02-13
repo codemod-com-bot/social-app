@@ -6,6 +6,7 @@ import {
 } from '@fortawesome/react-native-fontawesome'
 import {Trans} from '@lingui/macro'
 import {useNavigation} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {MagnifyingGlassIcon} from '#/lib/icons'
@@ -16,6 +17,8 @@ import {Button} from '../util/forms/Button'
 import {Text} from '../util/text/Text'
 
 export function CustomFeedEmptyState() {
+const { t } = useTranslation("view/com/posts");
+
   const pal = usePalette('default')
   const palInverted = usePalette('inverted')
   const navigation = useNavigation<NavigationProp>()
@@ -35,17 +38,14 @@ export function CustomFeedEmptyState() {
         <MagnifyingGlassIcon style={[styles.emptyIcon, pal.text]} size={62} />
       </View>
       <Text type="xl-medium" style={[s.textCenter, pal.text]}>
-        <Trans>
-          This feed is empty! You may need to follow more users or tune your
-          language settings.
-        </Trans>
+        <Trans>{t('empty-feed-message')}</Trans>
       </Text>
       <Button
         type="inverted"
         style={styles.emptyBtn}
         onPress={onPressFindAccounts}>
         <Text type="lg-medium" style={palInverted.text}>
-          <Trans>Find accounts to follow</Trans>
+          <Trans>{t('find-accounts-to-follow')}</Trans>
         </Text>
         <FontAwesomeIcon
           icon="angle-right"

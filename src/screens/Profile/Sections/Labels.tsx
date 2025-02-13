@@ -9,6 +9,7 @@ import {
 } from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {useAnimatedScrollHandler} from '#/lib/hooks/useAnimatedScrollHandler_FIXED'
 import {isLabelerSubscribed, lookupLabelValueDefinition} from '#/lib/moderation'
@@ -111,6 +112,8 @@ export function ProfileLabelsSectionInner({
   scrollElRef: ListRef
   headerHeight: number
 }) {
+const { t } = useTranslation("screens/Profile/Sections");
+
   const t = useTheme()
 
   // Intentionally destructured outside the main thread closure.
@@ -161,20 +164,14 @@ export function ProfileLabelsSectionInner({
       <View style={[a.pt_xl, a.px_lg, a.border_t, t.atoms.border_contrast_low]}>
         <View>
           <Text style={[t.atoms.text_contrast_high, a.leading_snug, a.text_sm]}>
-            <Trans>
-              Labels are annotations on users and content. They can be used to
-              hide, warn, and categorize the network.
-            </Trans>
+            <Trans>{t('labels-annotations-on-users-and-content')}</Trans>
           </Text>
           {labelerInfo.creator.viewer?.blocking ? (
             <View style={[a.flex_row, a.gap_sm, a.align_center, a.mt_md]}>
               <CircleInfo size="sm" fill={t.atoms.text_contrast_medium.color} />
               <Text
                 style={[t.atoms.text_contrast_high, a.leading_snug, a.text_sm]}>
-                <Trans>
-                  Blocking does not prevent this labeler from placing labels on
-                  your account.
-                </Trans>
+                <Trans>{t('blocking-labeler-placing-labels')}</Trans>
               </Text>
             </View>
           ) : null}
@@ -186,10 +183,7 @@ export function ProfileLabelsSectionInner({
                 a.leading_snug,
                 a.text_sm,
               ]}>
-              <Trans>
-                This labeler hasn't declared what labels it publishes, and may
-                not be active.
-              </Trans>
+              <Trans>{t('labeler-declaration-status')}</Trans>
             </Text>
           ) : !isSubscribed ? (
             <Text
@@ -199,9 +193,7 @@ export function ProfileLabelsSectionInner({
                 a.leading_snug,
                 a.text_sm,
               ]}>
-              <Trans>
-                Subscribe to @{labelerInfo.creator.handle} to use these labels:
-              </Trans>
+              <Trans>{t('subscribe-to-labels')}{labelerInfo.creator.handle}{t('use-these-labels')}</Trans>
             </Text>
           ) : null}
         </View>

@@ -3,6 +3,7 @@ import {Pressable, View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import type Hls from 'hls.js'
+import { useTranslation } from "react-i18next";
 
 import {isTouchDevice} from '#/lib/browser'
 import {clamp} from '#/lib/numbers'
@@ -57,6 +58,8 @@ export function Controls({
   hlsLoading: boolean
   hasSubtitleTrack: boolean
 }) {
+const { t } = useTranslation("view/com/util/post-embeds/VideoEmbedInner/web-controls");
+
   const {
     play,
     pause,
@@ -417,7 +420,7 @@ export function Controls({
           {showSpinner && <Loader fill={t.palette.white} size="lg" />}
           {error && (
             <Text style={{color: t.palette.white}}>
-              <Trans>An error occurred</Trans>
+              <Trans>{t('an-error-occurred')}</Trans>
             </Text>
           )}
         </View>

@@ -3,6 +3,7 @@ import {StyleProp, Text as RNText, TextStyle} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useNavigation} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {NavigationProp} from '#/lib/routes/types'
 import {isInvalidHandle} from '#/lib/strings/handles'
@@ -34,6 +35,8 @@ export function RichTextTag({
   authorHandle?: string
   textStyle: StyleProp<TextStyle>
 }) {
+const { t } = useTranslation("components");
+
   const {_} = useLingui()
   const {isLoading: isPreferencesLoading, data: preferences} =
     usePreferencesQuery()
@@ -115,7 +118,7 @@ export function RichTextTag({
               })
             }}>
             <Menu.ItemText>
-              <Trans>See #{tag} posts</Trans>
+              <Trans>{t('see-tag-posts', { tag })}</Trans>
             </Menu.ItemText>
             <Menu.ItemIcon icon={Search} />
           </Menu.Item>
@@ -129,7 +132,7 @@ export function RichTextTag({
                 })
               }}>
               <Menu.ItemText>
-                <Trans>See #{tag} posts by user</Trans>
+                <Trans>{t('see-tag-posts-by-user', { tag })}</Trans>
               </Menu.ItemText>
               <Menu.ItemIcon icon={Person} />
             </Menu.Item>

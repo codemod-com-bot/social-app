@@ -1,6 +1,7 @@
 import {StyleProp, View, ViewStyle} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {
   useProgressGuide,
@@ -14,6 +15,8 @@ import {FollowDialog} from './FollowDialog'
 import {ProgressGuideTask} from './Task'
 
 export function ProgressGuideList({style}: {style?: StyleProp<ViewStyle>}) {
+const { t } = useTranslation("components/ProgressGuide");
+
   const t = useTheme()
   const {_} = useLingui()
   const followProgressGuide = useProgressGuide('follow-10')
@@ -32,7 +35,7 @@ export function ProgressGuideList({style}: {style?: StyleProp<ViewStyle>}) {
               a.text_sm,
               {textTransform: 'uppercase'},
             ]}>
-            <Trans>Getting started</Trans>
+            <Trans>{t('getting-started')}</Trans>
           </Text>
           <Button
             variant="ghost"

@@ -2,6 +2,7 @@ import React, {useRef} from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {logEvent} from '#/lib/statsig/statsig'
 import {
@@ -22,6 +23,8 @@ import {Text} from '#/components/Typography'
 import {BackNextButtons} from './BackNextButtons'
 
 export function StepHandle() {
+const { t } = useTranslation("screens/Signup");
+
   const {_} = useLingui()
   const t = useTheme()
   const {state, dispatch} = useSignupContext()
@@ -126,7 +129,7 @@ export function StepHandle() {
         </View>
         {draftValue !== '' && (
           <Text style={[a.text_md]}>
-            <Trans>Your full username will be</Trans>{' '}
+            <Trans>{t('username-full-message')}</Trans>{' '}
             <Text style={[a.text_md, a.font_bold]}>
               @{createFullHandle(draftValue, state.userDomain)}
             </Text>
@@ -153,14 +156,14 @@ export function StepHandle() {
               <View style={[a.w_full, a.flex_row, a.align_center, a.gap_sm]}>
                 <IsValidIcon valid={validCheck.handleChars} />
                 <Text style={[a.text_md, a.flex_1]}>
-                  <Trans>Only contains letters, numbers, and hyphens</Trans>
+                  <Trans>{t('username-characters-restrictions')}</Trans>
                 </Text>
               </View>
             ) : (
               <View style={[a.w_full, a.flex_row, a.align_center, a.gap_sm]}>
                 <IsValidIcon valid={validCheck.hyphenStartOrEnd} />
                 <Text style={[a.text_md, a.flex_1]}>
-                  <Trans>Doesn't begin or end with a hyphen</Trans>
+                  <Trans>{t('username-hyphen-restrictions')}</Trans>
                 </Text>
               </View>
             )}
@@ -170,14 +173,11 @@ export function StepHandle() {
               />
               {!validCheck.totalLength ? (
                 <Text style={[a.text_md, a.flex_1]}>
-                  <Trans>
-                    No longer than {maxServiceHandleLength(state.userDomain)}{' '}
-                    characters
-                  </Trans>
+                  <Trans>{t('username-length-restriction-start')}{maxServiceHandleLength(state.userDomain)}{t('username-length-restriction-end')}</Trans>
                 </Text>
               ) : (
                 <Text style={[a.text_md, a.flex_1]}>
-                  <Trans>At least 3 characters</Trans>
+                  <Trans>{t('username-minimum-length')}</Trans>
                 </Text>
               )}
             </View>

@@ -5,6 +5,7 @@ import {
 } from '@fortawesome/react-native-fontawesome'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {atoms as a, useTheme} from '#/alf'
@@ -28,6 +29,8 @@ export function ErrorScreen({
   testID?: string
   showHeader?: boolean
 }) {
+const { t } = useTranslation("view/com/util/error");
+
   const t = useTheme()
   const pal = usePalette('default')
   const {_} = useLingui()
@@ -39,7 +42,7 @@ export function ErrorScreen({
           <Layout.Header.BackButton />
           <Layout.Header.Content>
             <Layout.Header.TitleText>
-              <Trans>Error</Trans>
+              <Trans>{t('error-message')}</Trans>
             </Layout.Header.TitleText>
           </Layout.Header.Content>
           <Layout.Header.Slot />
@@ -100,7 +103,7 @@ export function ErrorScreen({
               )}>
               <ButtonIcon icon={ArrowRotateCounterClockwiseIcon} />
               <ButtonText>
-                <Trans context="action">Try again</Trans>
+                <Trans context="action">{t('try-again-prompt')}</Trans>
               </ButtonText>
             </Button>
           </View>

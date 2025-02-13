@@ -1,11 +1,11 @@
-import { I18nextProvider } from "react-i18next";
-import { i18n } from ".././i18n";
 import events from 'node:events'
 import http from 'node:http'
 
 import express from 'express'
 import {createHttpTerminator, HttpTerminator} from 'http-terminator'
+import { I18nextProvider } from "react-i18next";
 
+import { i18n } from ".././i18n";
 import {Config} from './config.js'
 import {AppContext} from './context.js'
 import {default as routes, errorHandler} from './routes/index.js'

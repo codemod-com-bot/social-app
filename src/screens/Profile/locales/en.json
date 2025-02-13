@@ -1,0 +1,5 @@
+{
+  "could-not-load-moderation-service": "Hmmmm, we couldn't load that moderation service.",
+  "moderation-service-unavailable-details": "This moderation service is unavailable. See below for more details. If this issue persists, contact us.",
+  "go-back": "Go Back"
+}

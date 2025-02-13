@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useQuery} from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {logEvent} from '#/lib/statsig/statsig'
 import {capitalize} from '#/lib/strings/capitalize'
@@ -32,6 +33,8 @@ import {Loader} from '#/components/Loader'
 import {Text} from '#/components/Typography'
 
 export function StepInterests() {
+const { t } = useTranslation("screens/Onboarding/StepInterests");
+
   const {_} = useLingui()
   const t = useTheme()
   const {gtMobile} = useBreakpoints()
@@ -121,17 +124,14 @@ export function StepInterests() {
   }, [onboardDispatch, dispatch])
 
   const title = isError ? (
-    <Trans>Oh no! Something went wrong.</Trans>
+    <Trans>{t('oh-no-something-went-wrong')}</Trans>
   ) : (
-    <Trans>What are your interests?</Trans>
+    <Trans>{t('user-interests-question')}</Trans>
   )
   const description = isError ? (
-    <Trans>
-      We weren't able to connect. Please try again to continue setting up your
-      account. If it continues to fail, you can skip this flow.
-    </Trans>
+    <Trans>{t('connection-failure-message')}</Trans>
   ) : (
-    <Trans>We'll use this to help customize your experience.</Trans>
+    <Trans>{t('customize-experience-note')}</Trans>
   )
 
   return (
@@ -180,7 +180,7 @@ export function StepInterests() {
                     color: t.palette.negative_900,
                   },
                 ]}>
-                <Trans>Error:</Trans>{' '}
+                <Trans>{t('error-label')}</Trans>{' '}
               </Text>
               {error?.message || _(msg`an unknown error occurred`)}
             </Text>
@@ -217,7 +217,7 @@ export function StepInterests() {
               label={_(msg`Retry`)}
               onPress={() => refetch()}>
               <ButtonText>
-                <Trans>Retry</Trans>
+                <Trans>{t('retry-button')}</Trans>
               </ButtonText>
               <ButtonIcon icon={ArrowRotateCounterClockwise} position="right" />
             </Button>
@@ -228,7 +228,7 @@ export function StepInterests() {
               label={_(msg`Skip this flow`)}
               onPress={skipOnboarding}>
               <ButtonText>
-                <Trans>Skip</Trans>
+                <Trans>{t('skip-button')}</Trans>
               </ButtonText>
             </Button>
           </View>
@@ -241,7 +241,7 @@ export function StepInterests() {
             label={_(msg`Continue to next step`)}
             onPress={saveInterests}>
             <ButtonText>
-              <Trans>Continue</Trans>
+              <Trans>{t('continue-button')}</Trans>
             </ButtonText>
             <ButtonIcon
               icon={saving ? Loader : ChevronRight}

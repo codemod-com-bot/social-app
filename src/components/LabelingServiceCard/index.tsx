@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {AppBskyLabelerDefs} from '@atproto/api'
 import {msg, Plural, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {getLabelingServiceTitle} from '#/lib/moderation'
 import {sanitizeHandle} from '#/lib/strings/handles'
@@ -65,6 +66,8 @@ export function Description({value, handle}: {value?: string; handle: string}) {
 }
 
 export function RegionalNotice() {
+const { t } = useTranslation("components/LabelingServiceCard");
+
   const t = useTheme()
   return (
     <View
@@ -77,13 +80,15 @@ export function RegionalNotice() {
       ]}>
       <Flag fill={t.atoms.text_contrast_low.color} size="sm" />
       <Text style={[a.italic, a.leading_snug]}>
-        <Trans>Required in your region</Trans>
+        <Trans>{t('required-in-your-region')}</Trans>
       </Text>
     </View>
   )
 }
 
 export function LikeCount({likeCount}: {likeCount: number}) {
+const { t } = useTranslation("components/LabelingServiceCard");
+
   const t = useTheme()
   return (
     <Text
@@ -93,8 +98,7 @@ export function LikeCount({likeCount}: {likeCount: number}) {
         t.atoms.text_contrast_medium,
         {fontWeight: '600'},
       ]}>
-      <Trans>
-        Liked by <Plural value={likeCount} one="# user" other="# users" />
+      <Trans>{t('liked-by')}<Plural value={likeCount} one="# user" other="# users" />
       </Trans>
     </Text>
   )
@@ -170,9 +174,11 @@ export function Link({
 
 // TODO not finished yet
 export function DefaultSkeleton() {
+const { t } = useTranslation("components/LabelingServiceCard");
+
   return (
     <View>
-      <Text>Loading</Text>
+      <Text>{t('loading')}</Text>
     </View>
   )
 }

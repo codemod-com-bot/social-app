@@ -2,6 +2,7 @@ import React from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {useLoggedOutViewControls} from '#/state/shell/logged-out'
 import {useCloseAllActiveElements} from '#/state/util'
@@ -13,6 +14,8 @@ import {Link} from '#/components/Link'
 import {Text} from '#/components/Typography'
 
 let NavSignupCard = ({}: {}): React.ReactNode => {
+const { t } = useTranslation("view/shell");
+
   const {_} = useLingui()
   const {requestSwitchToAccount} = useLoggedOutViewControls()
   const closeAllActiveElements = useCloseAllActiveElements()
@@ -37,7 +40,7 @@ let NavSignupCard = ({}: {}): React.ReactNode => {
       <View style={[a.pt_lg]}>
         <Text
           style={[a.text_3xl, a.font_heavy, {lineHeight: a.text_3xl.fontSize}]}>
-          <Trans>Join the conversation</Trans>
+          <Trans>{t('join-the-conversation')}</Trans>
         </Text>
       </View>
 
@@ -49,7 +52,7 @@ let NavSignupCard = ({}: {}): React.ReactNode => {
           variant="solid"
           color="primary">
           <ButtonText>
-            <Trans>Create account</Trans>
+            <Trans>{t('create-account')}</Trans>
           </ButtonText>
         </Button>
         <Button
@@ -59,7 +62,7 @@ let NavSignupCard = ({}: {}): React.ReactNode => {
           variant="solid"
           color="secondary">
           <ButtonText>
-            <Trans>Sign in</Trans>
+            <Trans>{t('sign-in')}</Trans>
           </ButtonText>
         </Button>
       </View>

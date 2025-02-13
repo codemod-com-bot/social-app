@@ -1,0 +1,22 @@
+{
+  "back-button": "Back",
+  "retry-button": "Retry",
+  "next-button": "Next",
+  "username-full-message": "Your full username will be",
+  "username-characters-restrictions": "Only contains letters, numbers, and hyphens",
+  "username-hyphen-restrictions": "Doesn't begin or end with a hyphen",
+  "username-length-restriction-start": "No longer than",
+  "username-length-restriction-end": "  characters",
+  "username-minimum-length": "At least 3 characters",
+  "user-follow-suggestion-on-account-creation": "You'll follow the suggested users and feeds once you finish creating your account!",
+  "user-follow-suggestion-on-account-creation-short": "You'll follow the suggested users once you finish creating your account!",
+  "step-indicator": {
+    "true": "2",
+    "false": "3"
+  },
+  "account-title": "Your account",
+  "username-prompt": "Choose your username",
+  "challenge-completion": "Complete the challenge",
+  "trouble-help": "Having trouble?",
+  "support-contact": "Contact support"
+}

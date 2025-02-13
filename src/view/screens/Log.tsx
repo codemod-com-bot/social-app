@@ -4,6 +4,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {msg} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useFocusEffect} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {useGetTimeAgo} from '#/lib/hooks/useTimeAgo'
@@ -21,6 +22,8 @@ export function LogScreen({}: NativeStackScreenProps<
   CommonNavigatorParams,
   'Log'
 >) {
+const { t } = useTranslation("view/screens");
+
   const pal = usePalette('default')
   const {_} = useLingui()
   const setMinimalShellMode = useSetMinimalShellMode()
@@ -44,7 +47,7 @@ export function LogScreen({}: NativeStackScreenProps<
 
   return (
     <Layout.Screen>
-      <ViewHeader title="Log" />
+      <ViewHeader title={t('log-message')} />
       <ScrollView style={s.flex1}>
         {getEntries()
           .slice(0)

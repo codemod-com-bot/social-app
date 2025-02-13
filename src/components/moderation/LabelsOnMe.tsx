@@ -2,6 +2,7 @@ import {StyleProp, View, ViewStyle} from 'react-native'
 import {AppBskyFeedDefs, ComAtprotoLabelDefs} from '@atproto/api'
 import {msg, Plural, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {useSession} from '#/state/session'
 import {atoms as a} from '#/alf'
@@ -23,6 +24,8 @@ export function LabelsOnMe({
   size?: ButtonSize
   style?: StyleProp<ViewStyle>
 }) {
+const { t } = useTranslation("components/moderation");
+
   const {_} = useLingui()
   const {currentAccount} = useSession()
   const control = useLabelsOnMeDialogControl()
@@ -55,18 +58,14 @@ export function LabelsOnMe({
                 value={labels.length}
                 one="# label has"
                 other="# labels have"
-              />{' '}
-              been placed on this account
-            </Trans>
+              />{t('account-placement-message')}</Trans>
           ) : (
             <Trans>
               <Plural
                 value={labels.length}
                 one="# label has"
                 other="# labels have"
-              />{' '}
-              been placed on this content
-            </Trans>
+              />{t('content-placement-message')}</Trans>
           )}
         </ButtonText>
       </Button>

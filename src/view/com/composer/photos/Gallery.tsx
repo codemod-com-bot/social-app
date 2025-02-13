@@ -12,6 +12,7 @@ import {Image} from 'expo-image'
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
 import {Dimensions} from '#/lib/media/types'
@@ -137,6 +138,8 @@ const GalleryItem = ({
   onChange,
   onRemove,
 }: GalleryItemProps): React.ReactNode => {
+const { t } = useTranslation("view/com/composer/photos");
+
   const {_} = useLingui()
   const t = useTheme()
 
@@ -184,7 +187,7 @@ const GalleryItem = ({
           />
         )}
         <Text style={styles.altTextControlLabel} accessible={false}>
-          <Trans>ALT</Trans>
+          <Trans>{t('alt-text')}</Trans>
         </Text>
       </TouchableOpacity>
       <View style={imageControlsStyle}>
@@ -245,6 +248,8 @@ const GalleryItem = ({
 }
 
 export function AltTextReminder() {
+const { t } = useTranslation("view/com/composer/photos");
+
   const t = useTheme()
   return (
     <View style={[styles.reminder]}>
@@ -252,10 +257,7 @@ export function AltTextReminder() {
         <FontAwesomeIcon icon="info" size={12} color={t.atoms.text.color} />
       </View>
       <Text type="sm" style={[t.atoms.text_contrast_medium, s.flex1]}>
-        <Trans>
-          Alt text describes images for blind and low-vision users, and helps
-          give context to everyone.
-        </Trans>
+        <Trans>{t('alt-text-description')}</Trans>
       </Text>
     </View>
   )

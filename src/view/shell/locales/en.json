@@ -1,0 +1,12 @@
+{
+  "join-the-conversation": "Join the conversation",
+  "create-account": "Create account",
+  "sign-in": "Sign in",
+  "feedback": "Feedback",
+  "help": "Help",
+  "terms-of-service": "Terms of Service",
+  "privacy-policy": "Privacy Policy",
+  "logo-inline-link_nested_1": "@sawaratsuki.bsky.social",
+  "logo-inline-link_nested_0": "@sawaratsuki.bsky.social",
+  "logo-inline-link": "Logo by <0>{$t('logo-inline-link_nested_0', {  })}</0><0>{$t('logo-inline-link_nested_1', {  })}</0>"
+}

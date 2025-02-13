@@ -8,6 +8,7 @@ import {
 import {AppBskyGraphDefs as GraphDefs} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { Trans,useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {sanitizeDisplayName} from '#/lib/strings/display-names'
@@ -45,6 +46,8 @@ export function Component({
   onAdd?: (listUri: string) => void
   onRemove?: (listUri: string) => void
 }) {
+const { t } = useTranslation("view/com/modals");
+
   const {closeModal} = useModalControls()
   const pal = usePalette('default')
   const {height: screenHeight} = useWindowDimensions()
@@ -79,13 +82,12 @@ export function Component({
   return (
     <View testID="userAddRemoveListsModal" style={s.hContentRegion}>
       <Text style={headerStyles} numberOfLines={1}>
-        <Trans>
-          Update{' '}
-          <Text style={headerStyles} numberOfLines={1}>
-            {displayName}
-          </Text>{' '}
-          in Lists
-        </Trans>
+        <Trans><Trans
+i18nKey="update-user-in-lists"
+values={{ displayName: <>{displayName}</> }}
+components={{"0": <Text style={headerStyles} numberOfLines={1} />}}
+/>
+          </Trans>
       </Text>
       <MyLists
         filter="all"
@@ -137,6 +139,8 @@ function ListItem({
   onAdd?: (listUri: string) => void
   onRemove?: (listUri: string) => void
 }) {
+const { t } = useTranslation("view/com/modals");
+
   const pal = usePalette('default')
   const {_} = useLingui()
   const {currentAccount} = useSession()
@@ -209,18 +213,16 @@ function ListItem({
         <Text type="md" style={[pal.textLight]} numberOfLines={1}>
           {list.purpose === 'app.bsky.graph.defs#curatelist' &&
             (list.creator.did === currentAccount?.did ? (
-              <Trans>User list by you</Trans>
+              <Trans>{t('user-list-by-you')}</Trans>
             ) : (
-              <Trans>
-                User list by {sanitizeHandle(list.creator.handle, '@')}
+              <Trans>{t('user-list-by')}{sanitizeHandle(list.creator.handle, '@')}
               </Trans>
             ))}
           {list.purpose === 'app.bsky.graph.defs#modlist' &&
             (list.creator.did === currentAccount?.did ? (
-              <Trans>Moderation list by you</Trans>
+              <Trans>{t('moderation-list-by-you')}</Trans>
             ) : (
-              <Trans>
-                Moderation list by {sanitizeHandle(list.creator.handle, '@')}
+              <Trans>{t('moderation-list-by')}{sanitizeHandle(list.creator.handle, '@')}
               </Trans>
             ))}
         </Text>

@@ -11,6 +11,7 @@ import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useFocusEffect} from '@react-navigation/native'
 import {NativeStackScreenProps} from '@react-navigation/native-stack'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
@@ -31,6 +32,8 @@ type Props = NativeStackScreenProps<
   'ModerationMutedAccounts'
 >
 export function ModerationMutedAccounts({}: Props) {
+const { t } = useTranslation("view/screens");
+
   const pal = usePalette('default')
   const {_} = useLingui()
   const setMinimalShellMode = useSetMinimalShellMode()
@@ -109,27 +112,20 @@ export function ModerationMutedAccounts({}: Props) {
               marginTop: 20,
             },
           ]}>
-          <Trans>
-            Muted accounts have their posts removed from your feed and from your
-            notifications. Mutes are completely private.
-          </Trans>
+          <Trans>{t('muted-accounts-info')}</Trans>
         </Text>
         {isEmpty ? (
           <View style={[pal.border]}>
             {isError ? (
               <ErrorScreen
-                title="Oops!"
+                title={t('oops-message')}
                 message={cleanError(error)}
                 onPressTryAgain={refetch}
               />
             ) : (
               <View style={[styles.empty, pal.viewLight]}>
                 <Text type="lg" style={[pal.text, styles.emptyText]}>
-                  <Trans>
-                    You have not muted any accounts yet. To mute an account, go
-                    to their profile and select "Mute account" from the menu on
-                    their account.
-                  </Trans>
+                  <Trans>{t('no-muted-accounts-yet')}</Trans>
                 </Text>
               </View>
             )}

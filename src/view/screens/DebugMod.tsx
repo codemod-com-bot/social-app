@@ -19,6 +19,7 @@ import {
 } from '@atproto/api'
 import {msg} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {useGlobalLabelStrings} from '#/lib/moderation/useGlobalLabelStrings'
 import {CommonNavigatorParams, NativeStackScreenProps} from '#/lib/routes/types'
@@ -57,6 +58,8 @@ export const DebugModScreen = ({}: NativeStackScreenProps<
   CommonNavigatorParams,
   'DebugMod'
 >) => {
+const { t } = useTranslation("view/screens");
+
   const t = useTheme()
   const [scenario, setScenario] = React.useState<string[]>(['label'])
   const [scenarioSwitches, setScenarioSwitches] = React.useState<string[]>([])
@@ -269,9 +272,7 @@ export const DebugModScreen = ({}: NativeStackScreenProps<
       <moderationOptsOverrideContext.Provider value={modOpts}>
         <ScrollView>
           <CenteredView style={[t.atoms.bg, a.px_lg, a.py_lg]}>
-            <H1 style={[a.text_5xl, a.font_bold, a.pb_lg]}>
-              Moderation states
-            </H1>
+            <H1 style={[a.text_5xl, a.font_bold, a.pb_lg]}>{t('moderation-states')}</H1>
 
             <Heading title="" subtitle="Scenario" />
             <ToggleButton.Group
@@ -279,13 +280,13 @@ export const DebugModScreen = ({}: NativeStackScreenProps<
               values={scenario}
               onChange={setScenario}>
               <ToggleButton.Button name="label" label="Label">
-                <ToggleButton.ButtonText>Label</ToggleButton.ButtonText>
+                <ToggleButton.ButtonText>{t('label')}</ToggleButton.ButtonText>
               </ToggleButton.Button>
               <ToggleButton.Button name="block" label="Block">
-                <ToggleButton.ButtonText>Block</ToggleButton.ButtonText>
+                <ToggleButton.ButtonText>{t('block')}</ToggleButton.ButtonText>
               </ToggleButton.Button>
               <ToggleButton.Button name="mute" label="Mute">
-                <ToggleButton.ButtonText>Mute</ToggleButton.ButtonText>
+                <ToggleButton.ButtonText>{t('mute')}</ToggleButton.ButtonText>
               </ToggleButton.Button>
             </ToggleButton.Group>
 
@@ -335,7 +336,7 @@ export const DebugModScreen = ({}: NativeStackScreenProps<
                         disabled={isSelfLabel}
                         style={isSelfLabel ? {opacity: 0.5} : undefined}>
                         <Toggle.Radio />
-                        <Toggle.LabelText>Custom label</Toggle.LabelText>
+                        <Toggle.LabelText>{t('custom-label')}</Toggle.LabelText>
                       </Toggle.Item>
                     </View>
                   </Toggle.Group>
@@ -364,23 +365,23 @@ export const DebugModScreen = ({}: NativeStackScreenProps<
                         style={[a.gap_md, a.flex_row, a.flex_wrap, a.pt_md]}>
                         <Toggle.Item name="targetMe" label="Target is me">
                           <Toggle.Checkbox />
-                          <Toggle.LabelText>Target is me</Toggle.LabelText>
+                          <Toggle.LabelText>{t('target-is-me')}</Toggle.LabelText>
                         </Toggle.Item>
                         <Toggle.Item name="following" label="Following target">
                           <Toggle.Checkbox />
-                          <Toggle.LabelText>Following target</Toggle.LabelText>
+                          <Toggle.LabelText>{t('following-target')}</Toggle.LabelText>
                         </Toggle.Item>
                         <Toggle.Item name="selfLabel" label="Self label">
                           <Toggle.Checkbox />
-                          <Toggle.LabelText>Self label</Toggle.LabelText>
+                          <Toggle.LabelText>{t('self-label')}</Toggle.LabelText>
                         </Toggle.Item>
                         <Toggle.Item name="noAdult" label="Adult disabled">
                           <Toggle.Checkbox />
-                          <Toggle.LabelText>Adult disabled</Toggle.LabelText>
+                          <Toggle.LabelText>{t('adult-disabled')}</Toggle.LabelText>
                         </Toggle.Item>
                         <Toggle.Item name="loggedOut" label="Logged out">
                           <Toggle.Checkbox />
-                          <Toggle.LabelText>Logged out</Toggle.LabelText>
+                          <Toggle.LabelText>{t('logged-out')}</Toggle.LabelText>
                         </Toggle.Item>
                       </View>
                     </Toggle.Group>
@@ -394,9 +395,7 @@ export const DebugModScreen = ({}: NativeStackScreenProps<
                             a.text_xs,
                             t.atoms.text,
                             a.pb_sm,
-                          ]}>
-                          Preference
-                        </Text>
+                          ]}>{t('preference')}</Text>
                         <Toggle.Group
                           label="Preference"
                           type="radio"
@@ -411,15 +410,15 @@ export const DebugModScreen = ({}: NativeStackScreenProps<
                             ]}>
                             <Toggle.Item name="hide" label="Hide">
                               <Toggle.Radio />
-                              <Toggle.LabelText>Hide</Toggle.LabelText>
+                              <Toggle.LabelText>{t('hide')}</Toggle.LabelText>
                             </Toggle.Item>
                             <Toggle.Item name="warn" label="Warn">
                               <Toggle.Radio />
-                              <Toggle.LabelText>Warn</Toggle.LabelText>
+                              <Toggle.LabelText>{t('warn')}</Toggle.LabelText>
                             </Toggle.Item>
                             <Toggle.Item name="ignore" label="Ignore">
                               <Toggle.Radio />
-                              <Toggle.LabelText>Ignore</Toggle.LabelText>
+                              <Toggle.LabelText>{t('ignore')}</Toggle.LabelText>
                             </Toggle.Item>
                           </View>
                         </Toggle.Group>
@@ -437,9 +436,7 @@ export const DebugModScreen = ({}: NativeStackScreenProps<
                         t.atoms.text,
                         a.pl_md,
                         a.pb_xs,
-                      ]}>
-                      Target
-                    </Text>
+                      ]}>{t('target')}</Text>
                     <View
                       style={[
                         a.border,
@@ -457,19 +454,19 @@ export const DebugModScreen = ({}: NativeStackScreenProps<
                         <View style={[a.flex_row, a.gap_md, a.flex_wrap]}>
                           <Toggle.Item name="account" label="Account">
                             <Toggle.Radio />
-                            <Toggle.LabelText>Account</Toggle.LabelText>
+                            <Toggle.LabelText>{t('account')}</Toggle.LabelText>
                           </Toggle.Item>
                           <Toggle.Item name="profile" label="Profile">
                             <Toggle.Radio />
-                            <Toggle.LabelText>Profile</Toggle.LabelText>
+                            <Toggle.LabelText>{t('profile')}</Toggle.LabelText>
                           </Toggle.Item>
                           <Toggle.Item name="post" label="Post">
                             <Toggle.Radio />
-                            <Toggle.LabelText>Post</Toggle.LabelText>
+                            <Toggle.LabelText>{t('post')}</Toggle.LabelText>
                           </Toggle.Item>
                           <Toggle.Item name="embed" label="Embed">
                             <Toggle.Radio />
-                            <Toggle.LabelText>Embed</Toggle.LabelText>
+                            <Toggle.LabelText>{t('embed')}</Toggle.LabelText>
                           </Toggle.Item>
                         </View>
                       </Toggle.Group>
@@ -488,16 +485,16 @@ export const DebugModScreen = ({}: NativeStackScreenProps<
               values={view}
               onChange={setView}>
               <ToggleButton.Button name="post" label="Post">
-                <ToggleButton.ButtonText>Post</ToggleButton.ButtonText>
+                <ToggleButton.ButtonText>{t('post-notifications')}</ToggleButton.ButtonText>
               </ToggleButton.Button>
               <ToggleButton.Button name="notifications" label="Notifications">
-                <ToggleButton.ButtonText>Notifications</ToggleButton.ButtonText>
+                <ToggleButton.ButtonText>{t('notifications')}</ToggleButton.ButtonText>
               </ToggleButton.Button>
               <ToggleButton.Button name="account" label="Account">
-                <ToggleButton.ButtonText>Account</ToggleButton.ButtonText>
+                <ToggleButton.ButtonText>{t('account-data')}</ToggleButton.ButtonText>
               </ToggleButton.Button>
               <ToggleButton.Button name="data" label="Data">
-                <ToggleButton.ButtonText>Data</ToggleButton.ButtonText>
+                <ToggleButton.ButtonText>{t('data')}</ToggleButton.ButtonText>
               </ToggleButton.Button>
             </ToggleButton.Group>
 
@@ -511,13 +508,13 @@ export const DebugModScreen = ({}: NativeStackScreenProps<
               ]}>
               {view[0] === 'post' && (
                 <>
-                  <Heading title="Post" subtitle="in feed" />
+                  <Heading title={t('post-quote')} subtitle="in feed" />
                   <MockPostFeedItem post={post} moderation={postModeration} />
 
-                  <Heading title="Post" subtitle="viewed directly" />
+                  <Heading title={t('post-quote-duplicate')} subtitle="viewed directly" />
                   <MockPostThreadItem post={post} moderation={postModeration} />
 
-                  <Heading title="Post" subtitle="reply in thread" />
+                  <Heading title={t('post-quote-another')} subtitle="reply in thread" />
                   <MockPostThreadItem
                     post={post}
                     moderation={postModeration}
@@ -528,23 +525,23 @@ export const DebugModScreen = ({}: NativeStackScreenProps<
 
               {view[0] === 'notifications' && (
                 <>
-                  <Heading title="Notification" subtitle="quote or reply" />
+                  <Heading title={t('notification-quote')} subtitle="quote or reply" />
                   <MockNotifItem notif={replyNotif} moderationOpts={modOpts} />
                   <View style={{height: 20}} />
-                  <Heading title="Notification" subtitle="follow or like" />
+                  <Heading title={t('notification-quote-duplicate')} subtitle="follow or like" />
                   <MockNotifItem notif={followNotif} moderationOpts={modOpts} />
                 </>
               )}
 
               {view[0] === 'account' && (
                 <>
-                  <Heading title="Account" subtitle="in listing" />
+                  <Heading title={t('account-quote')} subtitle="in listing" />
                   <MockAccountCard
                     profile={profile}
                     moderation={profileModeration}
                   />
 
-                  <Heading title="Account" subtitle="viewing directly" />
+                  <Heading title={t('account-quote-duplicate')} subtitle="viewing directly" />
                   <MockAccountScreen
                     profile={profile}
                     moderation={profileModeration}
@@ -556,11 +553,11 @@ export const DebugModScreen = ({}: NativeStackScreenProps<
               {view[0] === 'data' && (
                 <>
                   <ModerationUIView
-                    label="Profile Moderation UI"
+                    label={t('profile-moderation-ui')}
                     mod={profileModeration}
                   />
                   <ModerationUIView
-                    label="Post Moderation UI"
+                    label={t('post-moderation-ui')}
                     mod={postModeration}
                   />
                   <DataView
@@ -568,11 +565,11 @@ export const DebugModScreen = ({}: NativeStackScreenProps<
                     data={LABELS[label[0] as keyof typeof LABELS]}
                   />
                   <DataView
-                    label="Profile Moderation Data"
+                    label={t('profile-moderation-data')}
                     data={profileModeration}
                   />
                   <DataView
-                    label="Post Moderation Data"
+                    label={t('post-moderation-data')}
                     data={postModeration}
                   />
                 </>
@@ -608,6 +605,8 @@ function CustomLabelForm({
     React.SetStateAction<ComAtprotoLabelDefs.LabelValueDefinition>
   >
 }) {
+const { t } = useTranslation("view/screens");
+
   const t = useTheme()
   return (
     <View
@@ -621,9 +620,7 @@ function CustomLabelForm({
         a.mt_md,
       ]}>
       <View>
-        <Text style={[a.font_bold, a.text_xs, t.atoms.text, a.pl_md, a.pb_xs]}>
-          Blurs
-        </Text>
+        <Text style={[a.font_bold, a.text_xs, t.atoms.text, a.pl_md, a.pb_xs]}>{t('blurs')}</Text>
         <View
           style={[
             a.border,
@@ -641,24 +638,22 @@ function CustomLabelForm({
             <View style={[a.flex_row, a.gap_md, a.flex_wrap]}>
               <Toggle.Item name="content" label="Content">
                 <Toggle.Radio />
-                <Toggle.LabelText>Content</Toggle.LabelText>
+                <Toggle.LabelText>{t('content')}</Toggle.LabelText>
               </Toggle.Item>
               <Toggle.Item name="media" label="Media">
                 <Toggle.Radio />
-                <Toggle.LabelText>Media</Toggle.LabelText>
+                <Toggle.LabelText>{t('media')}</Toggle.LabelText>
               </Toggle.Item>
               <Toggle.Item name="none" label="None">
                 <Toggle.Radio />
-                <Toggle.LabelText>None</Toggle.LabelText>
+                <Toggle.LabelText>{t('none')}</Toggle.LabelText>
               </Toggle.Item>
             </View>
           </Toggle.Group>
         </View>
       </View>
       <View>
-        <Text style={[a.font_bold, a.text_xs, t.atoms.text, a.pl_md, a.pb_xs]}>
-          Severity
-        </Text>
+        <Text style={[a.font_bold, a.text_xs, t.atoms.text, a.pl_md, a.pb_xs]}>{t('severity')}</Text>
         <View
           style={[
             a.border,
@@ -676,15 +671,15 @@ function CustomLabelForm({
             <View style={[a.flex_row, a.gap_md, a.flex_wrap, a.align_center]}>
               <Toggle.Item name="alert" label="Alert">
                 <Toggle.Radio />
-                <Toggle.LabelText>Alert</Toggle.LabelText>
+                <Toggle.LabelText>{t('alert')}</Toggle.LabelText>
               </Toggle.Item>
               <Toggle.Item name="inform" label="Inform">
                 <Toggle.Radio />
-                <Toggle.LabelText>Inform</Toggle.LabelText>
+                <Toggle.LabelText>{t('inform')}</Toggle.LabelText>
               </Toggle.Item>
               <Toggle.Item name="none" label="None">
                 <Toggle.Radio />
-                <Toggle.LabelText>None</Toggle.LabelText>
+                <Toggle.LabelText>{t('none-severity')}</Toggle.LabelText>
               </Toggle.Item>
             </View>
           </Toggle.Group>
@@ -767,6 +762,8 @@ function ModerationUIView({
   mod: ModerationDecision
   label: string
 }) {
+const { t } = useTranslation("view/screens");
+
   return (
     <Toggler label={label}>
       <View style={a.p_lg}>
@@ -784,10 +781,10 @@ function ModerationUIView({
           return (
             <View key={key} style={[a.flex_row, a.gap_md]}>
               <Text style={[a.font_bold, {width: 100}]}>{key}</Text>
-              <Flag v={ui.filter} label="Filter" />
-              <Flag v={ui.blur} label="Blur" />
-              <Flag v={ui.alert} label="Alert" />
-              <Flag v={ui.inform} label="Inform" />
+              <Flag v={ui.filter} label={t('filter-quote')} />
+              <Flag v={ui.blur} label={t('blur-quote')} />
+              <Flag v={ui.alert} label={t('alert-quote')} />
+              <Flag v={ui.inform} label={t('inform-quote')} />
               <Flag v={ui.noOverride} label="No-override" />
             </View>
           )
@@ -808,12 +805,12 @@ function MockPostFeedItem({
   post: AppBskyFeedDefs.PostView
   moderation: ModerationDecision
 }) {
+const { t } = useTranslation("view/screens");
+
   const t = useTheme()
   if (moderation.ui('contentList').filter) {
     return (
-      <P style={[t.atoms.bg_contrast_25, a.px_lg, a.py_md, a.mb_lg]}>
-        Filtered from the feed
-      </P>
+      <P style={[t.atoms.bg_contrast_25, a.px_lg, a.py_md, a.mb_lg]}>{t('filtered-from-feed')}</P>
     )
   }
   return (
@@ -864,12 +861,12 @@ function MockNotifItem({
   notif: FeedNotification
   moderationOpts: ModerationOpts
 }) {
+const { t } = useTranslation("view/screens");
+
   const t = useTheme()
   if (shouldFilterNotif(notif.notification, moderationOpts)) {
     return (
-      <P style={[t.atoms.bg_contrast_25, a.px_lg, a.py_md]}>
-        Filtered from the feed
-      </P>
+      <P style={[t.atoms.bg_contrast_25, a.px_lg, a.py_md]}>{t('filtered-from-feed-duplicate')}</P>
     )
   }
   return (
@@ -888,13 +885,13 @@ function MockAccountCard({
   profile: AppBskyActorDefs.ProfileViewBasic
   moderation: ModerationDecision
 }) {
+const { t } = useTranslation("view/screens");
+
   const t = useTheme()
 
   if (moderation.ui('profileList').filter) {
     return (
-      <P style={[t.atoms.bg_contrast_25, a.px_lg, a.py_md, a.mb_lg]}>
-        Filtered from the listing
-      </P>
+      <P style={[t.atoms.bg_contrast_25, a.px_lg, a.py_md, a.mb_lg]}>{t('filtered-from-listing')}</P>
     )
   }
 

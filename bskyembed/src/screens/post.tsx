@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import '../index.css'
 
 import {AppBskyFeedDefs, AtpAgent} from '@atproto/api'
@@ -49,6 +50,8 @@ agent
   })
 
 function PwiOptOut({thread}: {thread: AppBskyFeedDefs.ThreadViewPost}) {
+const { t } = useTranslation("../bskyembed/src/screens");
+
   const href = `/profile/${thread.post.author.did}/post/${getRkey(thread.post)}`
   return (
     <Container href={href}>
@@ -58,21 +61,18 @@ function PwiOptOut({thread}: {thread: AppBskyFeedDefs.ThreadViewPost}) {
         <img src={logo} className="h-6" />
       </Link>
       <div className="w-full py-12 gap-4 flex flex-col items-center">
-        <p className="max-w-80 text-center w-full text-textLight dark:text-textDimmed">
-          The author of this post has requested their posts not be displayed on
-          external sites.
-        </p>
+        <p className="max-w-80 text-center w-full text-textLight dark:text-textDimmed">{t('author-request-no-display')}</p>
         <Link
           href={href}
-          className="max-w-80 rounded-lg bg-brand text-white text-center py-1 px-4 w-full mx-auto">
-          View on Bluesky
-        </Link>
+          className="max-w-80 rounded-lg bg-brand text-white text-center py-1 px-4 w-full mx-auto">{t('view-on-bluesky')}</Link>
       </div>
     </Container>
   )
 }
 
 function ErrorMessage() {
+const { t } = useTranslation("../bskyembed/src/screens");
+
   return (
     <Container href="https://bsky.app/">
       <Link
@@ -80,9 +80,7 @@ function ErrorMessage() {
         className="transition-transform hover:scale-110 absolute top-4 right-4">
         <img src={logo} className="h-6" />
       </Link>
-      <p className="my-16 text-center w-full text-textLight dark:text-textDimmed">
-        Post not found, it may have been deleted.
-      </p>
+      <p className="my-16 text-center w-full text-textLight dark:text-textDimmed">{t('post-not-found')}</p>
     </Container>
   )
 }

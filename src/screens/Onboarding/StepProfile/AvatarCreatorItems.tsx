@@ -2,6 +2,7 @@ import React from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {Avatar} from '#/screens/Onboarding/StepProfile/index'
 import {
@@ -34,6 +35,8 @@ export function AvatarCreatorItems({
   avatar: Avatar
   setAvatar: React.Dispatch<React.SetStateAction<Avatar>>
 }) {
+const { t } = useTranslation("screens/Onboarding/StepProfile");
+
   const {_} = useLingui()
   const t = useTheme()
   const isEmojis = type === 'emojis'
@@ -62,9 +65,9 @@ export function AvatarCreatorItems({
     <View style={[a.w_full]}>
       <Text style={[a.pb_md, t.atoms.text_contrast_medium]}>
         {isEmojis ? (
-          <Trans>Select an emoji</Trans>
+          <Trans>{t('select-an-emoji')}</Trans>
         ) : (
-          <Trans>Select a color</Trans>
+          <Trans>{t('select-a-color')}</Trans>
         )}
       </Text>
 

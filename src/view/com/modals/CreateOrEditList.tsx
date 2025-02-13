@@ -13,6 +13,7 @@ import {LinearGradient} from 'expo-linear-gradient'
 import {AppBskyGraphDefs, RichText as RichTextAPI} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
@@ -48,6 +49,8 @@ export function Component({
   onSave?: (uri: string) => void
   list?: AppBskyGraphDefs.ListView
 }) {
+const { t } = useTranslation("view/com/modals");
+
   const {closeModal} = useModalControls()
   const {isMobile} = useWebMediaQueries()
   const [error, setError] = useState<string>('')
@@ -222,14 +225,14 @@ export function Component({
         <Text style={[styles.title, pal.text]}>
           {isCurateList ? (
             list ? (
-              <Trans>Edit User List</Trans>
+              <Trans>{t('edit-user-list')}</Trans>
             ) : (
-              <Trans>New User List</Trans>
+              <Trans>{t('new-user-list')}</Trans>
             )
           ) : list ? (
-            <Trans>Edit Moderation List</Trans>
+            <Trans>{t('edit-moderation-list')}</Trans>
           ) : (
-            <Trans>New Moderation List</Trans>
+            <Trans>{t('new-moderation-list')}</Trans>
           )}
         </Text>
         {error !== '' && (
@@ -238,7 +241,7 @@ export function Component({
           </View>
         )}
         <Text style={[styles.label, pal.text]}>
-          <Trans>List Avatar</Trans>
+          <Trans>{t('list-avatar')}</Trans>
         </Text>
         <View style={[styles.avi, {borderColor: pal.colors.background}]}>
           <EditableUserAvatar
@@ -252,7 +255,7 @@ export function Component({
           <View>
             <View style={styles.labelWrapper}>
               <Text style={[styles.label, pal.text]} nativeID="list-name">
-                <Trans>List Name</Trans>
+                <Trans>{t('list-name')}</Trans>
               </Text>
             </View>
             <TextInput
@@ -277,7 +280,7 @@ export function Component({
               <Text
                 style={[styles.label, pal.text]}
                 nativeID="list-description">
-                <Trans>Description</Trans>
+                <Trans>{t('description')}</Trans>
               </Text>
               <Text
                 style={[!isDescriptionOver ? pal.textLight : s.red3, s.f13]}>
@@ -322,7 +325,7 @@ export function Component({
                 end={{x: 1, y: 1}}
                 style={styles.btn}>
                 <Text style={[s.white, s.bold]}>
-                  <Trans context="action">Save</Trans>
+                  <Trans context="action">{t('save')}</Trans>
                 </Text>
               </LinearGradient>
             </TouchableOpacity>
@@ -337,7 +340,7 @@ export function Component({
             onAccessibilityEscape={onPressCancel}>
             <View style={[styles.btn]}>
               <Text style={[s.black, s.bold, pal.text]}>
-                <Trans context="action">Cancel</Trans>
+                <Trans context="action">{t('cancel')}</Trans>
               </Text>
             </View>
           </TouchableOpacity>

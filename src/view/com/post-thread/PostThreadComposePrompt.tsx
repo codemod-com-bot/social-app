@@ -1,6 +1,7 @@
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {PressableScale} from '#/lib/custom-animations/PressableScale'
 import {useHaptics} from '#/lib/haptics'
@@ -16,6 +17,8 @@ export function PostThreadComposePrompt({
 }: {
   onPressCompose: () => void
 }) {
+const { t } = useTranslation("view/com/post-thread");
+
   const {currentAccount} = useSession()
   const {data: profile} = useProfileQuery({did: currentAccount?.did})
   const {_} = useLingui()
@@ -66,7 +69,7 @@ export function PostThreadComposePrompt({
           type={profile?.associated?.labeler ? 'labeler' : 'user'}
         />
         <Text style={[a.text_md, t.atoms.text_contrast_medium]}>
-          <Trans>Write your reply</Trans>
+          <Trans>{t('write-your-reply')}</Trans>
         </Text>
       </View>
     </PressableScale>

@@ -11,6 +11,7 @@ import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useFocusEffect} from '@react-navigation/native'
 import {NativeStackScreenProps} from '@react-navigation/native-stack'
+import { useTranslation } from "react-i18next";
 
 import {usePalette} from '#/lib/hooks/usePalette'
 import {useWebMediaQueries} from '#/lib/hooks/useWebMediaQueries'
@@ -31,6 +32,8 @@ type Props = NativeStackScreenProps<
   'ModerationBlockedAccounts'
 >
 export function ModerationBlockedAccounts({}: Props) {
+const { t } = useTranslation("view/screens");
+
   const pal = usePalette('default')
   const {_} = useLingui()
   const setMinimalShellMode = useSetMinimalShellMode()
@@ -109,28 +112,20 @@ export function ModerationBlockedAccounts({}: Props) {
               marginTop: 20,
             },
           ]}>
-          <Trans>
-            Blocked accounts cannot reply in your threads, mention you, or
-            otherwise interact with you. You will not see their content and they
-            will be prevented from seeing yours.
-          </Trans>
+          <Trans>{t('blocked-accounts-interaction-restriction')}</Trans>
         </Text>
         {isEmpty ? (
           <View style={[pal.border]}>
             {isError ? (
               <ErrorScreen
-                title="Oops!"
+                title={t('oops-message')}
                 message={cleanError(error)}
                 onPressTryAgain={refetch}
               />
             ) : (
               <View style={[styles.empty, pal.viewLight]}>
                 <Text type="lg" style={[pal.text, styles.emptyText]}>
-                  <Trans>
-                    You have not blocked any accounts yet. To block an account,
-                    go to their profile and select "Block account" from the menu
-                    on their account.
-                  </Trans>
+                  <Trans>{t('no-blocked-accounts-yet')}</Trans>
                 </Text>
               </View>
             )}

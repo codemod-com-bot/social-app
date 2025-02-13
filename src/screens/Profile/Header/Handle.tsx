@@ -2,6 +2,7 @@ import {View} from 'react-native'
 import {AppBskyActorDefs} from '@atproto/api'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {isInvalidHandle} from '#/lib/strings/handles'
 import {isIOS} from '#/platform/detection'
@@ -17,6 +18,8 @@ export function ProfileHeaderHandle({
   profile: Shadow<AppBskyActorDefs.ProfileViewDetailed>
   disableTaps?: boolean
 }) {
+const { t } = useTranslation("screens/Profile/Header");
+
   const t = useTheme()
   const {_} = useLingui()
   const invalidHandle = isInvalidHandle(profile.handle)
@@ -29,7 +32,7 @@ export function ProfileHeaderHandle({
       {profile.viewer?.followedBy && !blockHide ? (
         <View style={[t.atoms.bg_contrast_25, a.rounded_xs, a.px_sm, a.py_xs]}>
           <Text style={[t.atoms.text, a.text_sm]}>
-            <Trans>Follows you</Trans>
+            <Trans>{t('follows-you')}</Trans>
           </Text>
         </View>
       ) : undefined}

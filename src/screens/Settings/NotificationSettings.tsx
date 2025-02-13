@@ -1,6 +1,7 @@
 import {Text} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { Trans,useTranslation } from "react-i18next";
 
 import {AllNavigatorParams, NativeStackScreenProps} from '#/lib/routes/types'
 import {useNotificationFeedQuery} from '#/state/queries/notifications/feed'
@@ -16,6 +17,8 @@ import * as SettingsList from './components/SettingsList'
 
 type Props = NativeStackScreenProps<AllNavigatorParams, 'NotificationSettings'>
 export function NotificationSettingsScreen({}: Props) {
+const { t } = useTranslation("screens/Settings");
+
   const {_} = useLingui()
 
   const {
@@ -43,7 +46,7 @@ export function NotificationSettingsScreen({}: Props) {
         <Layout.Header.BackButton />
         <Layout.Header.Content>
           <Layout.Header.TitleText>
-            <Trans>Notification Settings</Trans>
+            <Trans>{t('notification-settings')}</Trans>
           </Layout.Header.TitleText>
         </Layout.Header.Content>
         <Layout.Header.Slot />
@@ -61,7 +64,7 @@ export function NotificationSettingsScreen({}: Props) {
             <SettingsList.Group>
               <SettingsList.ItemIcon icon={BeakerIcon} />
               <SettingsList.ItemText>
-                <Trans>Notification filters</Trans>
+                <Trans>{t('notification-filters')}</Trans>
               </SettingsList.ItemText>
               <Toggle.Group
                 label={_(msg`Priority notifications`)}
@@ -74,7 +77,7 @@ export function NotificationSettingsScreen({}: Props) {
                   label={_(msg`Enable priority notifications`)}
                   style={[a.flex_1, a.justify_between]}>
                   <Toggle.LabelText>
-                    <Trans>Enable priority notifications</Trans>
+                    <Trans>{t('enable-priority-notifications')}</Trans>
                   </Toggle.LabelText>
                   {!data ? <Loader size="md" /> : <Toggle.Platform />}
                 </Toggle.Item>
@@ -83,11 +86,10 @@ export function NotificationSettingsScreen({}: Props) {
             <SettingsList.Item>
               <Admonition type="warning" style={[a.flex_1]}>
                 <Trans>
-                  <Text style={[a.font_bold]}>Experimental:</Text> When this
-                  preference is enabled, you'll only receive reply and quote
-                  notifications from users you follow. We'll continue to add
-                  more controls here over time.
-                </Trans>
+                  <Trans
+i18nKey="experimental-notification-preference"
+components={{"0": <Text style={[a.font_bold]} />}}
+/></Trans>
               </Admonition>
             </SettingsList.Item>
           </SettingsList.Container>

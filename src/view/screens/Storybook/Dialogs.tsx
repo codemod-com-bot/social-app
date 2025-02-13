@@ -1,5 +1,6 @@
 import React from 'react'
 import {View} from 'react-native'
+import { useTranslation } from "react-i18next";
 
 import {useDialogStateControlContext} from '#/state/dialogs'
 import {atoms as a} from '#/alf'
@@ -11,6 +12,8 @@ import {H3, P, Text} from '#/components/Typography'
 import {PlatformInfo} from '../../../../modules/expo-bluesky-swiss-army'
 
 export function Dialogs() {
+const { t } = useTranslation("view/screens/Storybook");
+
   const scrollable = Dialog.useDialogControl()
   const basic = Dialog.useDialogControl()
   const prompt = Prompt.usePromptControl()
@@ -70,7 +73,7 @@ export function Dialogs() {
           withMenu.open()
         }}
         label="Open basic dialog">
-        <ButtonText>Open all dialogs</ButtonText>
+        <ButtonText>{t('open-all-dialogs')}</ButtonText>
       </Button>
 
       <Button
@@ -81,7 +84,7 @@ export function Dialogs() {
           scrollable.open()
         }}
         label="Open basic dialog">
-        <ButtonText>Open scrollable dialog</ButtonText>
+        <ButtonText>{t('open-scrollable-dialog')}</ButtonText>
       </Button>
 
       <Button
@@ -92,7 +95,7 @@ export function Dialogs() {
           basic.open()
         }}
         label="Open basic dialog">
-        <ButtonText>Open basic dialog</ButtonText>
+        <ButtonText>{t('open-basic-dialog')}</ButtonText>
       </Button>
 
       <Button
@@ -101,7 +104,7 @@ export function Dialogs() {
         size="small"
         onPress={() => withMenu.open()}
         label="Open dialog with menu in it">
-        <ButtonText>Open dialog with menu in it</ButtonText>
+        <ButtonText>{t('open-dialog-with-menu')}</ButtonText>
       </Button>
 
       <Button
@@ -110,7 +113,7 @@ export function Dialogs() {
         size="small"
         onPress={() => prompt.open()}
         label="Open prompt">
-        <ButtonText>Open prompt</ButtonText>
+        <ButtonText>{t('open-prompt')}</ButtonText>
       </Button>
 
       <Button
@@ -119,7 +122,7 @@ export function Dialogs() {
         size="small"
         onPress={testDialog.open}
         label="one">
-        <ButtonText>Open Tester</ButtonText>
+        <ButtonText>{t('open-tester')}</ButtonText>
       </Button>
 
       <Button
@@ -128,7 +131,7 @@ export function Dialogs() {
         size="small"
         onPress={onUnmountTestStartPressWithClose}
         label="two">
-        <ButtonText>Start Unmount Test With `.close()` call</ButtonText>
+        <ButtonText>{t('start-unmount-test-with-close-call')}</ButtonText>
       </Button>
 
       <Button
@@ -137,7 +140,7 @@ export function Dialogs() {
         size="small"
         onPress={onUnmountTestStartPressWithoutClose}
         label="two">
-        <ButtonText>Start Unmount Test Without `.close()` call</ButtonText>
+        <ButtonText>{t('start-unmount-test-without-close-call')}</ButtonText>
       </Button>
 
       <Button
@@ -146,7 +149,7 @@ export function Dialogs() {
         size="small"
         onPress={onUnmountTestEndPress}
         label="two">
-        <ButtonText>End Unmount Test</ButtonText>
+        <ButtonText>{t('end-unmount-test')}</ButtonText>
       </Button>
 
       <Button
@@ -159,18 +162,13 @@ export function Dialogs() {
           setReducedMotionEnabled(isReducedMotionEnabled)
         }}
         label="two">
-        <ButtonText>
-          Is reduced motion enabled?: (
-          {reducedMotionEnabled?.toString() || 'undefined'})
+        <ButtonText>{t('is-reduced-motion-enabled')}{reducedMotionEnabled?.toString() || 'undefined'})
         </ButtonText>
       </Button>
 
       <Prompt.Outer control={prompt}>
-        <Prompt.TitleText>This is a prompt</Prompt.TitleText>
-        <Prompt.DescriptionText>
-          This is a generic prompt component. It accepts a title and a
-          description, as well as two actions.
-        </Prompt.DescriptionText>
+        <Prompt.TitleText>{t('this-is-a-prompt')}</Prompt.TitleText>
+        <Prompt.DescriptionText>{t('generic-prompt-component')}</Prompt.DescriptionText>
         <Prompt.Actions>
           <Prompt.Cancel />
           <Prompt.Action cta="Confirm" onPress={() => {}} />
@@ -179,14 +177,14 @@ export function Dialogs() {
 
       <Dialog.Outer control={basic}>
         <Dialog.Inner label="test">
-          <H3 nativeID="dialog-title">Dialog</H3>
-          <P nativeID="dialog-description">A basic dialog</P>
+          <H3 nativeID="dialog-title">{t('dialog')}</H3>
+          <P nativeID="dialog-description">{t('basic-dialog')}</P>
         </Dialog.Inner>
       </Dialog.Outer>
 
       <Dialog.Outer control={withMenu}>
         <Dialog.Inner label="test">
-          <H3 nativeID="dialog-title">Dialog with Menu</H3>
+          <H3 nativeID="dialog-title">{t('dialog-with-menu')}</H3>
           <Menu.Root>
             <Menu.Trigger label="Open menu">
               {({props}) => (
@@ -197,17 +195,17 @@ export function Dialogs() {
                   variant="solid"
                   size="large"
                   {...props}>
-                  <ButtonText>Open Menu</ButtonText>
+                  <ButtonText>{t('open-menu')}</ButtonText>
                 </Button>
               )}
             </Menu.Trigger>
             <Menu.Outer>
               <Menu.Group>
                 <Menu.Item label="Item 1" onPress={() => console.log('item 1')}>
-                  <Menu.ItemText>Item 1</Menu.ItemText>
+                  <Menu.ItemText>{t('item-1')}</Menu.ItemText>
                 </Menu.Item>
                 <Menu.Item label="Item 2" onPress={() => console.log('item 2')}>
-                  <Menu.ItemText>Item 2</Menu.ItemText>
+                  <Menu.ItemText>{t('item-2')}</Menu.ItemText>
                 </Menu.Item>
               </Menu.Group>
             </Menu.Outer>
@@ -220,11 +218,9 @@ export function Dialogs() {
           accessibilityDescribedBy="dialog-description"
           accessibilityLabelledBy="dialog-title">
           <View style={[a.relative, a.gap_md, a.w_full]}>
-            <H3 nativeID="dialog-title">Dialog</H3>
-            <P nativeID="dialog-description">
-              A scrollable dialog with an input within it.
-            </P>
-            <Dialog.Input value="" onChangeText={() => {}} label="Type here" />
+            <H3 nativeID="dialog-title">{t('dialog-duplicate')}</H3>
+            <P nativeID="dialog-description">{t('scrollable-dialog-with-input')}</P>
+            <Dialog.Input value="" onChangeText={() => {}} label={t('type-here')} />
 
             <Button
               variant="outline"
@@ -232,7 +228,7 @@ export function Dialogs() {
               size="small"
               onPress={closeAllDialogs}
               label="Close all dialogs">
-              <ButtonText>Close all dialogs</ButtonText>
+              <ButtonText>{t('close-all-dialogs')}</ButtonText>
             </Button>
             <View style={{height: 1000}} />
             <View style={[a.flex_row, a.justify_end]}>
@@ -246,7 +242,7 @@ export function Dialogs() {
                   })
                 }
                 label="Open basic dialog">
-                <ButtonText>Close dialog</ButtonText>
+                <ButtonText>{t('close-dialog')}</ButtonText>
               </Button>
             </View>
           </View>
@@ -258,11 +254,7 @@ export function Dialogs() {
           accessibilityDescribedBy="dialog-description"
           accessibilityLabelledBy="dialog-title">
           <View style={[a.relative, a.gap_md, a.w_full]}>
-            <Text>
-              Watch the console logs to test each of these dialog edge cases.
-              Functionality should be consistent across both native and web. If
-              not then *sad face* something is wrong.
-            </Text>
+            <Text>{t('dialog-edge-cases')}</Text>
 
             <Button
               variant="outline"
@@ -274,7 +266,7 @@ export function Dialogs() {
                 })
               }}
               label="Close It">
-              <ButtonText>Normal Use (Should just log)</ButtonText>
+              <ButtonText>{t('normal-use-log')}</ButtonText>
             </Button>
 
             <Button
@@ -291,10 +283,7 @@ export function Dialogs() {
                 }, 100)
               }}
               label="Close It">
-              <ButtonText>
-                Calls `.open()` in 100ms (Should log when the animation switches
-                to open)
-              </ButtonText>
+              <ButtonText>{t('calls-open-in-100ms')}</ButtonText>
             </Button>
 
             <Button
@@ -311,10 +300,7 @@ export function Dialogs() {
                 })
               }}
               label="Close It">
-              <ButtonText>
-                Calls `.open()` in 2000ms (Should log after close animation and
-                not log on open)
-              </ButtonText>
+              <ButtonText>{t('calls-open-in-2000ms')}</ButtonText>
             </Button>
 
             <Button
@@ -332,9 +318,7 @@ export function Dialogs() {
                 }, 100)
               }}
               label="Close It">
-              <ButtonText>
-                Calls `.close()` then again in 100ms (should log twice)
-              </ButtonText>
+              <ButtonText>{t('calls-close-twice')}</ButtonText>
             </Button>
 
             <Button
@@ -350,9 +334,7 @@ export function Dialogs() {
                 })
               }}
               label="Close It">
-              <ButtonText>
-                Call `close()` twice immediately (should just log twice)
-              </ButtonText>
+              <ButtonText>{t('call-close-twice-immediately')}</ButtonText>
             </Button>
 
             <Button
@@ -367,10 +349,7 @@ export function Dialogs() {
                 console.log('Step 2')
               }}
               label="Close It">
-              <ButtonText>
-                Log before `close()`, after `close()` and in the `close()`
-                callback. Should be an order of 1 2 3
-              </ButtonText>
+              <ButtonText>{t('log-order-close-callback')}</ButtonText>
             </Button>
           </View>
         </Dialog.ScrollableInner>
@@ -379,8 +358,8 @@ export function Dialogs() {
       {shouldRenderUnmountTest && (
         <Dialog.Outer control={unmountTestDialog}>
           <Dialog.Inner label="test">
-            <H3 nativeID="dialog-title">Unmount Test Dialog</H3>
-            <P nativeID="dialog-description">Will unmount in about 5 seconds</P>
+            <H3 nativeID="dialog-title">{t('unmount-test-dialog')}</H3>
+            <P nativeID="dialog-description">{t('will-unmount-in-5-seconds')}</P>
           </Dialog.Inner>
         </Dialog.Outer>
       )}

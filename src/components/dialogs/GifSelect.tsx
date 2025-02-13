@@ -10,6 +10,7 @@ import {useWindowDimensions} from 'react-native'
 import {Image} from 'expo-image'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {logEvent} from '#/lib/statsig/statsig'
 import {cleanError} from '#/lib/strings/errors'
@@ -256,6 +257,8 @@ function GifList({
 }
 
 function DialogError({details}: {details?: string}) {
+const { t } = useTranslation("components/dialogs");
+
   const {_} = useLingui()
   const control = Dialog.useDialogContext()
 
@@ -278,7 +281,7 @@ function DialogError({details}: {details?: string}) {
         size="large"
         variant="solid">
         <ButtonText>
-          <Trans>Close</Trans>
+          <Trans>{t('close-button')}</Trans>
         </ButtonText>
       </Button>
     </Dialog.ScrollableInner>

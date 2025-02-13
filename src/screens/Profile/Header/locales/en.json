@@ -1,0 +1,19 @@
+{
+  "follows-you": "Follows you",
+  "edit-profile": "Edit profile",
+  "unblock": "Unblock",
+  "following": "Following",
+  "follow-back": "Follow Back",
+  "follow": "Follow",
+  "unsubscribe": "Unsubscribe",
+  "subscribe-to-labeler": "Subscribe to Labeler",
+  "liked-by": "Liked by",
+  "unable-to-subscribe": "Unable to subscribe",
+  "subscription-limit-reached": "We're sorry! You can only subscribe to twenty labelers, and you've reached your limit of twenty.",
+  "cancel-button": "Cancel",
+  "save-button": "Save",
+  "display-name": "Display name",
+  "display-name-too-long-warning": "Display name is too long. The maximum number of characters is {{DISPLAY_NAME_MAX_GRAPHEMES}}.",
+  "description": "Description",
+  "description-too-long-warning": "Description is too long. The maximum number of characters is {{DESCRIPTION_MAX_GRAPHEMES}}."
+}

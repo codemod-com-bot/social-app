@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {AppBskyActorDefs, moderateProfile, ModerationOpts} from '@atproto/api'
 import {msg, Plural, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { Trans,useTranslation } from "react-i18next";
 
 import {makeProfileLink} from '#/lib/routes/links'
 import {sanitizeDisplayName} from '#/lib/strings/display-names'
@@ -83,6 +84,8 @@ function KnownFollowersInner({
   onLinkPress?: LinkProps['onPress']
   minimal?: boolean
 }) {
+const { t } = useTranslation("components");
+
   const t = useTheme()
   const {_} = useLingui()
 
@@ -184,16 +187,13 @@ function KnownFollowersInner({
             {slice.length >= 2 ? (
               // 2-n followers, including blocks
               serverCount > 2 ? (
-                <Trans>
-                  Followed by{' '}
-                  <Text emoji key={slice[0].profile.did} style={textStyle}>
-                    {slice[0].profile.displayName}
-                  </Text>
-                  ,{' '}
-                  <Text emoji key={slice[1].profile.did} style={textStyle}>
-                    {slice[1].profile.displayName}
-                  </Text>
-                  , and{' '}
+                <Trans><Trans
+i18nKey="followed-by-multiple-users"
+values={{ slice0ProfileDisplayName: <>{slice[0].profile.displayName}</>, slice1ProfileDisplayName: <>{slice[1].profile.displayName}</> }}
+components={{"0": <Text emoji key={slice[0].profile.did} style={textStyle} />, "1": <Text emoji key={slice[1].profile.did} style={textStyle} />}}
+/>
+                  
+                  
                   <Plural
                     value={serverCount - 2}
                     one="# other"
@@ -202,25 +202,23 @@ function KnownFollowersInner({
                 </Trans>
               ) : (
                 // only 2
-                <Trans>
-                  Followed by{' '}
-                  <Text emoji key={slice[0].profile.did} style={textStyle}>
-                    {slice[0].profile.displayName}
-                  </Text>{' '}
-                  and{' '}
-                  <Text emoji key={slice[1].profile.did} style={textStyle}>
-                    {slice[1].profile.displayName}
-                  </Text>
+                <Trans><Trans
+i18nKey="followed-by-two-users"
+values={{ slice0ProfileDisplayName: <>{slice[0].profile.displayName}</>, slice1ProfileDisplayName: <>{slice[1].profile.displayName}</> }}
+components={{"0": <Text emoji key={slice[0].profile.did} style={textStyle} />, "1": <Text emoji key={slice[1].profile.did} style={textStyle} />}}
+/>
+                  
+                  
                 </Trans>
               )
             ) : serverCount > 1 ? (
               // 1-n followers, including blocks
-              <Trans>
-                Followed by{' '}
-                <Text emoji key={slice[0].profile.did} style={textStyle}>
-                  {slice[0].profile.displayName}
-                </Text>{' '}
-                and{' '}
+              <Trans><Trans
+i18nKey="followed-by-one-user-and"
+values={{ slice0ProfileDisplayName: <>{slice[0].profile.displayName}</> }}
+components={{"0": <Text emoji key={slice[0].profile.did} style={textStyle} />}}
+/>
+                
                 <Plural
                   value={serverCount - 1}
                   one="# other"
@@ -229,11 +227,12 @@ function KnownFollowersInner({
               </Trans>
             ) : (
               // only 1
-              <Trans>
-                Followed by{' '}
-                <Text emoji key={slice[0].profile.did} style={textStyle}>
-                  {slice[0].profile.displayName}
-                </Text>
+              <Trans><Trans
+i18nKey="followed-by-one-user"
+values={{ slice0ProfileDisplayName: <>{slice[0].profile.displayName}</> }}
+components={{"0": <Text emoji key={slice[0].profile.did} style={textStyle} />}}
+/>
+                
               </Trans>
             )}
           </Text>

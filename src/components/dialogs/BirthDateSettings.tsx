@@ -2,6 +2,7 @@ import React from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {cleanError} from '#/lib/strings/errors'
 import {logger} from '#/logger'
@@ -24,6 +25,8 @@ export function BirthDateSettingsDialog({
 }: {
   control: Dialog.DialogControlProps
 }) {
+const { t } = useTranslation("components/dialogs");
+
   const t = useTheme()
   const {_} = useLingui()
   const {isLoading, error, data: preferences} = usePreferencesQuery()
@@ -34,10 +37,10 @@ export function BirthDateSettingsDialog({
       <Dialog.ScrollableInner label={_(msg`My Birthday`)}>
         <View style={[a.gap_sm, a.pb_lg]}>
           <Text style={[a.text_2xl, a.font_bold]}>
-            <Trans>My Birthday</Trans>
+            <Trans>{t('my-birthday')}</Trans>
           </Text>
           <Text style={[a.text_md, t.atoms.text_contrast_medium]}>
-            <Trans>This information is not shared with other users.</Trans>
+            <Trans>{t('info-not-shared')}</Trans>
           </Text>
         </View>
 
@@ -70,6 +73,8 @@ function BirthdayInner({
   control: Dialog.DialogControlProps
   preferences: UsePreferencesQueryResponse
 }) {
+const { t } = useTranslation("components/dialogs");
+
   const {_} = useLingui()
   const [date, setDate] = React.useState(preferences.birthDate || new Date())
   const {
@@ -117,7 +122,7 @@ function BirthdayInner({
           variant="solid"
           color="primary">
           <ButtonText>
-            {hasChanged ? <Trans>Save</Trans> : <Trans>Done</Trans>}
+            {hasChanged ? <Trans>{t('save-button')}</Trans> : <Trans>{t('done-button')}</Trans>}
           </ButtonText>
           {isPending && <ButtonIcon icon={Loader} />}
         </Button>

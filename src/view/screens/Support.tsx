@@ -2,6 +2,7 @@ import React from 'react'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 import {useFocusEffect} from '@react-navigation/native'
+import { useTranslation } from "react-i18next";
 
 import {HELP_DESK_URL} from '#/lib/constants'
 import {usePalette} from '#/lib/hooks/usePalette'
@@ -16,6 +17,8 @@ import * as Layout from '#/components/Layout'
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, 'Support'>
 export const SupportScreen = (_props: Props) => {
+const { t } = useTranslation("view/screens");
+
   const pal = usePalette('default')
   const setMinimalShellMode = useSetMinimalShellMode()
   const {_} = useLingui()
@@ -31,18 +34,15 @@ export const SupportScreen = (_props: Props) => {
       <ViewHeader title={_(msg`Support`)} />
       <CenteredView>
         <Text type="title-xl" style={[pal.text, s.p20, s.pb5]}>
-          <Trans>Support</Trans>
+          <Trans>{t('support-title')}</Trans>
         </Text>
         <Text style={[pal.text, s.p20]}>
-          <Trans>
-            The support form has been moved. If you need help, please{' '}
+          <Trans>{t('support-form-moved-message')}
             <TextLink
               href={HELP_DESK_URL}
               text={_(msg`click here`)}
               style={pal.link}
-            />{' '}
-            or visit {HELP_DESK_URL} to get in touch with us.
-          </Trans>
+            />{t('contact-help-desk-message', { HELP_DESK_URL })}</Trans>
         </Text>
       </CenteredView>
     </Layout.Screen>

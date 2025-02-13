@@ -1,0 +1,21 @@
+{
+  "no-feeds-found": "No feeds found. Try searching for something else.",
+  "nobody-found-try-searching": "Nobody was found. Try searching for someone else.",
+  "invites-but-personal": "Invites, but personal",
+  "invite-friends-to-follow": "Invite your friends to follow your favorite feeds and people",
+  "starter-pack-name-prompt": "What do you want to call your starter pack?",
+  "tell-us-more": "Tell us a little more",
+  "next": "Next",
+  "starter-pack-empty-message": "It's just you right now! Add more people to your starter pack by searching above.",
+  "you-and-other-included": "<0>You</0> and <1></1><2></2> are included in your starter pack",
+  "multiple-people-included": "<0>,</0><1>,</1> and",
+  "included-in-starter-pack": "  are included in your starter pack",
+  "add-feeds-to-starter-pack": "Add some feeds to your starter pack!",
+  "search-for-feeds-message": "Search for feeds that you want to suggest to others.",
+  "first-person-included": "<0>{{getNameItems0}}</0>  is included in your starter pack",
+  "first-and-second-person-included": "<0>{{getNameItems0}}</0>  and <1></1><2></2> are included in your starter pack",
+  "first-and-second-people-included": "<0>,</0><1>,</1> and",
+  "edit": "Edit",
+  "add": "Add",
+  "more-to-continue": " more to continue"
+}

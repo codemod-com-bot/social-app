@@ -16,6 +16,7 @@ import {
   UseInfiniteQueryResult,
   useQueryClient,
 } from '@tanstack/react-query'
+import { useTranslation } from "react-i18next";
 
 import {useSetTitle} from '#/lib/hooks/useSetTitle'
 import {ComposeIcon2} from '#/lib/icons'
@@ -65,6 +66,8 @@ export function ProfileScreen(props: Props) {
 }
 
 function ProfileScreenInner({route}: Props) {
+const { t } = useTranslation("view/screens");
+
   const {_} = useLingui()
   const {currentAccount} = useSession()
   const queryClient = useQueryClient()
@@ -150,7 +153,7 @@ function ProfileScreenInner({route}: Props) {
     <SafeAreaView style={[a.flex_1]}>
       <ErrorScreen
         testID="profileErrorScreen"
-        title="Oops!"
+        title={t('oops-message')}
         message="Something went wrong and we're not sure what."
         onPressTryAgain={onPressTryAgain}
         showHeader

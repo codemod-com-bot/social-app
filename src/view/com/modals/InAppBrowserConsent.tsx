@@ -2,6 +2,7 @@ import React from 'react'
 import {StyleSheet, View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {useOpenLink} from '#/lib/hooks/useOpenLink'
 import {usePalette} from '#/lib/hooks/usePalette'
@@ -15,6 +16,8 @@ import {Text} from '#/view/com/util/text/Text'
 export const snapPoints = [350]
 
 export function Component({href}: {href: string}) {
+const { t } = useTranslation("view/com/modals");
+
   const pal = usePalette('default')
   const {closeModal} = useModalControls()
   const {_} = useLingui()
@@ -38,12 +41,10 @@ export function Component({href}: {href: string}) {
       testID="inAppBrowserConsentModal"
       style={[s.flex1, pal.view, {paddingHorizontal: 20, paddingTop: 10}]}>
       <Text style={[pal.text, styles.title]}>
-        <Trans>How should we open this link?</Trans>
+        <Trans>{t('how-should-we-open-this-link')}</Trans>
       </Text>
       <Text style={pal.text}>
-        <Trans>
-          Your choice will be saved, but can be changed later in settings.
-        </Trans>
+        <Trans>{t('your-choice-saved-changed-later')}</Trans>
       </Text>
       <View style={[styles.btnContainer]}>
         <Button

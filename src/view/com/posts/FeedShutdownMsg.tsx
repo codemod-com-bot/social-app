@@ -2,6 +2,7 @@ import React from 'react'
 import {View} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { Trans,useTranslation } from "react-i18next";
 
 import {PROD_DEFAULT_FEED} from '#/lib/constants'
 import {logger} from '#/logger'
@@ -19,6 +20,8 @@ import {Loader} from '#/components/Loader'
 import {Text} from '#/components/Typography'
 
 export function FeedShutdownMsg({feedUri}: {feedUri: string}) {
+const { t } = useTranslation("view/com/posts");
+
   const t = useTheme()
   const {_} = useLingui()
   const setSelectedFeed = useSetSelectedFeed()
@@ -96,16 +99,14 @@ export function FeedShutdownMsg({feedUri}: {feedUri: string}) {
         :(
       </Text>
       <Text style={[a.text_md, a.leading_snug, t.atoms.text, a.text_center]}>
-        <Trans>
-          This feed is no longer online. We are showing{' '}
-          <InlineLinkText
+        <Trans><Trans
+i18nKey="feed-no-longer-online"
+components={{"0": <InlineLinkText
             label={_(msg`The Discover feed`)}
             to="/profile/bsky.app/feed/whats-hot"
-            style={[a.text_md]}>
-            Discover
-          </InlineLinkText>{' '}
-          instead.
-        </Trans>
+            style={[a.text_md]} />}}
+/>
+          </Trans>
       </Text>
       {hasFeedPinned ? (
         <View style={[a.flex_row, a.justify_center, a.gap_sm]}>
@@ -117,7 +118,7 @@ export function FeedShutdownMsg({feedUri}: {feedUri: string}) {
             disabled={isProcessing}
             onPress={onRemoveFeed}>
             <ButtonText>
-              <Trans>Remove feed</Trans>
+              <Trans>{t('remove-feed')}</Trans>
             </ButtonText>
             {isRemovePending && <ButtonIcon icon={Loader} />}
           </Button>
@@ -130,7 +131,7 @@ export function FeedShutdownMsg({feedUri}: {feedUri: string}) {
               disabled={isProcessing}
               onPress={onReplaceFeed}>
               <ButtonText>
-                <Trans>Replace with Discover</Trans>
+                <Trans>{t('replace-with-discover')}</Trans>
               </ButtonText>
               {isReplacePending && <ButtonIcon icon={Loader} />}
             </Button>

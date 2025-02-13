@@ -3,6 +3,7 @@ import {ImageStyle, useWindowDimensions, View} from 'react-native'
 import {Image} from 'expo-image'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import { useTranslation } from "react-i18next";
 
 import {MAX_ALT_TEXT} from '#/lib/constants'
 import {enforceLen} from '#/lib/strings/helpers'
@@ -61,6 +62,8 @@ const ImageAltTextInner = ({
   control: DialogControlProps
   image: Props['image']
 }): React.ReactNode => {
+const { t } = useTranslation("view/com/composer/photos");
+
   const {_, i18n} = useLingui()
   const t = useTheme()
   const windim = useWindowDimensions()
@@ -90,7 +93,7 @@ const ImageAltTextInner = ({
 
       <View>
         <Text style={[a.text_2xl, a.font_bold, a.leading_tight, a.pb_sm]}>
-          <Trans>Add alt text</Trans>
+          <Trans>{t('add-alt-text')}</Trans>
         </Text>
 
         <View style={[t.atoms.bg_contrast_50, a.rounded_sm, a.overflow_hidden]}>
@@ -111,7 +114,7 @@ const ImageAltTextInner = ({
         <View style={[a.gap_sm]}>
           <View style={[a.relative, {width: '100%'}]}>
             <TextField.LabelText>
-              <Trans>Descriptive alt text</Trans>
+              <Trans>{t('descriptive-alt-text')}</Trans>
             </TextField.LabelText>
             <TextField.Root>
               <Dialog.Input
@@ -136,10 +139,7 @@ const ImageAltTextInner = ({
                   a.leading_snug,
                   t.atoms.text_contrast_medium,
                 ]}>
-                <Trans>
-                  Alt text will be truncated. Limit: {i18n.number(MAX_ALT_TEXT)}{' '}
-                  characters.
-                </Trans>
+                <Trans>{t('alt-text-truncation-limit')}{i18n.number(MAX_ALT_TEXT)}{t('alt-text-character-count')}</Trans>
               </Text>
             </View>
           )}
@@ -157,7 +157,7 @@ const ImageAltTextInner = ({
             }}
             style={[a.flex_grow]}>
             <ButtonText>
-              <Trans>Save</Trans>
+              <Trans>{t('save-button')}</Trans>
             </ButtonText>
           </Button>
         </AltTextCounterWrapper>
