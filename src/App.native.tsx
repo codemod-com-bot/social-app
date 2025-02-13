@@ -15,6 +15,7 @@ import * as SplashScreen from 'expo-splash-screen'
 import * as SystemUI from 'expo-system-ui'
 import {msg} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
+import {I18nextProvider} from 'react-i18next'
 
 import {KeyboardControllerProvider} from '#/lib/hooks/useEnableKeyboardController'
 import {QueryProvider} from '#/lib/react-query'
@@ -70,6 +71,7 @@ import {useStarterPackEntry} from '#/components/hooks/useStarterPackEntry'
 import {Provider as IntentDialogProvider} from '#/components/intents/IntentDialogs'
 import {Provider as PortalProvider} from '#/components/Portal'
 import {Splash} from '#/Splash'
+import {i18n} from '.././i18n'
 import {BottomSheetProvider} from '../modules/bottom-sheet'
 import {BackgroundNotificationPreferencesProvider} from '../modules/expo-background-notification-handler/src/BackgroundNotificationHandlerProvider'
 
@@ -125,59 +127,61 @@ function InnerApp() {
   }, [_])
 
   return (
-    <Alf theme={theme}>
-      <ThemeProvider theme={theme}>
-        <Splash isReady={isReady && hasCheckedReferrer}>
-          <RootSiblingParent>
-            <VideoVolumeProvider>
-              <React.Fragment
-                // Resets the entire tree below when it changes:
-                key={currentAccount?.did}>
-                <QueryProvider currentDid={currentAccount?.did}>
-                  <ComposerProvider>
-                    <StatsigProvider>
-                      <MessagesProvider>
-                        {/* LabelDefsProvider MUST come before ModerationOptsProvider */}
-                        <LabelDefsProvider>
-                          <ModerationOptsProvider>
-                            <LoggedOutViewProvider>
-                              <SelectedFeedProvider>
-                                <HiddenRepliesProvider>
-                                  <HomeBadgeProvider>
-                                    <UnreadNotifsProvider>
-                                      <BackgroundNotificationPreferencesProvider>
-                                        <MutedThreadsProvider>
-                                          <ProgressGuideProvider>
-                                            <TrendingConfigProvider>
-                                              <GestureHandlerRootView
-                                                style={s.h100pct}>
-                                                <IntentDialogProvider>
-                                                  <TestCtrls />
-                                                  <Shell />
-                                                  <NuxDialogs />
-                                                </IntentDialogProvider>
-                                              </GestureHandlerRootView>
-                                            </TrendingConfigProvider>
-                                          </ProgressGuideProvider>
-                                        </MutedThreadsProvider>
-                                      </BackgroundNotificationPreferencesProvider>
-                                    </UnreadNotifsProvider>
-                                  </HomeBadgeProvider>
-                                </HiddenRepliesProvider>
-                              </SelectedFeedProvider>
-                            </LoggedOutViewProvider>
-                          </ModerationOptsProvider>
-                        </LabelDefsProvider>
-                      </MessagesProvider>
-                    </StatsigProvider>
-                  </ComposerProvider>
-                </QueryProvider>
-              </React.Fragment>
-            </VideoVolumeProvider>
-          </RootSiblingParent>
-        </Splash>
-      </ThemeProvider>
-    </Alf>
+    <I18nextProvider i18n={i18n}>
+      <Alf theme={theme}>
+        <ThemeProvider theme={theme}>
+          <Splash isReady={isReady && hasCheckedReferrer}>
+            <RootSiblingParent>
+              <VideoVolumeProvider>
+                <React.Fragment
+                  // Resets the entire tree below when it changes:
+                  key={currentAccount?.did}>
+                  <QueryProvider currentDid={currentAccount?.did}>
+                    <ComposerProvider>
+                      <StatsigProvider>
+                        <MessagesProvider>
+                          {/* LabelDefsProvider MUST come before ModerationOptsProvider */}
+                          <LabelDefsProvider>
+                            <ModerationOptsProvider>
+                              <LoggedOutViewProvider>
+                                <SelectedFeedProvider>
+                                  <HiddenRepliesProvider>
+                                    <HomeBadgeProvider>
+                                      <UnreadNotifsProvider>
+                                        <BackgroundNotificationPreferencesProvider>
+                                          <MutedThreadsProvider>
+                                            <ProgressGuideProvider>
+                                              <TrendingConfigProvider>
+                                                <GestureHandlerRootView
+                                                  style={s.h100pct}>
+                                                  <IntentDialogProvider>
+                                                    <TestCtrls />
+                                                    <Shell />
+                                                    <NuxDialogs />
+                                                  </IntentDialogProvider>
+                                                </GestureHandlerRootView>
+                                              </TrendingConfigProvider>
+                                            </ProgressGuideProvider>
+                                          </MutedThreadsProvider>
+                                        </BackgroundNotificationPreferencesProvider>
+                                      </UnreadNotifsProvider>
+                                    </HomeBadgeProvider>
+                                  </HiddenRepliesProvider>
+                                </SelectedFeedProvider>
+                              </LoggedOutViewProvider>
+                            </ModerationOptsProvider>
+                          </LabelDefsProvider>
+                        </MessagesProvider>
+                      </StatsigProvider>
+                    </ComposerProvider>
+                  </QueryProvider>
+                </React.Fragment>
+              </VideoVolumeProvider>
+            </RootSiblingParent>
+          </Splash>
+        </ThemeProvider>
+      </Alf>
+    </I18nextProvider>
   )
 }
 
@@ -199,40 +203,42 @@ function App() {
    * that is set up in the InnerApp component above.
    */
   return (
-    <GeolocationProvider>
-      <A11yProvider>
-        <KeyboardControllerProvider>
-          <SessionProvider>
-            <PrefsStateProvider>
-              <I18nProvider>
-                <ShellStateProvider>
-                  <InvitesStateProvider>
-                    <ModalStateProvider>
-                      <DialogStateProvider>
-                        <LightboxStateProvider>
-                          <PortalProvider>
-                            <BottomSheetProvider>
-                              <StarterPackProvider>
-                                <SafeAreaProvider
-                                  initialMetrics={initialWindowMetrics}>
-                                  <LightStatusBarProvider>
-                                    <InnerApp />
-                                  </LightStatusBarProvider>
-                                </SafeAreaProvider>
-                              </StarterPackProvider>
-                            </BottomSheetProvider>
-                          </PortalProvider>
-                        </LightboxStateProvider>
-                      </DialogStateProvider>
-                    </ModalStateProvider>
-                  </InvitesStateProvider>
-                </ShellStateProvider>
-              </I18nProvider>
-            </PrefsStateProvider>
-          </SessionProvider>
-        </KeyboardControllerProvider>
-      </A11yProvider>
-    </GeolocationProvider>
+    <I18nextProvider i18n={i18n}>
+      <GeolocationProvider>
+        <A11yProvider>
+          <KeyboardControllerProvider>
+            <SessionProvider>
+              <PrefsStateProvider>
+                <I18nProvider>
+                  <ShellStateProvider>
+                    <InvitesStateProvider>
+                      <ModalStateProvider>
+                        <DialogStateProvider>
+                          <LightboxStateProvider>
+                            <PortalProvider>
+                              <BottomSheetProvider>
+                                <StarterPackProvider>
+                                  <SafeAreaProvider
+                                    initialMetrics={initialWindowMetrics}>
+                                    <LightStatusBarProvider>
+                                      <InnerApp />
+                                    </LightStatusBarProvider>
+                                  </SafeAreaProvider>
+                                </StarterPackProvider>
+                              </BottomSheetProvider>
+                            </PortalProvider>
+                          </LightboxStateProvider>
+                        </DialogStateProvider>
+                      </ModalStateProvider>
+                    </InvitesStateProvider>
+                  </ShellStateProvider>
+                </I18nProvider>
+              </PrefsStateProvider>
+            </SessionProvider>
+          </KeyboardControllerProvider>
+        </A11yProvider>
+      </GeolocationProvider>
+    </I18nextProvider>
   )
 }
 
